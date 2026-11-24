@@ -1,0 +1,14 @@
+Hannah Tanaka
+Contact: hannah.tanaka@postnet.example, +1 555 0119 7319
+
+I am applying for the Backend Software Engineer position. Key skills: on call.
+
+For 3 years I was a Backend Software Engineer at Bluepine Services. Reviewed pull requests from teammates and joined planning sessions each sprint. Raised test coverage on search from 44 to 81 percent and added integration tests that caught 36 bugs before release.
+
+For 2 years I was a Assistant Backend Software Engineer at Ironwood Partners. Used databases when building features.
+
+For 18 months I was a Junior Backend Software Engineer at Meridian Works. Led the API design for the search platform used by 6 internal teams, serving 2 million requests a day, and wrote the versioning policy the teams follow.
+
+I studied Computer Science at Redwood Institute of Technology and finished in 2017.
+
+Career break for two years to care for a family member, now returning to work.

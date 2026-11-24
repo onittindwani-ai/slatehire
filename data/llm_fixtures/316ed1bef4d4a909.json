@@ -1,0 +1,7 @@
+{
+  "text": "{\"shown\": false, \"level\": 1, \"evidence\": \"\", \"reason\": \"No sentence in the resume matches this criterion.\"}",
+  "input_tokens": 150,
+  "output_tokens": 40,
+  "model": "claude-sonnet-5-5",
+  "prompt_preview": "[task:score_criterion]\nCRITERION_JSON: {\"id\":\"cs_tools\",\"name\":\"Support tools and systems\",\"definition\":\"Evidence of working in a ticket queue, chat and a knowl"
+}

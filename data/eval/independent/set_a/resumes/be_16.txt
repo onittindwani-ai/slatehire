@@ -1,0 +1,17 @@
+ANIL OKAFOR
+anil.okafor@postnet.example | (555) 0115-7115 | Ashford
+
+TARGET ROLE: Backend Software Engineer
+
+SKILLS
+REST, GraphQL, microservices, API design, REST, GraphQL, SQL, PostgreSQL, MySQL, data modelling, SQL, PostgreSQL, unit testing, TDD, CI, code review, unit testing, TDD, on call, incident response, monitoring, SRE, on call, incident response, mentoring, pair programming, team player, code review, mentoring, pair programming
+
+EXPERIENCE
+Backend Software Engineer, Greenfield Operations (3 years)
+* Built and maintained REST endpoints for the orders service using Python.
+
+Assistant Backend Software Engineer, Meridian Works (2 years)
+
+EDUCATION
+Computer Science, Redwood Institute of Technology, 2004
+

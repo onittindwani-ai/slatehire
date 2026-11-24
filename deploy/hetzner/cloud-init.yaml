@@ -1,0 +1,16 @@
+#cloud-config
+# Paste into the Cloud config box when you create a Hetzner server. It holds NO secrets: do not add any.
+package_update: true
+packages:
+  - ca-certificates
+  - curl
+  - git
+  - caddy
+  - ufw
+runcmd:
+  - curl -fsSL https://get.docker.com | sh
+  - ufw allow 22/tcp
+  - ufw allow 80/tcp
+  - ufw allow 443/tcp
+  - ufw --force enable
+  - mkdir -p /opt/slatehire /var/backups/slatehire

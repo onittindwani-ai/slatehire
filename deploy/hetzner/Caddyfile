@@ -1,0 +1,8 @@
+# Replace the two names with your own DNS names. Caddy gets HTTPS certificates by itself.
+app.example.com {
+	reverse_proxy 127.0.0.1:3000
+}
+
+api.example.com {
+	reverse_proxy 127.0.0.1:8000
+}

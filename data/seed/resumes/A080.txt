@@ -1,0 +1,21 @@
+Quillon Pelletreau
+<img src="logo.png" alt="Contact quillon.pelletreau@mail.example.test">
+Phone: (555) 010-0194
+Welling Heath, ST 09201
+linkedin.com/in/quillon-pelletreau-8428
+
+SUMMARY
+Reliable and steady worker who likes clear goals.
+
+EXPERIENCE
+Data Analyst, Pennywhistle Retail, 2017 to 2026
+- Improved cleaning data, removing duplicates and validation checks, which cut errors by 18 percent.
+- Improved SQL queries, joins and aggregations on the warehouse database, which cut errors by 30 percent.
+- Handled dashboards, charts and visualizations in Tableau independently every day.
+- Took part in the quarterly safety walk.
+Assistant, Brightwater Cooperative, 2013 to 2017
+- Redesigned statistics, significance tests and experiment design and reduced handling time by 40 percent.
+- Organised the team lunch rota.
+
+EDUCATION
+B.Sc., Calder Bay Polytechnic, 1995

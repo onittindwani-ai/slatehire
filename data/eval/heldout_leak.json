@@ -1,0 +1,6219 @@
+{
+ "note": "40 fictional resumes with planted identity details in unusual formats. mode norm: leak when a core string is found in the normalised redacted text; mode token: leak when the word is found as a whole word.",
+ "resumes": [
+  {
+   "id": "L01",
+   "known_name": {
+    "first": "Yarrow",
+    "last": "Yeoman"
+   },
+   "text": "Yarrow Yeoman\n[write to me](mailto:yarrow.yeoman@mail.example.test)\nPhone: tel:+15550100151\nFlat 3\n178 Bishop's Wharf\nTarn End CV9 5ZA\nPortfolio: https://yarrow.example.test/work\n@yyeoman\n![Photo of Yarrow](photo.jpg)\nb. 1976\nPronouns: she/her\nMarital status: married, two children\n\nSUMMARY\nReliable and steady worker who likes clear goals. She has years of steady experience. Worked as a Foreman on the loading dock.\n\nEXPERIENCE\nCustomer Support Specialist, Brightwater Cooperative, 2019 to 2026\n- Rewrote the team's wording guide and coached six new hires on tone; satisfaction on written answers rose from 81 to 93 percent in two quarters.\n- Led root-cause reviews of the ten most frequent faults each month, with engineers; fixes we proposed shipped in four releases and cut repeat contacts by 40 percent.\n- Set up saved replies and routing rules in the helpdesk platform for our team of twelve.\n- Joined the staff newsletter committee.\n\nAssistant, Pennywhistle Retail, 2012 to 2019\n- Settled most heated complaints myself by listening first, restating the problem and offering a clear next step.\n- Organised the team's lunch rota.\n\nEDUCATION\nGraduation: May 1998\nNorthmere Institute of Technology\n\nPage 1 of 2 | Yarrow Yeoman | Confidential",
+   "planted": [
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Page 1 of 2 | Yarrow Yeoman | Confidential",
+     "cores": [
+      "Yarrow",
+      "Yeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Yarrow Yeoman",
+     "cores": [
+      "Yarrow",
+      "Yeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "[write to me](mailto:yarrow.yeoman@mail.example.test)",
+     "cores": [
+      "yarrowyeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: tel:+15550100151",
+     "cores": [
+      "5550100151"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "Flat 3\n178 Bishop's Wharf\nTarn End CV9 5ZA",
+     "cores": [
+      "Bishop's Wharf"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "Portfolio: https://yarrow.example.test/work",
+     "cores": [
+      "yarrow"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "@yyeoman",
+     "cores": [
+      "yyeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "![Photo of Yarrow](photo.jpg)",
+     "cores": [
+      "photo.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "b. 1976",
+     "cores": [
+      "b1976"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduation: May 1998",
+     "cores": [
+      "may1998"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: she/her",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "She has years of steady experience.",
+     "cores": [
+      "she"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Worked as a Foreman on the loading dock.",
+     "cores": [
+      "foreman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Northmere Institute of Technology",
+     "cores": [
+      "northmere"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Marital status: married, two children",
+     "cores": [
+      "twochildren"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Brightwater Cooperative",
+    "Pennywhistle Retail",
+    "Customer Support Specialist",
+    "Rewrote the team's wording guide and coa",
+    "Led root-cause reviews of the ten most f",
+    "Set up saved replies and routing rules i",
+    "Settled most heated complaints myself by"
+   ]
+  },
+  {
+   "id": "L02",
+   "known_name": {
+    "first": "Quillon",
+    "last": "Lindqvist"
+   },
+   "text": "QUILLON LINDQVIST\n[write to me](mailto:quillon.lindqvist@mail.example.test)\n+44 20 7946 0115\nFlat 3\n296 Tern Street\nTarn End CV9 7ZM\ninstagram.com/quillon.l\n(in/quillon-lindqvist)\n![Photo of Quillon](photo.jpg)\nBorn 1985 in Tarn End\nPronouns: she/her\nNationality: Corvalian\n\n## Summary\nReliable and steady worker who likes clear goals. Led her team of fifteen through two busy seasons. Previously worked as a Salesman in a retail shop.\n\n## Experience\nOperations Coordinator, Brightwater Cooperative, 2019 to 2026\n* Ran the whole weekly plan for three warehouses and 60 staff, and trained two coordinators to take it over; on-time delivery reached 97 percent.\n* Renegotiated terms with two key suppliers, saving about 8 percent a year.\n* Replaced a manual tally with an automated workbook that saved around five hours a week.\n* Organised the team's lunch rota.\n\nAssistant, Marlow & Finch Supply, 2012 to 2019\n* Led a company-wide review of 20 routines, rewrote them, and got teams to adopt them; errors fell by 45 percent over the year.\n* Organised the team's lunch rota.\n\n## Education\nClass of 2007\nAlumna of Tallis Heath College\n\nPage 1 of 2 | Quillon Lindqvist | Confidential",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "QUILLON LINDQVIST",
+     "cores": [
+      "Quillon",
+      "Lindqvist"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Page 1 of 2 | Quillon Lindqvist | Confidential",
+     "cores": [
+      "Quillon",
+      "Lindqvist"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "[write to me](mailto:quillon.lindqvist@mail.example.test)",
+     "cores": [
+      "quillonlindqvist"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "+44 20 7946 0115",
+     "cores": [
+      "79460115"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "Flat 3\n296 Tern Street\nTarn End CV9 7ZM",
+     "cores": [
+      "Tern Street"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "instagram.com/quillon.l",
+     "cores": [
+      "quillon"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "(in/quillon-lindqvist)",
+     "cores": [
+      "quillon"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "![Photo of Quillon](photo.jpg)",
+     "cores": [
+      "photo.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Born 1985 in Tarn End",
+     "cores": [
+      "born1985"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Class of 2007",
+     "cores": [
+      "2007"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "Led her team of fifteen through two busy seasons.",
+     "cores": [
+      "her"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: she/her",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Previously worked as a Salesman in a retail shop.",
+     "cores": [
+      "salesman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Alumna of Tallis Heath College",
+     "cores": [
+      "tallis"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Nationality: Corvalian",
+     "cores": [
+      "corvalian"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Brightwater Cooperative",
+    "Marlow & Finch Supply",
+    "Operations Coordinator",
+    "Ran the whole weekly plan for three ware",
+    "Renegotiated terms with two key supplier",
+    "Replaced a manual tally with an automate",
+    "Led a company-wide review of 20 routines"
+   ]
+  },
+  {
+   "id": "L03",
+   "known_name": {
+    "first": "Oswin",
+    "last": "Halvorsen"
+   },
+   "text": "Resume_Oswin_Halvorsen_2026.pdf\noswin.halvorsen@mail.example.test\nPhone: (555) 010-0157\n@ohalvorsen\nohalvorsen.example.test\n![Photo of Oswin](photo.jpg)\nDate of birth: 9 December 1986\n(he/him)\nGender: male\n\n| Summary |\nReliable and steady worker who likes clear goals. He has years of steady experience. Began as a Waitress at a roadside diner.\n\n| Experience |\nData Analyst, Tidewell Logistics, 2019 to 2026\n| Rebuilt a slow reporting query so it ran in 40 seconds instead of 12 minutes.\n| Defined the visual style and review process for all company dashboards, managed about 60 of them, and trained analysts across three teams.\n| Designed and analysed a pricing test with 20,000 visitors, which led to a 4 percent revenue gain.\n| Organised the team's lunch rota.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n| Established the data quality program: owners, tests and alerts across 40 tables; incidents of wrong numbers fell by 70 percent.\n| Took part in the quarterly safety walk.\n\n| Education |\nGraduated in 2008\nStudied at the Tallis Heath College, with honours\n\nPrepared by Oswin Halvorsen\nAddress: 57 Marlpit Road Welling Heath 04099",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Resume_Oswin_Halvorsen_2026.pdf",
+     "cores": [
+      "Oswin",
+      "Halvorsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Prepared by Oswin Halvorsen",
+     "cores": [
+      "Oswin",
+      "Halvorsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "oswin.halvorsen@mail.example.test",
+     "cores": [
+      "oswinhalvorsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: (555) 010-0157",
+     "cores": [
+      "5550100157"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "footer",
+     "text": "Address: 57 Marlpit Road Welling Heath 04099",
+     "cores": [
+      "Marlpit Road"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "@ohalvorsen",
+     "cores": [
+      "ohalvorsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "ohalvorsen.example.test",
+     "cores": [
+      "ohalvorsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "![Photo of Oswin](photo.jpg)",
+     "cores": [
+      "photo.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Date of birth: 9 December 1986",
+     "cores": [
+      "9december1986"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduated in 2008",
+     "cores": [
+      "2008"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "(he/him)",
+     "cores": [
+      "hehim"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "He has years of steady experience.",
+     "cores": [
+      "he"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Began as a Waitress at a roadside diner.",
+     "cores": [
+      "waitress"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Studied at the Tallis Heath College, with honours",
+     "cores": [
+      "tallis"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Gender: male",
+     "cores": [
+      "gender"
+     ],
+     "mode": "token"
+    }
+   ],
+   "keep": [
+    "Tidewell Logistics",
+    "Ferncliff Foods",
+    "Data Analyst",
+    "Rebuilt a slow reporting query so it ran",
+    "Defined the visual style and review proc",
+    "Designed and analysed a pricing test wit",
+    "Established the data quality program: ow"
+   ]
+  },
+  {
+   "id": "L04",
+   "known_name": {
+    "first": "Beaufort",
+    "last": "Fontaine-Ruiz"
+   },
+   "text": "BEAUFORT FONTAINE-RUIZ\nPhone: (555) 010-0194\nPO Box 4918, Tarn End\nPortfolio: https://beaufort.example.test/work\ninstagram.com/beaufort.f\nPhoto: attached (headshot.jpg)\nDOB 08/28/1979\nPronouns: she/her\nMiss. Fontaine-Ruiz\nHealth: excellent\n\nSUMMARY\nReliable and steady worker who likes clear goals. She has years of steady experience.\n\nEXPERIENCE\nCustomer Support Specialist, Marlow & Finch Supply, 2019 to 2026\n- Known on the team for short, warm answers; my written responses were picked as examples in training, and my customer rating averaged 4.8 of 5.\n- Traced a recurring duplicate-charge fault to a settings conflict and documented the fix; repeat contacts on that issue fell by 35 percent.\n- Administered the support platform for 30 agents, connected it to the billing system, and trained everyone on the new workflow.\n- Took part in the quarterly safety walk.\n\nAssistant, Greylock Utilities, 2012 to 2019\n- Chosen to take the hardest complaints on the team; refund disputes I handled ended with the customer staying in 9 of 10 cases.\n- Organised the team's lunch rota.\n\nEDUCATION\nGraduation: May 2001\nAlumna of Fenwick College of Commerce\n\nPrepared by Beaufort Fontaine-Ruiz\nbeaufort_fontaineruiz(at)mail.example.test",
+   "planted": [
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Prepared by Beaufort Fontaine-Ruiz",
+     "cores": [
+      "Beaufort",
+      "Fontaine-Ruiz"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "BEAUFORT FONTAINE-RUIZ",
+     "cores": [
+      "Beaufort",
+      "Fontaine-Ruiz"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "footer",
+     "text": "beaufort_fontaineruiz(at)mail.example.test",
+     "cores": [
+      "beaufortfontaineruiz"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: (555) 010-0194",
+     "cores": [
+      "5550100194"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "PO Box 4918, Tarn End",
+     "cores": [
+      "pobox4918"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "Portfolio: https://beaufort.example.test/work",
+     "cores": [
+      "beaufort"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "instagram.com/beaufort.f",
+     "cores": [
+      "beaufort"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "Photo: attached (headshot.jpg)",
+     "cores": [
+      "headshot.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "DOB 08/28/1979",
+     "cores": [
+      "08281979"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduation: May 2001",
+     "cores": [
+      "may2001"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: she/her",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "She has years of steady experience.",
+     "cores": [
+      "she"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "title",
+     "where": "header",
+     "text": "Miss. Fontaine-Ruiz",
+     "cores": [
+      "miss"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Alumna of Fenwick College of Commerce",
+     "cores": [
+      "fenwick"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Health: excellent",
+     "cores": [
+      "healthexcellent"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Marlow & Finch Supply",
+    "Greylock Utilities",
+    "Customer Support Specialist",
+    "Known on the team for short, warm answer",
+    "Traced a recurring duplicate-charge faul",
+    "Administered the support platform for 30",
+    "Chosen to take the hardest complaints on"
+   ]
+  },
+  {
+   "id": "L05",
+   "known_name": {
+    "first": "Lazlo",
+    "last": "Ardenwood"
+   },
+   "text": "L A Z L O       A R D E N W O O D\nArdénwóód\nlazlo.ardenwood [at] mail [dot] example [dot] test\nPhone: 555.010.0162\nFlat 3\n107 Fennimore Lane\nCorvale CV3 2ZA\nlardenwood.example.test\nPortfolio: https://lazlo.example.test/work\nPhoto: attached (headshot.jpg)\nDate of birth: 2 May 1981\n(she/her)\nPronouns: she/her\nMarital status: married, two children\n\n## Summary\nReliable and steady worker who likes clear goals. Worked as a Foreman on the loading dock.\n\n## Experience\nOperations Coordinator, Greylock Utilities, 2019 to 2026\n* Re-planned the loading dock timetable so trucks waited 30 percent less on average.\n* Managed the full supplier panel of 25 companies, ran the yearly review, replaced three weak partners, and brought late deliveries down by half.\n* Maintained spreadsheets with formulas and pivot tables to follow orders and stock, and sent the manager a Monday summary.\n* Organised the team's lunch rota.\n\nAssistant, Hearthstone Clinics, 2012 to 2019\n* Wrote step-by-step instructions for receiving and returns that new staff could follow without help.\n* Took part in the quarterly safety walk.\n\n## Education\nGraduated in 2003\nAlumna of Tallis Heath College\n",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "L A Z L O       A R D E N W O O D",
+     "cores": [
+      "Lazlo",
+      "Ardenwood"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Ardénwóód",
+     "cores": [
+      "Ardenwood"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "lazlo.ardenwood [at] mail [dot] example [dot] test",
+     "cores": [
+      "lazloardenwood"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: 555.010.0162",
+     "cores": [
+      "5550100162"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "Flat 3\n107 Fennimore Lane\nCorvale CV3 2ZA",
+     "cores": [
+      "Fennimore Lane"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "lardenwood.example.test",
+     "cores": [
+      "lardenwood"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "Portfolio: https://lazlo.example.test/work",
+     "cores": [
+      "lazlo"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "Photo: attached (headshot.jpg)",
+     "cores": [
+      "headshot.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Date of birth: 2 May 1981",
+     "cores": [
+      "2may1981"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduated in 2003",
+     "cores": [
+      "2003"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "(she/her)",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: she/her",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Worked as a Foreman on the loading dock.",
+     "cores": [
+      "foreman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Alumna of Tallis Heath College",
+     "cores": [
+      "tallis"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Marital status: married, two children",
+     "cores": [
+      "twochildren"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Greylock Utilities",
+    "Hearthstone Clinics",
+    "Operations Coordinator",
+    "Re-planned the loading dock timetable so",
+    "Managed the full supplier panel of 25 co",
+    "Maintained spreadsheets with formulas an",
+    "Wrote step-by-step instructions for rece"
+   ]
+  },
+  {
+   "id": "L06",
+   "known_name": {
+    "first": "Delphine",
+    "last": "Strand"
+   },
+   "text": "Resume_Delphine_Strand_2026.pdf\n<img src=\"logo.png\" alt=\"Contact delphine.strand@mail.example.test\">\nPhone: tel:+15550100143\n97 Marlpit Road, Welling Heath, ST 02447\nlinkedin.com/in/delphine-strand-9975\ninstagram.com/delphine.s\n![Photo of Delphine](photo.jpg)\nBorn 1968 in Welling Heath\nPronouns: they/them\nPlace of birth: Welling Heath\n\n| Summary |\nReliable and steady worker who likes clear goals. Sincerely, Delphine He has years of steady experience. Served as Chairwoman of the staff committee.\n\n| Experience |\nData Analyst, Pennywhistle Retail, 2019 to 2026\n| Rebuilt a slow reporting query so it ran in 40 seconds instead of 12 minutes.\n| Created an executive dashboard used by 40 people, replacing six slide decks.\n| Set up the company's experimentation practice, including sample-size rules and review, and ran 30 controlled tests that were used in decisions.\n| Organised the team's lunch rota.\n\nAssistant, Quillon Software, 2012 to 2019\n| Built automatic validation that caught about 200 bad records a week before they reached dashboards.\n| Joined the staff newsletter committee.\n\n| Education |\nGraduation: May 1990\nAlumnus of Harrowgate University\n",
+   "planted": [
+    {
+     "category": "name",
+     "where": "body",
+     "text": "Sincerely, Delphine",
+     "cores": [
+      "Delphine"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Resume_Delphine_Strand_2026.pdf",
+     "cores": [
+      "Delphine",
+      "Strand"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "<img src=\"logo.png\" alt=\"Contact delphine.strand@mail.example.test\">",
+     "cores": [
+      "delphinestrand"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: tel:+15550100143",
+     "cores": [
+      "5550100143"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "97 Marlpit Road, Welling Heath, ST 02447",
+     "cores": [
+      "Marlpit Road"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "linkedin.com/in/delphine-strand-9975",
+     "cores": [
+      "delphine"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "instagram.com/delphine.s",
+     "cores": [
+      "delphine"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "![Photo of Delphine](photo.jpg)",
+     "cores": [
+      "photo.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Born 1968 in Welling Heath",
+     "cores": [
+      "born1968"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduation: May 1990",
+     "cores": [
+      "may1990"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "He has years of steady experience.",
+     "cores": [
+      "he"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Served as Chairwoman of the staff committee.",
+     "cores": [
+      "chairwoman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Alumnus of Harrowgate University",
+     "cores": [
+      "harrowgate"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Place of birth: Welling Heath",
+     "cores": [
+      "placeofbirth"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Pennywhistle Retail",
+    "Quillon Software",
+    "Data Analyst",
+    "Rebuilt a slow reporting query so it ran",
+    "Created an executive dashboard used by 4",
+    "Set up the company's experimentation pra",
+    "Built automatic validation that caught a"
+   ]
+  },
+  {
+   "id": "L07",
+   "known_name": {
+    "first": "Beaufort",
+    "last": "Vantongeren"
+   },
+   "text": "Beaufort Vantongeren\nBEAUFORT.VANTONGEREN@MAIL.EXAMPLE.TEST\nPhone: (555) 010-0123\nFlat 3\n284 Marlpit Road\nCorvale CV1 6ZA\nPortfolio: https://beaufort.example.test/work\nhttps://www.linkedin.com/in/bvantongeren\n<img src=\"headshot.png\" alt=\"Headshot\">\nBorn 1985 in Corvale\nPronouns: they/them\nHealth: excellent\n\nSUMMARY\nReliable and steady worker who likes clear goals. Led his team of fifteen through two busy seasons. Served as Chairwoman of the staff committee.\n\nEXPERIENCE\nCustomer Support Specialist, Hearthstone Clinics, 2019 to 2026\n- Rewrote the team's wording guide and coached six new hires on tone; satisfaction on written answers rose from 81 to 93 percent in two quarters.\n- Led root-cause reviews of the ten most frequent faults each month, with engineers; fixes we proposed shipped in four releases and cut repeat contacts by 40 percent.\n- Administered the support platform for 30 agents, connected it to the billing system, and trained everyone on the new workflow.\n- Covered the front desk during holiday weeks.\n\nAssistant, Brightwater Cooperative, 2012 to 2019\n- Chosen to take the hardest complaints on the team; refund disputes I handled ended with the customer staying in 9 of 10 cases.\n- Organised the team's lunch rota.\n\nEDUCATION\nGraduated in 2007\nAlumnus of Institute of Applied Studies at Lowmere\n\nPage 1 of 2 | Beaufort Vantongeren | Confidential",
+   "planted": [
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Page 1 of 2 | Beaufort Vantongeren | Confidential",
+     "cores": [
+      "Beaufort",
+      "Vantongeren"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Beaufort Vantongeren",
+     "cores": [
+      "Beaufort",
+      "Vantongeren"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "BEAUFORT.VANTONGEREN@MAIL.EXAMPLE.TEST",
+     "cores": [
+      "beaufortvantongeren"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: (555) 010-0123",
+     "cores": [
+      "5550100123"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "Flat 3\n284 Marlpit Road\nCorvale CV1 6ZA",
+     "cores": [
+      "Marlpit Road"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "Portfolio: https://beaufort.example.test/work",
+     "cores": [
+      "beaufort"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "https://www.linkedin.com/in/bvantongeren",
+     "cores": [
+      "bvantongeren"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "<img src=\"headshot.png\" alt=\"Headshot\">",
+     "cores": [
+      "headshot.png"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Born 1985 in Corvale",
+     "cores": [
+      "born1985"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduated in 2007",
+     "cores": [
+      "2007"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "Led his team of fifteen through two busy seasons.",
+     "cores": [
+      "his"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Served as Chairwoman of the staff committee.",
+     "cores": [
+      "chairwoman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Alumnus of Institute of Applied Studies at Lowmere",
+     "cores": [
+      "lowmere"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Health: excellent",
+     "cores": [
+      "healthexcellent"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Hearthstone Clinics",
+    "Brightwater Cooperative",
+    "Customer Support Specialist",
+    "Rewrote the team's wording guide and coa",
+    "Led root-cause reviews of the ten most f",
+    "Administered the support platform for 30",
+    "Chosen to take the hardest complaints on"
+   ]
+  },
+  {
+   "id": "L08",
+   "known_name": {
+    "first": "Ilse",
+    "last": "Yeoman"
+   },
+   "text": "Yéómán\nResume_Ilse_Yeoman_2026.pdf\n[write to me](mailto:ilse.yeoman@mail.example.test)\nPhone: +1 555 010 0124\nhttps://www.linkedin.com/in/iyeoman\ngithub.com/iyeoman\nPhotograph enclosed\nDOB 04/15/1974\nPronouns: they/them\nReligion: Quaker\n\n## Summary\nReliable and steady worker who likes clear goals. Led her team of fifteen through two busy seasons. Previously worked as a Salesman in a retail shop.\n\n## Experience\nOperations Coordinator, Quillon Software, 2019 to 2026\n* Re-planned the loading dock timetable so trucks waited 30 percent less on average.\n* Managed the full supplier panel of 25 companies, ran the yearly review, replaced three weak partners, and brought late deliveries down by half.\n* Replaced a manual tally with an automated workbook that saved around five hours a week.\n* Organised the team's lunch rota.\n\nAssistant, Brightwater Cooperative, 2012 to 2019\n* Redesigned the returns routine, cutting handling time per item from 12 to 7 minutes.\n* Welcomed visitors and signed them in.\n\n## Education\n(1992 - 1996)\nAlumna of Northmere Institute of Technology\n\nAddress: 123 Marlpit Road Tarn End 07089",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Yéómán",
+     "cores": [
+      "Yeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Resume_Ilse_Yeoman_2026.pdf",
+     "cores": [
+      "Ilse",
+      "Yeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "[write to me](mailto:ilse.yeoman@mail.example.test)",
+     "cores": [
+      "ilseyeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: +1 555 010 0124",
+     "cores": [
+      "5550100124"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "footer",
+     "text": "Address: 123 Marlpit Road Tarn End 07089",
+     "cores": [
+      "Marlpit Road"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "https://www.linkedin.com/in/iyeoman",
+     "cores": [
+      "iyeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "github.com/iyeoman",
+     "cores": [
+      "iyeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "Photograph enclosed",
+     "cores": [
+      "photographenclosed"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "DOB 04/15/1974",
+     "cores": [
+      "04151974"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "(1992 - 1996)",
+     "cores": [
+      "19921996"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "Led her team of fifteen through two busy seasons.",
+     "cores": [
+      "her"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Previously worked as a Salesman in a retail shop.",
+     "cores": [
+      "salesman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Alumna of Northmere Institute of Technology",
+     "cores": [
+      "northmere"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Religion: Quaker",
+     "cores": [
+      "quaker"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Quillon Software",
+    "Brightwater Cooperative",
+    "Operations Coordinator",
+    "Re-planned the loading dock timetable so",
+    "Managed the full supplier panel of 25 co",
+    "Replaced a manual tally with an automate",
+    "Redesigned the returns routine, cutting "
+   ]
+  },
+  {
+   "id": "L09",
+   "known_name": {
+    "first": "Marisol",
+    "last": "Hartnell"
+   },
+   "text": "M. Hartnell\n<img src=\"logo.png\" alt=\"Contact marisol.hartnell@mail.example.test\">\n+44 20 7946 0197\nApt 5B, 8 Marlpit Road\nhttps://www.linkedin.com/in/mhartnell\n(in/marisol-hartnell)\n<img src=\"headshot.png\" alt=\"Headshot\">\nDOB 07/18/1985\nPronouns: he/him\n(he/him)\nGender: male\n\n| Summary |\nReliable and steady worker who likes clear goals. Previously worked as a Salesman in a retail shop.\n\n| Experience |\nData Analyst, Hearthstone Clinics, 2019 to 2026\n| Rebuilt a slow reporting query so it ran in 40 seconds instead of 12 minutes.\n| Defined the visual style and review process for all company dashboards, managed about 60 of them, and trained analysts across three teams.\n| Set up the company's experimentation practice, including sample-size rules and review, and ran 30 controlled tests that were used in decisions.\n| Covered the front desk during holiday weeks.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n| Established the data quality program: owners, tests and alerts across 40 tables; incidents of wrong numbers fell by 70 percent.\n| Covered the front desk during holiday weeks.\n\n| Education |\nB.A. Economics, 2007\nAlumnus of University of Orrin Valley\n\nPrepared by Marisol Hartnell",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "M. Hartnell",
+     "cores": [
+      "Hartnell"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Prepared by Marisol Hartnell",
+     "cores": [
+      "Marisol",
+      "Hartnell"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "<img src=\"logo.png\" alt=\"Contact marisol.hartnell@mail.example.test\">",
+     "cores": [
+      "marisolhartnell"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "+44 20 7946 0197",
+     "cores": [
+      "79460197"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "Apt 5B, 8 Marlpit Road",
+     "cores": [
+      "Marlpit Road"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "https://www.linkedin.com/in/mhartnell",
+     "cores": [
+      "mhartnell"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "(in/marisol-hartnell)",
+     "cores": [
+      "marisol"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "<img src=\"headshot.png\" alt=\"Headshot\">",
+     "cores": [
+      "headshot.png"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "DOB 07/18/1985",
+     "cores": [
+      "07181985"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "B.A. Economics, 2007",
+     "cores": [
+      "2007"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: he/him",
+     "cores": [
+      "hehim"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "(he/him)",
+     "cores": [
+      "hehim"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Previously worked as a Salesman in a retail shop.",
+     "cores": [
+      "salesman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Alumnus of University of Orrin Valley",
+     "cores": [
+      "orrin"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Gender: male",
+     "cores": [
+      "gender"
+     ],
+     "mode": "token"
+    }
+   ],
+   "keep": [
+    "Hearthstone Clinics",
+    "Ferncliff Foods",
+    "Data Analyst",
+    "Rebuilt a slow reporting query so it ran",
+    "Defined the visual style and review proc",
+    "Set up the company's experimentation pra",
+    "Established the data quality program: ow"
+   ]
+  },
+  {
+   "id": "L10",
+   "known_name": {
+    "first": "Winola",
+    "last": "Thackeray"
+   },
+   "text": "WINOLA.THACKERAY@MAIL.EXAMPLE.TEST\nPhone: five five five, zero one zero, zero one four five\n@wthackeray\nlinkedin.com/in/winola-thackeray-4691\n[image: portrait of applicant]\nBorn on the 5th of May, 1985\n(he/him)\nGender: male\n\nSUMMARY\nReliable and steady worker who likes clear goals. Sincerely, Winola He has years of steady experience. Previously worked as a Salesman in a retail shop.\n\nEXPERIENCE\nCustomer Support Specialist, Brightwater Cooperative, 2019 to 2026\n- Rewrote the team's wording guide and coached six new hires on tone; satisfaction on written answers rose from 81 to 93 percent in two quarters.\n- Led root-cause reviews of the ten most frequent faults each month, with engineers; fixes we proposed shipped in four releases and cut repeat contacts by 40 percent.\n- Set up saved replies and routing rules in the helpdesk platform for our team of twelve.\n- Welcomed visitors and signed them in.\n\nAssistant, Pennywhistle Retail, 2012 to 2019\n- Chosen to take the hardest complaints on the team; refund disputes I handled ended with the customer staying in 9 of 10 cases.\n- Organised the team's lunch rota.\n\nEDUCATION\n(2003 - 2007)\nInstitute of Applied Studies at Lowmere\n\nPage 1 of 2 | Winola Thackeray | Confidential\nAddress: 132 Tern Street Tarn End 06829",
+   "planted": [
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Page 1 of 2 | Winola Thackeray | Confidential",
+     "cores": [
+      "Winola",
+      "Thackeray"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "body",
+     "text": "Sincerely, Winola",
+     "cores": [
+      "Winola"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "WINOLA.THACKERAY@MAIL.EXAMPLE.TEST",
+     "cores": [
+      "winolathackeray"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: five five five, zero one zero, zero one four five",
+     "cores": [
+      "fivefivefivezeroonezero"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "footer",
+     "text": "Address: 132 Tern Street Tarn End 06829",
+     "cores": [
+      "Tern Street"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "@wthackeray",
+     "cores": [
+      "wthackeray"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "linkedin.com/in/winola-thackeray-4691",
+     "cores": [
+      "winola"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "[image: portrait of applicant]",
+     "cores": [
+      "portraitofapplicant"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Born on the 5th of May, 1985",
+     "cores": [
+      "may1985"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "(2003 - 2007)",
+     "cores": [
+      "20032007"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "He has years of steady experience.",
+     "cores": [
+      "he"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "(he/him)",
+     "cores": [
+      "hehim"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Previously worked as a Salesman in a retail shop.",
+     "cores": [
+      "salesman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Institute of Applied Studies at Lowmere",
+     "cores": [
+      "lowmere"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Gender: male",
+     "cores": [
+      "gender"
+     ],
+     "mode": "token"
+    }
+   ],
+   "keep": [
+    "Brightwater Cooperative",
+    "Pennywhistle Retail",
+    "Customer Support Specialist",
+    "Rewrote the team's wording guide and coa",
+    "Led root-cause reviews of the ten most f",
+    "Set up saved replies and routing rules i",
+    "Chosen to take the hardest complaints on"
+   ]
+  },
+  {
+   "id": "L11",
+   "known_name": {
+    "first": "Perpetua",
+    "last": "Quenby"
+   },
+   "text": "PERPETUA QUENBY\nQuénby\n[write to me](mailto:perpetua.quenby@mail.example.test)\nPhone: 5550100183\nPO Box 2236, Corvale\nhttps://www.linkedin.com/in/pquenby\n@pquenby\n![Photo of Perpetua](photo.jpg)\nb. 1968\n(she/her)\nPronouns: they/them\nNationality: Corvalian\n\n## Summary\nReliable and steady worker who likes clear goals. Served as Chairwoman of the staff committee.\n\n## Experience\nOperations Coordinator, Pennywhistle Retail, 2019 to 2026\n* Planned shifts for a crew of fifteen and the weekly truck arrivals, resolving clashes before they became delays.\n* Renegotiated terms with two key suppliers, saving about 8 percent a year.\n* Designed the operations reporting pack used by 4 managers, with checks that caught errors before sending, and trained others to maintain it.\n* Covered the front desk during holiday weeks.\n\nAssistant, Hearthstone Clinics, 2012 to 2019\n* Wrote step-by-step instructions for receiving and returns that new staff could follow without help.\n* Took part in the quarterly safety walk.\n\n## Education\n(1986 - 1990)\nAlumna of Tallis Heath College\n",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "PERPETUA QUENBY",
+     "cores": [
+      "Perpetua",
+      "Quenby"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Quénby",
+     "cores": [
+      "Quenby"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "[write to me](mailto:perpetua.quenby@mail.example.test)",
+     "cores": [
+      "perpetuaquenby"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: 5550100183",
+     "cores": [
+      "5550100183"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "PO Box 2236, Corvale",
+     "cores": [
+      "pobox2236"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "https://www.linkedin.com/in/pquenby",
+     "cores": [
+      "pquenby"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "@pquenby",
+     "cores": [
+      "pquenby"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "![Photo of Perpetua](photo.jpg)",
+     "cores": [
+      "photo.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "b. 1968",
+     "cores": [
+      "b1968"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "(1986 - 1990)",
+     "cores": [
+      "19861990"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "(she/her)",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Served as Chairwoman of the staff committee.",
+     "cores": [
+      "chairwoman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Alumna of Tallis Heath College",
+     "cores": [
+      "tallis"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Nationality: Corvalian",
+     "cores": [
+      "corvalian"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Pennywhistle Retail",
+    "Hearthstone Clinics",
+    "Operations Coordinator",
+    "Planned shifts for a crew of fifteen and",
+    "Renegotiated terms with two key supplier",
+    "Designed the operations reporting pack u",
+    "Wrote step-by-step instructions for rece"
+   ]
+  },
+  {
+   "id": "L12",
+   "known_name": {
+    "first": "Delphine",
+    "last": "Galloway"
+   },
+   "text": "Galloway, Delphine\ndel​phine.galloway@mail.example.test\nPhone: 555.010.0162\nPortfolio: https://delphine.example.test/work\nlinkedin.com/in/delphine-galloway-8153\nPhotograph enclosed\nDate of birth: 4 October 1979\nPronouns: they/them\nPronouns: he/him\nMr. Galloway\nHealth: excellent\n\n| Summary |\nReliable and steady worker who likes clear goals. \n\n| Experience |\nData Analyst, Hearthstone Clinics, 2019 to 2026\n| Wrote my own joins and aggregations against the company database to answer weekly questions.\n| Defined the visual style and review process for all company dashboards, managed about 60 of them, and trained analysts across three teams.\n| Set up the company's experimentation practice, including sample-size rules and review, and ran 30 controlled tests that were used in decisions.\n| Joined the staff newsletter committee.\n\nAssistant, Brightwater Cooperative, 2012 to 2019\n| Established the data quality program: owners, tests and alerts across 40 tables; incidents of wrong numbers fell by 70 percent.\n| Took part in the quarterly safety walk.\n\n| Education |\nGraduated in 2001\nStudied at the Northmere Institute of Technology, with honours\n\nPage 1 of 2 | Delphine Galloway | Confidential\nAddress: 26 Tern Street Brackenridge 07020",
+   "planted": [
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Page 1 of 2 | Delphine Galloway | Confidential",
+     "cores": [
+      "Delphine",
+      "Galloway"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Galloway, Delphine",
+     "cores": [
+      "Delphine",
+      "Galloway"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "del​phine.galloway@mail.example.test",
+     "cores": [
+      "delphinegalloway"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: 555.010.0162",
+     "cores": [
+      "5550100162"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "footer",
+     "text": "Address: 26 Tern Street Brackenridge 07020",
+     "cores": [
+      "Tern Street"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "Portfolio: https://delphine.example.test/work",
+     "cores": [
+      "delphine"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "linkedin.com/in/delphine-galloway-8153",
+     "cores": [
+      "delphine"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "Photograph enclosed",
+     "cores": [
+      "photographenclosed"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Date of birth: 4 October 1979",
+     "cores": [
+      "4october1979"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduated in 2001",
+     "cores": [
+      "2001"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: he/him",
+     "cores": [
+      "hehim"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "header",
+     "text": "Mr. Galloway",
+     "cores": [
+      "mr"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Studied at the Northmere Institute of Technology, with honours",
+     "cores": [
+      "northmere"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Health: excellent",
+     "cores": [
+      "healthexcellent"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Hearthstone Clinics",
+    "Brightwater Cooperative",
+    "Data Analyst",
+    "Wrote my own joins and aggregations agai",
+    "Defined the visual style and review proc",
+    "Set up the company's experimentation pra",
+    "Established the data quality program: ow"
+   ]
+  },
+  {
+   "id": "L13",
+   "known_name": {
+    "first": "Anneliese",
+    "last": "Pelletreau"
+   },
+   "text": "Pelletreau, Anneliese\nann​eliese.pelletreau@mail.example.test\nPhone: five five five, zero one zero, zero one seven six\ngithub.com/apelletreau\nlinkedin.com/in/anneliese-pelletreau-4038\nPhoto: attached (headshot.jpg)\n47 years old\nPronouns: they/them\nPronouns: she/her\nGender: female\n\nSUMMARY\nReliable and steady worker who likes clear goals. Anneliese is a dependable team member who enjoys steady work. Previously worked as a Salesman in a retail shop.\n\nEXPERIENCE\nCustomer Support Specialist, Hearthstone Clinics, 2019 to 2026\n- Known on the team for short, warm answers; my written responses were picked as examples in training, and my customer rating averaged 4.8 of 5.\n- Found the cause of most billing and login problems on my own by asking structured questions and checking logs.\n- Administered the support platform for 30 agents, connected it to the billing system, and trained everyone on the new workflow.\n- Covered the front desk during holiday weeks.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n- Chosen to take the hardest complaints on the team; refund disputes I handled ended with the customer staying in 9 of 10 cases.\n- Joined the staff newsletter committee.\n\nEDUCATION\nClass of 2001\nAlumna of Tallis Heath College\n\nAddress: 276 Fennimore Lane Tarn End 05076",
+   "planted": [
+    {
+     "category": "name",
+     "where": "body",
+     "text": "Anneliese is a dependable team member who enjoys steady work.",
+     "cores": [
+      "Anneliese"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Pelletreau, Anneliese",
+     "cores": [
+      "Anneliese",
+      "Pelletreau"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "ann​eliese.pelletreau@mail.example.test",
+     "cores": [
+      "anneliesepelletreau"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: five five five, zero one zero, zero one seven six",
+     "cores": [
+      "fivefivefivezeroonezero"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "footer",
+     "text": "Address: 276 Fennimore Lane Tarn End 05076",
+     "cores": [
+      "Fennimore Lane"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "github.com/apelletreau",
+     "cores": [
+      "apelletreau"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "linkedin.com/in/anneliese-pelletreau-4038",
+     "cores": [
+      "anneliese"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "Photo: attached (headshot.jpg)",
+     "cores": [
+      "headshot.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "47 years old",
+     "cores": [
+      "47yearsold"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Class of 2001",
+     "cores": [
+      "2001"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: she/her",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Previously worked as a Salesman in a retail shop.",
+     "cores": [
+      "salesman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Alumna of Tallis Heath College",
+     "cores": [
+      "tallis"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Gender: female",
+     "cores": [
+      "gender"
+     ],
+     "mode": "token"
+    }
+   ],
+   "keep": [
+    "Hearthstone Clinics",
+    "Ferncliff Foods",
+    "Customer Support Specialist",
+    "Known on the team for short, warm answer",
+    "Found the cause of most billing and logi",
+    "Administered the support platform for 30",
+    "Chosen to take the hardest complaints on"
+   ]
+  },
+  {
+   "id": "L14",
+   "known_name": {
+    "first": "Oswin",
+    "last": "Eskildsen"
+   },
+   "text": "Oswin Eskildsen\noswin.eskildsen [at] mail [dot] example [dot] test\nPhone: 555.010.0168\n268 Corvale Avenue, Welling Heath, ST 07503\nlinkedin.com/in/oswin-eskildsen-9025\ninstagram.com/oswin.e\n<img src=\"headshot.png\" alt=\"Headshot\">\nBorn on the 13th of February, 1980\nPronouns: she/her\nPronouns: they/them\nPlace of birth: Welling Heath\n\n## Summary\nReliable and steady worker who likes clear goals. Sincerely, Oswin Previously worked as a Salesman in a retail shop.\n\n## Experience\nOperations Coordinator, Greylock Utilities, 2019 to 2026\n* Planned shifts for a crew of fifteen and the weekly truck arrivals, resolving clashes before they became delays.\n* Renegotiated terms with two key suppliers, saving about 8 percent a year.\n* Maintained spreadsheets with formulas and pivot tables to follow orders and stock, and sent the manager a Monday summary.\n* Covered the front desk during holiday weeks.\n\nAssistant, Marlow & Finch Supply, 2012 to 2019\n* Wrote step-by-step instructions for receiving and returns that new staff could follow without help.\n* Organised the team's lunch rota.\n\n## Education\nB.A. Economics, 2002\nStudied at the Fenwick College of Commerce, with honours\n",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Oswin Eskildsen",
+     "cores": [
+      "Oswin",
+      "Eskildsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "body",
+     "text": "Sincerely, Oswin",
+     "cores": [
+      "Oswin"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "oswin.eskildsen [at] mail [dot] example [dot] test",
+     "cores": [
+      "oswineskildsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: 555.010.0168",
+     "cores": [
+      "5550100168"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "268 Corvale Avenue, Welling Heath, ST 07503",
+     "cores": [
+      "Corvale Avenue"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "linkedin.com/in/oswin-eskildsen-9025",
+     "cores": [
+      "oswin"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "instagram.com/oswin.e",
+     "cores": [
+      "oswin"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "<img src=\"headshot.png\" alt=\"Headshot\">",
+     "cores": [
+      "headshot.png"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Born on the 13th of February, 1980",
+     "cores": [
+      "february1980"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "B.A. Economics, 2002",
+     "cores": [
+      "2002"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: she/her",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Previously worked as a Salesman in a retail shop.",
+     "cores": [
+      "salesman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Studied at the Fenwick College of Commerce, with honours",
+     "cores": [
+      "fenwick"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Place of birth: Welling Heath",
+     "cores": [
+      "placeofbirth"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Greylock Utilities",
+    "Marlow & Finch Supply",
+    "Operations Coordinator",
+    "Planned shifts for a crew of fifteen and",
+    "Renegotiated terms with two key supplier",
+    "Maintained spreadsheets with formulas an",
+    "Wrote step-by-step instructions for rece"
+   ]
+  },
+  {
+   "id": "L15",
+   "known_name": {
+    "first": "Beaufort",
+    "last": "Kowalczyk"
+   },
+   "text": "Beaufort Kowalczyk\nEmail: beaufort.kowalczyk@\nmail.example.test\nPhone: +1 555 010 0169\nPO Box 4974, Tarn End\nhttps://www.linkedin.com/in/bkowalczyk\nlinkedin.com/in/beaufort-kowalczyk-4974\n![Photo of Beaufort](photo.jpg)\nDate of birth: 22 March 1984\nPronouns: she/her\n(she/her)\nPlace of birth: Tarn End\n\n| Summary |\nReliable and steady worker who likes clear goals. Served as Chairwoman of the staff committee.\n\n| Experience |\nData Analyst, Greylock Utilities, 2019 to 2026\n| Wrote my own joins and aggregations against the company database to answer weekly questions.\n| Created an executive dashboard used by 40 people, replacing six slide decks.\n| Ran significance tests on survey results and explained the confidence ranges.\n| Covered the front desk during holiday weeks.\n\nAssistant, Tidewell Logistics, 2012 to 2019\n| Built automatic validation that caught about 200 bad records a week before they reached dashboards.\n| Welcomed visitors and signed them in.\n\n| Education |\n(2002 - 2006)\nUniversity of Orrin Valley\n\nPrepared by Beaufort Kowalczyk",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Beaufort Kowalczyk",
+     "cores": [
+      "Beaufort",
+      "Kowalczyk"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Prepared by Beaufort Kowalczyk",
+     "cores": [
+      "Beaufort",
+      "Kowalczyk"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "Email: beaufort.kowalczyk@\nmail.example.test",
+     "cores": [
+      "beaufortkowalczyk"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: +1 555 010 0169",
+     "cores": [
+      "5550100169"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "PO Box 4974, Tarn End",
+     "cores": [
+      "pobox4974"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "https://www.linkedin.com/in/bkowalczyk",
+     "cores": [
+      "bkowalczyk"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "linkedin.com/in/beaufort-kowalczyk-4974",
+     "cores": [
+      "beaufort"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "![Photo of Beaufort](photo.jpg)",
+     "cores": [
+      "photo.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Date of birth: 22 March 1984",
+     "cores": [
+      "22march1984"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "(2002 - 2006)",
+     "cores": [
+      "20022006"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: she/her",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "(she/her)",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Served as Chairwoman of the staff committee.",
+     "cores": [
+      "chairwoman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "University of Orrin Valley",
+     "cores": [
+      "orrin"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Place of birth: Tarn End",
+     "cores": [
+      "placeofbirth"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Greylock Utilities",
+    "Tidewell Logistics",
+    "Data Analyst",
+    "Wrote my own joins and aggregations agai",
+    "Created an executive dashboard used by 4",
+    "Ran significance tests on survey results",
+    "Built automatic validation that caught a"
+   ]
+  },
+  {
+   "id": "L16",
+   "known_name": {
+    "first": "Honora",
+    "last": "Dunmore"
+   },
+   "text": "Dunmore, Honora\nH O N O R A       D U N M O R E\n<img src=\"logo.png\" alt=\"Contact honora.dunmore@mail.example.test\">\nPhone: +1 555 010 0185\nhttps://www.linkedin.com/in/hdunmore\nlinkedin.com/in/honora-dunmore-899\nPhotograph enclosed\nBorn 1975 in Brackenridge\nPronouns: they/them\n(he/him)\nMr. Dunmore\nMarital status: married, two children\n\nSUMMARY\nReliable and steady worker who likes clear goals. \n\nEXPERIENCE\nCustomer Support Specialist, Ferncliff Foods, 2019 to 2026\n- Wrote clear, friendly answers to about 40 customer notes per shift and signed each with a personal line.\n- Led root-cause reviews of the ten most frequent faults each month, with engineers; fixes we proposed shipped in four releases and cut repeat contacts by 40 percent.\n- Worked daily in the ticket queue, the live chat window and the internal wiki, keeping records current.\n- Joined the staff newsletter committee.\n\nAssistant, Brightwater Cooperative, 2012 to 2019\n- Chosen to take the hardest complaints on the team; refund disputes I handled ended with the customer staying in 9 of 10 cases.\n- Took part in the quarterly safety walk.\n\nEDUCATION\nB.A. Economics, 1997\nAlumnus of Northmere Institute of Technology\n\nAddress: 60 Linden Rise Brackenridge 09117",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Dunmore, Honora",
+     "cores": [
+      "Honora",
+      "Dunmore"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "H O N O R A       D U N M O R E",
+     "cores": [
+      "Honora",
+      "Dunmore"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "<img src=\"logo.png\" alt=\"Contact honora.dunmore@mail.example.test\">",
+     "cores": [
+      "honoradunmore"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: +1 555 010 0185",
+     "cores": [
+      "5550100185"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "footer",
+     "text": "Address: 60 Linden Rise Brackenridge 09117",
+     "cores": [
+      "Linden Rise"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "https://www.linkedin.com/in/hdunmore",
+     "cores": [
+      "hdunmore"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "linkedin.com/in/honora-dunmore-899",
+     "cores": [
+      "honora"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "Photograph enclosed",
+     "cores": [
+      "photographenclosed"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Born 1975 in Brackenridge",
+     "cores": [
+      "born1975"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "B.A. Economics, 1997",
+     "cores": [
+      "1997"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "(he/him)",
+     "cores": [
+      "hehim"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "header",
+     "text": "Mr. Dunmore",
+     "cores": [
+      "mr"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Alumnus of Northmere Institute of Technology",
+     "cores": [
+      "northmere"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Marital status: married, two children",
+     "cores": [
+      "twochildren"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Ferncliff Foods",
+    "Brightwater Cooperative",
+    "Customer Support Specialist",
+    "Wrote clear, friendly answers to about 4",
+    "Led root-cause reviews of the ten most f",
+    "Worked daily in the ticket queue, the li",
+    "Chosen to take the hardest complaints on"
+   ]
+  },
+  {
+   "id": "L17",
+   "known_name": {
+    "first": "Quillon",
+    "last": "Vantongeren"
+   },
+   "text": "QUILLON VANTONGEREN\nqui​llon.vantongeren@mail.example.test\nPhone: 5550100108\nApt 5B, 42 Bishop's Wharf\ninstagram.com/quillon.v\nlinkedin.com/in/quillon-vantongeren-2869\nPhoto: attached (headshot.jpg)\nDate of birth: 20 December 1972\nPlace of birth: Brackenridge\n\n## Summary\nReliable and steady worker who likes clear goals. Led her team of fifteen through two busy seasons. She has years of steady experience. Worked as a Foreman on the loading dock.\n\n## Experience\nOperations Coordinator, Ferncliff Foods, 2019 to 2026\n* Re-planned the loading dock timetable so trucks waited 30 percent less on average.\n* Was the day-to-day contact for six suppliers, checking orders against quotes and sorting out shortages.\n* Replaced a manual tally with an automated workbook that saved around five hours a week.\n* Took part in the quarterly safety walk.\n\nAssistant, Tidewell Logistics, 2012 to 2019\n* Redesigned the returns routine, cutting handling time per item from 12 to 7 minutes.\n* Welcomed visitors and signed them in.\n\n## Education\nB.A. Economics, 1994\nFenwick College of Commerce\n\nPrepared by Quillon Vantongeren",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "QUILLON VANTONGEREN",
+     "cores": [
+      "Quillon",
+      "Vantongeren"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Prepared by Quillon Vantongeren",
+     "cores": [
+      "Quillon",
+      "Vantongeren"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "qui​llon.vantongeren@mail.example.test",
+     "cores": [
+      "quillonvantongeren"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: 5550100108",
+     "cores": [
+      "5550100108"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "Apt 5B, 42 Bishop's Wharf",
+     "cores": [
+      "Bishop's Wharf"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "instagram.com/quillon.v",
+     "cores": [
+      "quillon"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "linkedin.com/in/quillon-vantongeren-2869",
+     "cores": [
+      "quillon"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "Photo: attached (headshot.jpg)",
+     "cores": [
+      "headshot.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Date of birth: 20 December 1972",
+     "cores": [
+      "20december1972"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "B.A. Economics, 1994",
+     "cores": [
+      "1994"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "Led her team of fifteen through two busy seasons.",
+     "cores": [
+      "her"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "She has years of steady experience.",
+     "cores": [
+      "she"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Worked as a Foreman on the loading dock.",
+     "cores": [
+      "foreman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Fenwick College of Commerce",
+     "cores": [
+      "fenwick"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Place of birth: Brackenridge",
+     "cores": [
+      "placeofbirth"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Ferncliff Foods",
+    "Tidewell Logistics",
+    "Operations Coordinator",
+    "Re-planned the loading dock timetable so",
+    "Was the day-to-day contact for six suppl",
+    "Replaced a manual tally with an automate",
+    "Redesigned the returns routine, cutting "
+   ]
+  },
+  {
+   "id": "L18",
+   "known_name": {
+    "first": "Briony",
+    "last": "Yeoman"
+   },
+   "text": "bri​ony.yeoman@mail.example.test\n+44 20 7946 0101\nApt 5B, 11 Tern Street\n(in/briony-yeoman)\nbyeoman.example.test\n[image: portrait of applicant]\nDOB 05/01/1965\nPronouns: they/them\nHealth: excellent\n\n| Summary |\nReliable and steady worker who likes clear goals. Briony is a dependable team member who enjoys steady work. He has years of steady experience. Served as Chairwoman of the staff committee.\n\n| Experience |\nData Analyst, Pennywhistle Retail, 2019 to 2026\n| Designed the team's warehouse tables and query standards, reviewed colleagues' code, and taught a monthly workshop on advanced queries.\n| Built charts and a dashboard in a BI tool that the sales leads opened every morning.\n| Set up the company's experimentation practice, including sample-size rules and review, and ran 30 controlled tests that were used in decisions.\n| Joined the staff newsletter committee.\n\nAssistant, Greylock Utilities, 2012 to 2019\n| Built automatic validation that caught about 200 bad records a week before they reached dashboards.\n| Joined the staff newsletter committee.\n\n| Education |\nClass of 1987\nStudied at the Fenwick College of Commerce, with honours\n\nPrepared by Briony Yeoman",
+   "planted": [
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Prepared by Briony Yeoman",
+     "cores": [
+      "Briony",
+      "Yeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "body",
+     "text": "Briony is a dependable team member who enjoys steady work.",
+     "cores": [
+      "Briony"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "bri​ony.yeoman@mail.example.test",
+     "cores": [
+      "brionyyeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "+44 20 7946 0101",
+     "cores": [
+      "79460101"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "Apt 5B, 11 Tern Street",
+     "cores": [
+      "Tern Street"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "(in/briony-yeoman)",
+     "cores": [
+      "briony"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "byeoman.example.test",
+     "cores": [
+      "byeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "[image: portrait of applicant]",
+     "cores": [
+      "portraitofapplicant"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "DOB 05/01/1965",
+     "cores": [
+      "05011965"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Class of 1987",
+     "cores": [
+      "1987"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "He has years of steady experience.",
+     "cores": [
+      "he"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Served as Chairwoman of the staff committee.",
+     "cores": [
+      "chairwoman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Studied at the Fenwick College of Commerce, with honours",
+     "cores": [
+      "fenwick"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Health: excellent",
+     "cores": [
+      "healthexcellent"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Pennywhistle Retail",
+    "Greylock Utilities",
+    "Data Analyst",
+    "Designed the team's warehouse tables and",
+    "Built charts and a dashboard in a BI too",
+    "Set up the company's experimentation pra",
+    "Built automatic validation that caught a"
+   ]
+  },
+  {
+   "id": "L19",
+   "known_name": {
+    "first": "Cormac",
+    "last": "Strand"
+   },
+   "text": "C O R M A C       S T R A N D\ncor​mac.strand@mail.example.test\nPhone: 555.010.0103\n48 Corvale Avenue, Corvale, ST 05390\n@cstrand\ngithub.com/cstrand\nPhoto: attached (headshot.jpg)\nDOB 06/13/1978\nPronouns: she/her\n(she/her)\nGender: female\n\nSUMMARY\nReliable and steady worker who likes clear goals. Began as a Waitress at a roadside diner.\n\nEXPERIENCE\nCustomer Support Specialist, Pennywhistle Retail, 2019 to 2026\n- Rewrote the team's wording guide and coached six new hires on tone; satisfaction on written answers rose from 81 to 93 percent in two quarters.\n- Found the cause of most billing and login problems on my own by asking structured questions and checking logs.\n- Worked daily in the ticket queue, the live chat window and the internal wiki, keeping records current.\n- Joined the staff newsletter committee.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n- Wrote and taught the team's guide for calming angry customers; formal complaints against our desk dropped from 25 to 9 a quarter.\n- Organised the team's lunch rota.\n\nEDUCATION\nGraduation: May 2000\nStudied at the Ashgrove State College, with honours\n\nPage 1 of 2 | Cormac Strand | Confidential",
+   "planted": [
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Page 1 of 2 | Cormac Strand | Confidential",
+     "cores": [
+      "Cormac",
+      "Strand"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "C O R M A C       S T R A N D",
+     "cores": [
+      "Cormac",
+      "Strand"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "cor​mac.strand@mail.example.test",
+     "cores": [
+      "cormacstrand"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: 555.010.0103",
+     "cores": [
+      "5550100103"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "48 Corvale Avenue, Corvale, ST 05390",
+     "cores": [
+      "Corvale Avenue"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "@cstrand",
+     "cores": [
+      "cstrand"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "github.com/cstrand",
+     "cores": [
+      "cstrand"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "Photo: attached (headshot.jpg)",
+     "cores": [
+      "headshot.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "DOB 06/13/1978",
+     "cores": [
+      "06131978"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduation: May 2000",
+     "cores": [
+      "may2000"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: she/her",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "(she/her)",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Began as a Waitress at a roadside diner.",
+     "cores": [
+      "waitress"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Studied at the Ashgrove State College, with honours",
+     "cores": [
+      "ashgrove"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Gender: female",
+     "cores": [
+      "gender"
+     ],
+     "mode": "token"
+    }
+   ],
+   "keep": [
+    "Pennywhistle Retail",
+    "Ferncliff Foods",
+    "Customer Support Specialist",
+    "Rewrote the team's wording guide and coa",
+    "Found the cause of most billing and logi",
+    "Worked daily in the ticket queue, the li",
+    "Wrote and taught the team's guide for ca"
+   ]
+  },
+  {
+   "id": "L20",
+   "known_name": {
+    "first": "Delphine",
+    "last": "Galloway"
+   },
+   "text": "DELPHINE GALLOWAY\nD. Galloway\n[write to me](mailto:delphine.galloway@mail.example.test)\nPhone: tel:+15550100185\n259 Linden Rise, Tarn End, ST 09420\ndgalloway.example.test\nPortfolio: https://delphine.example.test/work\n[image: portrait of applicant]\nAge: 50\nPronouns: he/him\nNationality: Corvalian\n\n## Summary\nReliable and steady worker who likes clear goals. He has years of steady experience. Previously worked as a Salesman in a retail shop.\n\n## Experience\nOperations Coordinator, Quillon Software, 2019 to 2026\n* Re-planned the loading dock timetable so trucks waited 30 percent less on average.\n* Was the day-to-day contact for six suppliers, checking orders against quotes and sorting out shortages.\n* Maintained spreadsheets with formulas and pivot tables to follow orders and stock, and sent the manager a Monday summary.\n* Joined the staff newsletter committee.\n\nAssistant, Brightwater Cooperative, 2012 to 2019\n* Redesigned the returns routine, cutting handling time per item from 12 to 7 minutes.\n* Joined the staff newsletter committee.\n\n## Education\nGraduated in 1998\nFenwick College of Commerce\n",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "DELPHINE GALLOWAY",
+     "cores": [
+      "Delphine",
+      "Galloway"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "D. Galloway",
+     "cores": [
+      "Galloway"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "[write to me](mailto:delphine.galloway@mail.example.test)",
+     "cores": [
+      "delphinegalloway"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: tel:+15550100185",
+     "cores": [
+      "5550100185"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "259 Linden Rise, Tarn End, ST 09420",
+     "cores": [
+      "Linden Rise"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "dgalloway.example.test",
+     "cores": [
+      "dgalloway"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "Portfolio: https://delphine.example.test/work",
+     "cores": [
+      "delphine"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "[image: portrait of applicant]",
+     "cores": [
+      "portraitofapplicant"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Age: 50",
+     "cores": [
+      "age50"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduated in 1998",
+     "cores": [
+      "1998"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: he/him",
+     "cores": [
+      "hehim"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "He has years of steady experience.",
+     "cores": [
+      "he"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Previously worked as a Salesman in a retail shop.",
+     "cores": [
+      "salesman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Fenwick College of Commerce",
+     "cores": [
+      "fenwick"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Nationality: Corvalian",
+     "cores": [
+      "corvalian"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Quillon Software",
+    "Brightwater Cooperative",
+    "Operations Coordinator",
+    "Re-planned the loading dock timetable so",
+    "Was the day-to-day contact for six suppl",
+    "Maintained spreadsheets with formulas an",
+    "Redesigned the returns routine, cutting "
+   ]
+  },
+  {
+   "id": "L21",
+   "known_name": {
+    "first": "Corwin",
+    "last": "Hartnell"
+   },
+   "text": "CORWIN HARTNELL\nCorwin Hartnell\ncor​win.hartnell@mail.example.test\nPhone: 5550100179\n275 Marlpit Road, Brackenridge, ST 04482\nPortfolio: https://corwin.example.test/work\n@chartnell\n[image: portrait of applicant]\nAge: 46\n(she/her)\nReligion: Quaker\n\n| Summary |\nReliable and steady worker who likes clear goals. Led her team of fifteen through two busy seasons. Worked as a Foreman on the loading dock.\n\n| Experience |\nData Analyst, Tidewell Logistics, 2019 to 2026\n| Designed the team's warehouse tables and query standards, reviewed colleagues' code, and taught a monthly workshop on advanced queries.\n| Defined the visual style and review process for all company dashboards, managed about 60 of them, and trained analysts across three teams.\n| Designed and analysed a pricing test with 20,000 visitors, which led to a 4 percent revenue gain.\n| Organised the team's lunch rota.\n\nAssistant, Greylock Utilities, 2012 to 2019\n| Built automatic validation that caught about 200 bad records a week before they reached dashboards.\n| Covered the front desk during holiday weeks.\n\n| Education |\nGraduation: May 2002\nNorthmere Institute of Technology\n",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "CORWIN HARTNELL",
+     "cores": [
+      "Corwin",
+      "Hartnell"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Corwin Hartnell",
+     "cores": [
+      "Corwin",
+      "Hartnell"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "cor​win.hartnell@mail.example.test",
+     "cores": [
+      "corwinhartnell"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: 5550100179",
+     "cores": [
+      "5550100179"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "275 Marlpit Road, Brackenridge, ST 04482",
+     "cores": [
+      "Marlpit Road"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "Portfolio: https://corwin.example.test/work",
+     "cores": [
+      "corwin"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "@chartnell",
+     "cores": [
+      "chartnell"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "[image: portrait of applicant]",
+     "cores": [
+      "portraitofapplicant"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Age: 46",
+     "cores": [
+      "age46"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduation: May 2002",
+     "cores": [
+      "may2002"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "Led her team of fifteen through two busy seasons.",
+     "cores": [
+      "her"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "(she/her)",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Worked as a Foreman on the loading dock.",
+     "cores": [
+      "foreman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Northmere Institute of Technology",
+     "cores": [
+      "northmere"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Religion: Quaker",
+     "cores": [
+      "quaker"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Tidewell Logistics",
+    "Greylock Utilities",
+    "Data Analyst",
+    "Designed the team's warehouse tables and",
+    "Defined the visual style and review proc",
+    "Designed and analysed a pricing test wit",
+    "Built automatic validation that caught a"
+   ]
+  },
+  {
+   "id": "L22",
+   "known_name": {
+    "first": "Quillon",
+    "last": "Ibsen"
+   },
+   "text": "quillon.ibsen [at] mail [dot] example [dot] test\n+44 20 7946 0125\n@qibsen\nlinkedin.com/in/quillon-ibsen-817\n<img src=\"headshot.png\" alt=\"Headshot\">\nDate of birth: 23 November 1988\nPronouns: they/them\nMarital status: married, two children\n\nSUMMARY\nReliable and steady worker who likes clear goals. Quillon is a dependable team member who enjoys steady work. Led her team of fifteen through two busy seasons. Previously worked as a Salesman in a retail shop.\n\nEXPERIENCE\nCustomer Support Specialist, Tidewell Logistics, 2019 to 2026\n- Rewrote the team's wording guide and coached six new hires on tone; satisfaction on written answers rose from 81 to 93 percent in two quarters.\n- Traced a recurring duplicate-charge fault to a settings conflict and documented the fix; repeat contacts on that issue fell by 35 percent.\n- Administered the support platform for 30 agents, connected it to the billing system, and trained everyone on the new workflow.\n- Covered the front desk during holiday weeks.\n\nAssistant, Brightwater Cooperative, 2012 to 2019\n- Settled most heated complaints myself by listening first, restating the problem and offering a clear next step.\n- Welcomed visitors and signed them in.\n\nEDUCATION\nGraduation: May 2010\nStudied at the Ashgrove State College, with honours\n\nPage 1 of 2 | Quillon Ibsen | Confidential\nAddress: 181 Tern Street Tarn End 07469",
+   "planted": [
+    {
+     "category": "name",
+     "where": "body",
+     "text": "Quillon is a dependable team member who enjoys steady work.",
+     "cores": [
+      "Quillon"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Page 1 of 2 | Quillon Ibsen | Confidential",
+     "cores": [
+      "Quillon",
+      "Ibsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "quillon.ibsen [at] mail [dot] example [dot] test",
+     "cores": [
+      "quillonibsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "+44 20 7946 0125",
+     "cores": [
+      "79460125"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "footer",
+     "text": "Address: 181 Tern Street Tarn End 07469",
+     "cores": [
+      "Tern Street"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "@qibsen",
+     "cores": [
+      "qibsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "linkedin.com/in/quillon-ibsen-817",
+     "cores": [
+      "quillon"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "<img src=\"headshot.png\" alt=\"Headshot\">",
+     "cores": [
+      "headshot.png"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Date of birth: 23 November 1988",
+     "cores": [
+      "23november1988"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduation: May 2010",
+     "cores": [
+      "may2010"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "Led her team of fifteen through two busy seasons.",
+     "cores": [
+      "her"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Previously worked as a Salesman in a retail shop.",
+     "cores": [
+      "salesman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Studied at the Ashgrove State College, with honours",
+     "cores": [
+      "ashgrove"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Marital status: married, two children",
+     "cores": [
+      "twochildren"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Tidewell Logistics",
+    "Brightwater Cooperative",
+    "Customer Support Specialist",
+    "Rewrote the team's wording guide and coa",
+    "Traced a recurring duplicate-charge faul",
+    "Administered the support platform for 30",
+    "Settled most heated complaints myself by"
+   ]
+  },
+  {
+   "id": "L23",
+   "known_name": {
+    "first": "Winola",
+    "last": "Strand"
+   },
+   "text": "Winola Strand\nW. Strand\nwinola.strand@mail.example.test\nPhone: (555) 010-0190\nApt 5B, 60 Tern Street\nlinkedin.com/in/winola-strand-3353\n@wstrand\n<img src=\"headshot.png\" alt=\"Headshot\">\nDate of birth: 19 May 1963\nPronouns: they/them\nPronouns: she/her\nGender: female\n\n## Summary\nReliable and steady worker who likes clear goals. Began as a Waitress at a roadside diner.\n\n## Experience\nOperations Coordinator, Tidewell Logistics, 2019 to 2026\n* Ran the whole weekly plan for three warehouses and 60 staff, and trained two coordinators to take it over; on-time delivery reached 97 percent.\n* Managed the full supplier panel of 25 companies, ran the yearly review, replaced three weak partners, and brought late deliveries down by half.\n* Designed the operations reporting pack used by 4 managers, with checks that caught errors before sending, and trained others to maintain it.\n* Welcomed visitors and signed them in.\n\nAssistant, Quillon Software, 2012 to 2019\n* Wrote step-by-step instructions for receiving and returns that new staff could follow without help.\n* Covered the front desk during holiday weeks.\n\n## Education\nGraduated in 1985\nStudied at the University of Orrin Valley, with honours\n",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Winola Strand",
+     "cores": [
+      "Winola",
+      "Strand"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "W. Strand",
+     "cores": [
+      "Strand"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "winola.strand@mail.example.test",
+     "cores": [
+      "winolastrand"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: (555) 010-0190",
+     "cores": [
+      "5550100190"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "Apt 5B, 60 Tern Street",
+     "cores": [
+      "Tern Street"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "linkedin.com/in/winola-strand-3353",
+     "cores": [
+      "winola"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "@wstrand",
+     "cores": [
+      "wstrand"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "<img src=\"headshot.png\" alt=\"Headshot\">",
+     "cores": [
+      "headshot.png"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Date of birth: 19 May 1963",
+     "cores": [
+      "19may1963"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduated in 1985",
+     "cores": [
+      "1985"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: she/her",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Began as a Waitress at a roadside diner.",
+     "cores": [
+      "waitress"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Studied at the University of Orrin Valley, with honours",
+     "cores": [
+      "orrin"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Gender: female",
+     "cores": [
+      "gender"
+     ],
+     "mode": "token"
+    }
+   ],
+   "keep": [
+    "Tidewell Logistics",
+    "Quillon Software",
+    "Operations Coordinator",
+    "Ran the whole weekly plan for three ware",
+    "Managed the full supplier panel of 25 co",
+    "Designed the operations reporting pack u",
+    "Wrote step-by-step instructions for rece"
+   ]
+  },
+  {
+   "id": "L24",
+   "known_name": {
+    "first": "Edda",
+    "last": "Yeoman"
+   },
+   "text": "E. Yeoman\nResume_Edda_Yeoman_2026.pdf\nEDDA.YEOMAN@MAIL.EXAMPLE.TEST\nPhone: tel:+15550100186\n150 Bishop's Wharf, Ostmere, ST 07546\n(in/edda-yeoman)\nhttps://www.linkedin.com/in/eyeoman\nPhoto: attached (headshot.jpg)\n42 years old\nPronouns: they/them\nMiss. Yeoman\nHealth: excellent\n\n| Summary |\nReliable and steady worker who likes clear goals. Led her team of fifteen through two busy seasons.\n\n| Experience |\nData Analyst, Pennywhistle Retail, 2019 to 2026\n| Designed the team's warehouse tables and query standards, reviewed colleagues' code, and taught a monthly workshop on advanced queries.\n| Created an executive dashboard used by 40 people, replacing six slide decks.\n| Ran significance tests on survey results and explained the confidence ranges.\n| Joined the staff newsletter committee.\n\nAssistant, Hearthstone Clinics, 2012 to 2019\n| Built automatic validation that caught about 200 bad records a week before they reached dashboards.\n| Covered the front desk during holiday weeks.\n\n| Education |\n(2002 - 2006)\nAlumna of University of Orrin Valley\n",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "E. Yeoman",
+     "cores": [
+      "Yeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Resume_Edda_Yeoman_2026.pdf",
+     "cores": [
+      "Edda",
+      "Yeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "EDDA.YEOMAN@MAIL.EXAMPLE.TEST",
+     "cores": [
+      "eddayeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: tel:+15550100186",
+     "cores": [
+      "5550100186"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "150 Bishop's Wharf, Ostmere, ST 07546",
+     "cores": [
+      "Bishop's Wharf"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "(in/edda-yeoman)",
+     "cores": [
+      "edda"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "https://www.linkedin.com/in/eyeoman",
+     "cores": [
+      "eyeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "Photo: attached (headshot.jpg)",
+     "cores": [
+      "headshot.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "42 years old",
+     "cores": [
+      "42yearsold"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "(2002 - 2006)",
+     "cores": [
+      "20022006"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "Led her team of fifteen through two busy seasons.",
+     "cores": [
+      "her"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "title",
+     "where": "header",
+     "text": "Miss. Yeoman",
+     "cores": [
+      "miss"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Alumna of University of Orrin Valley",
+     "cores": [
+      "orrin"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Health: excellent",
+     "cores": [
+      "healthexcellent"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Pennywhistle Retail",
+    "Hearthstone Clinics",
+    "Data Analyst",
+    "Designed the team's warehouse tables and",
+    "Created an executive dashboard used by 4",
+    "Ran significance tests on survey results",
+    "Built automatic validation that caught a"
+   ]
+  },
+  {
+   "id": "L25",
+   "known_name": {
+    "first": "Edda",
+    "last": "Fontaine-Ruiz"
+   },
+   "text": "Resume_Edda_Fontaine-Ruiz_2026.pdf\nedd​a.fontaineruiz@mail.example.test\n+44 20 7946 0169\n124 Corvale Avenue, Ostmere, ST 05955\nlinkedin.com/in/edda-fontaine-ruiz-6455\nhttps://www.linkedin.com/in/efontaineruiz\nPhoto: attached (headshot.jpg)\nBorn 1964 in Ostmere\nPronouns: they/them\nGender: female\n\nSUMMARY\nReliable and steady worker who likes clear goals. Sincerely, Edda She has years of steady experience. Worked as a Foreman on the loading dock.\n\nEXPERIENCE\nCustomer Support Specialist, Greylock Utilities, 2019 to 2026\n- Wrote clear, friendly answers to about 40 customer notes per shift and signed each with a personal line.\n- Led root-cause reviews of the ten most frequent faults each month, with engineers; fixes we proposed shipped in four releases and cut repeat contacts by 40 percent.\n- Set up saved replies and routing rules in the helpdesk platform for our team of twelve.\n- Covered the front desk during holiday weeks.\n\nAssistant, Hearthstone Clinics, 2012 to 2019\n- Settled most heated complaints myself by listening first, restating the problem and offering a clear next step.\n- Took part in the quarterly safety walk.\n\nEDUCATION\nB.A. Economics, 1986\nAshgrove State College\n",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Resume_Edda_Fontaine-Ruiz_2026.pdf",
+     "cores": [
+      "Edda",
+      "Fontaine-Ruiz"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "body",
+     "text": "Sincerely, Edda",
+     "cores": [
+      "Edda"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "edd​a.fontaineruiz@mail.example.test",
+     "cores": [
+      "eddafontaineruiz"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "+44 20 7946 0169",
+     "cores": [
+      "79460169"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "124 Corvale Avenue, Ostmere, ST 05955",
+     "cores": [
+      "Corvale Avenue"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "linkedin.com/in/edda-fontaine-ruiz-6455",
+     "cores": [
+      "edda"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "https://www.linkedin.com/in/efontaineruiz",
+     "cores": [
+      "efontaineruiz"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "Photo: attached (headshot.jpg)",
+     "cores": [
+      "headshot.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Born 1964 in Ostmere",
+     "cores": [
+      "born1964"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "B.A. Economics, 1986",
+     "cores": [
+      "1986"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "She has years of steady experience.",
+     "cores": [
+      "she"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Worked as a Foreman on the loading dock.",
+     "cores": [
+      "foreman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Ashgrove State College",
+     "cores": [
+      "ashgrove"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Gender: female",
+     "cores": [
+      "gender"
+     ],
+     "mode": "token"
+    }
+   ],
+   "keep": [
+    "Greylock Utilities",
+    "Hearthstone Clinics",
+    "Customer Support Specialist",
+    "Wrote clear, friendly answers to about 4",
+    "Led root-cause reviews of the ten most f",
+    "Set up saved replies and routing rules i",
+    "Settled most heated complaints myself by"
+   ]
+  },
+  {
+   "id": "L26",
+   "known_name": {
+    "first": "Honora",
+    "last": "Pelletreau"
+   },
+   "text": "Péllétréáu\nH O N O R A       P E L L E T R E A U\nhon​ora.pelletreau@mail.example.test\nPhone: five five five, zero one zero, zero one four five\n133 Fennimore Lane, Ostmere, ST 05486\nhttps://www.linkedin.com/in/hpelletreau\nPortfolio: https://honora.example.test/work\nPhotograph enclosed\nBorn 1969 in Ostmere\nPronouns: she/her\nPronouns: they/them\nMarital status: married, two children\n\n## Summary\nReliable and steady worker who likes clear goals. Worked as a Foreman on the loading dock.\n\n## Experience\nOperations Coordinator, Greylock Utilities, 2019 to 2026\n* Re-planned the loading dock timetable so trucks waited 30 percent less on average.\n* Managed the full supplier panel of 25 companies, ran the yearly review, replaced three weak partners, and brought late deliveries down by half.\n* Maintained spreadsheets with formulas and pivot tables to follow orders and stock, and sent the manager a Monday summary.\n* Took part in the quarterly safety walk.\n\nAssistant, Brightwater Cooperative, 2012 to 2019\n* Led a company-wide review of 20 routines, rewrote them, and got teams to adopt them; errors fell by 45 percent over the year.\n* Took part in the quarterly safety walk.\n\n## Education\nB.A. Economics, 1991\nAshgrove State College\n",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Péllétréáu",
+     "cores": [
+      "Pelletreau"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "H O N O R A       P E L L E T R E A U",
+     "cores": [
+      "Honora",
+      "Pelletreau"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "hon​ora.pelletreau@mail.example.test",
+     "cores": [
+      "honorapelletreau"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: five five five, zero one zero, zero one four five",
+     "cores": [
+      "fivefivefivezeroonezero"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "133 Fennimore Lane, Ostmere, ST 05486",
+     "cores": [
+      "Fennimore Lane"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "https://www.linkedin.com/in/hpelletreau",
+     "cores": [
+      "hpelletreau"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "Portfolio: https://honora.example.test/work",
+     "cores": [
+      "honora"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "Photograph enclosed",
+     "cores": [
+      "photographenclosed"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Born 1969 in Ostmere",
+     "cores": [
+      "born1969"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "B.A. Economics, 1991",
+     "cores": [
+      "1991"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: she/her",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Worked as a Foreman on the loading dock.",
+     "cores": [
+      "foreman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Ashgrove State College",
+     "cores": [
+      "ashgrove"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Marital status: married, two children",
+     "cores": [
+      "twochildren"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Greylock Utilities",
+    "Brightwater Cooperative",
+    "Operations Coordinator",
+    "Re-planned the loading dock timetable so",
+    "Managed the full supplier panel of 25 co",
+    "Maintained spreadsheets with formulas an",
+    "Led a company-wide review of 20 routines"
+   ]
+  },
+  {
+   "id": "L27",
+   "known_name": {
+    "first": "Briony",
+    "last": "Mirabeau"
+   },
+   "text": "[write to me](mailto:briony.mirabeau@mail.example.test)\n+44 20 7946 0165\nPO Box 5374, Ostmere\ninstagram.com/briony.m\ngithub.com/bmirabeau\nPhoto: attached (headshot.jpg)\nBorn 1987 in Ostmere\nPronouns: they/them\nPlace of birth: Ostmere\n\n| Summary |\nReliable and steady worker who likes clear goals. She has years of steady experience. Previously worked as a Salesman in a retail shop.\n\n| Experience |\nData Analyst, Pennywhistle Retail, 2019 to 2026\n| Wrote my own joins and aggregations against the company database to answer weekly questions.\n| Created an executive dashboard used by 40 people, replacing six slide decks.\n| Set up the company's experimentation practice, including sample-size rules and review, and ran 30 controlled tests that were used in decisions.\n| Took part in the quarterly safety walk.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n| Built automatic validation that caught about 200 bad records a week before they reached dashboards.\n| Covered the front desk during holiday weeks.\n\n| Education |\nB.A. Economics, 2009\nAlumna of Fenwick College of Commerce\n\nPrepared by Briony Mirabeau\nPage 1 of 2 | Briony Mirabeau | Confidential",
+   "planted": [
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Prepared by Briony Mirabeau",
+     "cores": [
+      "Briony",
+      "Mirabeau"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Page 1 of 2 | Briony Mirabeau | Confidential",
+     "cores": [
+      "Briony",
+      "Mirabeau"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "[write to me](mailto:briony.mirabeau@mail.example.test)",
+     "cores": [
+      "brionymirabeau"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "+44 20 7946 0165",
+     "cores": [
+      "79460165"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "PO Box 5374, Ostmere",
+     "cores": [
+      "pobox5374"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "instagram.com/briony.m",
+     "cores": [
+      "briony"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "github.com/bmirabeau",
+     "cores": [
+      "bmirabeau"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "Photo: attached (headshot.jpg)",
+     "cores": [
+      "headshot.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Born 1987 in Ostmere",
+     "cores": [
+      "born1987"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "B.A. Economics, 2009",
+     "cores": [
+      "2009"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "She has years of steady experience.",
+     "cores": [
+      "she"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Previously worked as a Salesman in a retail shop.",
+     "cores": [
+      "salesman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Alumna of Fenwick College of Commerce",
+     "cores": [
+      "fenwick"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Place of birth: Ostmere",
+     "cores": [
+      "placeofbirth"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Pennywhistle Retail",
+    "Ferncliff Foods",
+    "Data Analyst",
+    "Wrote my own joins and aggregations agai",
+    "Created an executive dashboard used by 4",
+    "Set up the company's experimentation pra",
+    "Built automatic validation that caught a"
+   ]
+  },
+  {
+   "id": "L28",
+   "known_name": {
+    "first": "Ilse",
+    "last": "Thackeray"
+   },
+   "text": "Resume_Ilse_Thackeray_2026.pdf\nilse.thackeray@mail.example.test\nPhone: 5550100150\nFlat 3\n104 Fennimore Lane\nCorvale CV6 1ZB\ngithub.com/ithackeray\nhttps://www.linkedin.com/in/ithackeray\n![Photo of Ilse](photo.jpg)\nAge: 63\n(she/her)\nPronouns: they/them\nMarital status: married, two children\n\nSUMMARY\nReliable and steady worker who likes clear goals. Sincerely, Ilse Previously worked as a Salesman in a retail shop.\n\nEXPERIENCE\nCustomer Support Specialist, Tidewell Logistics, 2019 to 2026\n- Wrote clear, friendly answers to about 40 customer notes per shift and signed each with a personal line.\n- Traced a recurring duplicate-charge fault to a settings conflict and documented the fix; repeat contacts on that issue fell by 35 percent.\n- Worked daily in the ticket queue, the live chat window and the internal wiki, keeping records current.\n- Covered the front desk during holiday weeks.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n- Chosen to take the hardest complaints on the team; refund disputes I handled ended with the customer staying in 9 of 10 cases.\n- Covered the front desk during holiday weeks.\n\nEDUCATION\nGraduated in 1985\nInstitute of Applied Studies at Lowmere\n",
+   "planted": [
+    {
+     "category": "name",
+     "where": "body",
+     "text": "Sincerely, Ilse",
+     "cores": [
+      "Ilse"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Resume_Ilse_Thackeray_2026.pdf",
+     "cores": [
+      "Ilse",
+      "Thackeray"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "ilse.thackeray@mail.example.test",
+     "cores": [
+      "ilsethackeray"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: 5550100150",
+     "cores": [
+      "5550100150"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "Flat 3\n104 Fennimore Lane\nCorvale CV6 1ZB",
+     "cores": [
+      "Fennimore Lane"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "github.com/ithackeray",
+     "cores": [
+      "ithackeray"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "https://www.linkedin.com/in/ithackeray",
+     "cores": [
+      "ithackeray"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "![Photo of Ilse](photo.jpg)",
+     "cores": [
+      "photo.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Age: 63",
+     "cores": [
+      "age63"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduated in 1985",
+     "cores": [
+      "1985"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "(she/her)",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Previously worked as a Salesman in a retail shop.",
+     "cores": [
+      "salesman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Institute of Applied Studies at Lowmere",
+     "cores": [
+      "lowmere"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Marital status: married, two children",
+     "cores": [
+      "twochildren"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Tidewell Logistics",
+    "Ferncliff Foods",
+    "Customer Support Specialist",
+    "Wrote clear, friendly answers to about 4",
+    "Traced a recurring duplicate-charge faul",
+    "Worked daily in the ticket queue, the li",
+    "Chosen to take the hardest complaints on"
+   ]
+  },
+  {
+   "id": "L29",
+   "known_name": {
+    "first": "Anneliese",
+    "last": "Yeoman"
+   },
+   "text": "A N N E L I E S E       Y E O M A N\n[write to me](mailto:anneliese.yeoman@mail.example.test)\nPhone: 555.010.0170\nApt 5B, 209 Bishop's Wharf\ngithub.com/ayeoman\nayeoman.example.test\n![Photo of Anneliese](photo.jpg)\nDate of birth: 6 March 1964\n(he/him)\nPlace of birth: Corvale\n\n## Summary\nReliable and steady worker who likes clear goals. Sincerely, Anneliese He has years of steady experience. Worked as a Foreman on the loading dock.\n\n## Experience\nOperations Coordinator, Pennywhistle Retail, 2019 to 2026\n* Planned shifts for a crew of fifteen and the weekly truck arrivals, resolving clashes before they became delays.\n* Was the day-to-day contact for six suppliers, checking orders against quotes and sorting out shortages.\n* Maintained spreadsheets with formulas and pivot tables to follow orders and stock, and sent the manager a Monday summary.\n* Organised the team's lunch rota.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n* Led a company-wide review of 20 routines, rewrote them, and got teams to adopt them; errors fell by 45 percent over the year.\n* Welcomed visitors and signed them in.\n\n## Education\nGraduation: May 1986\nStudied at the Veldt University, with honours\n",
+   "planted": [
+    {
+     "category": "name",
+     "where": "body",
+     "text": "Sincerely, Anneliese",
+     "cores": [
+      "Anneliese"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "A N N E L I E S E       Y E O M A N",
+     "cores": [
+      "Anneliese",
+      "Yeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "[write to me](mailto:anneliese.yeoman@mail.example.test)",
+     "cores": [
+      "annelieseyeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: 555.010.0170",
+     "cores": [
+      "5550100170"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "Apt 5B, 209 Bishop's Wharf",
+     "cores": [
+      "Bishop's Wharf"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "github.com/ayeoman",
+     "cores": [
+      "ayeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "ayeoman.example.test",
+     "cores": [
+      "ayeoman"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "![Photo of Anneliese](photo.jpg)",
+     "cores": [
+      "photo.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Date of birth: 6 March 1964",
+     "cores": [
+      "6march1964"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduation: May 1986",
+     "cores": [
+      "may1986"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "He has years of steady experience.",
+     "cores": [
+      "he"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "(he/him)",
+     "cores": [
+      "hehim"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Worked as a Foreman on the loading dock.",
+     "cores": [
+      "foreman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Studied at the Veldt University, with honours",
+     "cores": [
+      "veldt"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Place of birth: Corvale",
+     "cores": [
+      "placeofbirth"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Pennywhistle Retail",
+    "Ferncliff Foods",
+    "Operations Coordinator",
+    "Planned shifts for a crew of fifteen and",
+    "Was the day-to-day contact for six suppl",
+    "Maintained spreadsheets with formulas an",
+    "Led a company-wide review of 20 routines"
+   ]
+  },
+  {
+   "id": "L30",
+   "known_name": {
+    "first": "Beaufort",
+    "last": "Dunmore"
+   },
+   "text": "B. Dunmore\nbeaufort.dunmore@mail.example.test\nPhone: 555.010.0122\n@bdunmore\ninstagram.com/beaufort.d\n<img src=\"headshot.png\" alt=\"Headshot\">\n55 years old\n(she/her)\nMs. Dunmore\nNationality: Corvalian\n\n| Summary |\nReliable and steady worker who likes clear goals. Sincerely, Beaufort She has years of steady experience.\n\n| Experience |\nData Analyst, Quillon Software, 2019 to 2026\n| Wrote my own joins and aggregations against the company database to answer weekly questions.\n| Defined the visual style and review process for all company dashboards, managed about 60 of them, and trained analysts across three teams.\n| Set up the company's experimentation practice, including sample-size rules and review, and ran 30 controlled tests that were used in decisions.\n| Joined the staff newsletter committee.\n\nAssistant, Pennywhistle Retail, 2012 to 2019\n| Established the data quality program: owners, tests and alerts across 40 tables; incidents of wrong numbers fell by 70 percent.\n| Covered the front desk during holiday weeks.\n\n| Education |\nGraduated in 1993\nHarrowgate Univ.\n\nAddress: 239 Bishop's Wharf Corvale 08966",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "B. Dunmore",
+     "cores": [
+      "Dunmore"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "body",
+     "text": "Sincerely, Beaufort",
+     "cores": [
+      "Beaufort"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "beaufort.dunmore@mail.example.test",
+     "cores": [
+      "beaufortdunmore"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: 555.010.0122",
+     "cores": [
+      "5550100122"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "footer",
+     "text": "Address: 239 Bishop's Wharf Corvale 08966",
+     "cores": [
+      "Bishop's Wharf"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "@bdunmore",
+     "cores": [
+      "bdunmore"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "instagram.com/beaufort.d",
+     "cores": [
+      "beaufort"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "<img src=\"headshot.png\" alt=\"Headshot\">",
+     "cores": [
+      "headshot.png"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "55 years old",
+     "cores": [
+      "55yearsold"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduated in 1993",
+     "cores": [
+      "1993"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "(she/her)",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "She has years of steady experience.",
+     "cores": [
+      "she"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "title",
+     "where": "header",
+     "text": "Ms. Dunmore",
+     "cores": [
+      "ms"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Harrowgate Univ.",
+     "cores": [
+      "harrowgate"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Nationality: Corvalian",
+     "cores": [
+      "corvalian"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Quillon Software",
+    "Pennywhistle Retail",
+    "Data Analyst",
+    "Wrote my own joins and aggregations agai",
+    "Defined the visual style and review proc",
+    "Set up the company's experimentation pra",
+    "Established the data quality program: ow"
+   ]
+  },
+  {
+   "id": "L31",
+   "known_name": {
+    "first": "Oswin",
+    "last": "Hartnell"
+   },
+   "text": "Hartnell, Oswin\noswin.hartnell@mail.example.test\n+44 20 7946 0150\n35 Linden Rise, Brackenridge, ST 05362\nohartnell.example.test\n(in/oswin-hartnell)\n![Photo of Oswin](photo.jpg)\nBorn 1988 in Brackenridge\n(he/him)\nGender: male\n\nSUMMARY\nReliable and steady worker who likes clear goals. Led his team of fifteen through two busy seasons. Previously worked as a Salesman in a retail shop.\n\nEXPERIENCE\nCustomer Support Specialist, Brightwater Cooperative, 2019 to 2026\n- Known on the team for short, warm answers; my written responses were picked as examples in training, and my customer rating averaged 4.8 of 5.\n- Led root-cause reviews of the ten most frequent faults each month, with engineers; fixes we proposed shipped in four releases and cut repeat contacts by 40 percent.\n- Administered the support platform for 30 agents, connected it to the billing system, and trained everyone on the new workflow.\n- Organised the team's lunch rota.\n\nAssistant, Marlow & Finch Supply, 2012 to 2019\n- Chosen to take the hardest complaints on the team; refund disputes I handled ended with the customer staying in 9 of 10 cases.\n- Organised the team's lunch rota.\n\nEDUCATION\nClass of 2010\nAlumnus of Fenwick College of Commerce\n\nPage 1 of 2 | Oswin Hartnell | Confidential",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Hartnell, Oswin",
+     "cores": [
+      "Oswin",
+      "Hartnell"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Page 1 of 2 | Oswin Hartnell | Confidential",
+     "cores": [
+      "Oswin",
+      "Hartnell"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "oswin.hartnell@mail.example.test",
+     "cores": [
+      "oswinhartnell"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "+44 20 7946 0150",
+     "cores": [
+      "79460150"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "35 Linden Rise, Brackenridge, ST 05362",
+     "cores": [
+      "Linden Rise"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "ohartnell.example.test",
+     "cores": [
+      "ohartnell"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "(in/oswin-hartnell)",
+     "cores": [
+      "oswin"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "![Photo of Oswin](photo.jpg)",
+     "cores": [
+      "photo.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Born 1988 in Brackenridge",
+     "cores": [
+      "born1988"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Class of 2010",
+     "cores": [
+      "2010"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "Led his team of fifteen through two busy seasons.",
+     "cores": [
+      "his"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "(he/him)",
+     "cores": [
+      "hehim"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Previously worked as a Salesman in a retail shop.",
+     "cores": [
+      "salesman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Alumnus of Fenwick College of Commerce",
+     "cores": [
+      "fenwick"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Gender: male",
+     "cores": [
+      "gender"
+     ],
+     "mode": "token"
+    }
+   ],
+   "keep": [
+    "Brightwater Cooperative",
+    "Marlow & Finch Supply",
+    "Customer Support Specialist",
+    "Known on the team for short, warm answer",
+    "Led root-cause reviews of the ten most f",
+    "Administered the support platform for 30",
+    "Chosen to take the hardest complaints on"
+   ]
+  },
+  {
+   "id": "L32",
+   "known_name": {
+    "first": "Rafferty",
+    "last": "Halvorsen"
+   },
+   "text": "Rafferty Halvorsen\nrafferty.halvorsen [at] mail [dot] example [dot] test\nPhone: (555) 010-0186\nApt 5B, 182 Bishop's Wharf\nhttps://www.linkedin.com/in/rhalvorsen\n@rhalvorsen\n[image: portrait of applicant]\n50 years old\nPronouns: they/them\nMarital status: married, two children\n\n## Summary\nReliable and steady worker who likes clear goals. Led her team of fifteen through two busy seasons. Worked as a Foreman on the loading dock.\n\n## Experience\nOperations Coordinator, Greylock Utilities, 2019 to 2026\n* Re-planned the loading dock timetable so trucks waited 30 percent less on average.\n* Renegotiated terms with two key suppliers, saving about 8 percent a year.\n* Designed the operations reporting pack used by 4 managers, with checks that caught errors before sending, and trained others to maintain it.\n* Joined the staff newsletter committee.\n\nAssistant, Brightwater Cooperative, 2012 to 2019\n* Wrote step-by-step instructions for receiving and returns that new staff could follow without help.\n* Took part in the quarterly safety walk.\n\n## Education\n(1994 - 1998)\nStudied at the Saltmarsh Academy, with honours\n\nPage 1 of 2 | Rafferty Halvorsen | Confidential",
+   "planted": [
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Page 1 of 2 | Rafferty Halvorsen | Confidential",
+     "cores": [
+      "Rafferty",
+      "Halvorsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Rafferty Halvorsen",
+     "cores": [
+      "Rafferty",
+      "Halvorsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "rafferty.halvorsen [at] mail [dot] example [dot] test",
+     "cores": [
+      "raffertyhalvorsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: (555) 010-0186",
+     "cores": [
+      "5550100186"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "Apt 5B, 182 Bishop's Wharf",
+     "cores": [
+      "Bishop's Wharf"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "https://www.linkedin.com/in/rhalvorsen",
+     "cores": [
+      "rhalvorsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "@rhalvorsen",
+     "cores": [
+      "rhalvorsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "[image: portrait of applicant]",
+     "cores": [
+      "portraitofapplicant"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "50 years old",
+     "cores": [
+      "50yearsold"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "(1994 - 1998)",
+     "cores": [
+      "19941998"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "Led her team of fifteen through two busy seasons.",
+     "cores": [
+      "her"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Worked as a Foreman on the loading dock.",
+     "cores": [
+      "foreman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Studied at the Saltmarsh Academy, with honours",
+     "cores": [
+      "saltmarsh"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Marital status: married, two children",
+     "cores": [
+      "twochildren"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Greylock Utilities",
+    "Brightwater Cooperative",
+    "Operations Coordinator",
+    "Re-planned the loading dock timetable so",
+    "Renegotiated terms with two key supplier",
+    "Designed the operations reporting pack u",
+    "Wrote step-by-step instructions for rece"
+   ]
+  },
+  {
+   "id": "L33",
+   "known_name": {
+    "first": "Yarrow",
+    "last": "Fontaine-Ruiz"
+   },
+   "text": "Y. Fontaine-Ruiz\nResume_Yarrow_Fontaine-Ruiz_2026.pdf\nEmail: yarrow.fontaineruiz@\nmail.example.test\nPhone: +1 555 010 0107\n73 Linden Rise, Brackenridge, ST 09986\nPortfolio: https://yarrow.example.test/work\nhttps://www.linkedin.com/in/yfontaineruiz\nPhoto: attached (headshot.jpg)\nBorn on the 11th of March, 1981\n(she/her)\nPronouns: she/her\nMarital status: married, two children\n\n| Summary |\nReliable and steady worker who likes clear goals. Previously worked as a Salesman in a retail shop.\n\n| Experience |\nData Analyst, Greylock Utilities, 2019 to 2026\n| Wrote my own joins and aggregations against the company database to answer weekly questions.\n| Built charts and a dashboard in a BI tool that the sales leads opened every morning.\n| Set up the company's experimentation practice, including sample-size rules and review, and ran 30 controlled tests that were used in decisions.\n| Organised the team's lunch rota.\n\nAssistant, Tidewell Logistics, 2012 to 2019\n| Wrote routine checks for gaps, duplicates and wrong formats before every report.\n| Welcomed visitors and signed them in.\n\n| Education |\n(1999 - 2003)\nStudied at the Tallis Heath College, with honours\n",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Y. Fontaine-Ruiz",
+     "cores": [
+      "Fontaine-Ruiz"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Resume_Yarrow_Fontaine-Ruiz_2026.pdf",
+     "cores": [
+      "Yarrow",
+      "Fontaine-Ruiz"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "Email: yarrow.fontaineruiz@\nmail.example.test",
+     "cores": [
+      "yarrowfontaineruiz"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: +1 555 010 0107",
+     "cores": [
+      "5550100107"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "73 Linden Rise, Brackenridge, ST 09986",
+     "cores": [
+      "Linden Rise"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "Portfolio: https://yarrow.example.test/work",
+     "cores": [
+      "yarrow"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "https://www.linkedin.com/in/yfontaineruiz",
+     "cores": [
+      "yfontaineruiz"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "Photo: attached (headshot.jpg)",
+     "cores": [
+      "headshot.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Born on the 11th of March, 1981",
+     "cores": [
+      "march1981"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "(1999 - 2003)",
+     "cores": [
+      "19992003"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "(she/her)",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: she/her",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Previously worked as a Salesman in a retail shop.",
+     "cores": [
+      "salesman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Studied at the Tallis Heath College, with honours",
+     "cores": [
+      "tallis"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Marital status: married, two children",
+     "cores": [
+      "twochildren"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Greylock Utilities",
+    "Tidewell Logistics",
+    "Data Analyst",
+    "Wrote my own joins and aggregations agai",
+    "Built charts and a dashboard in a BI too",
+    "Set up the company's experimentation pra",
+    "Wrote routine checks for gaps, duplicate"
+   ]
+  },
+  {
+   "id": "L34",
+   "known_name": {
+    "first": "Winola",
+    "last": "Thackeray"
+   },
+   "text": "W I N O L A       T H A C K E R A Y\nWinola Thackeray\nwinola.thackeray@mail.example.test\nPhone: (555) 010-0119\n(in/winola-thackeray)\nlinkedin.com/in/winola-thackeray-1326\nPhoto: attached (headshot.jpg)\nb. 1981\nPronouns: they/them\nNationality: Corvalian\n\nSUMMARY\nReliable and steady worker who likes clear goals. Led her team of fifteen through two busy seasons. Worked as a Foreman on the loading dock.\n\nEXPERIENCE\nCustomer Support Specialist, Hearthstone Clinics, 2019 to 2026\n- Rewrote the team's wording guide and coached six new hires on tone; satisfaction on written answers rose from 81 to 93 percent in two quarters.\n- Traced a recurring duplicate-charge fault to a settings conflict and documented the fix; repeat contacts on that issue fell by 35 percent.\n- Worked daily in the ticket queue, the live chat window and the internal wiki, keeping records current.\n- Welcomed visitors and signed them in.\n\nAssistant, Tidewell Logistics, 2012 to 2019\n- Chosen to take the hardest complaints on the team; refund disputes I handled ended with the customer staying in 9 of 10 cases.\n- Welcomed visitors and signed them in.\n\nEDUCATION\nGraduation: May 2003\nAlumna of Tallis Heath College\n\nAddress: 283 Bishop's Wharf Tarn End 01253",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "W I N O L A       T H A C K E R A Y",
+     "cores": [
+      "Winola",
+      "Thackeray"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Winola Thackeray",
+     "cores": [
+      "Winola",
+      "Thackeray"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "winola.thackeray@mail.example.test",
+     "cores": [
+      "winolathackeray"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: (555) 010-0119",
+     "cores": [
+      "5550100119"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "footer",
+     "text": "Address: 283 Bishop's Wharf Tarn End 01253",
+     "cores": [
+      "Bishop's Wharf"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "(in/winola-thackeray)",
+     "cores": [
+      "winola"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "linkedin.com/in/winola-thackeray-1326",
+     "cores": [
+      "winola"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "Photo: attached (headshot.jpg)",
+     "cores": [
+      "headshot.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "b. 1981",
+     "cores": [
+      "b1981"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduation: May 2003",
+     "cores": [
+      "may2003"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "Led her team of fifteen through two busy seasons.",
+     "cores": [
+      "her"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Worked as a Foreman on the loading dock.",
+     "cores": [
+      "foreman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Alumna of Tallis Heath College",
+     "cores": [
+      "tallis"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Nationality: Corvalian",
+     "cores": [
+      "corvalian"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Hearthstone Clinics",
+    "Tidewell Logistics",
+    "Customer Support Specialist",
+    "Rewrote the team's wording guide and coa",
+    "Traced a recurring duplicate-charge faul",
+    "Worked daily in the ticket queue, the li",
+    "Chosen to take the hardest complaints on"
+   ]
+  },
+  {
+   "id": "L35",
+   "known_name": {
+    "first": "Corwin",
+    "last": "Quenby"
+   },
+   "text": "Quénby\nCORWIN.QUENBY@MAIL.EXAMPLE.TEST\nPhone: 5550100170\n115 Fennimore Lane, Brackenridge, ST 09492\nPortfolio: https://corwin.example.test/work\nlinkedin.com/in/corwin-quenby-9021\n[image: portrait of applicant]\nb. 1970\nPronouns: they/them\nPronouns: she/her\nMarital status: married, two children\n\n## Summary\nReliable and steady worker who likes clear goals. Previously worked as a Salesman in a retail shop.\n\n## Experience\nOperations Coordinator, Tidewell Logistics, 2019 to 2026\n* Planned shifts for a crew of fifteen and the weekly truck arrivals, resolving clashes before they became delays.\n* Renegotiated terms with two key suppliers, saving about 8 percent a year.\n* Maintained spreadsheets with formulas and pivot tables to follow orders and stock, and sent the manager a Monday summary.\n* Took part in the quarterly safety walk.\n\nAssistant, Pennywhistle Retail, 2012 to 2019\n* Led a company-wide review of 20 routines, rewrote them, and got teams to adopt them; errors fell by 45 percent over the year.\n* Joined the staff newsletter committee.\n\n## Education\nClass of 1992\nStudied at the University of Orrin Valley, with honours\n\nPrepared by Corwin Quenby",
+   "planted": [
+    {
+     "category": "name",
+     "where": "footer",
+     "text": "Prepared by Corwin Quenby",
+     "cores": [
+      "Corwin",
+      "Quenby"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Quénby",
+     "cores": [
+      "Quenby"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "CORWIN.QUENBY@MAIL.EXAMPLE.TEST",
+     "cores": [
+      "corwinquenby"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: 5550100170",
+     "cores": [
+      "5550100170"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "115 Fennimore Lane, Brackenridge, ST 09492",
+     "cores": [
+      "Fennimore Lane"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "Portfolio: https://corwin.example.test/work",
+     "cores": [
+      "corwin"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "linkedin.com/in/corwin-quenby-9021",
+     "cores": [
+      "corwin"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "[image: portrait of applicant]",
+     "cores": [
+      "portraitofapplicant"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "b. 1970",
+     "cores": [
+      "b1970"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Class of 1992",
+     "cores": [
+      "1992"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: she/her",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Previously worked as a Salesman in a retail shop.",
+     "cores": [
+      "salesman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Studied at the University of Orrin Valley, with honours",
+     "cores": [
+      "orrin"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Marital status: married, two children",
+     "cores": [
+      "twochildren"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Tidewell Logistics",
+    "Pennywhistle Retail",
+    "Operations Coordinator",
+    "Planned shifts for a crew of fifteen and",
+    "Renegotiated terms with two key supplier",
+    "Maintained spreadsheets with formulas an",
+    "Led a company-wide review of 20 routines"
+   ]
+  },
+  {
+   "id": "L36",
+   "known_name": {
+    "first": "Cormac",
+    "last": "Lindqvist"
+   },
+   "text": "Líndqvíst\nC. Lindqvist\nCORMAC.LINDQVIST@MAIL.EXAMPLE.TEST\n+44 20 7946 0193\n202 Corvale Avenue, Ostmere, ST 09454\n@clindqvist\ngithub.com/clindqvist\nPhoto: attached (headshot.jpg)\nDOB 01/16/1975\n(he/him)\nNationality: Corvalian\n\n| Summary |\nReliable and steady worker who likes clear goals. He has years of steady experience. Worked as a Foreman on the loading dock.\n\n| Experience |\nData Analyst, Pennywhistle Retail, 2019 to 2026\n| Wrote my own joins and aggregations against the company database to answer weekly questions.\n| Created an executive dashboard used by 40 people, replacing six slide decks.\n| Ran significance tests on survey results and explained the confidence ranges.\n| Joined the staff newsletter committee.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n| Established the data quality program: owners, tests and alerts across 40 tables; incidents of wrong numbers fell by 70 percent.\n| Took part in the quarterly safety walk.\n\n| Education |\nGraduated in 1997\nCalder Bay Polytechnic\n",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Líndqvíst",
+     "cores": [
+      "Lindqvist"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "C. Lindqvist",
+     "cores": [
+      "Lindqvist"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "CORMAC.LINDQVIST@MAIL.EXAMPLE.TEST",
+     "cores": [
+      "cormaclindqvist"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "+44 20 7946 0193",
+     "cores": [
+      "79460193"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "202 Corvale Avenue, Ostmere, ST 09454",
+     "cores": [
+      "Corvale Avenue"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "@clindqvist",
+     "cores": [
+      "clindqvist"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "github.com/clindqvist",
+     "cores": [
+      "clindqvist"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "Photo: attached (headshot.jpg)",
+     "cores": [
+      "headshot.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "DOB 01/16/1975",
+     "cores": [
+      "01161975"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduated in 1997",
+     "cores": [
+      "1997"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "He has years of steady experience.",
+     "cores": [
+      "he"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "(he/him)",
+     "cores": [
+      "hehim"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Worked as a Foreman on the loading dock.",
+     "cores": [
+      "foreman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Calder Bay Polytechnic",
+     "cores": [
+      "calder"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Nationality: Corvalian",
+     "cores": [
+      "corvalian"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Pennywhistle Retail",
+    "Ferncliff Foods",
+    "Data Analyst",
+    "Wrote my own joins and aggregations agai",
+    "Created an executive dashboard used by 4",
+    "Ran significance tests on survey results",
+    "Established the data quality program: ow"
+   ]
+  },
+  {
+   "id": "L37",
+   "known_name": {
+    "first": "Teodor",
+    "last": "Vantongeren"
+   },
+   "text": "Phone: five five five, zero one zero, zero one three seven\nApt 5B, 89 Bishop's Wharf\ngithub.com/tvantongeren\n@tvantongeren\n![Photo of Teodor](photo.jpg)\nBorn 1968 in Tarn End\nPronouns: they/them\nGender: male\n\nSUMMARY\nReliable and steady worker who likes clear goals. Teodor is a dependable team member who enjoys steady work. Sincerely, Teodor He has years of steady experience. Worked as a Foreman on the loading dock.\n\nEXPERIENCE\nCustomer Support Specialist, Ferncliff Foods, 2019 to 2026\n- Wrote clear, friendly answers to about 40 customer notes per shift and signed each with a personal line.\n- Led root-cause reviews of the ten most frequent faults each month, with engineers; fixes we proposed shipped in four releases and cut repeat contacts by 40 percent.\n- Administered the support platform for 30 agents, connected it to the billing system, and trained everyone on the new workflow.\n- Took part in the quarterly safety walk.\n\nAssistant, Quillon Software, 2012 to 2019\n- Chosen to take the hardest complaints on the team; refund disputes I handled ended with the customer staying in 9 of 10 cases.\n- Welcomed visitors and signed them in.\n\nEDUCATION\n(1986 - 1990)\nAlumnus of Ashgrove State College\n\nteodor_vantongeren(at)mail.example.test",
+   "planted": [
+    {
+     "category": "name",
+     "where": "body",
+     "text": "Teodor is a dependable team member who enjoys steady work.",
+     "cores": [
+      "Teodor"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "body",
+     "text": "Sincerely, Teodor",
+     "cores": [
+      "Teodor"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "footer",
+     "text": "teodor_vantongeren(at)mail.example.test",
+     "cores": [
+      "teodorvantongeren"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: five five five, zero one zero, zero one three seven",
+     "cores": [
+      "fivefivefivezeroonezero"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "Apt 5B, 89 Bishop's Wharf",
+     "cores": [
+      "Bishop's Wharf"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "github.com/tvantongeren",
+     "cores": [
+      "tvantongeren"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "@tvantongeren",
+     "cores": [
+      "tvantongeren"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "![Photo of Teodor](photo.jpg)",
+     "cores": [
+      "photo.jpg"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Born 1968 in Tarn End",
+     "cores": [
+      "born1968"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "(1986 - 1990)",
+     "cores": [
+      "19861990"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "He has years of steady experience.",
+     "cores": [
+      "he"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Worked as a Foreman on the loading dock.",
+     "cores": [
+      "foreman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Alumnus of Ashgrove State College",
+     "cores": [
+      "ashgrove"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Gender: male",
+     "cores": [
+      "gender"
+     ],
+     "mode": "token"
+    }
+   ],
+   "keep": [
+    "Ferncliff Foods",
+    "Quillon Software",
+    "Customer Support Specialist",
+    "Wrote clear, friendly answers to about 4",
+    "Led root-cause reviews of the ten most f",
+    "Administered the support platform for 30",
+    "Chosen to take the hardest complaints on"
+   ]
+  },
+  {
+   "id": "L38",
+   "known_name": {
+    "first": "Beaufort",
+    "last": "Brannigan"
+   },
+   "text": "Beaufort Brannigan\nResume_Beaufort_Brannigan_2026.pdf\n<img src=\"logo.png\" alt=\"Contact beaufort.brannigan@mail.example.test\">\nPhone: five five five, zero one zero, zero one seven five\n258 Corvale Avenue, Welling Heath, ST 09097\n(in/beaufort-brannigan)\nbbrannigan.example.test\n<img src=\"headshot.png\" alt=\"Headshot\">\nb. 1989\nPronouns: he/him\nGender: male\n\n## Summary\nReliable and steady worker who likes clear goals. He has years of steady experience. Previously worked as a Salesman in a retail shop.\n\n## Experience\nOperations Coordinator, Brightwater Cooperative, 2019 to 2026\n* Ran the whole weekly plan for three warehouses and 60 staff, and trained two coordinators to take it over; on-time delivery reached 97 percent.\n* Renegotiated terms with two key suppliers, saving about 8 percent a year.\n* Replaced a manual tally with an automated workbook that saved around five hours a week.\n* Organised the team's lunch rota.\n\nAssistant, Marlow & Finch Supply, 2012 to 2019\n* Wrote step-by-step instructions for receiving and returns that new staff could follow without help.\n* Organised the team's lunch rota.\n\n## Education\nClass of 2011\nTallis Heath College\n",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Beaufort Brannigan",
+     "cores": [
+      "Beaufort",
+      "Brannigan"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Resume_Beaufort_Brannigan_2026.pdf",
+     "cores": [
+      "Beaufort",
+      "Brannigan"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "<img src=\"logo.png\" alt=\"Contact beaufort.brannigan@mail.example.test\">",
+     "cores": [
+      "beaufortbrannigan"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: five five five, zero one zero, zero one seven five",
+     "cores": [
+      "fivefivefivezeroonezero"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "258 Corvale Avenue, Welling Heath, ST 09097",
+     "cores": [
+      "Corvale Avenue"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "(in/beaufort-brannigan)",
+     "cores": [
+      "beaufort"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "bbrannigan.example.test",
+     "cores": [
+      "bbrannigan"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "<img src=\"headshot.png\" alt=\"Headshot\">",
+     "cores": [
+      "headshot.png"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "b. 1989",
+     "cores": [
+      "b1989"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Class of 2011",
+     "cores": [
+      "2011"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "He has years of steady experience.",
+     "cores": [
+      "he"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: he/him",
+     "cores": [
+      "hehim"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Previously worked as a Salesman in a retail shop.",
+     "cores": [
+      "salesman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Tallis Heath College",
+     "cores": [
+      "tallis"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Gender: male",
+     "cores": [
+      "gender"
+     ],
+     "mode": "token"
+    }
+   ],
+   "keep": [
+    "Brightwater Cooperative",
+    "Marlow & Finch Supply",
+    "Operations Coordinator",
+    "Ran the whole weekly plan for three ware",
+    "Renegotiated terms with two key supplier",
+    "Replaced a manual tally with an automate",
+    "Wrote step-by-step instructions for rece"
+   ]
+  },
+  {
+   "id": "L39",
+   "known_name": {
+    "first": "Briony",
+    "last": "Okonjo-Reyes"
+   },
+   "text": "B. Okonjo-Reyes\nBriony Okonjo-Reyes\n[write to me](mailto:briony.okonjoreyes@mail.example.test)\n+44 20 7946 0161\nPortfolio: https://briony.example.test/work\n(in/briony-okonjo-reyes)\n<img src=\"headshot.png\" alt=\"Headshot\">\nb. 1974\n(she/her)\nMrs. Okonjo-Reyes\nPlace of birth: Ostmere\n\n| Summary |\nReliable and steady worker who likes clear goals. Led her team of fifteen through two busy seasons.\n\n| Experience |\nData Analyst, Marlow & Finch Supply, 2019 to 2026\n| Rebuilt a slow reporting query so it ran in 40 seconds instead of 12 minutes.\n| Created an executive dashboard used by 40 people, replacing six slide decks.\n| Designed and analysed a pricing test with 20,000 visitors, which led to a 4 percent revenue gain.\n| Organised the team's lunch rota.\n\nAssistant, Greylock Utilities, 2012 to 2019\n| Established the data quality program: owners, tests and alerts across 40 tables; incidents of wrong numbers fell by 70 percent.\n| Welcomed visitors and signed them in.\n\n| Education |\nGraduation: May 1996\nStudied at the Veldt University, with honours\n\nAddress: 278 Bishop's Wharf Ostmere 08568",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "B. Okonjo-Reyes",
+     "cores": [
+      "Okonjo-Reyes"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Briony Okonjo-Reyes",
+     "cores": [
+      "Briony",
+      "Okonjo-Reyes"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "[write to me](mailto:briony.okonjoreyes@mail.example.test)",
+     "cores": [
+      "brionyokonjoreyes"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "+44 20 7946 0161",
+     "cores": [
+      "79460161"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "footer",
+     "text": "Address: 278 Bishop's Wharf Ostmere 08568",
+     "cores": [
+      "Bishop's Wharf"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "Portfolio: https://briony.example.test/work",
+     "cores": [
+      "briony"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "(in/briony-okonjo-reyes)",
+     "cores": [
+      "briony"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "<img src=\"headshot.png\" alt=\"Headshot\">",
+     "cores": [
+      "headshot.png"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "b. 1974",
+     "cores": [
+      "b1974"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduation: May 1996",
+     "cores": [
+      "may1996"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "Led her team of fifteen through two busy seasons.",
+     "cores": [
+      "her"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "(she/her)",
+     "cores": [
+      "sheher"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "title",
+     "where": "header",
+     "text": "Mrs. Okonjo-Reyes",
+     "cores": [
+      "mrs"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Studied at the Veldt University, with honours",
+     "cores": [
+      "veldt"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Place of birth: Ostmere",
+     "cores": [
+      "placeofbirth"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Marlow & Finch Supply",
+    "Greylock Utilities",
+    "Data Analyst",
+    "Rebuilt a slow reporting query so it ran",
+    "Created an executive dashboard used by 4",
+    "Designed and analysed a pricing test wit",
+    "Established the data quality program: ow"
+   ]
+  },
+  {
+   "id": "L40",
+   "known_name": {
+    "first": "Cormac",
+    "last": "Halvorsen"
+   },
+   "text": "Cormac Halvorsen\nHalvorsen, Cormac\n<img src=\"logo.png\" alt=\"Contact cormac.halvorsen@mail.example.test\">\nPhone: (555) 010-0175\nApt 5B, 271 Fennimore Lane\nhttps://www.linkedin.com/in/chalvorsen\nlinkedin.com/in/cormac-halvorsen-6817\nPhotograph enclosed\nAge: 53\nPronouns: they/them\nReligion: Quaker\n\nSUMMARY\nReliable and steady worker who likes clear goals. Led his team of fifteen through two busy seasons. Previously worked as a Salesman in a retail shop.\n\nEXPERIENCE\nCustomer Support Specialist, Tidewell Logistics, 2019 to 2026\n- Rewrote the team's wording guide and coached six new hires on tone; satisfaction on written answers rose from 81 to 93 percent in two quarters.\n- Traced a recurring duplicate-charge fault to a settings conflict and documented the fix; repeat contacts on that issue fell by 35 percent.\n- Worked daily in the ticket queue, the live chat window and the internal wiki, keeping records current.\n- Organised the team's lunch rota.\n\nAssistant, Brightwater Cooperative, 2012 to 2019\n- Settled most heated complaints myself by listening first, restating the problem and offering a clear next step.\n- Welcomed visitors and signed them in.\n\nEDUCATION\nGraduated in 1995\nStudied at the University of Orrin Valley, with honours\n",
+   "planted": [
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Cormac Halvorsen",
+     "cores": [
+      "Cormac",
+      "Halvorsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "name",
+     "where": "header",
+     "text": "Halvorsen, Cormac",
+     "cores": [
+      "Cormac",
+      "Halvorsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "email",
+     "where": "header",
+     "text": "<img src=\"logo.png\" alt=\"Contact cormac.halvorsen@mail.example.test\">",
+     "cores": [
+      "cormachalvorsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "phone",
+     "where": "header",
+     "text": "Phone: (555) 010-0175",
+     "cores": [
+      "5550100175"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "address",
+     "where": "header",
+     "text": "Apt 5B, 271 Fennimore Lane",
+     "cores": [
+      "Fennimore Lane"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "https://www.linkedin.com/in/chalvorsen",
+     "cores": [
+      "chalvorsen"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "link",
+     "where": "header",
+     "text": "linkedin.com/in/cormac-halvorsen-6817",
+     "cores": [
+      "cormac"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "photo",
+     "where": "header",
+     "text": "Photograph enclosed",
+     "cores": [
+      "photographenclosed"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "dob_age",
+     "where": "header",
+     "text": "Age: 53",
+     "cores": [
+      "age53"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "grad_year",
+     "where": "edu",
+     "text": "Graduated in 1995",
+     "cores": [
+      "1995"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "header",
+     "text": "Pronouns: they/them",
+     "cores": [
+      "theythem"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "pronoun",
+     "where": "body",
+     "text": "Led his team of fifteen through two busy seasons.",
+     "cores": [
+      "his"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "title",
+     "where": "body",
+     "text": "Previously worked as a Salesman in a retail shop.",
+     "cores": [
+      "salesman"
+     ],
+     "mode": "token"
+    },
+    {
+     "category": "institution",
+     "where": "edu",
+     "text": "Studied at the University of Orrin Valley, with honours",
+     "cores": [
+      "orrin"
+     ],
+     "mode": "norm"
+    },
+    {
+     "category": "personal",
+     "where": "header",
+     "text": "Religion: Quaker",
+     "cores": [
+      "quaker"
+     ],
+     "mode": "norm"
+    }
+   ],
+   "keep": [
+    "Tidewell Logistics",
+    "Brightwater Cooperative",
+    "Customer Support Specialist",
+    "Rewrote the team's wording guide and coa",
+    "Traced a recurring duplicate-charge faul",
+    "Worked daily in the ticket queue, the li",
+    "Settled most heated complaints myself by"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1025 @@
+{
+ "note": "60 labelled fictional resumes. Labels are the level of the statement the author wrote into the resume, by construction. Same author as the rules: not independent.",
+ "resumes": [
+  {
+   "id": "S01",
+   "role": "support",
+   "known_name": {
+    "first": "Honora",
+    "last": "Thackeray"
+   },
+   "text": "Honora Thackeray\nhonora.thackeray@mail.example.test\nPhone: (555) 010-0159\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Ferncliff Foods, 2019 to 2026\n- Worked daily in the ticket queue, the live chat window and the internal wiki, keeping records current.\n- Answered customer messages with templated text and filled in the details for each case.\n- Found the cause of most billing and login problems on my own by asking structured questions and checking logs.\n- Welcomed visitors and signed them in.\n\nAssistant, Marlow & Finch Supply, 2012 to 2019\n- Settled most heated complaints myself by listening first, restating the problem and offering a clear next step.\n- Fixed outdated help pages and added the questions customers kept asking, about 15 pages in a year.\n- Covered the front desk during holiday weeks.\n\nEDUCATION\nB.A., Veldt University, 2001",
+   "labels": {
+    "cs_written": 2,
+    "cs_diagnosis": 3,
+    "cs_tools": 3,
+    "cs_deescalate": 3,
+    "cs_improve": 3
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S02",
+   "role": "ops",
+   "known_name": {
+    "first": "Teodor",
+    "last": "Lindqvist"
+   },
+   "text": "Teodor Lindqvist\nteodor.lindqvist@mail.example.test\nPhone: (555) 010-0172\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Hearthstone Clinics, 2019 to 2026\n- Wrote step-by-step instructions for receiving and returns that new staff could follow without help.\n- Collected receipts and matched them to the cost sheet.\n- Updated the weekly stock sheet by hand.\n- Took part in the quarterly safety walk.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n- Sat in on a call with our packaging supplier.\n- Covered the front desk during holiday weeks.\n\nEDUCATION\nB.A., Tallis Heath College, 1986",
+   "labels": {
+    "ops_schedule": 0,
+    "ops_vendor": 1,
+    "ops_data": 2,
+    "ops_process": 3,
+    "ops_budget": 2
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S03",
+   "role": "analyst",
+   "known_name": {
+    "first": "Oswin",
+    "last": "Yeoman"
+   },
+   "text": "Oswin Yeoman\noswin.yeoman@mail.example.test\nPhone: (555) 010-0172\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Greylock Utilities, 2019 to 2026\n- Wrote routine checks for gaps, duplicates and wrong formats before every report.\n- Regularly briefed executives and the board, and wrote the guide that taught analysts how to turn results into decisions.\n- Joined the staff newsletter committee.\n\nAssistant, Marlow & Finch Supply, 2012 to 2019\n- Organised the team's lunch rota.\n\nEDUCATION\nB.A., Saltmarsh Academy, 1996",
+   "labels": {
+    "da_sql": 0,
+    "da_viz": 0,
+    "da_stats": 0,
+    "da_clean": 3,
+    "da_story": 5
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S04",
+   "role": "support",
+   "known_name": {
+    "first": "Quillon",
+    "last": "Quenby"
+   },
+   "text": "Quillon Quenby\nquillon.quenby@mail.example.test\nPhone: (555) 010-0131\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Quillon Software, 2019 to 2026\n- Built a monthly report of top complaint themes for the manager, and two of its recommendations were adopted.\n- Chosen to take the hardest complaints on the team; refund disputes I handled ended with the customer staying in 9 of 10 cases.\n- Welcomed visitors and signed them in.\n\nAssistant, Tidewell Logistics, 2012 to 2019\n- Followed the checklist to find out why a device would not connect and passed unsolved cases upward.\n- Organised the team's lunch rota.\n\nEDUCATION\nB.A., University of Orrin Valley, 2000",
+   "labels": {
+    "cs_written": 0,
+    "cs_diagnosis": 2,
+    "cs_tools": 0,
+    "cs_deescalate": 4,
+    "cs_improve": 4
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S05",
+   "role": "ops",
+   "known_name": {
+    "first": "Corwin",
+    "last": "Dunmore"
+   },
+   "text": "Corwin Dunmore\ncorwin.dunmore@mail.example.test\nPhone: (555) 010-0162\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Brightwater Cooperative, 2019 to 2026\n- Kept the team's monthly spending within the agreed limits and explained differences to the manager.\n- Re-planned the loading dock timetable so trucks waited 30 percent less on average.\n- Led a company-wide review of 20 routines, rewrote them, and got teams to adopt them; errors fell by 45 percent over the year.\n- Took part in the quarterly safety walk.\n\nAssistant, Marlow & Finch Supply, 2012 to 2019\n- Maintained spreadsheets with formulas and pivot tables to follow orders and stock, and sent the manager a Monday summary.\n- Was the day-to-day contact for six suppliers, checking orders against quotes and sorting out shortages.\n- Took part in the quarterly safety walk.\n\nEDUCATION\nB.A., Ashgrove State College, 2010",
+   "labels": {
+    "ops_schedule": 4,
+    "ops_vendor": 3,
+    "ops_data": 3,
+    "ops_process": 5,
+    "ops_budget": 3
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S06",
+   "role": "analyst",
+   "known_name": {
+    "first": "Honora",
+    "last": "Castellane"
+   },
+   "text": "Honora Castellane\nhonora.castellane@mail.example.test\nPhone: (555) 010-0102\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Marlow & Finch Supply, 2019 to 2026\n- Calculated averages and percentages for reports.\n- Changed colours and titles on existing charts.\n- My analysis of customer drop-off was presented to the leadership team and changed the onboarding plan.\n- Organised the team's lunch rota.\n\nAssistant, Tidewell Logistics, 2012 to 2019\n- Wrote routine checks for gaps, duplicates and wrong formats before every report.\n- Covered the front desk during holiday weeks.\n\nEDUCATION\nB.A., Northmere Institute of Technology, 1992",
+   "labels": {
+    "da_sql": 0,
+    "da_viz": 2,
+    "da_stats": 2,
+    "da_clean": 3,
+    "da_story": 4
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S07",
+   "role": "support",
+   "known_name": {
+    "first": "Anneliese",
+    "last": "Fontaine-Ruiz"
+   },
+   "text": "Anneliese Fontaine-Ruiz\nanneliese.fontaineruiz@mail.example.test\nPhone: (555) 010-0115\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Pennywhistle Retail, 2019 to 2026\n- Fixed outdated help pages and added the questions customers kept asking, about 15 pages in a year.\n- Traced a recurring duplicate-charge fault to a settings conflict and documented the fix; repeat contacts on that issue fell by 35 percent.\n- Handed upset callers to a supervisor after apologising and taking notes.\n- Covered the front desk during holiday weeks.\n\nAssistant, Hearthstone Clinics, 2012 to 2019\n- Worked daily in the ticket queue, the live chat window and the internal wiki, keeping records current.\n- Organised the team's lunch rota.\n\nEDUCATION\nB.A., Ashgrove State College, 1989",
+   "labels": {
+    "cs_written": 0,
+    "cs_diagnosis": 4,
+    "cs_tools": 3,
+    "cs_deescalate": 2,
+    "cs_improve": 3
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S08",
+   "role": "ops",
+   "known_name": {
+    "first": "Lazlo",
+    "last": "Okonjo-Reyes"
+   },
+   "text": "Lazlo Okonjo-Reyes\nlazlo.okonjoreyes@mail.example.test\nPhone: (555) 010-0101\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Hearthstone Clinics, 2019 to 2026\n- Followed written steps for receiving goods and flagged gaps.\n- Re-planned the loading dock timetable so trucks waited 30 percent less on average.\n- Maintained spreadsheets with formulas and pivot tables to follow orders and stock, and sent the manager a Monday summary.\n- Took part in the quarterly safety walk.\n\nAssistant, Quillon Software, 2012 to 2019\n- Collected receipts and matched them to the cost sheet.\n- Covered the front desk during holiday weeks.\n\nEDUCATION\nB.A., Calder Bay Polytechnic, 2007",
+   "labels": {
+    "ops_schedule": 4,
+    "ops_vendor": 0,
+    "ops_data": 3,
+    "ops_process": 2,
+    "ops_budget": 2
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S09",
+   "role": "analyst",
+   "known_name": {
+    "first": "Briony",
+    "last": "Castellane"
+   },
+   "text": "Briony Castellane\nbriony.castellane@mail.example.test\nPhone: (555) 010-0195\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Tidewell Logistics, 2019 to 2026\n- Changed colours and titles on existing charts.\n- Calculated averages and percentages for reports.\n- Presented findings to non-technical colleagues in plain language, with one clear recommendation.\n- Took part in the quarterly safety walk.\n\nAssistant, Marlow & Finch Supply, 2012 to 2019\n- Rebuilt a slow reporting query so it ran in 40 seconds instead of 12 minutes.\n- Wrote routine checks for gaps, duplicates and wrong formats before every report.\n- Took part in the quarterly safety walk.\n\nEDUCATION\nB.A., Saltmarsh Academy, 1998",
+   "labels": {
+    "da_sql": 4,
+    "da_viz": 2,
+    "da_stats": 2,
+    "da_clean": 3,
+    "da_story": 3
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S10",
+   "role": "support",
+   "known_name": {
+    "first": "Perpetua",
+    "last": "Kowalczyk"
+   },
+   "text": "Perpetua Kowalczyk\nperpetua.kowalczyk@mail.example.test\nPhone: (555) 010-0181\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Quillon Software, 2019 to 2026\n- Mentioned small wording errors in help articles to my lead.\n- Answered customer messages with templated text and filled in the details for each case.\n- Joined the staff newsletter committee.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n- Traced a recurring duplicate-charge fault to a settings conflict and documented the fix; repeat contacts on that issue fell by 35 percent.\n- Covered the front desk during holiday weeks.\n\nEDUCATION\nB.A., Veldt University, 2004",
+   "labels": {
+    "cs_written": 2,
+    "cs_diagnosis": 4,
+    "cs_tools": 0,
+    "cs_deescalate": 0,
+    "cs_improve": 1
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S11",
+   "role": "ops",
+   "known_name": {
+    "first": "Cormac",
+    "last": "Kowalczyk"
+   },
+   "text": "Cormac Kowalczyk\ncormac.kowalczyk@mail.example.test\nPhone: (555) 010-0181\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Tidewell Logistics, 2019 to 2026\n- Redesigned the returns routine, cutting handling time per item from 12 to 7 minutes.\n- Chased suppliers for missing invoices and delivery confirmations.\n- Learned how the department's monthly spend was tracked.\n- Welcomed visitors and signed them in.\n\nAssistant, Greylock Utilities, 2012 to 2019\n- Booked drivers and meeting rooms from a weekly list.\n- Updated the weekly stock sheet by hand.\n- Joined the staff newsletter committee.\n\nEDUCATION\nB.A., Ashgrove State College, 1997",
+   "labels": {
+    "ops_schedule": 2,
+    "ops_vendor": 2,
+    "ops_data": 2,
+    "ops_process": 4,
+    "ops_budget": 1
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S12",
+   "role": "analyst",
+   "known_name": {
+    "first": "Winola",
+    "last": "Yeoman"
+   },
+   "text": "Winola Yeoman\nwinola.yeoman@mail.example.test\nPhone: (555) 010-0110\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Ferncliff Foods, 2019 to 2026\n- Changed colours and titles on existing charts.\n- Designed and analysed a pricing test with 20,000 visitors, which led to a 4 percent revenue gain.\n- Welcomed visitors and signed them in.\n\nAssistant, Tidewell Logistics, 2012 to 2019\n- Took part in the quarterly safety walk.\n\nEDUCATION\nB.A., Harrowgate University, 1993",
+   "labels": {
+    "da_sql": 0,
+    "da_viz": 2,
+    "da_stats": 4,
+    "da_clean": 0,
+    "da_story": 0
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S13",
+   "role": "support",
+   "known_name": {
+    "first": "Honora",
+    "last": "Hartnell"
+   },
+   "text": "Honora Hartnell\nhonora.hartnell@mail.example.test\nPhone: (555) 010-0158\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Marlow & Finch Supply, 2019 to 2026\n- Known on the team for short, warm answers; my written responses were picked as examples in training, and my customer rating averaged 4.8 of 5.\n- Owned the support improvement list: shipped 12 process changes that cut average handling time by 22 percent and saved the team about 30 hours a week.\n- Set up saved replies and routing rules in the helpdesk platform for our team of twelve.\n- Joined the staff newsletter committee.\n\nAssistant, Greylock Utilities, 2012 to 2019\n- Found the cause of most billing and login problems on my own by asking structured questions and checking logs.\n- Welcomed visitors and signed them in.\n\nEDUCATION\nB.A., Saltmarsh Academy, 1998",
+   "labels": {
+    "cs_written": 4,
+    "cs_diagnosis": 3,
+    "cs_tools": 4,
+    "cs_deescalate": 0,
+    "cs_improve": 5
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S14",
+   "role": "ops",
+   "known_name": {
+    "first": "Honora",
+    "last": "Lindqvist"
+   },
+   "text": "Honora Lindqvist\nhonora.lindqvist@mail.example.test\nPhone: (555) 010-0138\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Pennywhistle Retail, 2019 to 2026\n- Replaced a manual tally with an automated workbook that saved around five hours a week.\n- Was the day-to-day contact for six suppliers, checking orders against quotes and sorting out shortages.\n- Re-planned the loading dock timetable so trucks waited 30 percent less on average.\n- Joined the staff newsletter committee.\n\nAssistant, Tidewell Logistics, 2012 to 2019\n- Redesigned the returns routine, cutting handling time per item from 12 to 7 minutes.\n- Welcomed visitors and signed them in.\n\nEDUCATION\nB.A., Fenwick College of Commerce, 1987",
+   "labels": {
+    "ops_schedule": 4,
+    "ops_vendor": 3,
+    "ops_data": 4,
+    "ops_process": 4,
+    "ops_budget": 0
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S15",
+   "role": "analyst",
+   "known_name": {
+    "first": "Lazlo",
+    "last": "Dunmore"
+   },
+   "text": "Lazlo Dunmore\nlazlo.dunmore@mail.example.test\nPhone: (555) 010-0151\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Brightwater Cooperative, 2019 to 2026\n- Regularly briefed executives and the board, and wrote the guide that taught analysts how to turn results into decisions.\n- Noticed odd values in a table once and told my manager.\n- Covered the front desk during holiday weeks.\n\nAssistant, Marlow & Finch Supply, 2012 to 2019\n- Ran significance tests on survey results and explained the confidence ranges.\n- Organised the team's lunch rota.\n\nEDUCATION\nB.A., Veldt University, 1989",
+   "labels": {
+    "da_sql": 0,
+    "da_viz": 0,
+    "da_stats": 3,
+    "da_clean": 1,
+    "da_story": 5
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S16",
+   "role": "support",
+   "known_name": {
+    "first": "Teodor",
+    "last": "Lindqvist"
+   },
+   "text": "Teodor Lindqvist\nteodor.lindqvist@mail.example.test\nPhone: (555) 010-0186\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Tidewell Logistics, 2019 to 2026\n- Worked daily in the ticket queue, the live chat window and the internal wiki, keeping records current.\n- Answered customer messages with templated text and filled in the details for each case.\n- Took part in the quarterly safety walk.\n\nAssistant, Pennywhistle Retail, 2012 to 2019\n- Wrote and taught the team's guide for calming angry customers; formal complaints against our desk dropped from 25 to 9 a quarter.\n- Organised the team's lunch rota.\n\nEDUCATION\nB.A., Institute of Applied Studies at Lowmere, 1993",
+   "labels": {
+    "cs_written": 2,
+    "cs_diagnosis": 0,
+    "cs_tools": 3,
+    "cs_deescalate": 5,
+    "cs_improve": 0
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S17",
+   "role": "ops",
+   "known_name": {
+    "first": "Sunniva",
+    "last": "Kowalczyk"
+   },
+   "text": "Sunniva Kowalczyk\nsunniva.kowalczyk@mail.example.test\nPhone: (555) 010-0179\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Tidewell Logistics, 2019 to 2026\n- Found duplicated subscriptions and freight overcharges worth about 14,000 per year.\n- Maintained spreadsheets with formulas and pivot tables to follow orders and stock, and sent the manager a Monday summary.\n- Organised the team's lunch rota.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n- Re-planned the loading dock timetable so trucks waited 30 percent less on average.\n- Took part in the quarterly safety walk.\n\nEDUCATION\nB.A., Tallis Heath College, 2008",
+   "labels": {
+    "ops_schedule": 4,
+    "ops_vendor": 0,
+    "ops_data": 3,
+    "ops_process": 0,
+    "ops_budget": 4
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S18",
+   "role": "analyst",
+   "known_name": {
+    "first": "Thaddeus",
+    "last": "Ibsen"
+   },
+   "text": "Thaddeus Ibsen\nthaddeus.ibsen@mail.example.test\nPhone: (555) 010-0186\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Greylock Utilities, 2019 to 2026\n- Looked at the dashboards other people had made.\n- Designed and analysed a pricing test with 20,000 visitors, which led to a 4 percent revenue gain.\n- My analysis of customer drop-off was presented to the leadership team and changed the onboarding plan.\n- Took part in the quarterly safety walk.\n\nAssistant, Marlow & Finch Supply, 2012 to 2019\n- Wrote routine checks for gaps, duplicates and wrong formats before every report.\n- Welcomed visitors and signed them in.\n\nEDUCATION\nB.A., Calder Bay Polytechnic, 1993",
+   "labels": {
+    "da_sql": 0,
+    "da_viz": 1,
+    "da_stats": 4,
+    "da_clean": 3,
+    "da_story": 4
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S19",
+   "role": "support",
+   "known_name": {
+    "first": "Oswin",
+    "last": "Castellane"
+   },
+   "text": "Oswin Castellane\noswin.castellane@mail.example.test\nPhone: (555) 010-0127\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Brightwater Cooperative, 2019 to 2026\n- Settled most heated complaints myself by listening first, restating the problem and offering a clear next step.\n- Wrote clear, friendly answers to about 40 customer notes per shift and signed each with a personal line.\n- Watched colleagues work through faulty-product cases to learn how they narrowed down causes.\n- Organised the team's lunch rota.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n- Mentioned small wording errors in help articles to my lead.\n- Covered the front desk during holiday weeks.\n\nEDUCATION\nB.A., Ashgrove State College, 2010",
+   "labels": {
+    "cs_written": 3,
+    "cs_diagnosis": 1,
+    "cs_tools": 0,
+    "cs_deescalate": 3,
+    "cs_improve": 1
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S20",
+   "role": "ops",
+   "known_name": {
+    "first": "Sunniva",
+    "last": "Quenby"
+   },
+   "text": "Sunniva Quenby\nsunniva.quenby@mail.example.test\nPhone: (555) 010-0136\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Hearthstone Clinics, 2019 to 2026\n- Planned shifts for a crew of fifteen and the weekly truck arrivals, resolving clashes before they became delays.\n- Renegotiated terms with two key suppliers, saving about 8 percent a year.\n- Wrote step-by-step instructions for receiving and returns that new staff could follow without help.\n- Organised the team's lunch rota.\n\nAssistant, Marlow & Finch Supply, 2012 to 2019\n- Learned how the department's monthly spend was tracked.\n- Maintained spreadsheets with formulas and pivot tables to follow orders and stock, and sent the manager a Monday summary.\n- Welcomed visitors and signed them in.\n\nEDUCATION\nB.A., Tallis Heath College, 1999",
+   "labels": {
+    "ops_schedule": 3,
+    "ops_vendor": 4,
+    "ops_data": 3,
+    "ops_process": 3,
+    "ops_budget": 1
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S21",
+   "role": "analyst",
+   "known_name": {
+    "first": "Winola",
+    "last": "Yeoman"
+   },
+   "text": "Winola Yeoman\nwinola.yeoman@mail.example.test\nPhone: (555) 010-0134\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Quillon Software, 2019 to 2026\n- Wrote routine checks for gaps, duplicates and wrong formats before every report.\n- Built charts and a dashboard in a BI tool that the sales leads opened every morning.\n- Attended the monthly business review.\n- Organised the team's lunch rota.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n- Ran a few ready-made queries someone had given me.\n- Joined the staff newsletter committee.\n\nEDUCATION\nB.A., Fenwick College of Commerce, 2005",
+   "labels": {
+    "da_sql": 1,
+    "da_viz": 3,
+    "da_stats": 0,
+    "da_clean": 3,
+    "da_story": 1
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S22",
+   "role": "support",
+   "known_name": {
+    "first": "Anneliese",
+    "last": "Strand"
+   },
+   "text": "Anneliese Strand\nanneliese.strand@mail.example.test\nPhone: (555) 010-0104\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Greylock Utilities, 2019 to 2026\n- Sat beside senior agents and read through their customer correspondence to learn the house style.\n- Handed upset callers to a supervisor after apologising and taking notes.\n- Welcomed visitors and signed them in.\n\nAssistant, Tidewell Logistics, 2012 to 2019\n- Found the cause of most billing and login problems on my own by asking structured questions and checking logs.\n- Covered the front desk during holiday weeks.\n\nEDUCATION\nB.A., Saltmarsh Academy, 1993",
+   "labels": {
+    "cs_written": 1,
+    "cs_diagnosis": 3,
+    "cs_tools": 0,
+    "cs_deescalate": 2,
+    "cs_improve": 0
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S23",
+   "role": "ops",
+   "known_name": {
+    "first": "Ilse",
+    "last": "Thackeray"
+   },
+   "text": "Ilse Thackeray\nilse.thackeray@mail.example.test\nPhone: (555) 010-0157\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Quillon Software, 2019 to 2026\n- Helped the office manager put delivery dates on the shared calendar.\n- Read the standard operating notes on my first week.\n- Designed the operations reporting pack used by 4 managers, with checks that caught errors before sending, and trained others to maintain it.\n- Organised the team's lunch rota.\n\nAssistant, Pennywhistle Retail, 2012 to 2019\n- Kept the team's monthly spending within the agreed limits and explained differences to the manager.\n- Was the day-to-day contact for six suppliers, checking orders against quotes and sorting out shortages.\n- Covered the front desk during holiday weeks.\n\nEDUCATION\nB.A., Calder Bay Polytechnic, 2010",
+   "labels": {
+    "ops_schedule": 1,
+    "ops_vendor": 3,
+    "ops_data": 5,
+    "ops_process": 1,
+    "ops_budget": 3
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S24",
+   "role": "analyst",
+   "known_name": {
+    "first": "Winola",
+    "last": "Pelletreau"
+   },
+   "text": "Winola Pelletreau\nwinola.pelletreau@mail.example.test\nPhone: (555) 010-0108\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Hearthstone Clinics, 2019 to 2026\n- Changed colours and titles on existing charts.\n- Calculated averages and percentages for reports.\n- Noticed odd values in a table once and told my manager.\n- Organised the team's lunch rota.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n- Ran a few ready-made queries someone had given me.\n- Covered the front desk during holiday weeks.\n\nEDUCATION\nB.A., Ashgrove State College, 2007",
+   "labels": {
+    "da_sql": 1,
+    "da_viz": 2,
+    "da_stats": 2,
+    "da_clean": 1,
+    "da_story": 0
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S25",
+   "role": "support",
+   "known_name": {
+    "first": "Marisol",
+    "last": "Eskildsen"
+   },
+   "text": "Marisol Eskildsen\nmarisol.eskildsen@mail.example.test\nPhone: (555) 010-0149\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Brightwater Cooperative, 2019 to 2026\n- Worked daily in the ticket queue, the live chat window and the internal wiki, keeping records current.\n- Chosen to take the hardest complaints on the team; refund disputes I handled ended with the customer staying in 9 of 10 cases.\n- Owned the support improvement list: shipped 12 process changes that cut average handling time by 22 percent and saved the team about 30 hours a week.\n- Joined the staff newsletter committee.\n\nAssistant, Hearthstone Clinics, 2012 to 2019\n- Sat beside senior agents and read through their customer correspondence to learn the house style.\n- Followed the checklist to find out why a device would not connect and passed unsolved cases upward.\n- Welcomed visitors and signed them in.\n\nEDUCATION\nB.A., Institute of Applied Studies at Lowmere, 1984",
+   "labels": {
+    "cs_written": 1,
+    "cs_diagnosis": 2,
+    "cs_tools": 3,
+    "cs_deescalate": 4,
+    "cs_improve": 5
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S26",
+   "role": "ops",
+   "known_name": {
+    "first": "Delphine",
+    "last": "Quenby"
+   },
+   "text": "Delphine Quenby\ndelphine.quenby@mail.example.test\nPhone: (555) 010-0160\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Quillon Software, 2019 to 2026\n- Designed the operations reporting pack used by 4 managers, with checks that caught errors before sending, and trained others to maintain it.\n- Renegotiated terms with two key suppliers, saving about 8 percent a year.\n- Redesigned the returns routine, cutting handling time per item from 12 to 7 minutes.\n- Took part in the quarterly safety walk.\n\nAssistant, Tidewell Logistics, 2012 to 2019\n- Kept the team's monthly spending within the agreed limits and explained differences to the manager.\n- Joined the staff newsletter committee.\n\nEDUCATION\nB.A., Saltmarsh Academy, 1991",
+   "labels": {
+    "ops_schedule": 0,
+    "ops_vendor": 4,
+    "ops_data": 5,
+    "ops_process": 4,
+    "ops_budget": 3
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S27",
+   "role": "analyst",
+   "known_name": {
+    "first": "Oswin",
+    "last": "Thackeray"
+   },
+   "text": "Oswin Thackeray\noswin.thackeray@mail.example.test\nPhone: (555) 010-0165\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Tidewell Logistics, 2019 to 2026\n- Ran significance tests on survey results and explained the confidence ranges.\n- Wrote routine checks for gaps, duplicates and wrong formats before every report.\n- Edited existing queries to change dates and filters.\n- Welcomed visitors and signed them in.\n\nAssistant, Brightwater Cooperative, 2012 to 2019\n- Changed colours and titles on existing charts.\n- Took part in the quarterly safety walk.\n\nEDUCATION\nB.A., Veldt University, 1998",
+   "labels": {
+    "da_sql": 2,
+    "da_viz": 2,
+    "da_stats": 3,
+    "da_clean": 3,
+    "da_story": 0
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S28",
+   "role": "support",
+   "known_name": {
+    "first": "Lazlo",
+    "last": "Galloway"
+   },
+   "text": "Lazlo Galloway\nlazlo.galloway@mail.example.test\nPhone: (555) 010-0104\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Brightwater Cooperative, 2019 to 2026\n- Suggested a few new quick answers when I noticed the same question twice.\n- Handed upset callers to a supervisor after apologising and taking notes.\n- Set up saved replies and routing rules in the helpdesk platform for our team of twelve.\n- Joined the staff newsletter committee.\n\nAssistant, Greylock Utilities, 2012 to 2019\n- Answered customer messages with templated text and filled in the details for each case.\n- Organised the team's lunch rota.\n\nEDUCATION\nB.A., Ashgrove State College, 1987",
+   "labels": {
+    "cs_written": 2,
+    "cs_diagnosis": 0,
+    "cs_tools": 4,
+    "cs_deescalate": 2,
+    "cs_improve": 2
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S29",
+   "role": "ops",
+   "known_name": {
+    "first": "Rafferty",
+    "last": "Ibsen"
+   },
+   "text": "Rafferty Ibsen\nrafferty.ibsen@mail.example.test\nPhone: (555) 010-0178\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Marlow & Finch Supply, 2019 to 2026\n- Followed written steps for receiving goods and flagged gaps.\n- Learned how the department's monthly spend was tracked.\n- Helped the office manager put delivery dates on the shared calendar.\n- Covered the front desk during holiday weeks.\n\nAssistant, Pennywhistle Retail, 2012 to 2019\n- Renegotiated terms with two key suppliers, saving about 8 percent a year.\n- Maintained spreadsheets with formulas and pivot tables to follow orders and stock, and sent the manager a Monday summary.\n- Welcomed visitors and signed them in.\n\nEDUCATION\nB.A., Institute of Applied Studies at Lowmere, 1985",
+   "labels": {
+    "ops_schedule": 1,
+    "ops_vendor": 4,
+    "ops_data": 3,
+    "ops_process": 2,
+    "ops_budget": 1
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S30",
+   "role": "analyst",
+   "known_name": {
+    "first": "Sunniva",
+    "last": "Dunmore"
+   },
+   "text": "Sunniva Dunmore\nsunniva.dunmore@mail.example.test\nPhone: (555) 010-0146\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Ferncliff Foods, 2019 to 2026\n- Defined the visual style and review process for all company dashboards, managed about 60 of them, and trained analysts across three teams.\n- Removed duplicate rows from exports before reporting.\n- Ran significance tests on survey results and explained the confidence ranges.\n- Welcomed visitors and signed them in.\n\nAssistant, Pennywhistle Retail, 2012 to 2019\n- Rebuilt a slow reporting query so it ran in 40 seconds instead of 12 minutes.\n- Attended the monthly business review.\n- Took part in the quarterly safety walk.\n\nEDUCATION\nB.A., Tallis Heath College, 1994",
+   "labels": {
+    "da_sql": 4,
+    "da_viz": 5,
+    "da_stats": 3,
+    "da_clean": 2,
+    "da_story": 1
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S31",
+   "role": "support",
+   "known_name": {
+    "first": "Perpetua",
+    "last": "Fontaine-Ruiz"
+   },
+   "text": "Perpetua Fontaine-Ruiz\nperpetua.fontaineruiz@mail.example.test\nPhone: (555) 010-0126\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Tidewell Logistics, 2019 to 2026\n- Built a monthly report of top complaint themes for the manager, and two of its recommendations were adopted.\n- Handed upset callers to a supervisor after apologising and taking notes.\n- Watched colleagues work through faulty-product cases to learn how they narrowed down causes.\n- Joined the staff newsletter committee.\n\nAssistant, Brightwater Cooperative, 2012 to 2019\n- Worked daily in the ticket queue, the live chat window and the internal wiki, keeping records current.\n- Rewrote the team's wording guide and coached six new hires on tone; satisfaction on written answers rose from 81 to 93 percent in two quarters.\n- Covered the front desk during holiday weeks.\n\nEDUCATION\nB.A., Ashgrove State College, 1999",
+   "labels": {
+    "cs_written": 5,
+    "cs_diagnosis": 1,
+    "cs_tools": 3,
+    "cs_deescalate": 2,
+    "cs_improve": 4
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S32",
+   "role": "ops",
+   "known_name": {
+    "first": "Lazlo",
+    "last": "Eskildsen"
+   },
+   "text": "Lazlo Eskildsen\nlazlo.eskildsen@mail.example.test\nPhone: (555) 010-0173\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Quillon Software, 2019 to 2026\n- Replaced a manual tally with an automated workbook that saved around five hours a week.\n- Wrote step-by-step instructions for receiving and returns that new staff could follow without help.\n- Re-planned the loading dock timetable so trucks waited 30 percent less on average.\n- Took part in the quarterly safety walk.\n\nAssistant, Greylock Utilities, 2012 to 2019\n- Managed the full supplier panel of 25 companies, ran the yearly review, replaced three weak partners, and brought late deliveries down by half.\n- Took part in the quarterly safety walk.\n\nEDUCATION\nB.A., Ashgrove State College, 1991",
+   "labels": {
+    "ops_schedule": 4,
+    "ops_vendor": 5,
+    "ops_data": 4,
+    "ops_process": 3,
+    "ops_budget": 0
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S33",
+   "role": "analyst",
+   "known_name": {
+    "first": "Corwin",
+    "last": "Pelletreau"
+   },
+   "text": "Corwin Pelletreau\ncorwin.pelletreau@mail.example.test\nPhone: (555) 010-0191\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Brightwater Cooperative, 2019 to 2026\n- Designed and analysed a pricing test with 20,000 visitors, which led to a 4 percent revenue gain.\n- Removed duplicate rows from exports before reporting.\n- Regularly briefed executives and the board, and wrote the guide that taught analysts how to turn results into decisions.\n- Organised the team's lunch rota.\n\nAssistant, Marlow & Finch Supply, 2012 to 2019\n- Designed the team's warehouse tables and query standards, reviewed colleagues' code, and taught a monthly workshop on advanced queries.\n- Created an executive dashboard used by 40 people, replacing six slide decks.\n- Covered the front desk during holiday weeks.\n\nEDUCATION\nB.A., Ashgrove State College, 2007",
+   "labels": {
+    "da_sql": 5,
+    "da_viz": 4,
+    "da_stats": 4,
+    "da_clean": 2,
+    "da_story": 5
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S34",
+   "role": "support",
+   "known_name": {
+    "first": "Honora",
+    "last": "Vantongeren"
+   },
+   "text": "Honora Vantongeren\nhonora.vantongeren@mail.example.test\nPhone: (555) 010-0177\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Quillon Software, 2019 to 2026\n- Answered customer messages with templated text and filled in the details for each case.\n- Built a monthly report of top complaint themes for the manager, and two of its recommendations were adopted.\n- Handed upset callers to a supervisor after apologising and taking notes.\n- Welcomed visitors and signed them in.\n\nAssistant, Marlow & Finch Supply, 2012 to 2019\n- Had a login to the helpdesk software during onboarding and looked up past cases.\n- Covered the front desk during holiday weeks.\n\nEDUCATION\nB.A., Calder Bay Polytechnic, 1992",
+   "labels": {
+    "cs_written": 2,
+    "cs_diagnosis": 0,
+    "cs_tools": 1,
+    "cs_deescalate": 2,
+    "cs_improve": 4
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S35",
+   "role": "ops",
+   "known_name": {
+    "first": "Ilse",
+    "last": "Okonjo-Reyes"
+   },
+   "text": "Ilse Okonjo-Reyes\nilse.okonjoreyes@mail.example.test\nPhone: (555) 010-0129\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Hearthstone Clinics, 2019 to 2026\n- Kept the team's monthly spending within the agreed limits and explained differences to the manager.\n- Planned shifts for a crew of fifteen and the weekly truck arrivals, resolving clashes before they became delays.\n- Renegotiated terms with two key suppliers, saving about 8 percent a year.\n- Welcomed visitors and signed them in.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n- Read the standard operating notes on my first week.\n- Maintained spreadsheets with formulas and pivot tables to follow orders and stock, and sent the manager a Monday summary.\n- Covered the front desk during holiday weeks.\n\nEDUCATION\nB.A., Northmere Institute of Technology, 2008",
+   "labels": {
+    "ops_schedule": 3,
+    "ops_vendor": 4,
+    "ops_data": 3,
+    "ops_process": 1,
+    "ops_budget": 3
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S36",
+   "role": "analyst",
+   "known_name": {
+    "first": "Oswin",
+    "last": "Eskildsen"
+   },
+   "text": "Oswin Eskildsen\noswin.eskildsen@mail.example.test\nPhone: (555) 010-0117\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Brightwater Cooperative, 2019 to 2026\n- Built charts and a dashboard in a BI tool that the sales leads opened every morning.\n- Wrote my own joins and aggregations against the company database to answer weekly questions.\n- Removed duplicate rows from exports before reporting.\n- Welcomed visitors and signed them in.\n\nAssistant, Quillon Software, 2012 to 2019\n- Regularly briefed executives and the board, and wrote the guide that taught analysts how to turn results into decisions.\n- Covered the front desk during holiday weeks.\n\nEDUCATION\nB.A., Saltmarsh Academy, 1997",
+   "labels": {
+    "da_sql": 3,
+    "da_viz": 3,
+    "da_stats": 0,
+    "da_clean": 2,
+    "da_story": 5
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S37",
+   "role": "support",
+   "known_name": {
+    "first": "Winola",
+    "last": "Thackeray"
+   },
+   "text": "Winola Thackeray\nwinola.thackeray@mail.example.test\nPhone: (555) 010-0133\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Marlow & Finch Supply, 2019 to 2026\n- Set up saved replies and routing rules in the helpdesk platform for our team of twelve.\n- Wrote clear, friendly answers to about 40 customer notes per shift and signed each with a personal line.\n- Settled most heated complaints myself by listening first, restating the problem and offering a clear next step.\n- Joined the staff newsletter committee.\n\nAssistant, Quillon Software, 2012 to 2019\n- Mentioned small wording errors in help articles to my lead.\n- Joined the staff newsletter committee.\n\nEDUCATION\nB.A., Harrowgate University, 2005",
+   "labels": {
+    "cs_written": 3,
+    "cs_diagnosis": 0,
+    "cs_tools": 4,
+    "cs_deescalate": 3,
+    "cs_improve": 1
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S38",
+   "role": "ops",
+   "known_name": {
+    "first": "Quillon",
+    "last": "Ibsen"
+   },
+   "text": "Quillon Ibsen\nquillon.ibsen@mail.example.test\nPhone: (555) 010-0149\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Pennywhistle Retail, 2019 to 2026\n- Planned shifts for a crew of fifteen and the weekly truck arrivals, resolving clashes before they became delays.\n- Designed the operations reporting pack used by 4 managers, with checks that caught errors before sending, and trained others to maintain it.\n- Read the standard operating notes on my first week.\n- Covered the front desk during holiday weeks.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n- Found duplicated subscriptions and freight overcharges worth about 14,000 per year.\n- Managed the full supplier panel of 25 companies, ran the yearly review, replaced three weak partners, and brought late deliveries down by half.\n- Welcomed visitors and signed them in.\n\nEDUCATION\nB.A., Harrowgate University, 2010",
+   "labels": {
+    "ops_schedule": 3,
+    "ops_vendor": 5,
+    "ops_data": 5,
+    "ops_process": 1,
+    "ops_budget": 4
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S39",
+   "role": "analyst",
+   "known_name": {
+    "first": "Marisol",
+    "last": "Ibsen"
+   },
+   "text": "Marisol Ibsen\nmarisol.ibsen@mail.example.test\nPhone: (555) 010-0110\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Ferncliff Foods, 2019 to 2026\n- Designed and analysed a pricing test with 20,000 visitors, which led to a 4 percent revenue gain.\n- Ran a few ready-made queries someone had given me.\n- Built charts and a dashboard in a BI tool that the sales leads opened every morning.\n- Joined the staff newsletter committee.\n\nAssistant, Pennywhistle Retail, 2012 to 2019\n- Removed duplicate rows from exports before reporting.\n- Presented findings to non-technical colleagues in plain language, with one clear recommendation.\n- Covered the front desk during holiday weeks.\n\nEDUCATION\nB.A., Institute of Applied Studies at Lowmere, 1990",
+   "labels": {
+    "da_sql": 1,
+    "da_viz": 3,
+    "da_stats": 4,
+    "da_clean": 2,
+    "da_story": 3
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S40",
+   "role": "support",
+   "known_name": {
+    "first": "Beaufort",
+    "last": "Fontaine-Ruiz"
+   },
+   "text": "Beaufort Fontaine-Ruiz\nbeaufort.fontaineruiz@mail.example.test\nPhone: (555) 010-0162\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Pennywhistle Retail, 2019 to 2026\n- Followed the checklist to find out why a device would not connect and passed unsolved cases upward.\n- Logged and tagged cases in the shared inbox tool every day.\n- Settled most heated complaints myself by listening first, restating the problem and offering a clear next step.\n- Joined the staff newsletter committee.\n\nAssistant, Hearthstone Clinics, 2012 to 2019\n- Built a monthly report of top complaint themes for the manager, and two of its recommendations were adopted.\n- Organised the team's lunch rota.\n\nEDUCATION\nB.A., Institute of Applied Studies at Lowmere, 1993",
+   "labels": {
+    "cs_written": 0,
+    "cs_diagnosis": 2,
+    "cs_tools": 2,
+    "cs_deescalate": 3,
+    "cs_improve": 4
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S41",
+   "role": "ops",
+   "known_name": {
+    "first": "Honora",
+    "last": "Pelletreau"
+   },
+   "text": "Honora Pelletreau\nhonora.pelletreau@mail.example.test\nPhone: (555) 010-0197\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Pennywhistle Retail, 2019 to 2026\n- Helped the office manager put delivery dates on the shared calendar.\n- Took part in the quarterly safety walk.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n- Joined the staff newsletter committee.\n\nEDUCATION\nB.A., Saltmarsh Academy, 1991",
+   "labels": {
+    "ops_schedule": 1,
+    "ops_vendor": 0,
+    "ops_data": 0,
+    "ops_process": 0,
+    "ops_budget": 0
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S42",
+   "role": "analyst",
+   "known_name": {
+    "first": "Yarrow",
+    "last": "Dunmore"
+   },
+   "text": "Yarrow Dunmore\nyarrow.dunmore@mail.example.test\nPhone: (555) 010-0103\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Ferncliff Foods, 2019 to 2026\n- Ran significance tests on survey results and explained the confidence ranges.\n- Looked at the dashboards other people had made.\n- Covered the front desk during holiday weeks.\n\nAssistant, Brightwater Cooperative, 2012 to 2019\n- Removed duplicate rows from exports before reporting.\n- Joined the staff newsletter committee.\n\nEDUCATION\nB.A., Tallis Heath College, 1998",
+   "labels": {
+    "da_sql": 0,
+    "da_viz": 1,
+    "da_stats": 3,
+    "da_clean": 2,
+    "da_story": 0
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S43",
+   "role": "support",
+   "known_name": {
+    "first": "Oswin",
+    "last": "Lindqvist"
+   },
+   "text": "Oswin Lindqvist\noswin.lindqvist@mail.example.test\nPhone: (555) 010-0186\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Tidewell Logistics, 2019 to 2026\n- Wrote clear, friendly answers to about 40 customer notes per shift and signed each with a personal line.\n- Fixed outdated help pages and added the questions customers kept asking, about 15 pages in a year.\n- Settled most heated complaints myself by listening first, restating the problem and offering a clear next step.\n- Covered the front desk during holiday weeks.\n\nAssistant, Pennywhistle Retail, 2012 to 2019\n- Logged and tagged cases in the shared inbox tool every day.\n- Found the cause of most billing and login problems on my own by asking structured questions and checking logs.\n- Took part in the quarterly safety walk.\n\nEDUCATION\nB.A., Harrowgate University, 2002",
+   "labels": {
+    "cs_written": 3,
+    "cs_diagnosis": 3,
+    "cs_tools": 2,
+    "cs_deescalate": 3,
+    "cs_improve": 3
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S44",
+   "role": "ops",
+   "known_name": {
+    "first": "Oswin",
+    "last": "Ardenwood"
+   },
+   "text": "Oswin Ardenwood\noswin.ardenwood@mail.example.test\nPhone: (555) 010-0180\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Greylock Utilities, 2019 to 2026\n- Read the standard operating notes on my first week.\n- Was the day-to-day contact for six suppliers, checking orders against quotes and sorting out shortages.\n- Maintained spreadsheets with formulas and pivot tables to follow orders and stock, and sent the manager a Monday summary.\n- Joined the staff newsletter committee.\n\nAssistant, Hearthstone Clinics, 2012 to 2019\n- Kept the team's monthly spending within the agreed limits and explained differences to the manager.\n- Helped the office manager put delivery dates on the shared calendar.\n- Joined the staff newsletter committee.\n\nEDUCATION\nB.A., Calder Bay Polytechnic, 2011",
+   "labels": {
+    "ops_schedule": 1,
+    "ops_vendor": 3,
+    "ops_data": 3,
+    "ops_process": 1,
+    "ops_budget": 3
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S45",
+   "role": "analyst",
+   "known_name": {
+    "first": "Thaddeus",
+    "last": "Fontaine-Ruiz"
+   },
+   "text": "Thaddeus Fontaine-Ruiz\nthaddeus.fontaineruiz@mail.example.test\nPhone: (555) 010-0142\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Hearthstone Clinics, 2019 to 2026\n- Defined the visual style and review process for all company dashboards, managed about 60 of them, and trained analysts across three teams.\n- Removed duplicate rows from exports before reporting.\n- Covered the front desk during holiday weeks.\n\nAssistant, Pennywhistle Retail, 2012 to 2019\n- Presented findings to non-technical colleagues in plain language, with one clear recommendation.\n- Joined the staff newsletter committee.\n\nEDUCATION\nB.A., Northmere Institute of Technology, 2009",
+   "labels": {
+    "da_sql": 0,
+    "da_viz": 5,
+    "da_stats": 0,
+    "da_clean": 2,
+    "da_story": 3
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S46",
+   "role": "support",
+   "known_name": {
+    "first": "Sunniva",
+    "last": "Lindqvist"
+   },
+   "text": "Sunniva Lindqvist\nsunniva.lindqvist@mail.example.test\nPhone: (555) 010-0172\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Brightwater Cooperative, 2019 to 2026\n- Built a monthly report of top complaint themes for the manager, and two of its recommendations were adopted.\n- Wrote clear, friendly answers to about 40 customer notes per shift and signed each with a personal line.\n- Welcomed visitors and signed them in.\n\nAssistant, Hearthstone Clinics, 2012 to 2019\n- Worked daily in the ticket queue, the live chat window and the internal wiki, keeping records current.\n- Organised the team's lunch rota.\n\nEDUCATION\nB.A., Northmere Institute of Technology, 1997",
+   "labels": {
+    "cs_written": 3,
+    "cs_diagnosis": 0,
+    "cs_tools": 3,
+    "cs_deescalate": 0,
+    "cs_improve": 4
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S47",
+   "role": "ops",
+   "known_name": {
+    "first": "Winola",
+    "last": "Mirabeau"
+   },
+   "text": "Winola Mirabeau\nwinola.mirabeau@mail.example.test\nPhone: (555) 010-0143\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Brightwater Cooperative, 2019 to 2026\n- Wrote step-by-step instructions for receiving and returns that new staff could follow without help.\n- Designed the operations reporting pack used by 4 managers, with checks that caught errors before sending, and trained others to maintain it.\n- Kept the team's monthly spending within the agreed limits and explained differences to the manager.\n- Organised the team's lunch rota.\n\nAssistant, Marlow & Finch Supply, 2012 to 2019\n- Booked drivers and meeting rooms from a weekly list.\n- Organised the team's lunch rota.\n\nEDUCATION\nB.A., Harrowgate University, 1994",
+   "labels": {
+    "ops_schedule": 2,
+    "ops_vendor": 0,
+    "ops_data": 5,
+    "ops_process": 3,
+    "ops_budget": 3
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S48",
+   "role": "analyst",
+   "known_name": {
+    "first": "Edda",
+    "last": "Thackeray"
+   },
+   "text": "Edda Thackeray\nedda.thackeray@mail.example.test\nPhone: (555) 010-0131\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Pennywhistle Retail, 2019 to 2026\n- Wrote my own joins and aggregations against the company database to answer weekly questions.\n- Removed duplicate rows from exports before reporting.\n- Set up the company's experimentation practice, including sample-size rules and review, and ran 30 controlled tests that were used in decisions.\n- Welcomed visitors and signed them in.\n\nAssistant, Hearthstone Clinics, 2012 to 2019\n- Regularly briefed executives and the board, and wrote the guide that taught analysts how to turn results into decisions.\n- Created an executive dashboard used by 40 people, replacing six slide decks.\n- Took part in the quarterly safety walk.\n\nEDUCATION\nB.A., Harrowgate University, 2001",
+   "labels": {
+    "da_sql": 3,
+    "da_viz": 4,
+    "da_stats": 5,
+    "da_clean": 2,
+    "da_story": 5
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S49",
+   "role": "support",
+   "known_name": {
+    "first": "Oswin",
+    "last": "Galloway"
+   },
+   "text": "Oswin Galloway\noswin.galloway@mail.example.test\nPhone: (555) 010-0189\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Hearthstone Clinics, 2019 to 2026\n- Wrote and taught the team's guide for calming angry customers; formal complaints against our desk dropped from 25 to 9 a quarter.\n- Mentioned small wording errors in help articles to my lead.\n- Worked daily in the ticket queue, the live chat window and the internal wiki, keeping records current.\n- Took part in the quarterly safety walk.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n- Sat beside senior agents and read through their customer correspondence to learn the house style.\n- Joined the staff newsletter committee.\n\nEDUCATION\nB.A., Veldt University, 1991",
+   "labels": {
+    "cs_written": 1,
+    "cs_diagnosis": 0,
+    "cs_tools": 3,
+    "cs_deescalate": 5,
+    "cs_improve": 1
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S50",
+   "role": "ops",
+   "known_name": {
+    "first": "Lazlo",
+    "last": "Ibsen"
+   },
+   "text": "Lazlo Ibsen\nlazlo.ibsen@mail.example.test\nPhone: (555) 010-0124\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Hearthstone Clinics, 2019 to 2026\n- Read the standard operating notes on my first week.\n- Designed the operations reporting pack used by 4 managers, with checks that caught errors before sending, and trained others to maintain it.\n- Planned shifts for a crew of fifteen and the weekly truck arrivals, resolving clashes before they became delays.\n- Joined the staff newsletter committee.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n- Renegotiated terms with two key suppliers, saving about 8 percent a year.\n- Covered the front desk during holiday weeks.\n\nEDUCATION\nB.A., Northmere Institute of Technology, 1994",
+   "labels": {
+    "ops_schedule": 3,
+    "ops_vendor": 4,
+    "ops_data": 5,
+    "ops_process": 1,
+    "ops_budget": 0
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S51",
+   "role": "analyst",
+   "known_name": {
+    "first": "Edda",
+    "last": "Lindqvist"
+   },
+   "text": "Edda Lindqvist\nedda.lindqvist@mail.example.test\nPhone: (555) 010-0193\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Quillon Software, 2019 to 2026\n- Designed and analysed a pricing test with 20,000 visitors, which led to a 4 percent revenue gain.\n- Presented findings to non-technical colleagues in plain language, with one clear recommendation.\n- Removed duplicate rows from exports before reporting.\n- Covered the front desk during holiday weeks.\n\nAssistant, Pennywhistle Retail, 2012 to 2019\n- Defined the visual style and review process for all company dashboards, managed about 60 of them, and trained analysts across three teams.\n- Organised the team's lunch rota.\n\nEDUCATION\nB.A., Institute of Applied Studies at Lowmere, 1997",
+   "labels": {
+    "da_sql": 0,
+    "da_viz": 5,
+    "da_stats": 4,
+    "da_clean": 2,
+    "da_story": 3
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S52",
+   "role": "support",
+   "known_name": {
+    "first": "Beaufort",
+    "last": "Okonjo-Reyes"
+   },
+   "text": "Beaufort Okonjo-Reyes\nbeaufort.okonjoreyes@mail.example.test\nPhone: (555) 010-0174\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Greylock Utilities, 2019 to 2026\n- Traced a recurring duplicate-charge fault to a settings conflict and documented the fix; repeat contacts on that issue fell by 35 percent.\n- Chosen to take the hardest complaints on the team; refund disputes I handled ended with the customer staying in 9 of 10 cases.\n- Known on the team for short, warm answers; my written responses were picked as examples in training, and my customer rating averaged 4.8 of 5.\n- Covered the front desk during holiday weeks.\n\nAssistant, Marlow & Finch Supply, 2012 to 2019\n- Logged and tagged cases in the shared inbox tool every day.\n- Welcomed visitors and signed them in.\n\nEDUCATION\nB.A., Northmere Institute of Technology, 1999",
+   "labels": {
+    "cs_written": 4,
+    "cs_diagnosis": 4,
+    "cs_tools": 2,
+    "cs_deescalate": 4,
+    "cs_improve": 0
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S53",
+   "role": "ops",
+   "known_name": {
+    "first": "Marisol",
+    "last": "Quenby"
+   },
+   "text": "Marisol Quenby\nmarisol.quenby@mail.example.test\nPhone: (555) 010-0187\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Greylock Utilities, 2019 to 2026\n- Chased suppliers for missing invoices and delivery confirmations.\n- Redesigned the returns routine, cutting handling time per item from 12 to 7 minutes.\n- Found duplicated subscriptions and freight overcharges worth about 14,000 per year.\n- Covered the front desk during holiday weeks.\n\nAssistant, Hearthstone Clinics, 2012 to 2019\n- Ran the whole weekly plan for three warehouses and 60 staff, and trained two coordinators to take it over; on-time delivery reached 97 percent.\n- Designed the operations reporting pack used by 4 managers, with checks that caught errors before sending, and trained others to maintain it.\n- Organised the team's lunch rota.\n\nEDUCATION\nB.A., Tallis Heath College, 2011",
+   "labels": {
+    "ops_schedule": 5,
+    "ops_vendor": 2,
+    "ops_data": 5,
+    "ops_process": 4,
+    "ops_budget": 4
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S54",
+   "role": "analyst",
+   "known_name": {
+    "first": "Honora",
+    "last": "Brannigan"
+   },
+   "text": "Honora Brannigan\nhonora.brannigan@mail.example.test\nPhone: (555) 010-0154\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Greylock Utilities, 2019 to 2026\n- Ran a few ready-made queries someone had given me.\n- Attended the monthly business review.\n- Removed duplicate rows from exports before reporting.\n- Took part in the quarterly safety walk.\n\nAssistant, Hearthstone Clinics, 2012 to 2019\n- Created an executive dashboard used by 40 people, replacing six slide decks.\n- Set up the company's experimentation practice, including sample-size rules and review, and ran 30 controlled tests that were used in decisions.\n- Took part in the quarterly safety walk.\n\nEDUCATION\nB.A., Harrowgate University, 2011",
+   "labels": {
+    "da_sql": 1,
+    "da_viz": 4,
+    "da_stats": 5,
+    "da_clean": 2,
+    "da_story": 1
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S55",
+   "role": "support",
+   "known_name": {
+    "first": "Sunniva",
+    "last": "Brannigan"
+   },
+   "text": "Sunniva Brannigan\nsunniva.brannigan@mail.example.test\nPhone: (555) 010-0170\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Pennywhistle Retail, 2019 to 2026\n- Handed upset callers to a supervisor after apologising and taking notes.\n- Found the cause of most billing and login problems on my own by asking structured questions and checking logs.\n- Rewrote the team's wording guide and coached six new hires on tone; satisfaction on written answers rose from 81 to 93 percent in two quarters.\n- Took part in the quarterly safety walk.\n\nAssistant, Ferncliff Foods, 2012 to 2019\n- Suggested a few new quick answers when I noticed the same question twice.\n- Worked daily in the ticket queue, the live chat window and the internal wiki, keeping records current.\n- Took part in the quarterly safety walk.\n\nEDUCATION\nB.A., Calder Bay Polytechnic, 2008",
+   "labels": {
+    "cs_written": 5,
+    "cs_diagnosis": 3,
+    "cs_tools": 3,
+    "cs_deescalate": 2,
+    "cs_improve": 2
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S56",
+   "role": "ops",
+   "known_name": {
+    "first": "Beaufort",
+    "last": "Strand"
+   },
+   "text": "Beaufort Strand\nbeaufort.strand@mail.example.test\nPhone: (555) 010-0185\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Marlow & Finch Supply, 2019 to 2026\n- Planned shifts for a crew of fifteen and the weekly truck arrivals, resolving clashes before they became delays.\n- Wrote step-by-step instructions for receiving and returns that new staff could follow without help.\n- Collected receipts and matched them to the cost sheet.\n- Joined the staff newsletter committee.\n\nAssistant, Quillon Software, 2012 to 2019\n- Updated the weekly stock sheet by hand.\n- Was the day-to-day contact for six suppliers, checking orders against quotes and sorting out shortages.\n- Organised the team's lunch rota.\n\nEDUCATION\nB.A., Institute of Applied Studies at Lowmere, 2007",
+   "labels": {
+    "ops_schedule": 3,
+    "ops_vendor": 3,
+    "ops_data": 2,
+    "ops_process": 3,
+    "ops_budget": 2
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S57",
+   "role": "analyst",
+   "known_name": {
+    "first": "Yarrow",
+    "last": "Okonjo-Reyes"
+   },
+   "text": "Yarrow Okonjo-Reyes\nyarrow.okonjoreyes@mail.example.test\nPhone: (555) 010-0176\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Quillon Software, 2019 to 2026\n- Ran significance tests on survey results and explained the confidence ranges.\n- Edited existing queries to change dates and filters.\n- Organised the team's lunch rota.\n\nAssistant, Pennywhistle Retail, 2012 to 2019\n- Attended the monthly business review.\n- Joined the staff newsletter committee.\n\nEDUCATION\nB.A., Fenwick College of Commerce, 1989",
+   "labels": {
+    "da_sql": 2,
+    "da_viz": 0,
+    "da_stats": 3,
+    "da_clean": 0,
+    "da_story": 1
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S58",
+   "role": "support",
+   "known_name": {
+    "first": "Anneliese",
+    "last": "Fontaine-Ruiz"
+   },
+   "text": "Anneliese Fontaine-Ruiz\nanneliese.fontaineruiz@mail.example.test\nPhone: (555) 010-0172\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nCustomer Support Specialist, Greylock Utilities, 2019 to 2026\n- Worked daily in the ticket queue, the live chat window and the internal wiki, keeping records current.\n- Chosen to take the hardest complaints on the team; refund disputes I handled ended with the customer staying in 9 of 10 cases.\n- Found the cause of most billing and login problems on my own by asking structured questions and checking logs.\n- Organised the team's lunch rota.\n\nAssistant, Tidewell Logistics, 2012 to 2019\n- Built a monthly report of top complaint themes for the manager, and two of its recommendations were adopted.\n- Wrote clear, friendly answers to about 40 customer notes per shift and signed each with a personal line.\n- Welcomed visitors and signed them in.\n\nEDUCATION\nB.A., Tallis Heath College, 2009",
+   "labels": {
+    "cs_written": 3,
+    "cs_diagnosis": 3,
+    "cs_tools": 3,
+    "cs_deescalate": 4,
+    "cs_improve": 4
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S59",
+   "role": "ops",
+   "known_name": {
+    "first": "Winola",
+    "last": "Eskildsen"
+   },
+   "text": "Winola Eskildsen\nwinola.eskildsen@mail.example.test\nPhone: (555) 010-0120\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nOperations Coordinator, Hearthstone Clinics, 2019 to 2026\n- Owned a yearly operating budget of roughly 1.2 million, forecast it quarterly, and delivered 6 percent under plan two years running.\n- Booked drivers and meeting rooms from a weekly list.\n- Followed written steps for receiving goods and flagged gaps.\n- Took part in the quarterly safety walk.\n\nAssistant, Quillon Software, 2012 to 2019\n- Maintained spreadsheets with formulas and pivot tables to follow orders and stock, and sent the manager a Monday summary.\n- Organised the team's lunch rota.\n\nEDUCATION\nB.A., Fenwick College of Commerce, 2007",
+   "labels": {
+    "ops_schedule": 2,
+    "ops_vendor": 0,
+    "ops_data": 3,
+    "ops_process": 2,
+    "ops_budget": 5
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  },
+  {
+   "id": "S60",
+   "role": "analyst",
+   "known_name": {
+    "first": "Delphine",
+    "last": "Halvorsen"
+   },
+   "text": "Delphine Halvorsen\ndelphine.halvorsen@mail.example.test\nPhone: (555) 010-0172\n\nSUMMARY\nSteady and reliable worker.\n\nEXPERIENCE\nData Analyst, Marlow & Finch Supply, 2019 to 2026\n- Changed colours and titles on existing charts.\n- Calculated averages and percentages for reports.\n- Designed the team's warehouse tables and query standards, reviewed colleagues' code, and taught a monthly workshop on advanced queries.\n- Organised the team's lunch rota.\n\nAssistant, Hearthstone Clinics, 2012 to 2019\n- Regularly briefed executives and the board, and wrote the guide that taught analysts how to turn results into decisions.\n- Established the data quality program: owners, tests and alerts across 40 tables; incidents of wrong numbers fell by 70 percent.\n- Joined the staff newsletter committee.\n\nEDUCATION\nB.A., Saltmarsh Academy, 1984",
+   "labels": {
+    "da_sql": 5,
+    "da_viz": 2,
+    "da_stats": 2,
+    "da_clean": 5,
+    "da_story": 5
+   },
+   "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"
+  }
+ ]
+}

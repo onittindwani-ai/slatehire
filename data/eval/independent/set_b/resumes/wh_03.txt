@@ -1,0 +1,18 @@
+Application form answers: Rahul Fernández (rahul.fernandez@mailbox.example, +34 600 55 32 42)
+
+
+
+Q: Which role are you applying for?
+A: Warehouse Operations Supervisor
+
+Q: What did you do at Northgate Systems (3 years, Warehouse Operations Supervisor)?
+A: Supervised a few workers. Raised picks per hour by 12 percent after redesigning the pick paths in 4 zones.
+
+Q: What did you do at Bluepine Services (2 years, Assistant Warehouse Operations Supervisor)?
+A: Chaired the site safety committee for 5 years, led the audit that closed 9 findings, and took the site to 30 months without a lost time injury.
+
+Q: What did you do at Meridian Works (18 months, Junior Warehouse Operations Supervisor)?
+A: Ran weekly cycle counts and corrected stock records in the warehouse system.
+
+Q: Education?
+A: Logistics, Universidad de Valmoral, 2017

@@ -1,0 +1,46 @@
+MARCUS FERRARO
+marcus.ferraro@mailbox.example | 555-0118-7218 | Ashford
+
+TARGET ROLE: Backend Software Engineer
+
+SKILLS
+TDD, incident response
+
+EXPERIENCE
+Backend Software Engineer, Meridian Works (3 years)
+* Wrote unit tests for new features and ran them in the build pipeline.
+* Enjoys hiking and photography.
+* Joined the company charity run team.
+* Reads about local history in spare time.
+* Completed the mandatory induction and onboarding for new staff.
+
+Assistant Backend Software Engineer, Cobalt Ridge Ltd (2 years)
+* Holds a full driving licence.
+* Enjoys hiking and photography.
+* Worked well with the people on my team.
+* Attended the monthly all hands meeting.
+* Completed the mandatory induction and onboarding for new staff.
+
+Junior Backend Software Engineer, Summit Lane Co (18 months)
+* Holds a full driving licence.
+* Designed REST APIs for the search service that handled 2 million requests a day with 35 percent fewer errors.
+* Reads about local history in spare time.
+* Won the office table tennis tournament.
+* Completed the mandatory induction and onboarding for new staff.
+
+Backend Software Engineer, Harlow Group (4 years)
+* Led incident response for search for 3 years, ran 11 post incident reviews and drove the change that moved availability from 99.5 to 99.95 percent.
+* Reads about local history in spare time.
+* Attended the monthly all hands meeting.
+* Holds a full driving licence.
+* Completed the mandatory induction and onboarding for new staff.
+
+Assistant Backend Software Engineer, Lanternbay Trading (1 year)
+* Enjoys hiking and photography.
+* Joined the company charity run team.
+* Holds a full driving licence.
+* Completed the mandatory induction and onboarding for new staff.
+
+EDUCATION
+Computer Science, University of Westmere, 2005
+

@@ -1,0 +1,4247 @@
+{
+  "set": "set_a",
+  "files": {
+    "leak/leak_01.txt": {
+      "role_id": "be",
+      "planted": [
+        {
+          "category": "name",
+          "text": "TREVOR HOLLOWAY",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "24 Birchwood Terrace, Lakeview, TX 75099",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0100-7200",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "trevor.holloway@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/trevorholloway-72a",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file holloway.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 02/13/1986",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 40",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Nigerian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Gender: female",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She ran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Redwood Institute of Technology",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2009",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "St. Aldric's University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2005",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://trevorholloway.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Dana Kessler",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "(555) 0150-7150",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Designed REST APIs for the notifications service that handled 2 million requests a day with 20 percent fewer errors.",
+        "Wrote SQL queries and migrations for a MySQL database behind the notifications service.",
+        "Set the testing standard for the notifications team of 9 engineers, built the contract tests every service runs on each merge, and reduced escaped bugs by 20 percent over 4 years.",
+        "Reviewed pull requests from teammates and joined planning sessions each sprint.",
+        "monitoring, SQL, unit testing, on call"
+      ],
+      "keep_soft": [
+        "Computer Science"
+      ]
+    },
+    "leak/leak_02.txt": {
+      "role_id": "rn",
+      "planted": [
+        {
+          "category": "name",
+          "text": "QUIGLEY, Brian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "brian.quigley@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0101 7301",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "1507 Maple Court, Rivermead, CO 80211",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 09/14/1989",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 37",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Canadian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Gender: female",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She built",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Redwood Institute of Technology",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2012",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Brookhaven Technical College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2008",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/brianquigley",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/brianquigley-84a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Anil Ashworth",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "(555) 0151-7151",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Managed 5 patients per shift with 95 percent of medication rounds completed on time in the unit audit.",
+        "Completed charting within 90 minutes of each assessment and passed 24 chart audits without findings.",
+        "Precepted 3 new graduate nurses, led mock code drills for 14 staff and served as the unit resuscitation trainer for 5 years.",
+        "Explained care plans and discharge instructions to patients and family members at the bedside.",
+        "empathy, handover, wound care, BLS"
+      ],
+      "keep_soft": [
+        "Nursing"
+      ]
+    },
+    "leak/leak_03.txt": {
+      "role_id": "mk",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Joy Tanaka",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1987-08-14",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 39",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Canadian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Place of birth: Lagos",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file tanaka.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "24 Birchwood Terrace, Rivermead, CO 80211",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She ran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Brookhaven Technical College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2008",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Lakeshore State University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2004",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://joytanaka.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/joytanaka-79a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Marcus Okafor",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0152-7252",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "joy.tanaka@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "(555) 0102-7102",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Built the content calendar for 3 years, wrote or edited 17 pieces, and grew organic traffic by 35 percent while coaching 4 freelance writers.",
+        "Built a weekly dashboard of 17 metrics and used it to move budget away from a channel that converted 35 percent worse.",
+        "Coordinated deadlines between design, sales and content for monthly campaigns.",
+        "Ran 17 email campaigns a quarter for the fitness app with an average open rate of 44 percent.",
+        "deadlines, A/B testing, CRM, reporting"
+      ],
+      "keep_soft": [
+        "Communications"
+      ]
+    },
+    "leak/leak_04.txt": {
+      "role_id": "be",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Trevor Nakamura",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0103-7203",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "trevor.nakamura@inbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "760 Orchard Street, Fairmont, OH 44123",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 06/17/1993",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 33",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: they/them",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Brazilian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file nakamura.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "University of Westmere",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2015",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hollis Bay University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2011",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://trevornakamura.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/trevornakamura",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Gregory Sandoval",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0153-7253",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Mentored 4 engineers into promotions, ran the weekly design review for 6 engineers, and wrote the onboarding guide every new hire uses.",
+        "Led the API design for the search platform used by 6 internal teams, serving 12 million requests a day, and wrote the versioning policy the teams follow.",
+        "Raised test coverage on search from 31 to 88 percent and added integration tests that caught 36 bugs before release.",
+        "Cut incident response time for search from 90 minutes to 15 by adding dashboards and runbooks.",
+        "on call, mentoring, REST, PostgreSQL"
+      ],
+      "keep_soft": [
+        "Computer Science"
+      ]
+    },
+    "leak/leak_05.txt": {
+      "role_id": "rn",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Kessler Victor",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "760 Orchard Street, Oakdale, MN 55128",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0104 7304",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "victor.kessler@postnet.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 09/18/1993",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 33",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Nigerian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Gender: female",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file kessler.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Brookhaven Technical College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2016",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Calder Valley College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2012",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://victorkessler.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/victorkessler-82a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Kevin Duarte",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0154 7354",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Caught 11 near miss medication errors in a year through barcode checks and reported each one.",
+        "Worked with doctors, aides and therapists on daily rounds and responded to rapid response calls.",
+        "Served as charge nurse for a 28 bed unit across 5 years, coordinating care for up to 6 patients per shift and keeping medication timeliness above 95 percent in every audit.",
+        "Explained care plans and discharge instructions to patients and family members at the bedside.",
+        "ACLS, family communication, patient education, teamwork"
+      ],
+      "keep_soft": [
+        "Nursing"
+      ]
+    },
+    "leak/leak_06.txt": {
+      "role_id": "mk",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Aisha Whitfield",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "aisha . whitfield [at] inbox dot example",
+          "hard": true,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0105 7305",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 23 September 1996",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 30",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: they/them",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Canadian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Religion: Catholic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file whitfield.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Brookhaven Technical College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2018",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Redwood Institute of Technology",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2014",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://aishawhitfield.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/aishawhitfield",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Kevin Oyelaran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0155-7255",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Designed the attribution report the leadership team uses, ran 11 A/B tests with documented results, and lifted conversion by 50 percent.",
+        "Built the content calendar for 4 years, wrote or edited 11 pieces, and grew organic traffic by 50 percent while coaching 4 freelance writers.",
+        "Coordinated deadlines between design, sales and content for monthly campaigns.",
+        "Used an email platform and a scheduling tool to set up sends and social posts.",
+        "HubSpot, marketing automation, deadlines, newsletters"
+      ],
+      "keep_soft": [
+        "Communications"
+      ]
+    },
+    "leak/leak_07.txt": {
+      "role_id": "be",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Joy Patel",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "email",
+          "text": "joy.patel@inbox.example",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "phone",
+          "text": "555-0106-7206",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 07/15/1987",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 39",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Nigerian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Place of birth: Lagos",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "24 Birchwood Terrace, Oakdale, MN 55128",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She built",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Northfield Community College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2008",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hollis Bay University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2004",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://joypatel.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/joypatel-10a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Tyrone Okafor",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0156-7256",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Built and maintained REST endpoints for the inventory service using Python.",
+        "Led incident response for inventory for 5 years, ran 11 post incident reviews and drove the change that moved availability from 99.5 to 99.95 percent.",
+        "Wrote SQL queries and migrations for a PostgreSQL database behind the inventory service.",
+        "Mentored 8 engineers into promotions, ran the weekly design review for 6 engineers, and wrote the onboarding guide every new hire uses.",
+        "incident response, monitoring, GraphQL, TDD"
+      ],
+      "keep_soft": [
+        "Computer Science"
+      ]
+    },
+    "leak/leak_08.txt": {
+      "role_id": "rn",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Elena Rowntree",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0107-7207",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "elena.rowntree@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "418 Cedar Ridge Drive, Pinecrest, WA 98011",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 21 November 1987",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 39",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Brazilian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Place of birth: Lagos",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_rowntree.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Redwood Institute of Technology",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2008",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Calder Valley College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2004",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://elenarowntree.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/elenarowntree-23a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Isaac Ferraro",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0157-7257",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Caught 24 near miss medication errors in a year through barcode checks and reported each one.",
+        "Ran discharge teaching for about 24 patients a month and raised the unit discharge teaching score from 44 to 88 percent.",
+        "Responded to 24 rapid response and code events in a year, taking the recorder or compressions role as assigned.",
+        "Served as charge nurse for a 36 bed unit across 3 years, coordinating care for up to 5 patients per shift and keeping medication timeliness above 95 percent in every audit.",
+        "handover, patient care, hand hygiene, ACLS"
+      ],
+      "keep_soft": [
+        "Nursing"
+      ]
+    },
+    "leak/leak_09.txt": {
+      "role_id": "mk",
+      "planted": [
+        {
+          "category": "name",
+          "text": "NADIA NAKAMURA",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "24 Birchwood Terrace, Fairmont, OH 44123",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0108-7208",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "nadia.nakamura@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/nadianakamura-48a",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_nakamura.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 15 March 1986",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 40",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Polish",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Religion: Muslim",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He built",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "University of Westmere",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2008",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "St. Aldric's University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2004",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://nadianakamura.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Priya Kessler",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0158-7258",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Used an email platform and a scheduling tool to set up sends and social posts.",
+        "Wrote blog posts, newsletters and product descriptions to a style guide.",
+        "Built a weekly dashboard of 17 metrics and used it to move budget away from a channel that converted 20 percent worse.",
+        "Ran 17 email campaigns a quarter for the fitness app with an average open rate of 31 percent.",
+        "email marketing, reporting, paid ads, campaigns"
+      ],
+      "keep_soft": [
+        "Communications"
+      ]
+    },
+    "leak/leak_10.txt": {
+      "role_id": "be",
+      "planted": [
+        {
+          "category": "name",
+          "text": "OYELARAN, Maya",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "maya.oyelaran@postnet.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "(555) 0109-7109",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "24 Birchwood Terrace, Ashford, NC 27502",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 27 September 1999",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 27",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Nigerian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Gender: male",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He ran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "St. Aldric's University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2020",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Northfield Community College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2016",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "www.oyelarandesign.example/work",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/mayaoyelaran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Anil Castillo",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0159-7259",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Took part in the on call rotation and fixed production alerts for the billing service.",
+        "Led the API design for the billing platform used by 9 internal teams, serving 900,000 requests a day, and wrote the versioning policy the teams follow.",
+        "Owned the data model for billing across 9 services, planned a zero downtime migration of 900,000 rows on PostgreSQL, and trained 8 engineers on query tuning.",
+        "Set the testing standard for the billing team of 9 engineers, built the contract tests every service runs on each merge, and reduced escaped bugs by 35 percent over 5 years.",
+        "SQL, unit testing, GraphQL, incident response"
+      ],
+      "keep_soft": [
+        "Computer Science"
+      ]
+    },
+    "leak/leak_11.txt": {
+      "role_id": "rn",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Sofia Duarte",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 8 November 1983",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 43",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: they/them",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Brazilian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_duarte.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "24 Birchwood Terrace, Ashford, NC 27502",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Lakeshore State University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2006",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hollis Bay University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2002",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://sofiaduarte.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/sofiaduarte-75a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Latoya Mbeki",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0160 7360",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "sofia.duarte@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "(555) 0110-7110",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Ran discharge teaching for about 11 patients a month and raised the unit discharge teaching score from 44 to 81 percent.",
+        "Managed a caseload of 6 patients per shift on a medical surgical unit, including medication rounds and wound care.",
+        "Completed charting within 40 minutes of each assessment and passed 11 chart audits without findings.",
+        "Caught 11 near miss medication errors in a year through barcode checks and reported each one.",
+        "BLS, hand hygiene, medication safety, family communication"
+      ],
+      "keep_soft": [
+        "Nursing"
+      ]
+    },
+    "leak/leak_12.txt": {
+      "role_id": "mk",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Tyrone Mbeki",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0111 7311",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "tyrone.mbeki@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "760 Orchard Street, Pinecrest, WA 98011",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1987-06-13",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 39",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Polish",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file mbeki.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He ran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Brookhaven Technical College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2008",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Northfield Community College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2004",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://tyronembeki.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/tyronembeki",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Brian Patel",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0161-7261",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Planned and ran the full launch campaign for the fitness app across email, social and paid channels, reaching 40,000 people and producing 36 qualified leads.",
+        "Designed the attribution report the leadership team uses, ran 36 A/B tests with documented results, and lifted conversion by 50 percent.",
+        "Delivered 36 campaigns in a year on schedule while coordinating 6 stakeholders and a budget of 40,000.",
+        "Wrote 36 blog posts that together brought 40,000 organic visits and ranked on the first page for 4 target terms.",
+        "HubSpot, marketing automation, A/B testing, newsletters"
+      ],
+      "keep_soft": [
+        "Communications"
+      ]
+    },
+    "leak/leak_13.txt": {
+      "role_id": "be",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Ashworth Joy",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "760 Orchard Street, Lakeview, TX 75099",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0112 7312",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "joy.ashworth@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 17 June 1986",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 40",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Polish",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Place of birth: Lagos",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file ashworth.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She ran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "St. Aldric's University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2008",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Northfield Community College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2004",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/joyashworth",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/joyashworth",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Carlos Holloway",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0162-7262",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Wrote SQL queries and migrations for a MySQL database behind the inventory service.",
+        "Took part in the on call rotation and fixed production alerts for the inventory service.",
+        "Designed REST APIs for the inventory service that handled 12 million requests a day with 20 percent fewer errors.",
+        "Wrote unit tests for new features and ran them in the build pipeline.",
+        "PostgreSQL, microservices, MySQL, TDD"
+      ],
+      "keep_soft": [
+        "Computer Science"
+      ]
+    },
+    "leak/leak_14.txt": {
+      "role_id": "rn",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Kevin Delacroix",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "kevin . delacroix [at] mailbox dot example",
+          "hard": true,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0113-7213",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1986-06-13",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 40",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: they/them",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Nigerian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Religion: Muslim",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_delacroix.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "St. Aldric's University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2007",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Brookhaven Technical College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2003",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://kevindelacroix.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/kevindelacroix-14a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Rachel Okafor",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0163-7263",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Managed 6 patients per shift with 97 percent of medication rounds completed on time in the unit audit.",
+        "Explained care plans and discharge instructions to patients and family members at the bedside.",
+        "Caught 36 near miss medication errors in a year through barcode checks and reported each one.",
+        "Precepted 3 new graduate nurses, led mock code drills for 14 staff and served as the unit resuscitation trainer for 4 years.",
+        "documentation, family communication, BLS, bedside care"
+      ],
+      "keep_soft": [
+        "Nursing"
+      ]
+    },
+    "leak/leak_15.txt": {
+      "role_id": "mk",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Latoya Ferraro",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "email",
+          "text": "latoya.ferraro@postnet.example",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0114 7314",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1982-09-13",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 44",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Polish",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Gender: female",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_ferraro.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "92 Willow Lane, Oakdale, MN 55128",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Redwood Institute of Technology",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2006",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Northfield Community College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2002",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/latoyaferraro",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/latoyaferraro",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Maya Ferraro",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0164 7364",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Set up 36 automated email flows in HubSpot that saved about 15 hours of manual work a month.",
+        "Planned and ran the full launch campaign for the scheduling app across email, social and paid channels, reaching 900,000 people and producing 36 qualified leads.",
+        "Coordinated deadlines between design, sales and content for monthly campaigns.",
+        "Built the content calendar for 2 years, wrote or edited 36 pieces, and grew organic traffic by 20 percent while coaching 8 freelance writers.",
+        "CRM, email marketing, blogging, reporting"
+      ],
+      "keep_soft": [
+        "Communications"
+      ]
+    },
+    "leak/leak_16.txt": {
+      "role_id": "be",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Omar Brennan",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "(555) 0115-7115",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "omar.brennan@postnet.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "24 Birchwood Terrace, Lakeview, TX 75099",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 02/10/1997",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 29",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Nigerian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hollis Bay University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2018",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "University of Westmere",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2014",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://omarbrennan.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/omarbrennan-61a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Sofia Holloway",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "(555) 0165-7165",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Led the API design for the notifications platform used by 6 internal teams, serving 2 million requests a day, and wrote the versioning policy the teams follow.",
+        "Mentored 3 engineers into promotions, ran the weekly design review for 6 engineers, and wrote the onboarding guide every new hire uses.",
+        "Redesigned the MySQL schema for notifications and added indexes that cut the slowest query from 30 seconds to under one second.",
+        "Raised test coverage on notifications from 31 to 81 percent and added integration tests that caught 36 bugs before release.",
+        "TDD, unit testing, data modelling, code review"
+      ],
+      "keep_soft": [
+        "Computer Science"
+      ]
+    },
+    "leak/leak_17.txt": {
+      "role_id": "rn",
+      "planted": [
+        {
+          "category": "name",
+          "text": "ANIL CASTILLO",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "760 Orchard Street, Oakdale, MN 55128",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0116-7216",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "anil.castillo@inbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/anilcastillo-34a",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file castillo.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 9 September 1984",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 42",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: they/them",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: single",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Indian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Gender: male",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Redwood Institute of Technology",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2008",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Lakeshore State University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2004",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://anilcastillo.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Tyrone Garrison",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0166-7266",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Responded to 17 rapid response and code events in a year, taking the recorder or compressions role as assigned.",
+        "Explained care plans and discharge instructions to patients and family members at the bedside.",
+        "Caught 17 near miss medication errors in a year through barcode checks and reported each one.",
+        "Completed charting within 40 minutes of each assessment and passed 17 chart audits without findings.",
+        "ACLS, electronic health record, charting, rapid response"
+      ],
+      "keep_soft": [
+        "Nursing"
+      ]
+    },
+    "leak/leak_18.txt": {
+      "role_id": "mk",
+      "planted": [
+        {
+          "category": "name",
+          "text": "ROWNTREE, Tyrone",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "tyrone.rowntree@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0117-7217",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "24 Birchwood Terrace, Fairmont, OH 44123",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 05/11/1996",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 30",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: they/them",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Canadian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Place of birth: Lagos",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_rowntree.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "University of Westmere",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2020",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Lakeshore State University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2016",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/tyronerowntree",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/tyronerowntree-30a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Carlos Tanaka",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0167-7267",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Ran 17 email campaigns a quarter for the bakery chain with an average open rate of 44 percent.",
+        "Pulled weekly reports from the analytics tool and summarised clicks, opens and sign ups.",
+        "Wrote 17 blog posts that together brought 2 million organic visits and ranked on the first page for 3 target terms.",
+        "Used an email platform and a scheduling tool to set up sends and social posts.",
+        "campaigns, copywriting, SEO writing, email marketing"
+      ],
+      "keep_soft": [
+        "Communications"
+      ]
+    },
+    "leak/leak_19.txt": {
+      "role_id": "be",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Maya Holloway",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1987-02-17",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 39",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Polish",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Religion: Catholic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file holloway.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "1507 Maple Court, Fairmont, OH 44123",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He ran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "University of Westmere",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2010",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Calder Valley College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2006",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "www.hollowaydesign.example/work",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/mayaholloway",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Anil Quigley",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "(555) 0168-7168",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "maya.holloway@inbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0118 7318",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Led the API design for the search platform used by 6 internal teams, serving 40,000 requests a day, and wrote the versioning policy the teams follow.",
+        "Led incident response for search for 5 years, ran 36 post incident reviews and drove the change that moved availability from 99.5 to 99.95 percent.",
+        "Redesigned the PostgreSQL schema for search and added indexes that cut the slowest query from 30 seconds to under one second.",
+        "Set the testing standard for the search team of 6 engineers, built the contract tests every service runs on each merge, and reduced escaped bugs by 35 percent over 5 years.",
+        "CI, MySQL, data modelling, incident response"
+      ],
+      "keep_soft": [
+        "Computer Science"
+      ]
+    },
+    "leak/leak_20.txt": {
+      "role_id": "rn",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Joy Delacroix",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0119 7319",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "joy.delacroix@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "760 Orchard Street, Fairmont, OH 44123",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 4 November 1986",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 40",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Polish",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Gender: male",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file delacroix.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He built",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Lakeshore State University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2009",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Redwood Institute of Technology",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2005",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://joydelacroix.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/joydelacroix-94a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Isaac Quigley",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0169-7269",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Worked with doctors, aides and therapists on daily rounds and responded to rapid response calls.",
+        "Double checked medications with a second nurse and followed hand hygiene and isolation procedures.",
+        "Charted vitals, assessments and care notes in the electronic record every shift.",
+        "Served as charge nurse for a 36 bed unit across 5 years, coordinating care for up to 7 patients per shift and keeping medication timeliness above 95 percent in every audit.",
+        "ACLS, empathy, rapid response, documentation"
+      ],
+      "keep_soft": [
+        "Nursing"
+      ]
+    },
+    "leak/leak_21.txt": {
+      "role_id": "mk",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Abernathy Priya",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "33 Harbor View Road, Lakeview, TX 75099",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0120-7220",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "priya.abernathy@inbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 01/19/1985",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 41",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Polish",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She ran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hollis Bay University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2008",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Brookhaven Technical College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2004",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://priyaabernathy.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/priyaabernathy-60a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Elena Kessler",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0170 7370",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Coordinated deadlines between design, sales and content for monthly campaigns.",
+        "Wrote 36 blog posts that together brought 900,000 organic visits and ranked on the first page for 3 target terms.",
+        "Built a weekly dashboard of 36 metrics and used it to move budget away from a channel that converted 50 percent worse.",
+        "Selected and rolled out Mailchimp for a team of 6, built 36 automations and trained the team to run them without help.",
+        "newsletters, copywriting, project management, CRM"
+      ],
+      "keep_soft": [
+        "Communications"
+      ]
+    },
+    "leak/leak_22.txt": {
+      "role_id": "be",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Gregory Kowalczyk",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "gregory . kowalczyk [at] mailbox dot example",
+          "hard": true,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0121-7221",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 08/13/1989",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 37",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Nigerian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file kowalczyk.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He ran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Lakeshore State University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2011",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Calder Valley College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2007",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/gregorykowalczyk",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/gregorykowalczyk",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Joy Kessler",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0171-7271",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Redesigned the PostgreSQL schema for orders and added indexes that cut the slowest query from 12 seconds to under one second.",
+        "Reviewed pull requests from teammates and joined planning sessions each sprint.",
+        "Set the testing standard for the orders team of 6 engineers, built the contract tests every service runs on each merge, and reduced escaped bugs by 20 percent over 4 years.",
+        "Built and maintained REST endpoints for the orders service using Node.",
+        "monitoring, data modelling, incident response, mentoring"
+      ],
+      "keep_soft": [
+        "Computer Science"
+      ]
+    },
+    "leak/leak_23.txt": {
+      "role_id": "rn",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Carlos Oyelaran",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "email",
+          "text": "carlos.oyelaran@mailbox.example",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0122 7322",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1992-08-14",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 34",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: they/them",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Canadian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Religion: Muslim",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file oyelaran.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "760 Orchard Street, Lakeview, TX 75099",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hollis Bay University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2015",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "University of Westmere",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2011",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/carlosoyelaran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/carlosoyelaran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Brian Rowntree",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "(555) 0172-7172",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Served as charge nurse for a 28 bed unit across 4 years, coordinating care for up to 7 patients per shift and keeping medication timeliness above 95 percent in every audit.",
+        "Precepted 3 new graduate nurses, led mock code drills for 14 staff and served as the unit resuscitation trainer for 4 years.",
+        "Created the patient teaching sheets for 14 common diagnoses, coached 3 nurses on difficult family conversations, and received 36 written commendations from families.",
+        "Led the unit safety huddle for 4 years, introduced a two step medication check that cut reported errors by 50 percent, and trained 3 nurses on it.",
+        "bedside care, hand hygiene, wound care, BLS"
+      ],
+      "keep_soft": [
+        "Nursing"
+      ]
+    },
+    "leak/leak_24.txt": {
+      "role_id": "mk",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Gregory Tanaka",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0123 7323",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "gregory.tanaka@inbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "33 Harbor View Road, Ashford, NC 27502",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1992-09-10",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 34",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: they/them",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Canadian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Place of birth: Lagos",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hollis Bay University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2014",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Northfield Community College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2010",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/gregorytanaka",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/gregorytanaka-22a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Priya Bellamy",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0173-7273",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Planned and ran the full launch campaign for the scheduling app across email, social and paid channels, reaching 40,000 people and producing 11 qualified leads.",
+        "Wrote blog posts, newsletters and product descriptions to a style guide.",
+        "Selected and rolled out HubSpot for a team of 6, built 11 automations and trained the team to run them without help.",
+        "Managed a yearly marketing budget of 40,000, led a team of 8, and delivered 11 campaigns on time and within budget.",
+        "project management, social media, CRM, HubSpot"
+      ],
+      "keep_soft": [
+        "Communications"
+      ]
+    },
+    "leak/leak_25.txt": {
+      "role_id": "be",
+      "planted": [
+        {
+          "category": "name",
+          "text": "PETER ABERNATHY",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "33 Harbor View Road, Ashford, NC 27502",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0124 7324",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "peter.abernathy@inbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/peterabernathy",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file abernathy.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1997-09-11",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 29",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Nigerian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He ran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Calder Valley College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2018",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Lakeshore State University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2014",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "www.abernathydesign.example/work",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Jessica Delacroix",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0174-7274",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Paired with 5 newer engineers each quarter and reviewed about 24 pull requests a month, with faster merges as a result.",
+        "Set the testing standard for the orders team of 6 engineers, built the contract tests every service runs on each merge, and reduced escaped bugs by 50 percent over 5 years.",
+        "Designed REST APIs for the orders service that handled 12 million requests a day with 50 percent fewer errors.",
+        "Owned the data model for orders across 6 services, planned a zero downtime migration of 12 million rows on MySQL, and trained 5 engineers on query tuning.",
+        "team player, code review, SQL, API design"
+      ],
+      "keep_soft": [
+        "Computer Science"
+      ]
+    },
+    "leak/leak_26.txt": {
+      "role_id": "rn",
+      "planted": [
+        {
+          "category": "name",
+          "text": "GARRISON, Priya",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "priya.garrison@inbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0125 7325",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "418 Cedar Ridge Drive, Oakdale, MN 55128",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 06/11/1992",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 34",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Nigerian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Place of birth: Lagos",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_garrison.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She ran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "St. Aldric's University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2013",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "University of Westmere",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2009",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://priyagarrison.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/priyagarrison",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Brian Delacroix",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0175-7275",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Caught 36 near miss medication errors in a year through barcode checks and reported each one.",
+        "Explained care plans and discharge instructions to patients and family members at the bedside.",
+        "Responded to 36 rapid response and code events in a year, taking the recorder or compressions role as assigned.",
+        "Managed a caseload of 6 patients per shift on a medical surgical unit, including medication rounds and wound care.",
+        "discharge teaching, medication administration, rapid response, teamwork"
+      ],
+      "keep_soft": [
+        "Nursing"
+      ]
+    },
+    "leak/leak_27.txt": {
+      "role_id": "mk",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Samuel Delacroix",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 01/10/1988",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 38",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Brazilian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_delacroix.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "1507 Maple Court, Oakdale, MN 55128",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Brookhaven Technical College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2011",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hollis Bay University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2007",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://samueldelacroix.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/samueldelacroix-75a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Nadia Tanaka",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "(555) 0176-7176",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "samuel.delacroix@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0126 7326",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Wrote blog posts, newsletters and product descriptions to a style guide.",
+        "Pulled weekly reports from the analytics tool and summarised clicks, opens and sign ups.",
+        "Planned and ran the full launch campaign for the bakery chain across email, social and paid channels, reaching 40,000 people and producing 24 qualified leads.",
+        "Used an email platform and a scheduling tool to set up sends and social posts.",
+        "project management, deadlines, HubSpot, budget"
+      ],
+      "keep_soft": [
+        "Communications"
+      ]
+    },
+    "leak/leak_28.txt": {
+      "role_id": "be",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Beth Tanaka",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0127-7227",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "beth.tanaka@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "1507 Maple Court, Ashford, NC 27502",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 25 June 1984",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 42",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: single",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Brazilian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Gender: male",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_tanaka.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Northfield Community College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2007",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Calder Valley College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2003",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/bethtanaka",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/bethtanaka",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Peter Tanaka",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+1 555 0177 7377",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Built and maintained REST endpoints for the orders service using Node.",
+        "Redesigned the MySQL schema for orders and added indexes that cut the slowest query from 8 seconds to under one second.",
+        "Mentored 4 engineers into promotions, ran the weekly design review for 14 engineers, and wrote the onboarding guide every new hire uses.",
+        "Led incident response for orders for 3 years, ran 11 post incident reviews and drove the change that moved availability from 99.5 to 99.95 percent.",
+        "API design, pair programming, on call, mentoring"
+      ],
+      "keep_soft": [
+        "Computer Science"
+      ]
+    },
+    "leak/leak_29.txt": {
+      "role_id": "rn",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Duarte Daniel",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "760 Orchard Street, Ashford, NC 27502",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "(555) 0128-7128",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "daniel.duarte@inbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1984-06-15",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 42",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Indian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Place of birth: Lagos",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file duarte.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Northfield Community College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2006",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Calder Valley College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2002",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "www.duartedesign.example/work",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/danielduarte",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Latoya Castillo",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0178-7278",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Created the patient teaching sheets for 14 common diagnoses, coached 8 nurses on difficult family conversations, and received 24 written commendations from families.",
+        "Completed charting within 90 minutes of each assessment and passed 24 chart audits without findings.",
+        "Managed 5 patients per shift with 92 percent of medication rounds completed on time in the unit audit.",
+        "Worked with doctors, aides and therapists on daily rounds and responded to rapid response calls.",
+        "infection control, hand hygiene, family communication, medication administration"
+      ],
+      "keep_soft": [
+        "Nursing"
+      ]
+    },
+    "leak/leak_30.txt": {
+      "role_id": "mk",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Latoya Sandoval",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "latoya . sandoval [at] mailbox dot example",
+          "hard": true,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0129-7229",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 07/17/1994",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 32",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: they/them",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Canadian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Lakeshore State University",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2017",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Brookhaven Technical College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2013",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/latoyasandoval",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/latoyasandoval",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Hannah Kowalczyk",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0179-7279",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Wrote blog posts, newsletters and product descriptions to a style guide.",
+        "Used an email platform and a scheduling tool to set up sends and social posts.",
+        "Managed a yearly marketing budget of 150,000, led a team of 8, and delivered 11 campaigns on time and within budget.",
+        "Built a weekly dashboard of 11 metrics and used it to move budget away from a channel that converted 50 percent worse.",
+        "blogging, project management, campaigns, copywriting"
+      ],
+      "keep_soft": [
+        "Communications"
+      ]
+    },
+    "leak/leak_31.txt": {
+      "role_id": "be",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Latoya Okafor",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "email",
+          "text": "latoya.okafor@inbox.example",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "phone",
+          "text": "555-0130-7230",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1989-03-18",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 37",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Polish",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Religion: Muslim",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_okafor.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "760 Orchard Street, Ashford, NC 27502",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Calder Valley College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2011",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Redwood Institute of Technology",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2007",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/latoyaokafor",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/latoyaokafor",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Nadia Sandoval",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0180-7280",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Designed REST APIs for the inventory service that handled 12 million requests a day with 20 percent fewer errors.",
+        "Wrote SQL queries and migrations for a MySQL database behind the inventory service.",
+        "Cut incident response time for inventory from 90 minutes to 15 by adding dashboards and runbooks.",
+        "Wrote unit tests for new features and ran them in the build pipeline.",
+        "mentoring, TDD, microservices, MySQL"
+      ],
+      "keep_soft": [
+        "Computer Science"
+      ]
+    },
+    "leak/leak_32.txt": {
+      "role_id": "rn",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Kevin Mbeki",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "(555) 0131-7131",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "kevin.mbeki@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "92 Willow Lane, Ashford, NC 27502",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 5 November 1989",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 37",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Indian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Place of birth: Lagos",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_mbeki.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Northfield Community College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2012",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Brookhaven Technical College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2008",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://kevinmbeki.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/kevinmbeki-53a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Jessica Oyelaran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "555-0181-7281",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Completed charting within 40 minutes of each assessment and passed 11 chart audits without findings.",
+        "Managed a caseload of 6 patients per shift on a medical surgical unit, including medication rounds and wound care.",
+        "Worked with doctors, aides and therapists on daily rounds and responded to rapid response calls.",
+        "Caught 11 near miss medication errors in a year through barcode checks and reported each one.",
+        "charting, rapid response, electronic health record, BLS"
+      ],
+      "keep_soft": [
+        "Nursing"
+      ]
+    }
+  }
+}

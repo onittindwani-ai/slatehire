@@ -1,0 +1,13 @@
+Elena Patel
+Contact: elena.patel@postnet.example, +1 555 0110 7310
+
+I am applying for the Backend Software Engineer position. Key skills: PostgreSQL, TDD, pair programming.
+
+For 3 years I was a Backend Software Engineer at Harlow Group. Set the testing standard for the inventory team of 14 engineers, built the contract tests every service runs on each merge, and reduced escaped bugs by 20 percent over 5 years. Paired with 5 newer engineers each quarter and reviewed about 36 pull requests a month, with faster merges as a result.
+
+For 2 years I was a Assistant Backend Software Engineer at Ironwood Partners. Wrote SQL queries and migrations for a PostgreSQL database behind the inventory service.
+
+For 18 months I was a Junior Backend Software Engineer at Meridian Works. Helped when the service had problems in production.
+
+I studied Computer Science at Lakeshore State University and finished in 2009.
+

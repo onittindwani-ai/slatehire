@@ -1,0 +1,61 @@
+PERSONAL INFORMATION
+  Name: Chiara Nwosu
+  Telephone: +91 98765 41046
+  E-mail: chiara.nwosu@inbox.example
+
+WORK EXPERIENCE
+  Employer: Summit Lane Co
+  Position: Elementary School Teacher
+  Duration: 3 years
+  Main activities and responsibilities:
+    - Joined the company charity run team.
+    - Led curriculum planning for a team of 5 teachers, wrote the fifth grade maths units adopted by 14 classrooms, and revised them yearly from assessment results.
+    - Reads about local history in spare time.
+    - Holds a full driving licence.
+    - Completed the mandatory induction and onboarding for new staff.
+
+  Employer: Northgate Systems
+  Position: Assistant Elementary School Teacher
+  Duration: 2 years
+  Main activities and responsibilities:
+    - Won the office table tennis tournament.
+    - Holds a full driving licence.
+    - Ran small group support for 5 children with learning plans and 18 percent of them met their yearly targets.
+    - Attended the monthly all hands meeting.
+    - Completed the mandatory induction and onboarding for new staff.
+
+  Employer: Bluepine Services
+  Position: Junior Elementary School Teacher
+  Duration: 18 months
+  Main activities and responsibilities:
+    - Attended the monthly all hands meeting.
+    - Joined the company charity run team.
+    - Reads about local history in spare time.
+    - Kept the children in order.
+    - Completed the mandatory induction and onboarding for new staff.
+
+  Employer: Meridian Works
+  Position: Elementary School Teacher
+  Duration: 4 years
+  Main activities and responsibilities:
+    - Reads about local history in spare time.
+    - Holds a full driving licence.
+    - Sent weekly newsletters and held parent meetings each term.
+    - Enjoys hiking and photography.
+    - Completed the mandatory induction and onboarding for new staff.
+
+  Employer: Lanternbay Trading
+  Position: Assistant Elementary School Teacher
+  Duration: 1 year
+  Main activities and responsibilities:
+    - Won the office table tennis tournament.
+    - Holds a full driving licence.
+    - Joined the company charity run team.
+    - Completed the mandatory induction and onboarding for new staff.
+
+EDUCATION AND TRAINING
+  Education, Nordhavn University of Applied Sciences, 2020
+
+JOB RELATED SKILLS
+  curriculum, special needs, assessment, newsletters
+

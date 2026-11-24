@@ -1,0 +1,36 @@
+PETER ABERNATHY
+33 Harbor View Road, Ashford, NC 27502
+TEL +1 555 0124 7324   peter.abernathy@inbox.example
+https://www.linkedin.com/in/peterabernathy
+Picture: see attached portrait file abernathy.png
+
+Date of birth: 1997-09-11
+Age: 29
+Pronouns: he/him
+Marital status: married, two children
+Nationality: Nigerian
+Health: excellent, no disabilities
+
+SUMMARY
+Backend Software Engineer with solid experience. 
+He ran the work described below and received strong reviews.
+
+EXPERIENCE
+
+* Paired with 5 newer engineers each quarter and reviewed about 24 pull requests a month, with faster merges as a result.
+* Set the testing standard for the orders team of 6 engineers, built the contract tests every service runs on each merge, and reduced escaped bugs by 50 percent over 5 years.
+* Designed REST APIs for the orders service that handled 12 million requests a day with 50 percent fewer errors.
+* Owned the data model for orders across 6 services, planned a zero downtime migration of 12 million rows on MySQL, and trained 5 engineers on query tuning.
+
+SKILLS: team player, code review, SQL, API design
+
+EDUCATION
+Computer Science, Calder Valley College, Graduated: 2018
+Earlier study: Lakeshore State University, Class of 2014
+
+LINKS
+www.abernathydesign.example/work
+https://www.linkedin.com/in/peterabernathy
+
+REFERENCE: Jessica Delacroix, former manager, 555-0174-7274
+

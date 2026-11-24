@@ -1,0 +1,8 @@
+{
+  "auth": "basic (token as user name, blank password)",
+  "paging": {"header": "Link", "relations": ["next", "prev", "last"], "advice": "use the Link headers and do not page by changing query parameters"},
+  "per_page_documented_for": "GET /v1/applications (1 to 500, default 100)",
+  "removal": "Harvest v1/v2 deprecated, removal on 2026-08-31",
+  "attachment_fields_documented_on_applications": ["filename", "url", "type", "created_at"],
+  "candidate_fields_not_confirmed": ["first_name", "last_name", "email_addresses", "phone_numbers", "attachments"]
+}

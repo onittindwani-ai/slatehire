@@ -1,0 +1,108 @@
+/* Sendora design tokens. Warm neutrals (60), coffee browns (30), one accent per system (10).
+   Spacing, radius and type steps follow the golden ratio family: 8, 13, 21, 34, 55, 89. */
+:root {
+  --sx-space-1: 8px;
+  --sx-space-2: 13px;
+  --sx-space-3: 21px;
+  --sx-space-4: 34px;
+  --sx-space-5: 55px;
+  --sx-space-6: 89px;
+  --sx-radius-1: 8px;
+  --sx-radius-2: 13px;
+  --sx-radius-3: 21px;
+  --sx-text-caption: 13px;
+  --sx-text-body: 16px;
+  --sx-text-lead: 21px;
+  --sx-text-h3: 27px;
+  --sx-text-h2: 34px;
+  --sx-text-h1: 55px;
+  --sx-text-hero: 89px;
+  --sx-font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --sx-font-mono: "Geist Mono Variable", ui-monospace, monospace;
+  --sx-font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+
+  /* motion */
+  --sx-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --sx-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --sx-dur-press: 140ms;
+  --sx-dur-hover: 180ms;
+  --sx-dur-popover: 220ms;
+  --sx-dur-sheet: 320ms;
+  --sx-dur-page: 300ms;
+  --sx-dur-chart: 700ms;
+
+  /* status (true red is only for a real alarm) */
+  --sx-success: #3f6e44;
+  --sx-warning: #8a5a0c;
+  --sx-danger: #a8281f;
+  --sx-success-bg: #e3ecd9;
+  --sx-warning-bg: #f5e6c4;
+  --sx-danger-bg: #f6dcd6;
+
+  /* light theme: cream and oat with coffee ink */
+  --sx-bg: #f6f1e7;
+  --sx-surface: #fbf8f1;
+  --sx-surface-2: #efe7d8;
+  --sx-sand: #e4d8c3;
+  --sx-line: rgb(60 40 25 / 0.13);
+  --sx-line-strong: rgb(60 40 25 / 0.24);
+  --sx-ink: #2b1d14;
+  --sx-ink-2: #5a4535;
+  --sx-ink-3: #76604f;
+  --sx-glass: rgb(251 248 241 / 0.86);
+  --sx-shadow-1: 0 1px 0 rgb(60 40 25 / 0.06), 0 1px 3px rgb(60 40 25 / 0.08);
+  --sx-shadow-2: 0 8px 21px rgb(60 40 25 / 0.12), 0 2px 5px rgb(60 40 25 / 0.08);
+  --sx-focus: #2b1d14;
+  --sx-accent: #a24b2f;
+  --sx-accent-ink: #fbf8f1;
+  --sx-accent-soft: #f0dccf;
+  color-scheme: light;
+}
+
+/* dark theme "espresso" keeps the same hierarchy */
+[data-theme="dark"] {
+  --sx-success: #8fc197;
+  --sx-warning: #e3b45a;
+  --sx-danger: #f08c80;
+  --sx-success-bg: #25362a;
+  --sx-warning-bg: #3a2e16;
+  --sx-danger-bg: #44211d;
+  --sx-bg: #1b130e;
+  --sx-surface: #241a14;
+  --sx-surface-2: #2e221a;
+  --sx-sand: #3a2c22;
+  --sx-line: rgb(243 234 219 / 0.12);
+  --sx-line-strong: rgb(243 234 219 / 0.24);
+  --sx-ink: #f3eadb;
+  --sx-ink-2: #d1c0a8;
+  --sx-ink-3: #ad9a84;
+  --sx-glass: rgb(36 26 20 / 0.86);
+  --sx-shadow-1: 0 1px 0 rgb(0 0 0 / 0.3), 0 1px 3px rgb(0 0 0 / 0.4);
+  --sx-shadow-2: 0 8px 21px rgb(0 0 0 / 0.5), 0 2px 5px rgb(0 0 0 / 0.4);
+  --sx-focus: #f3eadb;
+  --sx-accent: #e08a68;
+  --sx-accent-ink: #1b130e;
+  --sx-accent-soft: #4a2d20;
+  color-scheme: dark;
+}
+
+/* one accent per system, set data-accent on the root element */
+[data-accent="clay"] { --sx-accent: #a24b2f; --sx-accent-soft: #f0dccf; }
+[data-accent="sage"] { --sx-accent: #4f6b4d; --sx-accent-soft: #dde6d6; }
+[data-accent="slate"] { --sx-accent: #3f5d7c; --sx-accent-soft: #d9e2ec; }
+[data-accent="plum"] { --sx-accent: #6e4a63; --sx-accent-soft: #e8d9e2; }
+[data-accent="ochre"] { --sx-accent: #8d6217; --sx-accent-soft: #f1e2bd; }
+[data-accent="teal"] { --sx-accent: #2f6b66; --sx-accent-soft: #d3e6e2; }
+[data-accent="rose"] { --sx-accent: #9a4a5f; --sx-accent-soft: #f0d9df; }
+[data-theme="dark"][data-accent="clay"] { --sx-accent: #e08a68; --sx-accent-soft: #4a2d20; }
+[data-theme="dark"][data-accent="sage"] { --sx-accent: #9cc096; --sx-accent-soft: #2a3a2a; }
+[data-theme="dark"][data-accent="slate"] { --sx-accent: #8fb3d6; --sx-accent-soft: #22323f; }
+[data-theme="dark"][data-accent="plum"] { --sx-accent: #cf9fc0; --sx-accent-soft: #3e2a37; }
+[data-theme="dark"][data-accent="ochre"] { --sx-accent: #e0b85e; --sx-accent-soft: #3d2f12; }
+[data-theme="dark"][data-accent="teal"] { --sx-accent: #86c4bd; --sx-accent-soft: #1f3a37; }
+[data-theme="dark"][data-accent="rose"] { --sx-accent: #e0a0b2; --sx-accent-soft: #432530; }
+
+@media (prefers-reduced-transparency: reduce) {
+  :root { --sx-glass: var(--sx-surface); }
+  [data-theme="dark"] { --sx-glass: var(--sx-surface); }
+}

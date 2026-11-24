@@ -1,0 +1,5 @@
+Vendor: Google Calendar API v3. Read 2026-11-23 with a page fetch (public docs, no account).
+Page: https://developers.google.com/workspace/calendar/api/v3/reference/events/insert
+events_insert.json holds: the method and path, the accepted scopes, the required body properties (start, end), the optional query parameters and the attendee shape, as the page states them.
+Not read: the full Events resource schema (the page only says the method returns an Events resource). A machine readable discovery document was not fetched.
+Never run against the real service.

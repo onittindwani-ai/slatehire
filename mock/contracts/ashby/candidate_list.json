@@ -1,0 +1,12 @@
+{
+  "method": "POST",
+  "path": "/candidate.list",
+  "auth": "basic (api key as user name, empty password)",
+  "permission": "candidatesRead",
+  "request_documented": ["syncToken", "createdAfter"],
+  "request_not_confirmed": ["cursor", "limit"],
+  "response_documented": ["success", "results", "moreDataAvailable", "syncToken"],
+  "response_not_confirmed": ["nextCursor"],
+  "example_candidate": {"id": "e9ed20fd-d45f-4aad-8a00-a19bfba0083e", "name": "Adam Hart", "primaryEmailAddress": {"value": "adam.hart@example.com", "type": "Personal", "isPrimary": true}, "primaryPhoneNumber": null, "resumeFileHandle": null,
+                        "createdAt": "x", "updatedAt": "x", "emailAddresses": [], "phoneNumbers": [], "fileHandles": [], "profileUrl": "x"}
+}

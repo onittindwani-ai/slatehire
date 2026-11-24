@@ -1,0 +1,4283 @@
+{
+  "set": "set_b",
+  "files": {
+    "leak/leak_01.txt": {
+      "role_id": "wh",
+      "planted": [
+        {
+          "category": "name",
+          "text": "RÉMI NCUBE",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "22 Ridgeline Crescent, Perth WA 6999, Australia",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+91 98765 41000",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "remi.ncube@inbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/remincube-37a",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file ncube.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 13 November 1987",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 39",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: they/them",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Polish",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Nordhavn University of Applied Sciences",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2008",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hartley Polytechnic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2004",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://remincube.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Leila Castañeda",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+61 4 0000 7050",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Held daily safety briefings and checked forklift and pallet racking inspection sheets.",
+        "Led the rollout of a new warehouse management system at a site of 50 people, wrote the training plan and trained 3 supervisors.",
+        "Ran the process improvement programme that raised daily shipments from 3,000 to 3,400 orders over 5 years with no extra headcount.",
+        "Led 50 people across three shifts, promoted 3 of them to team lead and kept staff turnover under 8 percent for 5 years.",
+        "reporting, WMS, forklift safety, team lead"
+      ],
+      "keep_soft": [
+        "Logistics"
+      ]
+    },
+    "leak/leak_02.txt": {
+      "role_id": "te",
+      "planted": [
+        {
+          "category": "name",
+          "text": "IYER, Ignacio",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "ignacio.iyer@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 01 11",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Plot 5 Jasmine Estate Road, Kestrel Heights 560999, India",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1983-02-16",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 43",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Nigerian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Place of birth: Lagos",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She ran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "École Supérieure de Marvelle",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2006",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Nordhavn University of Applied Sciences",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2002",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "www.iyerdesign.example/work",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/ignacioiyer-93a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Søren Varga",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+91 98765 41051",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Set classroom routines and handled behaviour with a clear set of rules in a class of 26.",
+        "Led curriculum planning for a team of 5 teachers, wrote the third grade maths units adopted by 14 classrooms, and revised them yearly from assessment results.",
+        "Marked work with written feedback and recorded termly reading and maths results.",
+        "Coordinated support plans for 11 students with special needs across 14 classes and coached teachers and aides on adapting lessons.",
+        "family engagement, lesson planning, conferences, differentiation"
+      ],
+      "keep_soft": [
+        "Education"
+      ]
+    },
+    "leak/leak_03.txt": {
+      "role_id": "kc",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Thandiwe Larsen",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 01/14/1983",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 43",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Canadian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Gender: male",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_larsen.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Plot 5 Jasmine Estate Road, Kestrel Heights 560999, India",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He built",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Tallis Culinary Academy",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2005",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Universidad de Valmoral",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2001",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/thandiwelarsen",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/thandiwelarsen-91a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Amélie Iyer",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+61 4 0000 7052",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "thandiwe.larsen@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+91 98765 41002",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Brought food cost from 38 to 31 percent of sales by renegotiating 24 supplier prices and trimming the menu.",
+        "Brought average ticket time from 32 to 18 minutes at the dinner rush by reorganising stations.",
+        "Wrote the food safety plan for 14 kitchens, trained 5 cooks to certification and held the top inspection rating for 2 years.",
+        "Led 15 staff, cut late arrivals by 18 percent and filled every shift with cross trained cooks.",
+        "supplier negotiation, staff training, ordering, dinner service"
+      ],
+      "keep_soft": [
+        "Culinary Arts"
+      ]
+    },
+    "leak/leak_04.txt": {
+      "role_id": "wh",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Mateusz Bianchi",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 03 13",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "mateusz.bianchi@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "14 Quillgate Mews, Hartley, HX7 4RB, United Kingdom",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 06/12/1983",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 43",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Indian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Religion: Catholic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file bianchi.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "École Supérieure de Marvelle",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2006",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Nordhavn University of Applied Sciences",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2002",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://mateuszbianchi.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/mateuszbianchi",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Gustavo Haugen",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+61 4 0000 7053",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Led a shift of 12 and cut overtime by 12 percent through better rostering.",
+        "Ran weekly cycle counts and corrected stock records in the warehouse system.",
+        "Ran the process improvement programme that raised daily shipments from 3,000 to 3,400 orders over 5 years with no extra headcount.",
+        "Chaired the site safety committee for 5 years, led the audit that closed 14 findings, and took the site to 18 months without a lost time injury.",
+        "SAP, cycle counts, hazard reporting, team lead"
+      ],
+      "keep_soft": [
+        "Logistics"
+      ]
+    },
+    "leak/leak_05.txt": {
+      "role_id": "te",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Al Habib Rahul",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Hauptweg 9, 80999 Marvelle, Germany",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+91 98765 41004",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "rahul.alhabib@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1994-01-17",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 32",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: single",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Brazilian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Religion: Muslim",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Mount Alder Teachers College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2018",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Kestrel Heights College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2014",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://rahulalhabib.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/rahulalhabib-75a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Siobhan Dąbrowski",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+44 7700 900154",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Marked work with written feedback and recorded termly reading and maths results.",
+        "Set classroom routines and handled behaviour with a clear set of rules in a class of 22.",
+        "Led curriculum planning for a team of 4 teachers, wrote the second grade maths units adopted by 14 classrooms, and revised them yearly from assessment results.",
+        "Coordinated support plans for 24 students with special needs across 14 classes and coached teachers and aides on adapting lessons.",
+        "classroom management, differentiation, assessment, unit plans"
+      ],
+      "keep_soft": [
+        "Education"
+      ]
+    },
+    "leak/leak_06.txt": {
+      "role_id": "kc",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Emeka Lindholm",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "emeka . lindholm [at] postnet dot example",
+          "hard": true,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+61 4 0000 7005",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 15 September 1989",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 37",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: single",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Brazilian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file lindholm.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He built",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Instituto Técnico Aurelio",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2011",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Tallis Culinary Academy",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2007",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://emekalindholm.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/emekalindholm",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Björn Ström",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 55 65",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Hired, trained and led a brigade of 35, promoted 3 cooks to sous chef and kept turnover under 12 percent for 2 years.",
+        "Developed 36 new menu dishes that together made up 12 percent of weekly sales and wrote the recipe cards.",
+        "Kept temperature logs, labelled stock and ran the daily cleaning checklist in line with food hygiene rules.",
+        "Managed a yearly food budget of 12,000, kept cost on target for 2 years and built the ordering sheet used by 14 sites.",
+        "expediting, line cook, inventory, allergens"
+      ],
+      "keep_soft": [
+        "Culinary Arts"
+      ]
+    },
+    "leak/leak_07.txt": {
+      "role_id": "wh",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Ananya Moyo",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "email",
+          "text": "ananya.moyo@inbox.example",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "phone",
+          "text": "+61 4 0000 7006",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 08/15/1989",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 37",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Indian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Religion: Catholic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_moyo.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Calle de las Acacias 12, 3B, 28999 Valmoral, Spain",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He built",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Instituto Técnico Aurelio",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2011",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hartley Polytechnic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2007",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/ananyamoyo",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/ananyamoyo",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Wei Kowalski",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+44 7700 900156",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Led 50 people across three shifts, promoted 8 of them to team lead and kept staff turnover under 8 percent for 2 years.",
+        "Reduced recordable injuries from 17 to 2 in a year by retraining 8 operators and fixing 9 floor hazards.",
+        "Built a daily shortage and late order report in spreadsheets that let the manager avoid 17 expedited shipments a month.",
+        "Ran weekly cycle counts and corrected stock records in the warehouse system.",
+        "lean, team lead, process improvement, OSHA"
+      ],
+      "keep_soft": [
+        "Logistics"
+      ]
+    },
+    "leak/leak_08.txt": {
+      "role_id": "te",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Ananya Iyer",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+61 4 0000 7007",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "ananya.iyer@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Plot 5 Jasmine Estate Road, Kestrel Heights 560999, India",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 07/14/1986",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 40",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Nigerian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Religion: Catholic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_iyer.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She built",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Instituto Técnico Aurelio",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2007",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Mount Alder Teachers College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2003",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "www.iyerdesign.example/work",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/ananyaiyer",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Ignacio Eriksson",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+44 7700 900157",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Built the family communication plan for a school of 450 students, ran parent workshops attended by 17 families and translated key notices into 3 languages.",
+        "Marked work with written feedback and recorded termly reading and maths results.",
+        "Set classroom routines and handled behaviour with a clear set of rules in a class of 28.",
+        "Ran small group support for 3 children with learning plans and 12 percent of them met their yearly targets.",
+        "assessment, feedback, testing, data driven instruction"
+      ],
+      "keep_soft": [
+        "Education"
+      ]
+    },
+    "leak/leak_09.txt": {
+      "role_id": "kc",
+      "planted": [
+        {
+          "category": "name",
+          "text": "GUSTAVO NWOSU",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Rua das Oliveiras 77, 4150 Portela, Portugal",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 08 18",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "gustavo.nwosu@postnet.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/gustavonwosu-40a",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file nwosu.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 3 November 1990",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 36",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Nigerian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Mount Alder Teachers College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2012",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hartley Polytechnic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2008",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://gustavonwosu.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Tomasz Ström",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+44 7700 900158",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Kept temperature logs, labelled stock and ran the daily cleaning checklist in line with food hygiene rules.",
+        "Designed three seasonal menus with costed recipe cards for a restaurant serving 900 covers a week and trained 4 cooks to the standard.",
+        "Managed a yearly food budget of 12,000, kept cost on target for 4 years and built the ordering sheet used by 14 sites.",
+        "Ran the pass during busy services and called orders to the line.",
+        "ordering, dinner service, hiring, line cook"
+      ],
+      "keep_soft": [
+        "Culinary Arts"
+      ]
+    },
+    "leak/leak_10.txt": {
+      "role_id": "wh",
+      "planted": [
+        {
+          "category": "name",
+          "text": "KUZNETSOV, Kofi",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "kofi.kuznetsov@inbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+61 4 0000 7009",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Rua das Oliveiras 77, 4150 Portela, Portugal",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 03/16/1987",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 39",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Indian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Religion: Catholic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_kuznetsov.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She built",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Instituto Técnico Aurelio",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2009",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Nordhavn University of Applied Sciences",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2005",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "www.kuznetsovdesign.example/work",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/kofikuznetsov",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Emeka Adeyemi",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+61 4 0000 7059",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Built a daily shortage and late order report in spreadsheets that let the manager avoid 11 expedited shipments a month.",
+        "Raised picks per hour by 12 percent after redesigning the pick paths in 6 zones.",
+        "Raised inventory accuracy from 91 to 99 percent by introducing bin level cycle counts across 6 zones.",
+        "Held daily safety briefings and checked forklift and pallet racking inspection sheets.",
+        "cycle counts, WMS, SAP, Excel"
+      ],
+      "keep_soft": [
+        "Logistics"
+      ]
+    },
+    "leak/leak_11.txt": {
+      "role_id": "te",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Björn Adeyemi",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1982-03-12",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 44",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: single",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Canadian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Gender: female",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Rua das Oliveiras 77, 4150 Portela, Portugal",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hartley Polytechnic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2006",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Nordhavn University of Applied Sciences",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2002",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://bjornadeyemi.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/bjornadeyemi",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Dmitri Obuya",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 60 70",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "bjorn.adeyemi@inbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+44 7700 900110",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Held 11 parent conferences a year with 85 percent of families attending and followed up in writing.",
+        "Used termly assessments to regroup the class and lifted the average reading score by 18 percent in a year.",
+        "Cut behaviour referrals in a class of 28 from 11 to 1 a term using a points routine and parent calls.",
+        "Led curriculum planning for a team of 4 teachers, wrote the fifth grade maths units adopted by 9 classrooms, and revised them yearly from assessment results.",
+        "lesson planning, feedback, unit plans, parent communication"
+      ],
+      "keep_soft": [
+        "Education"
+      ]
+    },
+    "leak/leak_12.txt": {
+      "role_id": "kc",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Rémi Varga",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+44 7700 900111",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "remi.varga@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "22 Ridgeline Crescent, Perth WA 6999, Australia",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 02/19/1985",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 41",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: single",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Nigerian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Religion: Catholic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_varga.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Mount Alder Teachers College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2009",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Kestrel Heights College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2005",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/remivarga",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/remivarga",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Tomasz Ström",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 61 71",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Brought food cost from 38 to 31 percent of sales by renegotiating 24 supplier prices and trimming the menu.",
+        "Kept temperature logs, labelled stock and ran the daily cleaning checklist in line with food hygiene rules.",
+        "Wrote weekly schedules and led a kitchen crew of 12 cooks and dishwashers.",
+        "Ran the pass for 1,400 covers a week, restructured the line for 9 service styles and coached 5 cooks to hold ticket times under 14 minutes.",
+        "temperature logs, supplier negotiation, line cook, hiring"
+      ],
+      "keep_soft": [
+        "Culinary Arts"
+      ]
+    },
+    "leak/leak_13.txt": {
+      "role_id": "wh",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Haugen Rémi",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Hauptweg 9, 80999 Marvelle, Germany",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+61 4 0000 7012",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "remi.haugen@inbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 8 March 1986",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 40",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Indian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Religion: Muslim",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file haugen.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She built",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Instituto Técnico Aurelio",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2009",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Mount Alder Teachers College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2005",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/remihaugen",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/remihaugen-23a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Lucía Larsen",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 62 72",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Led a shift of 8 and cut overtime by 18 percent through better rostering.",
+        "Owned inventory accuracy for a site holding 18,000 items, held it above 99 percent for 5 years and taught 4 leads the counting method.",
+        "Held daily safety briefings and checked forklift and pallet racking inspection sheets.",
+        "Raised picks per hour by 18 percent after redesigning the pick paths in 4 zones.",
+        "team lead, Excel, reporting, hazard reporting"
+      ],
+      "keep_soft": [
+        "Logistics"
+      ]
+    },
+    "leak/leak_14.txt": {
+      "role_id": "te",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Mei Moreau",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "mei . moreau [at] mailbox dot example",
+          "hard": true,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 13 23",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 05/16/1996",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 30",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: single",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Canadian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Place of birth: Lagos",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She ran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "École Supérieure de Marvelle",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2018",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Universidad de Valmoral",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2014",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/meimoreau",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/meimoreau",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Zoë Kuznetsov",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 63 73",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Used termly assessments to regroup the class and lifted the average reading score by 12 percent in a year.",
+        "Set classroom routines and handled behaviour with a clear set of rules in a class of 28.",
+        "Wrote 11 unit plans that moved 12 percent of the class to grade level in reading over a year.",
+        "Ran small group support for 5 children with learning plans and 12 percent of them met their yearly targets.",
+        "assessment, unit plans, routines, curriculum"
+      ],
+      "keep_soft": [
+        "Education"
+      ]
+    },
+    "leak/leak_15.txt": {
+      "role_id": "kc",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Björn Varga",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "email",
+          "text": "bjorn.varga@postnet.example",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "phone",
+          "text": "+91 98765 41014",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1986-03-11",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 40",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: single",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Brazilian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Gender: male",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_varga.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Plot 5 Jasmine Estate Road, Kestrel Heights 560999, India",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He built",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hartley Polytechnic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2010",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Tallis Culinary Academy",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2006",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "www.vargadesign.example/work",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/bjornvarga-31a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Björn Bianchi",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 64 74",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Ordered from suppliers weekly and tracked the food cost against sales.",
+        "Ran the pass during busy services and called orders to the line.",
+        "Cooked from standard recipes and plated each dish to the written specification.",
+        "Wrote weekly schedules and led a kitchen crew of 12 cooks and dishwashers.",
+        "expediting, allergens, staff training, inventory"
+      ],
+      "keep_soft": [
+        "Culinary Arts"
+      ]
+    },
+    "leak/leak_16.txt": {
+      "role_id": "wh",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Rémi Adeyemi",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 15 25",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "remi.adeyemi@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Rua das Oliveiras 77, 4150 Portela, Portugal",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 01/13/1983",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 43",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Indian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file adeyemi.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Mount Alder Teachers College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2005",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Nordhavn University of Applied Sciences",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2001",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://remiadeyemi.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/remiadeyemi",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Henrik Dąbrowski",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 65 75",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Led a shift of 8 and cut overtime by 12 percent through better rostering.",
+        "Ran the process improvement programme that raised daily shipments from 2,000 to 3,400 orders over 3 years with no extra headcount.",
+        "Ran weekly cycle counts and corrected stock records in the warehouse system.",
+        "Held daily safety briefings and checked forklift and pallet racking inspection sheets.",
+        "WMS, Excel, picks per hour, SAP"
+      ],
+      "keep_soft": [
+        "Logistics"
+      ]
+    },
+    "leak/leak_17.txt": {
+      "role_id": "te",
+      "planted": [
+        {
+          "category": "name",
+          "text": "RÉMI MACLEOD",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "14 Quillgate Mews, Hartley, HX7 4RB, United Kingdom",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+44 7700 900116",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "remi.macleod@postnet.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/remimacleod",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_macleod.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 28 November 1994",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 32",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Brazilian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Place of birth: Lagos",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Mount Alder Teachers College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2015",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Instituto Técnico Aurelio",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2011",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://remimacleod.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Rémi Larsen",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+44 7700 900166",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Cut behaviour referrals in a class of 28 from 17 to 2 a term using a points routine and parent calls.",
+        "Sent weekly newsletters and held parent meetings each term.",
+        "Adapted worksheets and groupings for children with reading difficulties and learners of English.",
+        "Led curriculum planning for a team of 3 teachers, wrote the fifth grade maths units adopted by 14 classrooms, and revised them yearly from assessment results.",
+        "curriculum, newsletters, conferences, data driven instruction"
+      ],
+      "keep_soft": [
+        "Education"
+      ]
+    },
+    "leak/leak_18.txt": {
+      "role_id": "kc",
+      "planted": [
+        {
+          "category": "name",
+          "text": "OBUYA, Pablo",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "pablo.obuya@inbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 17 27",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Calle de las Acacias 12, 3B, 28999 Valmoral, Spain",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 19 March 1988",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 38",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Canadian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She ran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Tallis Culinary Academy",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2010",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Nordhavn University of Applied Sciences",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2006",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://pabloobuya.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/pabloobuya-82a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Leila Nwosu",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+91 98765 41067",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Hired, trained and led a brigade of 35, promoted 5 cooks to sous chef and kept turnover under 8 percent for 4 years.",
+        "Brought average ticket time from 32 to 14 minutes at the dinner rush by reorganising stations.",
+        "Developed 36 new menu dishes that together made up 18 percent of weekly sales and wrote the recipe cards.",
+        "Managed a yearly food budget of 12,000, kept cost on target for 4 years and built the ordering sheet used by 6 sites.",
+        "HACCP, plating, food cost, hiring"
+      ],
+      "keep_soft": [
+        "Culinary Arts"
+      ]
+    },
+    "leak/leak_19.txt": {
+      "role_id": "wh",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Zoë Varga",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 01/19/1995",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 31",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: single",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Brazilian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Religion: Catholic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file varga.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Plot 5 Jasmine Estate Road, Kestrel Heights 560999, India",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He built",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "École Supérieure de Marvelle",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2016",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Mount Alder Teachers College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2012",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "www.vargadesign.example/work",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/zoevarga-49a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Lucía Fernández",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 68 78",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "zoe.varga@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+61 4 0000 7018",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Used a warehouse management system to receive, put away and ship orders.",
+        "Reduced recordable injuries from 11 to 1 in a year by retraining 8 operators and fixing 14 floor hazards.",
+        "Raised picks per hour by 18 percent after redesigning the pick paths in 4 zones.",
+        "Scheduled and supervised a shift crew of 8 and handled attendance and breaks.",
+        "WMS, WMS, forklift safety, process improvement"
+      ],
+      "keep_soft": [
+        "Logistics"
+      ]
+    },
+    "leak/leak_20.txt": {
+      "role_id": "te",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Tomasz Larsen",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+91 98765 41019",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "tomasz.larsen@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "22 Ridgeline Crescent, Perth WA 6999, Australia",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1988-05-13",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 38",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Brazilian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Place of birth: Lagos",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_larsen.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "École Supérieure de Marvelle",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2009",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hartley Polytechnic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2005",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://tomaszlarsen.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/tomaszlarsen",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Gustavo Al Habib",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 69 79",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Cut behaviour referrals in a class of 26 from 17 to 1 a term using a points routine and parent calls.",
+        "Built the family communication plan for a school of 450 students, ran parent workshops attended by 17 families and translated key notices into 3 languages.",
+        "Marked work with written feedback and recorded termly reading and maths results.",
+        "Adapted worksheets and groupings for children with reading difficulties and learners of English.",
+        "standards, parent communication, IEP, assessment"
+      ],
+      "keep_soft": [
+        "Education"
+      ]
+    },
+    "leak/leak_21.txt": {
+      "role_id": "kc",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Nwosu Fatima",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Plot 5 Jasmine Estate Road, Kestrel Heights 560999, India",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+91 98765 41020",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "fatima.nwosu@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 02/16/1993",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 33",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: single",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Brazilian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Gender: male",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He built",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "École Supérieure de Marvelle",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2017",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Mount Alder Teachers College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2013",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/fatimanwosu",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/fatimanwosu",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Björn Obuya",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 70 80",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Brought average ticket time from 26 to 14 minutes at the dinner rush by reorganising stations.",
+        "Wrote the food safety plan for 6 kitchens, trained 8 cooks to certification and held the top inspection rating for 5 years.",
+        "Cooked from standard recipes and plated each dish to the written specification.",
+        "Managed a yearly food budget of 150,000, kept cost on target for 5 years and built the ordering sheet used by 6 sites.",
+        "consistency, plating, team leadership, inventory"
+      ],
+      "keep_soft": [
+        "Culinary Arts"
+      ]
+    },
+    "leak/leak_22.txt": {
+      "role_id": "wh",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Noor Lindholm",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "noor . lindholm [at] inbox dot example",
+          "hard": true,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+61 4 0000 7021",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 01/17/1995",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 31",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: single",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Indian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She built",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Mount Alder Teachers College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2016",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Instituto Técnico Aurelio",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2012",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "www.lindholmdesign.example/work",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/noorlindholm",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Ananya Nwosu",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+61 4 0000 7071",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Used a warehouse management system to receive, put away and ship orders.",
+        "Owned inventory accuracy for a site holding 40,000 items, held it above 99 percent for 3 years and taught 5 leads the counting method.",
+        "Led 35 people across three shifts, promoted 5 of them to team lead and kept staff turnover under 8 percent for 3 years.",
+        "Tracked picks per hour and adjusted the pick routes when the numbers fell.",
+        "WMS, hazard reporting, coaching, lean"
+      ],
+      "keep_soft": [
+        "Logistics"
+      ]
+    },
+    "leak/leak_23.txt": {
+      "role_id": "te",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Ignacio Kuznetsov",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "email",
+          "text": "ignacio.kuznetsov@inbox.example",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "phone",
+          "text": "+91 98765 41022",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 04/10/1987",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 39",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: single",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Nigerian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Religion: Catholic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Calle de las Acacias 12, 3B, 28999 Valmoral, Spain",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Kestrel Heights College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2008",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Instituto Técnico Aurelio",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2004",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/ignaciokuznetsov",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/ignaciokuznetsov",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Pablo Moreau",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+61 4 0000 7072",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Cut behaviour referrals in a class of 22 from 36 to 2 a term using a points routine and parent calls.",
+        "Built the family communication plan for a school of 300 students, ran parent workshops attended by 36 families and translated key notices into 3 languages.",
+        "Wrote 36 unit plans that moved 18 percent of the class to grade level in reading over a year.",
+        "Coordinated support plans for 36 students with special needs across 6 classes and coached teachers and aides on adapting lessons.",
+        "routines, assessment, positive behaviour, conferences"
+      ],
+      "keep_soft": [
+        "Education"
+      ]
+    },
+    "leak/leak_24.txt": {
+      "role_id": "kc",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Ananya O'Connell",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+91 98765 41023",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "ananya.oconnell@postnet.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "14 Quillgate Mews, Hartley, HX7 4RB, United Kingdom",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1989-01-17",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 37",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Polish",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Place of birth: Lagos",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file oconnell.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He built",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hartley Polytechnic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2012",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "École Supérieure de Marvelle",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2008",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/ananyaoconnell",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/ananyaoconnell",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Leila Lindholm",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+44 7700 900173",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Ran the pass during busy services and called orders to the line.",
+        "Kept temperature logs, labelled stock and ran the daily cleaning checklist in line with food hygiene rules.",
+        "Designed three seasonal menus with costed recipe cards for a restaurant serving 900 covers a week and trained 3 cooks to the standard.",
+        "Hired, trained and led a brigade of 50, promoted 3 cooks to sous chef and kept turnover under 8 percent for 3 years.",
+        "dinner service, consistency, high volume, staff training"
+      ],
+      "keep_soft": [
+        "Culinary Arts"
+      ]
+    },
+    "leak/leak_25.txt": {
+      "role_id": "wh",
+      "planted": [
+        {
+          "category": "name",
+          "text": "RÉMI IYER",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "14 Quillgate Mews, Hartley, HX7 4RB, United Kingdom",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+61 4 0000 7024",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "remi.iyer@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/remiiyer",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 07/19/1990",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 36",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Polish",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Religion: Catholic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She ran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Nordhavn University of Applied Sciences",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2012",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hartley Polytechnic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2008",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/remiiyer",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Björn Petrović",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 74 84",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Chaired the site safety committee for 3 years, led the audit that closed 14 findings, and took the site to 30 months without a lost time injury.",
+        "Owned inventory accuracy for a site holding 40,000 items, held it above 99 percent for 3 years and taught 3 leads the counting method.",
+        "Led the rollout of a new warehouse management system at a site of 35 people, wrote the training plan and trained 3 supervisors.",
+        "Ran the process improvement programme that raised daily shipments from 3,000 to 5,000 orders over 3 years with no extra headcount.",
+        "WMS, safety briefings, Excel, team lead"
+      ],
+      "keep_soft": [
+        "Logistics"
+      ]
+    },
+    "leak/leak_26.txt": {
+      "role_id": "te",
+      "planted": [
+        {
+          "category": "name",
+          "text": "O'CONNELL, Thandiwe",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "thandiwe.oconnell@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 25 35",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Hauptweg 9, 80999 Marvelle, Germany",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1998-04-14",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 28",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: single",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Indian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Gender: male",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Picture: see attached portrait file oconnell.png",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He led",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hartley Polytechnic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2019",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Tallis Culinary Academy",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2015",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/thandiweoconnell",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/thandiweoconnell-71a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Mei Eriksson",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 75 85",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Held 17 parent conferences a year with 72 percent of families attending and followed up in writing.",
+        "Trained 8 colleagues in positive behaviour routines, which the school adopted for 9 classes, and kept referrals under 2 per term for 4 years.",
+        "Led curriculum planning for a team of 8 teachers, wrote the third grade maths units adopted by 9 classrooms, and revised them yearly from assessment results.",
+        "Marked work with written feedback and recorded termly reading and maths results.",
+        "IEP, family engagement, classroom management, routines"
+      ],
+      "keep_soft": [
+        "Education"
+      ]
+    },
+    "leak/leak_27.txt": {
+      "role_id": "kc",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Fatima Chaudhary",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1987-06-16",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 39",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Polish",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_chaudhary.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "22 Ridgeline Crescent, Perth WA 6999, Australia",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She built",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Kestrel Heights College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2011",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Universidad de Valmoral",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2007",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://fatimachaudhary.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/fatimachaudhary-56a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Ananya Nwosu",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 76 86",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "fatima.chaudhary@inbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+91 98765 41026",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Brought food cost from 38 to 31 percent of sales by renegotiating 24 supplier prices and trimming the menu.",
+        "Ran the pass during busy services and called orders to the line.",
+        "Wrote the food safety plan for 6 kitchens, trained 4 cooks to certification and held the top inspection rating for 2 years.",
+        "Developed 24 new menu dishes that together made up 12 percent of weekly sales and wrote the recipe cards.",
+        "food hygiene, supplier negotiation, dinner service, high volume"
+      ],
+      "keep_soft": [
+        "Culinary Arts"
+      ]
+    },
+    "leak/leak_28.txt": {
+      "role_id": "wh",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Pablo Al Habib",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+61 4 0000 7027",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "pablo.alhabib@mailbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "14 Quillgate Mews, Hartley, HX7 4RB, United Kingdom",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 04/18/1990",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 36",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: he/him",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Brazilian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Religion: Muslim",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "He built",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Universidad de Valmoral",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2013",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "École Supérieure de Marvelle",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2009",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://pabloalhabib.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/pabloalhabib",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Emeka Dubois",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+61 4 0000 7077",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Tracked picks per hour and adjusted the pick routes when the numbers fell.",
+        "Used a warehouse management system to receive, put away and ship orders.",
+        "Owned inventory accuracy for a site holding 18,000 items, held it above 99 percent for 2 years and taught 4 leads the counting method.",
+        "Scheduled and supervised a shift crew of 15 and handled attendance and breaks.",
+        "picks per hour, reporting, stock control, Excel"
+      ],
+      "keep_soft": [
+        "Logistics"
+      ]
+    },
+    "leak/leak_29.txt": {
+      "role_id": "te",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Dąbrowski Emeka",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Rua das Oliveiras 77, 4150 Portela, Portugal",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+44 7700 900128",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "emeka.dabrowski@postnet.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 07/16/1987",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 39",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Canadian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_dabrowski.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She ran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Kestrel Heights College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2010",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Nordhavn University of Applied Sciences",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2006",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "www.dabrowskidesign.example/work",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/emekadabrowski-55a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Ingrid Al Habib",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 78 88",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Wrote 11 unit plans that moved 18 percent of the class to grade level in reading over a year.",
+        "Set classroom routines and handled behaviour with a clear set of rules in a class of 26.",
+        "Marked work with written feedback and recorded termly reading and maths results.",
+        "Built the family communication plan for a school of 450 students, ran parent workshops attended by 11 families and translated key notices into 3 languages.",
+        "assessment, routines, data driven instruction, newsletters"
+      ],
+      "keep_soft": [
+        "Education"
+      ]
+    },
+    "leak/leak_30.txt": {
+      "role_id": "kc",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Mei Ncube",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "mei . ncube [at] mailbox dot example",
+          "hard": true,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+91 98765 41029",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 1981-03-11",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 45",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: they/them",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: single",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Polish",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_ncube.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Nordhavn University of Applied Sciences",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2005",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Mount Alder Teachers College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2001",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "www.ncubedesign.example/work",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/meincube-42a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Siobhan Fernández",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+91 98765 41079",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Kept temperature logs, labelled stock and ran the daily cleaning checklist in line with food hygiene rules.",
+        "Led 8 staff, cut late arrivals by 12 percent and filled every shift with cross trained cooks.",
+        "Brought average ticket time from 32 to 18 minutes at the dinner rush by reorganising stations.",
+        "Cooked from standard recipes and plated each dish to the written specification.",
+        "HACCP, expediting, team leadership, ordering"
+      ],
+      "keep_soft": [
+        "Culinary Arts"
+      ]
+    },
+    "leak/leak_31.txt": {
+      "role_id": "wh",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Thandiwe Ström",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "email",
+          "text": "thandiwe.strom@inbox.example",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "phone",
+          "text": "+61 4 0000 7030",
+          "hard": false,
+          "occurrences": 2
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 24 November 1995",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 31",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: she/her",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Marital status: married, two children",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Nigerian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Gender: female",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "Photo: headshot_strom.jpg",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Plot 5 Jasmine Estate Road, Kestrel Heights 560999, India",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "She ran",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Hartley Polytechnic",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2019",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Instituto Técnico Aurelio",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2015",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "github.com/thandiwestrom",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "linkedin.com/in/thandiwestrom-90a",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Gustavo Sharma",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+91 98765 41080",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Used a warehouse management system to receive, put away and ship orders.",
+        "Ran weekly cycle counts and corrected stock records in the warehouse system.",
+        "Led 50 people across three shifts, promoted 8 of them to team lead and kept staff turnover under 12 percent for 3 years.",
+        "Chaired the site safety committee for 3 years, led the audit that closed 14 findings, and took the site to 18 months without a lost time injury.",
+        "picks per hour, Excel, forklift safety, hazard reporting"
+      ],
+      "keep_soft": [
+        "Logistics"
+      ]
+    },
+    "leak/leak_32.txt": {
+      "role_id": "te",
+      "planted": [
+        {
+          "category": "name",
+          "text": "Mei Ramírez",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+34 600 55 31 41",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "email",
+          "text": "mei.ramirez@inbox.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "address",
+          "text": "Rua das Oliveiras 77, 4150 Portela, Portugal",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "date_of_birth",
+          "text": "Date of birth: 18 March 1992",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "age",
+          "text": "Age: 34",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "pronouns",
+          "text": "Pronouns: they/them",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Family: married with one child",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Nationality: Nigerian",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "personal_detail",
+          "text": "Health: excellent, no disabilities",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "photo_reference",
+          "text": "[photo attached: passport style picture]",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Instituto Técnico Aurelio",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2016",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "institution",
+          "text": "Kestrel Heights College",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "graduation_year",
+          "text": "2012",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://meiramirez.portfolio.example",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "link",
+          "text": "https://www.linkedin.com/in/meiramirez",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "name",
+          "text": "Ananya Kuznetsov",
+          "hard": false,
+          "occurrences": 1
+        },
+        {
+          "category": "phone",
+          "text": "+91 98765 41081",
+          "hard": false,
+          "occurrences": 1
+        }
+      ],
+      "keep": [
+        "Used termly assessments to regroup the class and lifted the average reading score by 18 percent in a year.",
+        "Set classroom routines and handled behaviour with a clear set of rules in a class of 22.",
+        "Adapted worksheets and groupings for children with reading difficulties and learners of English.",
+        "Sent weekly newsletters and held parent meetings each term.",
+        "positive behaviour, IEP, family engagement, assessment"
+      ],
+      "keep_soft": [
+        "Education"
+      ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+Oswin Kowalczyk
+oswin.kowalczyk@mail.example.test
+Phone: (555) 010-0127
+Corvale, ST 05083
+linkedin.com/in/oswin-kowalczyk-526
+![Photo of Oswin](photo.jpg)
+
+| Summary |
+Reliable and steady worker who likes clear goals.
+
+| Experience |
+Data Analyst, Ferncliff Foods, 2021 to 2026
+| Responsible for presenting and explaining results to stakeholders with a clear recommendation across the team, every week.
+| Observed weekly charts during my first weeks and read about how it is done.
+| Responsible for cleaning data, removing duplicates and validation checks across the team, every week.
+| Organised the team lunch rota.
+Assistant, Marlow & Finch Supply, 2017 to 2021
+| Led statistics, significance tests and experiment design for a team of 15, trained 3 colleagues and owned the results, cutting errors by 18 percent.
+| Covered the front desk during holiday weeks.
+
+| Education |
+B.Sc., Institute of Applied Studies at Lowmere, 2002

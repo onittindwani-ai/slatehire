@@ -1,0 +1,366 @@
+{
+  "set": "set_a",
+  "rule": "see README",
+  "cases": [
+    {
+      "id": "clear_flag",
+      "description": "Two groups, one clearly below four fifths.",
+      "min_group_size": 5,
+      "steps": {
+        "screen": {
+          "A": {
+            "entered": 20,
+            "advanced": 10
+          },
+          "B": {
+            "entered": 20,
+            "advanced": 6
+          }
+        }
+      },
+      "expected": {
+        "screen": {
+          "rates": {
+            "A": "1/2",
+            "B": "3/10"
+          },
+          "assessed_groups": [
+            "A",
+            "B"
+          ],
+          "not_assessed_small": [],
+          "reference_group": "A",
+          "ratios": {
+            "A": "1",
+            "B": "3/5"
+          },
+          "flagged": [
+            "B"
+          ],
+          "indicator": "flag"
+        }
+      },
+      "hand_working": "A 10/20=1/2, B 6/20=3/10. Ref A. B ratio (3/10)/(1/2)=3/5=0.6 < 4/5 so flagged."
+    },
+    {
+      "id": "exactly_four_fifths",
+      "description": "Ratio exactly 4/5 is not flagged (flag only when strictly below).",
+      "min_group_size": 5,
+      "steps": {
+        "screen": {
+          "A": {
+            "entered": 20,
+            "advanced": 10
+          },
+          "B": {
+            "entered": 20,
+            "advanced": 8
+          }
+        }
+      },
+      "expected": {
+        "screen": {
+          "rates": {
+            "A": "1/2",
+            "B": "2/5"
+          },
+          "assessed_groups": [
+            "A",
+            "B"
+          ],
+          "not_assessed_small": [],
+          "reference_group": "A",
+          "ratios": {
+            "A": "1",
+            "B": "4/5"
+          },
+          "flagged": [],
+          "indicator": "ok"
+        }
+      },
+      "hand_working": "A 1/2, B 8/20=2/5. Ratio (2/5)/(1/2)=4/5, equal to 0.8, not below, so ok."
+    },
+    {
+      "id": "just_below",
+      "description": "Ratio 19/25 = 0.76 is flagged.",
+      "min_group_size": 5,
+      "steps": {
+        "screen": {
+          "A": {
+            "entered": 50,
+            "advanced": 25
+          },
+          "B": {
+            "entered": 50,
+            "advanced": 19
+          }
+        }
+      },
+      "expected": {
+        "screen": {
+          "rates": {
+            "A": "1/2",
+            "B": "19/50"
+          },
+          "assessed_groups": [
+            "A",
+            "B"
+          ],
+          "not_assessed_small": [],
+          "reference_group": "A",
+          "ratios": {
+            "A": "1",
+            "B": "19/25"
+          },
+          "flagged": [
+            "B"
+          ],
+          "indicator": "flag"
+        }
+      },
+      "hand_working": "A 25/50=1/2, B 19/50. Ratio (19/50)/(1/2)=19/25=0.76 < 0.8, flagged."
+    },
+    {
+      "id": "three_groups_reference_not_first",
+      "description": "Highest rate group is not the first listed.",
+      "min_group_size": 5,
+      "steps": {
+        "screen": {
+          "A": {
+            "entered": 30,
+            "advanced": 9
+          },
+          "B": {
+            "entered": 40,
+            "advanced": 20
+          },
+          "C": {
+            "entered": 25,
+            "advanced": 10
+          }
+        }
+      },
+      "expected": {
+        "screen": {
+          "rates": {
+            "A": "3/10",
+            "B": "1/2",
+            "C": "2/5"
+          },
+          "assessed_groups": [
+            "A",
+            "B",
+            "C"
+          ],
+          "not_assessed_small": [],
+          "reference_group": "B",
+          "ratios": {
+            "A": "3/5",
+            "B": "1",
+            "C": "4/5"
+          },
+          "flagged": [
+            "A"
+          ],
+          "indicator": "flag"
+        }
+      },
+      "hand_working": "A 9/30=3/10, B 20/40=1/2, C 10/25=2/5. Ref B. A ratio 3/5 flagged. C ratio (2/5)/(1/2)=4/5 not flagged."
+    },
+    {
+      "id": "small_group_not_assessed",
+      "description": "A group below the smallest group size is shown but not assessed.",
+      "min_group_size": 5,
+      "steps": {
+        "screen": {
+          "A": {
+            "entered": 40,
+            "advanced": 20
+          },
+          "B": {
+            "entered": 30,
+            "advanced": 10
+          },
+          "C": {
+            "entered": 3,
+            "advanced": 0
+          }
+        }
+      },
+      "expected": {
+        "screen": {
+          "rates": {
+            "A": "1/2",
+            "B": "1/3",
+            "C": "0"
+          },
+          "assessed_groups": [
+            "A",
+            "B"
+          ],
+          "not_assessed_small": [
+            "C"
+          ],
+          "reference_group": "A",
+          "ratios": {
+            "A": "1",
+            "B": "2/3"
+          },
+          "flagged": [
+            "B"
+          ],
+          "indicator": "flag"
+        }
+      },
+      "hand_working": "A 1/2, B 10/30=1/3, C 0/3=0 but n=3<5 so not assessed. B ratio (1/3)/(1/2)=2/3 flagged."
+    },
+    {
+      "id": "small_group_cannot_be_reference",
+      "description": "A small group with a high rate must not become the reference.",
+      "min_group_size": 5,
+      "steps": {
+        "screen": {
+          "A": {
+            "entered": 4,
+            "advanced": 4
+          },
+          "B": {
+            "entered": 20,
+            "advanced": 10
+          },
+          "C": {
+            "entered": 25,
+            "advanced": 10
+          }
+        }
+      },
+      "expected": {
+        "screen": {
+          "rates": {
+            "A": "1",
+            "B": "1/2",
+            "C": "2/5"
+          },
+          "assessed_groups": [
+            "B",
+            "C"
+          ],
+          "not_assessed_small": [
+            "A"
+          ],
+          "reference_group": "B",
+          "ratios": {
+            "B": "1",
+            "C": "4/5"
+          },
+          "flagged": [],
+          "indicator": "ok"
+        }
+      },
+      "hand_working": "A 4/4=1 but n=4<5 excluded. Ref is B (1/2). C 10/25=2/5, ratio 4/5 not flagged. Indicator ok."
+    },
+    {
+      "id": "nobody_selected",
+      "description": "Reference rate is zero, ratio cannot be computed.",
+      "min_group_size": 5,
+      "steps": {
+        "screen": {
+          "A": {
+            "entered": 10,
+            "advanced": 0
+          },
+          "B": {
+            "entered": 12,
+            "advanced": 0
+          }
+        }
+      },
+      "expected": {
+        "screen": {
+          "rates": {
+            "A": "0",
+            "B": "0"
+          },
+          "assessed_groups": [
+            "A",
+            "B"
+          ],
+          "not_assessed_small": [],
+          "reference_group": "A",
+          "ratios": {},
+          "flagged": [],
+          "indicator": "not_computable"
+        }
+      },
+      "hand_working": "Both rates 0. Reference rate 0 so no ratio, indicator not_computable, nothing flagged."
+    },
+    {
+      "id": "two_steps",
+      "description": "Each step is computed separately on the people who entered that step.",
+      "min_group_size": 5,
+      "steps": {
+        "screen": {
+          "A": {
+            "entered": 40,
+            "advanced": 20
+          },
+          "B": {
+            "entered": 30,
+            "advanced": 12
+          }
+        },
+        "shortlist": {
+          "A": {
+            "entered": 20,
+            "advanced": 10
+          },
+          "B": {
+            "entered": 12,
+            "advanced": 3
+          }
+        }
+      },
+      "expected": {
+        "screen": {
+          "rates": {
+            "A": "1/2",
+            "B": "2/5"
+          },
+          "assessed_groups": [
+            "A",
+            "B"
+          ],
+          "not_assessed_small": [],
+          "reference_group": "A",
+          "ratios": {
+            "A": "1",
+            "B": "4/5"
+          },
+          "flagged": [],
+          "indicator": "ok"
+        },
+        "shortlist": {
+          "rates": {
+            "A": "1/2",
+            "B": "1/4"
+          },
+          "assessed_groups": [
+            "A",
+            "B"
+          ],
+          "not_assessed_small": [],
+          "reference_group": "A",
+          "ratios": {
+            "A": "1",
+            "B": "1/2"
+          },
+          "flagged": [
+            "B"
+          ],
+          "indicator": "flag"
+        }
+      },
+      "hand_working": "Screen: A 1/2, B 12/30=2/5, ratio 4/5 ok. Shortlist: A 10/20=1/2, B 3/12=1/4, ratio 1/2 flagged."
+    }
+  ]
+}

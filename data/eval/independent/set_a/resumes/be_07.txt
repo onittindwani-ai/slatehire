@@ -1,0 +1,16 @@
+SOFIA PENNINGTON
+sofia.pennington@inbox.example | (555) 0106-7106 | Fairmont
+
+TARGET ROLE: Backend Software Engineer
+
+SKILLS
+REST, GraphQL, microservices, API design, REST, GraphQL, SQL, PostgreSQL, MySQL, data modelling, SQL, PostgreSQL, unit testing, TDD, CI, code review, unit testing, TDD, on call, incident response, monitoring, SRE, on call, incident response, mentoring, pair programming, team player, code review, mentoring, pair programming
+
+EXPERIENCE
+Backend Software Engineer, Bluepine Services (3 years)
+
+Assistant Backend Software Engineer, Northgate Systems (2 years)
+
+EDUCATION
+Computer Science, Lakeshore State University, 2008
+

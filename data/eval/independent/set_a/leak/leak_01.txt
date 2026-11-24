@@ -1,0 +1,36 @@
+TREVOR HOLLOWAY
+24 Birchwood Terrace, Lakeview, TX 75099
+TEL 555-0100-7200   trevor.holloway@mailbox.example
+linkedin.com/in/trevorholloway-72a
+Picture: see attached portrait file holloway.png
+
+Date of birth: 02/13/1986
+Age: 40
+Pronouns: she/her
+Marital status: married, two children
+Nationality: Nigerian
+Gender: female
+
+SUMMARY
+Backend Software Engineer with solid experience. 
+She ran the work described below and received strong reviews.
+
+EXPERIENCE
+
+* Designed REST APIs for the notifications service that handled 2 million requests a day with 20 percent fewer errors.
+* Wrote SQL queries and migrations for a MySQL database behind the notifications service.
+* Set the testing standard for the notifications team of 9 engineers, built the contract tests every service runs on each merge, and reduced escaped bugs by 20 percent over 4 years.
+* Reviewed pull requests from teammates and joined planning sessions each sprint.
+
+SKILLS: monitoring, SQL, unit testing, on call
+
+EDUCATION
+Computer Science, Redwood Institute of Technology, Graduated: 2009
+Earlier study: St. Aldric's University, Class of 2005
+
+LINKS
+https://trevorholloway.portfolio.example
+linkedin.com/in/trevorholloway-72a
+
+REFERENCE: Dana Kessler, former manager, (555) 0150-7150
+

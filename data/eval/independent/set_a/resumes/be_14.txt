@@ -1,0 +1,15 @@
+Carlos Garrison
+Contact: carlos.garrison@mailbox.example, +1 555 0113 7313
+
+I am applying for the Backend Software Engineer position. Key skills: GraphQL, SQL, TDD.
+
+For 3 years I was a Backend Software Engineer at Northgate Systems. Wrote unit tests for new features and ran them in the build pipeline. Led incident response for billing for 3 years, ran 17 post incident reviews and drove the change that moved availability from 99.5 to 99.95 percent.
+
+For 2 years I was a Assistant Backend Software Engineer at Harlow Group. Worked well with the people on my team.
+
+For 18 months I was a Junior Backend Software Engineer at Summit Lane Co. Designed REST APIs for the billing service that handled 900,000 requests a day with 50 percent fewer errors.
+
+For 6 years I was a Earlier career at Redfern Haulage. Painted houses and repaired fences for a property firm. Drove a delivery van on a fixed route for a courier firm.
+
+I studied Computer Science at St. Aldric's University and finished in 2004.
+

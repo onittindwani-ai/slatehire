@@ -1,0 +1,12 @@
+node_modules
+.venv
+.pgtmp
+.demo
+.next
+.git
+**/__pycache__
+*.sqlite3
+.env
+test-results
+playwright-report
+docs/screenshots

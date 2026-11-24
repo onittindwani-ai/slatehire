@@ -1,0 +1,15 @@
+{
+  "name": "slatehire",
+  "private": true,
+  "version": "1.0.0",
+  "license": "MIT",
+  "engines": { "node": ">=22" },
+  "packageManager": "pnpm@12.21.0",
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "typecheck": "pnpm -r typecheck",
+    "test:ui": "pnpm --filter @sendora/ui-kit test",
+    "e2e": "pnpm --filter web e2e"
+  }
+}

@@ -1,0 +1,539 @@
+{
+ "note": "Held out leak set, first run, saved untouched. Same author as the redactor, so not independent. The first run counted a short core as a leak when it appeared glued across two words (a flaw of the test, found afterwards and fixed in tools/eval_redaction.py); that can only have raised the leak count slightly.",
+ "known_name": {
+  "name_known": true,
+  "planted": 600,
+  "leaked": 39,
+  "leak_rate": 0.065,
+  "per_category": {
+   "name": {
+    "planted": 80,
+    "leaked": 13,
+    "leak_rate": 0.163
+   },
+   "email": {
+    "planted": 40,
+    "leaked": 0,
+    "leak_rate": 0.0
+   },
+   "phone": {
+    "planted": 40,
+    "leaked": 0,
+    "leak_rate": 0.0
+   },
+   "address": {
+    "planted": 40,
+    "leaked": 13,
+    "leak_rate": 0.325
+   },
+   "link": {
+    "planted": 80,
+    "leaked": 10,
+    "leak_rate": 0.125
+   },
+   "photo": {
+    "planted": 40,
+    "leaked": 0,
+    "leak_rate": 0.0
+   },
+   "dob_age": {
+    "planted": 40,
+    "leaked": 0,
+    "leak_rate": 0.0
+   },
+   "grad_year": {
+    "planted": 40,
+    "leaked": 0,
+    "leak_rate": 0.0
+   },
+   "pronoun": {
+    "planted": 80,
+    "leaked": 0,
+    "leak_rate": 0.0
+   },
+   "title": {
+    "planted": 40,
+    "leaked": 0,
+    "leak_rate": 0.0
+   },
+   "institution": {
+    "planted": 40,
+    "leaked": 3,
+    "leak_rate": 0.075
+   },
+   "personal": {
+    "planted": 40,
+    "leaked": 0,
+    "leak_rate": 0.0
+   }
+  },
+  "must_keep_phrases": 280,
+  "must_keep_lost": 0,
+  "over_redaction_rate": 0.0,
+  "missed": [
+   {
+    "resume": "L03",
+    "category": "name",
+    "text": "Resume_Oswin_Halvorsen_2026.pdf"
+   },
+   {
+    "resume": "L03",
+    "category": "name",
+    "text": "Prepared by Oswin Halvorsen"
+   },
+   {
+    "resume": "L03",
+    "category": "link",
+    "text": "@ohalvorsen"
+   },
+   {
+    "resume": "L03",
+    "category": "link",
+    "text": "ohalvorsen.example.test"
+   },
+   {
+    "resume": "L05",
+    "category": "name",
+    "text": "L A Z L O       A R D E N W O O D"
+   },
+   {
+    "resume": "L05",
+    "category": "name",
+    "text": "Ardénwóód"
+   },
+   {
+    "resume": "L05",
+    "category": "link",
+    "text": "lardenwood.example.test"
+   },
+   {
+    "resume": "L06",
+    "category": "address",
+    "text": "97 Marlpit Road, Welling Heath, ST 02447"
+   },
+   {
+    "resume": "L07",
+    "category": "institution",
+    "text": "Alumnus of Institute of Applied Studies at Lowmere"
+   },
+   {
+    "resume": "L10",
+    "category": "institution",
+    "text": "Institute of Applied Studies at Lowmere"
+   },
+   {
+    "resume": "L11",
+    "category": "address",
+    "text": "PO Box 2236, Corvale"
+   },
+   {
+    "resume": "L14",
+    "category": "address",
+    "text": "268 Corvale Avenue, Welling Heath, ST 07503"
+   },
+   {
+    "resume": "L18",
+    "category": "name",
+    "text": "Prepared by Briony Yeoman"
+   },
+   {
+    "resume": "L18",
+    "category": "link",
+    "text": "byeoman.example.test"
+   },
+   {
+    "resume": "L19",
+    "category": "address",
+    "text": "48 Corvale Avenue, Corvale, ST 05390"
+   },
+   {
+    "resume": "L20",
+    "category": "name",
+    "text": "DELPHINE GALLOWAY"
+   },
+   {
+    "resume": "L20",
+    "category": "name",
+    "text": "D. Galloway"
+   },
+   {
+    "resume": "L20",
+    "category": "address",
+    "text": "259 Linden Rise, Tarn End, ST 09420"
+   },
+   {
+    "resume": "L20",
+    "category": "link",
+    "text": "dgalloway.example.test"
+   },
+   {
+    "resume": "L21",
+    "category": "address",
+    "text": "275 Marlpit Road, Brackenridge, ST 04482"
+   },
+   {
+    "resume": "L24",
+    "category": "name",
+    "text": "Resume_Edda_Yeoman_2026.pdf"
+   },
+   {
+    "resume": "L24",
+    "category": "address",
+    "text": "150 Bishop's Wharf, Ostmere, ST 07546"
+   },
+   {
+    "resume": "L24",
+    "category": "link",
+    "text": "(in/edda-yeoman)"
+   },
+   {
+    "resume": "L25",
+    "category": "address",
+    "text": "124 Corvale Avenue, Ostmere, ST 05955"
+   },
+   {
+    "resume": "L27",
+    "category": "address",
+    "text": "PO Box 5374, Ostmere"
+   },
+   {
+    "resume": "L28",
+    "category": "institution",
+    "text": "Institute of Applied Studies at Lowmere"
+   },
+   {
+    "resume": "L29",
+    "category": "name",
+    "text": "A N N E L I E S E       Y E O M A N"
+   },
+   {
+    "resume": "L29",
+    "category": "link",
+    "text": "github.com/ayeoman"
+   },
+   {
+    "resume": "L29",
+    "category": "link",
+    "text": "ayeoman.example.test"
+   },
+   {
+    "resume": "L31",
+    "category": "name",
+    "text": "Hartnell, Oswin"
+   },
+   {
+    "resume": "L31",
+    "category": "name",
+    "text": "Page 1 of 2 | Oswin Hartnell | Confidential"
+   },
+   {
+    "resume": "L31",
+    "category": "address",
+    "text": "35 Linden Rise, Brackenridge, ST 05362"
+   },
+   {
+    "resume": "L31",
+    "category": "link",
+    "text": "ohartnell.example.test"
+   },
+   {
+    "resume": "L33",
+    "category": "address",
+    "text": "73 Linden Rise, Brackenridge, ST 09986"
+   },
+   {
+    "resume": "L35",
+    "category": "address",
+    "text": "115 Fennimore Lane, Brackenridge, ST 09492"
+   },
+   {
+    "resume": "L36",
+    "category": "address",
+    "text": "202 Corvale Avenue, Ostmere, ST 09454"
+   },
+   {
+    "resume": "L38",
+    "category": "name",
+    "text": "Beaufort Brannigan"
+   },
+   {
+    "resume": "L38",
+    "category": "name",
+    "text": "Resume_Beaufort_Brannigan_2026.pdf"
+   },
+   {
+    "resume": "L38",
+    "category": "link",
+    "text": "bbrannigan.example.test"
+   }
+  ]
+ },
+ "unknown_name": {
+  "name_known": false,
+  "planted": 600,
+  "leaked": 39,
+  "leak_rate": 0.065,
+  "per_category": {
+   "name": {
+    "planted": 80,
+    "leaked": 13,
+    "leak_rate": 0.163
+   },
+   "email": {
+    "planted": 40,
+    "leaked": 0,
+    "leak_rate": 0.0
+   },
+   "phone": {
+    "planted": 40,
+    "leaked": 0,
+    "leak_rate": 0.0
+   },
+   "address": {
+    "planted": 40,
+    "leaked": 13,
+    "leak_rate": 0.325
+   },
+   "link": {
+    "planted": 80,
+    "leaked": 10,
+    "leak_rate": 0.125
+   },
+   "photo": {
+    "planted": 40,
+    "leaked": 0,
+    "leak_rate": 0.0
+   },
+   "dob_age": {
+    "planted": 40,
+    "leaked": 0,
+    "leak_rate": 0.0
+   },
+   "grad_year": {
+    "planted": 40,
+    "leaked": 0,
+    "leak_rate": 0.0
+   },
+   "pronoun": {
+    "planted": 80,
+    "leaked": 0,
+    "leak_rate": 0.0
+   },
+   "title": {
+    "planted": 40,
+    "leaked": 0,
+    "leak_rate": 0.0
+   },
+   "institution": {
+    "planted": 40,
+    "leaked": 3,
+    "leak_rate": 0.075
+   },
+   "personal": {
+    "planted": 40,
+    "leaked": 0,
+    "leak_rate": 0.0
+   }
+  },
+  "must_keep_phrases": 280,
+  "must_keep_lost": 0,
+  "over_redaction_rate": 0.0,
+  "missed": [
+   {
+    "resume": "L03",
+    "category": "name",
+    "text": "Resume_Oswin_Halvorsen_2026.pdf"
+   },
+   {
+    "resume": "L03",
+    "category": "name",
+    "text": "Prepared by Oswin Halvorsen"
+   },
+   {
+    "resume": "L03",
+    "category": "link",
+    "text": "@ohalvorsen"
+   },
+   {
+    "resume": "L03",
+    "category": "link",
+    "text": "ohalvorsen.example.test"
+   },
+   {
+    "resume": "L05",
+    "category": "name",
+    "text": "L A Z L O       A R D E N W O O D"
+   },
+   {
+    "resume": "L05",
+    "category": "name",
+    "text": "Ardénwóód"
+   },
+   {
+    "resume": "L05",
+    "category": "link",
+    "text": "lardenwood.example.test"
+   },
+   {
+    "resume": "L06",
+    "category": "address",
+    "text": "97 Marlpit Road, Welling Heath, ST 02447"
+   },
+   {
+    "resume": "L07",
+    "category": "institution",
+    "text": "Alumnus of Institute of Applied Studies at Lowmere"
+   },
+   {
+    "resume": "L10",
+    "category": "institution",
+    "text": "Institute of Applied Studies at Lowmere"
+   },
+   {
+    "resume": "L11",
+    "category": "address",
+    "text": "PO Box 2236, Corvale"
+   },
+   {
+    "resume": "L14",
+    "category": "address",
+    "text": "268 Corvale Avenue, Welling Heath, ST 07503"
+   },
+   {
+    "resume": "L18",
+    "category": "name",
+    "text": "Prepared by Briony Yeoman"
+   },
+   {
+    "resume": "L18",
+    "category": "link",
+    "text": "byeoman.example.test"
+   },
+   {
+    "resume": "L19",
+    "category": "address",
+    "text": "48 Corvale Avenue, Corvale, ST 05390"
+   },
+   {
+    "resume": "L20",
+    "category": "name",
+    "text": "DELPHINE GALLOWAY"
+   },
+   {
+    "resume": "L20",
+    "category": "name",
+    "text": "D. Galloway"
+   },
+   {
+    "resume": "L20",
+    "category": "address",
+    "text": "259 Linden Rise, Tarn End, ST 09420"
+   },
+   {
+    "resume": "L20",
+    "category": "link",
+    "text": "dgalloway.example.test"
+   },
+   {
+    "resume": "L21",
+    "category": "address",
+    "text": "275 Marlpit Road, Brackenridge, ST 04482"
+   },
+   {
+    "resume": "L24",
+    "category": "name",
+    "text": "Resume_Edda_Yeoman_2026.pdf"
+   },
+   {
+    "resume": "L24",
+    "category": "address",
+    "text": "150 Bishop's Wharf, Ostmere, ST 07546"
+   },
+   {
+    "resume": "L24",
+    "category": "link",
+    "text": "(in/edda-yeoman)"
+   },
+   {
+    "resume": "L25",
+    "category": "address",
+    "text": "124 Corvale Avenue, Ostmere, ST 05955"
+   },
+   {
+    "resume": "L27",
+    "category": "address",
+    "text": "PO Box 5374, Ostmere"
+   },
+   {
+    "resume": "L28",
+    "category": "institution",
+    "text": "Institute of Applied Studies at Lowmere"
+   },
+   {
+    "resume": "L29",
+    "category": "name",
+    "text": "A N N E L I E S E       Y E O M A N"
+   },
+   {
+    "resume": "L29",
+    "category": "link",
+    "text": "github.com/ayeoman"
+   },
+   {
+    "resume": "L29",
+    "category": "link",
+    "text": "ayeoman.example.test"
+   },
+   {
+    "resume": "L31",
+    "category": "name",
+    "text": "Hartnell, Oswin"
+   },
+   {
+    "resume": "L31",
+    "category": "name",
+    "text": "Page 1 of 2 | Oswin Hartnell | Confidential"
+   },
+   {
+    "resume": "L31",
+    "category": "address",
+    "text": "35 Linden Rise, Brackenridge, ST 05362"
+   },
+   {
+    "resume": "L31",
+    "category": "link",
+    "text": "ohartnell.example.test"
+   },
+   {
+    "resume": "L33",
+    "category": "address",
+    "text": "73 Linden Rise, Brackenridge, ST 09986"
+   },
+   {
+    "resume": "L35",
+    "category": "address",
+    "text": "115 Fennimore Lane, Brackenridge, ST 09492"
+   },
+   {
+    "resume": "L36",
+    "category": "address",
+    "text": "202 Corvale Avenue, Ostmere, ST 09454"
+   },
+   {
+    "resume": "L38",
+    "category": "name",
+    "text": "Beaufort Brannigan"
+   },
+   {
+    "resume": "L38",
+    "category": "name",
+    "text": "Resume_Beaufort_Brannigan_2026.pdf"
+   },
+   {
+    "resume": "L38",
+    "category": "link",
+    "text": "bbrannigan.example.test"
+   }
+  ]
+ }
+}

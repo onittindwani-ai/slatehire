@@ -1,0 +1,31 @@
+PERSONAL INFORMATION
+  Name: Ananya Fernández
+  Telephone: +44 7700 900135
+  E-mail: ananya.fernandez@inbox.example
+
+WORK EXPERIENCE
+  Employer: Community Food Bank (volunteer)
+  Position: Participant
+  Duration: 1 year
+  Main activities and responsibilities:
+    - Tried to make the work go faster.
+    - Built a daily shortage and late order report in spreadsheets that let the manager avoid 17 expedited shipments a month.
+
+  Employer: Self directed portfolio project
+  Position: Participant
+  Duration: 1 year
+  Main activities and responsibilities:
+    - Held daily safety briefings and checked forklift and pallet racking inspection sheets.
+
+  Employer: Evening certificate course project
+  Position: Participant
+  Duration: 1 year
+  Main activities and responsibilities:
+    - Led 50 people across three shifts, promoted 5 of them to team lead and kept staff turnover under 8 percent for 3 years.
+
+EDUCATION AND TRAINING
+  Logistics, École Supérieure de Marvelle, 2005
+
+JOB RELATED SKILLS
+  cycle counts, shift management, SAP
+

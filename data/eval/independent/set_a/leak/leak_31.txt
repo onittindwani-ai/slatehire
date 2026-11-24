@@ -1,0 +1,37 @@
+Resume of Latoya Okafor  (page 1 of 2)
+latoya.okafor@inbox.example
+555-0130-7230
+
+Address: 760 Orchard Street, Ashford, NC 27502
+Date of birth: 1989-03-18
+Age: 37
+Pronouns: she/her
+Family: married with one child
+Nationality: Polish
+Religion: Muslim
+Photo: headshot_okafor.jpg
+
+SUMMARY
+Backend Software Engineer with solid experience. 
+She led the work described below and received strong reviews.
+
+EXPERIENCE
+
+* Designed REST APIs for the inventory service that handled 12 million requests a day with 20 percent fewer errors.
+* Wrote SQL queries and migrations for a MySQL database behind the inventory service.
+* Cut incident response time for inventory from 90 minutes to 15 by adding dashboards and runbooks.
+* Wrote unit tests for new features and ran them in the build pipeline.
+
+SKILLS: mentoring, TDD, microservices, MySQL
+
+EDUCATION
+Computer Science, Calder Valley College, Graduated: 2011
+Earlier study: Redwood Institute of Technology, Class of 2007
+
+LINKS
+github.com/latoyaokafor
+https://www.linkedin.com/in/latoyaokafor
+
+REFERENCE: Nadia Sandoval, former manager, 555-0180-7280
+
+Latoya Okafor  |  latoya.okafor@inbox.example  |  555-0130-7230

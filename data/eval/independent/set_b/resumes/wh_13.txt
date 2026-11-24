@@ -1,0 +1,21 @@
+Application form answers: Lucía Varga (lucia.varga@inbox.example, +44 7700 900142)
+
+
+
+Q: Which role are you applying for?
+A: Warehouse Operations Supervisor
+
+Q: List your skills.
+A: picks per hour
+
+Q: What did you do at Ironwood Partners (3 years, Warehouse Operations Supervisor)?
+A: Supervised a few workers. Chaired the site safety committee for 2 years, led the audit that closed 14 findings, and took the site to 30 months without a lost time injury.
+
+Q: What did you do at Cobalt Ridge Ltd (2 years, Assistant Warehouse Operations Supervisor)?
+A: Ran weekly cycle counts and corrected stock records in the warehouse system.
+
+Q: What did you do at Northgate Systems (18 months, Junior Warehouse Operations Supervisor)?
+A: Raised picks per hour by 18 percent after redesigning the pick paths in 6 zones.
+
+Q: Education?
+A: Logistics, Hartley Polytechnic, 2008

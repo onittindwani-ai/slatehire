@@ -1,0 +1,23 @@
+Perpetua Eskildsen
+<img src="logo.png" alt="Contact perpetua.eskildsen@mail.example.test">
+Phone: (555) 010-0143
+Brackenridge, ST 05636
+linkedin.com/in/perpetua-eskildsen-6954
+Date of birth: 26 August 1979
+
+| Summary |
+Reliable and steady worker who likes clear goals.
+
+| Experience |
+Data Analyst, Pennywhistle Retail, 2018 to 2026
+| Shadowed a senior colleague who handled simple statistics.
+| Shadowed a senior colleague who handled SQL queries.
+| Improved cleaning data, removing duplicates and validation checks, which cut errors by 18 percent.
+| Covered the front desk during holiday weeks.
+Assistant, Brightwater Cooperative, 2014 to 2018
+| Improved presenting and explaining results to stakeholders with a clear recommendation, which cut errors by 25 percent.
+| Redesigned dashboards, charts and visualizations in Tableau and reduced handling time by 25 percent.
+| Took part in the quarterly safety walk.
+
+| Education |
+B.Sc., Ashgrove State College, 2001

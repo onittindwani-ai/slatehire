@@ -1,0 +1,387 @@
+{
+ "support": {
+  "title": "Customer Support Specialist",
+  "criteria": [
+   {
+    "id": "cs_written",
+    "name": "Written communication with customers",
+    "description": "Evidence of writing clear, kind answers to customers.",
+    "weight": 3,
+    "anchors": {
+     "1": "Has seen writing clear, kind answers to customers done but has not done it alone.",
+     "3": "Has done writing clear, kind answers to customers independently and can give a clear example.",
+     "5": "Has led writing clear, kind answers to customers, can show a measured result and has taught others."
+    },
+    "look_for": [
+     "email",
+     "reply",
+     "replies",
+     "written",
+     "wrote",
+     "writing",
+     "response",
+     "message",
+     "correspondence",
+     "letter",
+     "tone",
+     "wording",
+     "answer"
+    ],
+    "question": "Tell me about a written answer to a customer that you are proud of. What did the customer need, what did you write, and what happened next?"
+   },
+   {
+    "id": "cs_diagnosis",
+    "name": "Troubleshooting and diagnosing problems",
+    "description": "Evidence of finding the cause of a customer's problem.",
+    "weight": 3,
+    "anchors": {
+     "1": "Has seen finding the cause of a customer's problem done but has not done it alone.",
+     "3": "Has done finding the cause of a customer's problem independently and can give a clear example.",
+     "5": "Has led finding the cause of a customer's problem, can show a measured result and has taught others."
+    },
+    "look_for": [
+     "troubleshoot",
+     "diagnos",
+     "root cause",
+     "root-cause",
+     "cause of",
+     "investigat",
+     "debug",
+     "logs",
+     "fault",
+     "narrow",
+     "trace",
+     "fix"
+    ],
+    "question": "Walk me through a problem you could not see the cause of at first. How did you narrow it down?"
+   },
+   {
+    "id": "cs_tools",
+    "name": "Support tools and systems",
+    "description": "Evidence of working in a ticket queue, chat and a knowledge base.",
+    "weight": 2,
+    "anchors": {
+     "1": "Has seen working in a ticket queue, chat and a knowledge base done but has not done it alone.",
+     "3": "Has done working in a ticket queue, chat and a knowledge base independently and can give a clear example.",
+     "5": "Has led working in a ticket queue, chat and a knowledge base, can show a measured result and has taught others."
+    },
+    "look_for": [
+     "ticket",
+     "helpdesk",
+     "help desk",
+     "zendesk",
+     "intercom",
+     "freshdesk",
+     "crm",
+     "knowledge base",
+     "live chat",
+     "queue",
+     "inbox",
+     "wiki",
+     "platform",
+     "saved repl",
+     "macro"
+    ],
+    "question": "Which support tools have you used every day, and how did you keep records useful for the next person?"
+   },
+   {
+    "id": "cs_deescalate",
+    "name": "Calm handling of upset customers",
+    "description": "Evidence of calming a customer who is upset.",
+    "weight": 2,
+    "anchors": {
+     "1": "Has seen calming a customer who is upset done but has not done it alone.",
+     "3": "Has done calming a customer who is upset independently and can give a clear example.",
+     "5": "Has led calming a customer who is upset, can show a measured result and has taught others."
+    },
+    "look_for": [
+     "upset",
+     "angry",
+     "complaint",
+     "de-escalat",
+     "calm",
+     "frustrat",
+     "difficult customer",
+     "escalat",
+     "dispute",
+     "heated",
+     "apolog"
+    ],
+    "question": "Describe a conversation with a very upset customer. What did you say first, and how did it end?"
+   },
+   {
+    "id": "cs_improve",
+    "name": "Improving how the team works",
+    "description": "Evidence of improving a support process or help article.",
+    "weight": 1,
+    "anchors": {
+     "1": "Has seen improving a support process or help article done but has not done it alone.",
+     "3": "Has done improving a support process or help article independently and can give a clear example.",
+     "5": "Has led improving a support process or help article, can show a measured result and has taught others."
+    },
+    "look_for": [
+     "improv",
+     "process",
+     "help article",
+     "help page",
+     "documentation",
+     "feedback",
+     "report",
+     "template",
+     "reduce",
+     "streamlin",
+     "workflow"
+    ],
+    "question": "Tell me about a change you made so the same customer problem happened less often."
+   }
+  ]
+ },
+ "ops": {
+  "title": "Operations Coordinator",
+  "criteria": [
+   {
+    "id": "ops_schedule",
+    "name": "Scheduling and coordinating people and deliveries",
+    "description": "Evidence of planning schedules for people and deliveries.",
+    "weight": 3,
+    "anchors": {
+     "1": "Has seen planning schedules for people and deliveries done but has not done it alone.",
+     "3": "Has done planning schedules for people and deliveries independently and can give a clear example.",
+     "5": "Has led planning schedules for people and deliveries, can show a measured result and has taught others."
+    },
+    "look_for": [
+     "schedule",
+     "scheduling",
+     "calendar",
+     "shift",
+     "rota",
+     "timetable",
+     "plan",
+     "dispatch",
+     "coordinat",
+     "deliver",
+     "logistic"
+    ],
+    "question": "Tell me about a week when the plan fell apart. How did you re-plan it?"
+   },
+   {
+    "id": "ops_vendor",
+    "name": "Working with suppliers",
+    "description": "Evidence of managing suppliers and orders.",
+    "weight": 3,
+    "anchors": {
+     "1": "Has seen managing suppliers and orders done but has not done it alone.",
+     "3": "Has done managing suppliers and orders independently and can give a clear example.",
+     "5": "Has led managing suppliers and orders, can show a measured result and has taught others."
+    },
+    "look_for": [
+     "vendor",
+     "supplier",
+     "contract",
+     "negotiat",
+     "purchase order",
+     "quote",
+     "procure",
+     "orders"
+    ],
+    "question": "Describe a supplier problem you had to sort out and how you handled the conversation."
+   },
+   {
+    "id": "ops_data",
+    "name": "Tracking work in spreadsheets and reports",
+    "description": "Evidence of tracking work and stock in spreadsheets.",
+    "weight": 2,
+    "anchors": {
+     "1": "Has seen tracking work and stock in spreadsheets done but has not done it alone.",
+     "3": "Has done tracking work and stock in spreadsheets independently and can give a clear example.",
+     "5": "Has led tracking work and stock in spreadsheets, can show a measured result and has taught others."
+    },
+    "look_for": [
+     "spreadsheet",
+     "excel",
+     "sheet",
+     "pivot",
+     "formula",
+     "tracker",
+     "tracking",
+     "report",
+     "inventory",
+     "stock",
+     "dashboard",
+     "workbook"
+    ],
+    "question": "Show me how you keep track of orders or stock. How do you avoid mistakes?"
+   },
+   {
+    "id": "ops_process",
+    "name": "Writing and improving routines",
+    "description": "Evidence of writing down and improving a routine.",
+    "weight": 2,
+    "anchors": {
+     "1": "Has seen writing down and improving a routine done but has not done it alone.",
+     "3": "Has done writing down and improving a routine independently and can give a clear example.",
+     "5": "Has led writing down and improving a routine, can show a measured result and has taught others."
+    },
+    "look_for": [
+     "procedure",
+     "process",
+     "standard operating",
+     "sop",
+     "checklist",
+     "step-by-step",
+     "routine",
+     "instructions",
+     "documented",
+     "workflow"
+    ],
+    "question": "Tell me about a routine you wrote or changed. How did you know it worked?"
+   },
+   {
+    "id": "ops_budget",
+    "name": "Cost awareness",
+    "description": "Evidence of keeping spending within a budget.",
+    "weight": 1,
+    "anchors": {
+     "1": "Has seen keeping spending within a budget done but has not done it alone.",
+     "3": "Has done keeping spending within a budget independently and can give a clear example.",
+     "5": "Has led keeping spending within a budget, can show a measured result and has taught others."
+    },
+    "look_for": [
+     "budget",
+     "cost",
+     "spend",
+     "saving",
+     "expense",
+     "invoice",
+     "forecast",
+     "overcharge"
+    ],
+    "question": "Tell me about a time you found a cost that could be cut. What did you do?"
+   }
+  ]
+ },
+ "analyst": {
+  "title": "Data Analyst",
+  "criteria": [
+   {
+    "id": "da_sql",
+    "name": "Querying data with SQL",
+    "description": "Evidence of writing queries against a database.",
+    "weight": 3,
+    "anchors": {
+     "1": "Has seen writing queries against a database done but has not done it alone.",
+     "3": "Has done writing queries against a database independently and can give a clear example.",
+     "5": "Has led writing queries against a database, can show a measured result and has taught others."
+    },
+    "look_for": [
+     "sql",
+     "query",
+     "queries",
+     "join",
+     "database",
+     "postgres",
+     "mysql",
+     "warehouse",
+     "aggregat"
+    ],
+    "question": "Describe a hard query you wrote. How did you check that the numbers were right?"
+   },
+   {
+    "id": "da_viz",
+    "name": "Charts and dashboards",
+    "description": "Evidence of building charts and dashboards.",
+    "weight": 2,
+    "anchors": {
+     "1": "Has seen building charts and dashboards done but has not done it alone.",
+     "3": "Has done building charts and dashboards independently and can give a clear example.",
+     "5": "Has led building charts and dashboards, can show a measured result and has taught others."
+    },
+    "look_for": [
+     "dashboard",
+     "chart",
+     "visuali",
+     "tableau",
+     "power bi",
+     "bi tool",
+     "looker",
+     "graph",
+     "plot",
+     "report"
+    ],
+    "question": "Tell me about a dashboard you built. Who used it and what did they decide with it?"
+   },
+   {
+    "id": "da_stats",
+    "name": "Statistics and tests",
+    "description": "Evidence of using statistics to compare options.",
+    "weight": 2,
+    "anchors": {
+     "1": "Has seen using statistics to compare options done but has not done it alone.",
+     "3": "Has done using statistics to compare options independently and can give a clear example.",
+     "5": "Has led using statistics to compare options, can show a measured result and has taught others."
+    },
+    "look_for": [
+     "statistic",
+     "significance",
+     "regression",
+     "a/b",
+     "experiment",
+     "hypothesis",
+     "confidence",
+     "probability",
+     "forecast",
+     "test"
+    ],
+    "question": "Describe a time you compared two options with numbers. How sure were you, and why?"
+   },
+   {
+    "id": "da_clean",
+    "name": "Cleaning and checking data",
+    "description": "Evidence of checking data quality.",
+    "weight": 2,
+    "anchors": {
+     "1": "Has seen checking data quality done but has not done it alone.",
+     "3": "Has done checking data quality independently and can give a clear example.",
+     "5": "Has led checking data quality, can show a measured result and has taught others."
+    },
+    "look_for": [
+     "clean",
+     "duplicate",
+     "validation",
+     "data quality",
+     "missing value",
+     "outlier",
+     "audit",
+     "wrong",
+     "format"
+    ],
+    "question": "Tell me about wrong data you found. How did you find it and how did you stop it coming back?"
+   },
+   {
+    "id": "da_story",
+    "name": "Explaining findings to non specialists",
+    "description": "Evidence of explaining results to people who are not analysts.",
+    "weight": 2,
+    "anchors": {
+     "1": "Has seen explaining results to people who are not analysts done but has not done it alone.",
+     "3": "Has done explaining results to people who are not analysts independently and can give a clear example.",
+     "5": "Has led explaining results to people who are not analysts, can show a measured result and has taught others."
+    },
+    "look_for": [
+     "present",
+     "explain",
+     "stakeholder",
+     "executive",
+     "recommend",
+     "story",
+     "non-technical",
+     "briefed",
+     "slides",
+     "communicat",
+     "plain language"
+    ],
+    "question": "Tell me about explaining an analysis to someone who does not work with data. What did they do afterwards?"
+   }
+  ]
+ }
+}

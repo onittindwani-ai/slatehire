@@ -1,0 +1,37 @@
+Resume of Joy Patel  (page 1 of 2)
+joy.patel@inbox.example
+555-0106-7206
+
+Address: 24 Birchwood Terrace, Oakdale, MN 55128
+Date of birth: 07/15/1987
+Age: 39
+Pronouns: she/her
+Marital status: married, two children
+Nationality: Nigerian
+Place of birth: Lagos
+[photo attached: passport style picture]
+
+SUMMARY
+Backend Software Engineer with solid experience. 
+She built the work described below and received strong reviews.
+
+EXPERIENCE
+
+* Built and maintained REST endpoints for the inventory service using Python.
+* Led incident response for inventory for 5 years, ran 11 post incident reviews and drove the change that moved availability from 99.5 to 99.95 percent.
+* Wrote SQL queries and migrations for a PostgreSQL database behind the inventory service.
+* Mentored 8 engineers into promotions, ran the weekly design review for 6 engineers, and wrote the onboarding guide every new hire uses.
+
+SKILLS: incident response, monitoring, GraphQL, TDD
+
+EDUCATION
+Computer Science, Northfield Community College, Graduated: 2008
+Earlier study: Hollis Bay University, Class of 2004
+
+LINKS
+https://joypatel.portfolio.example
+linkedin.com/in/joypatel-10a
+
+REFERENCE: Tyrone Okafor, former manager, 555-0156-7256
+
+Joy Patel  |  joy.patel@inbox.example  |  555-0106-7206

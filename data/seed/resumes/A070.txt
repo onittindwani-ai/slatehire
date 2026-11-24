@@ -1,0 +1,23 @@
+Perpetua Ardenwood
+<img src="logo.png" alt="Contact perpetua.ardenwood@mail.example.test">
+Phone: (555) 010-0161
+Brackenridge, ST 01645
+linkedin.com/in/perpetua-ardenwood-2880
+![Photo of Perpetua](photo.jpg)
+
+| Summary |
+Reliable and steady worker who likes clear goals.
+
+| Experience |
+Data Analyst, Quillon Software, 2018 to 2026
+| Responsible for statistics, significance tests and experiment design across the team, every week.
+| Redesigned presenting and explaining results to stakeholders with a clear recommendation and reduced handling time by 18 percent.
+| Shadowed a senior colleague who handled SQL queries.
+| Welcomed visitors and signed them in.
+Assistant, Greylock Utilities, 2014 to 2018
+| Redesigned dashboards, charts and visualizations in Tableau and reduced handling time by 18 percent.
+| Observed cleaning exports during my first weeks and read about how it is done.
+| Welcomed visitors and signed them in.
+
+| Education |
+B.Sc., Calder Bay Polytechnic, 1996

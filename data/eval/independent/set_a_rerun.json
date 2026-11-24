@@ -1,0 +1,916 @@
+{
+ "note": "Independent set, written by agents who never saw the code. Rules stand in, not a language model.",
+ "set": "set_a",
+ "scoring": {
+  "resumes": 60,
+  "pairs": 300,
+  "exact": 0.437,
+  "within_one": 0.82,
+  "by_key_level": {
+   "1": {
+    "pairs": 87,
+    "exact": 0.747,
+    "within_one": 0.943,
+    "mean_got": 1.33
+   },
+   "2": {
+    "pairs": 59,
+    "exact": 0.0,
+    "within_one": 0.949,
+    "mean_got": 1.29
+   },
+   "3": {
+    "pairs": 54,
+    "exact": 0.407,
+    "within_one": 0.704,
+    "mean_got": 3
+   },
+   "4": {
+    "pairs": 58,
+    "exact": 0.379,
+    "within_one": 0.69,
+    "mean_got": 3.5
+   },
+   "5": {
+    "pairs": 42,
+    "exact": 0.524,
+    "within_one": 0.714,
+    "mean_got": 3.81
+   }
+  },
+  "by_archetype": {
+   "changer": {
+    "pairs": 30,
+    "exact": 0.433,
+    "within_one": 0.867
+   },
+   "gap": {
+    "pairs": 30,
+    "exact": 0.4,
+    "within_one": 0.8
+   },
+   "inject": {
+    "pairs": 30,
+    "exact": 0.233,
+    "within_one": 0.8
+   },
+   "long": {
+    "pairs": 30,
+    "exact": 0.433,
+    "within_one": 0.867
+   },
+   "nontrad": {
+    "pairs": 30,
+    "exact": 0.233,
+    "within_one": 0.8
+   },
+   "prose": {
+    "pairs": 30,
+    "exact": 0.367,
+    "within_one": 0.667
+   },
+   "short": {
+    "pairs": 30,
+    "exact": 0.467,
+    "within_one": 0.9
+   },
+   "standard": {
+    "pairs": 30,
+    "exact": 0.467,
+    "within_one": 0.8
+   },
+   "stuffed": {
+    "pairs": 30,
+    "exact": 0.933,
+    "within_one": 0.967
+   },
+   "table": {
+    "pairs": 30,
+    "exact": 0.4,
+    "within_one": 0.733
+   }
+  },
+  "confusion_key_by_got": {
+   "1": {
+    "1": 65,
+    "2": 17,
+    "3": 3,
+    "4": 2,
+    "5": 0
+   },
+   "2": {
+    "1": 53,
+    "2": 0,
+    "3": 3,
+    "4": 1,
+    "5": 2
+   },
+   "3": {
+    "1": 8,
+    "2": 8,
+    "3": 22,
+    "4": 8,
+    "5": 8
+   },
+   "4": {
+    "1": 9,
+    "2": 9,
+    "3": 1,
+    "4": 22,
+    "5": 17
+   },
+   "5": {
+    "1": 7,
+    "2": 4,
+    "3": 1,
+    "4": 8,
+    "5": 22
+   }
+  },
+  "spearman_per_criterion": {
+   "computed": 15,
+   "mean": 0.643,
+   "median": 0.71,
+   "min": 0.089,
+   "not_computable": 0
+  },
+  "spearman_weighted_total_by_role": {
+   "be": 0.62,
+   "mk": 0.769,
+   "rn": 0.65
+  },
+  "evidence": {
+   "quotes_shown": 222,
+   "invalid": 0,
+   "valid_percent": 100.0,
+   "items_rejected_by_the_check": 0,
+   "quote_overlaps_key_evidence_for_levels_3_to_5": 0.892,
+   "levels_3_to_5_with_a_quote_checked": 130
+  },
+  "no_evidence": {
+   "key_level_1": 87,
+   "reported_not_found": 0.747,
+   "predicted_level_1": 0.747,
+   "overclaims_level_3_or_more": 5
+  },
+  "keyword_stuffed": {
+   "pairs": 30,
+   "exact": 0.933,
+   "within_one": 0.967,
+   "overclaims_level_3_or_more_where_key_is_1": 0
+  },
+  "instruction_injection": {
+   "resumes": 6,
+   "lines": 6,
+   "lines_flagged": 6,
+   "quotes_from_instruction_lines": 0,
+   "totals_rose": 0,
+   "criteria_rose": 0,
+   "compared": 6,
+   "lines_flagged_rate": 1.0,
+   "agreement_with_key": {
+    "pairs": 30,
+    "exact": 0.233,
+    "within_one": 0.8
+   }
+  },
+  "probes": {
+   "appended_instruction_lines": {
+    "resumes": 60,
+    "totals_rose": 0,
+    "criteria_rose": 0,
+    "lines_flagged": 180,
+    "lines": 180,
+    "lines_flagged_rate": 1.0
+   },
+   "appended_keyword_line": {
+    "resumes": 60,
+    "totals_rose": 0,
+    "criteria_rose": 0
+   }
+  },
+  "employment_gap": {
+   "pairs": 30,
+   "exact": 0.4,
+   "within_one": 0.8
+  },
+  "mean_weighted_total_gap_to_key_points": {
+   "be": 10.1,
+   "mk": 6.1,
+   "rn": 11.1
+  },
+  "misses": [
+   {
+    "resume": "resumes/be_01.txt",
+    "criterion": "testing_quality",
+    "role": "be",
+    "archetype": "standard",
+    "key": 5,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/be_01.txt",
+    "criterion": "collab",
+    "role": "be",
+    "archetype": "standard",
+    "key": 4,
+    "got": 2,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/be_03.txt",
+    "criterion": "collab",
+    "role": "be",
+    "archetype": "table",
+    "key": 1,
+    "got": 3,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/be_05.txt",
+    "criterion": "testing_quality",
+    "role": "be",
+    "archetype": "gap",
+    "key": 4,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/be_05.txt",
+    "criterion": "collab",
+    "role": "be",
+    "archetype": "gap",
+    "key": 3,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/be_06.txt",
+    "criterion": "testing_quality",
+    "role": "be",
+    "archetype": "nontrad",
+    "key": 5,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/be_06.txt",
+    "criterion": "collab",
+    "role": "be",
+    "archetype": "nontrad",
+    "key": 4,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/be_10.txt",
+    "criterion": "testing_quality",
+    "role": "be",
+    "archetype": "long",
+    "key": 4,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/be_11.txt",
+    "criterion": "testing_quality",
+    "role": "be",
+    "archetype": "standard",
+    "key": 5,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/be_11.txt",
+    "criterion": "collab",
+    "role": "be",
+    "archetype": "standard",
+    "key": 4,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/be_15.txt",
+    "criterion": "testing_quality",
+    "role": "be",
+    "archetype": "nontrad",
+    "key": 4,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/be_17.txt",
+    "criterion": "collab",
+    "role": "be",
+    "archetype": "inject",
+    "key": 4,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/be_20.txt",
+    "criterion": "testing_quality",
+    "role": "be",
+    "archetype": "gap",
+    "key": 4,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/be_20.txt",
+    "criterion": "collab",
+    "role": "be",
+    "archetype": "gap",
+    "key": 3,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/mk_01.txt",
+    "criterion": "campaign",
+    "role": "mk",
+    "archetype": "standard",
+    "key": 1,
+    "got": 4,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/mk_02.txt",
+    "criterion": "campaign",
+    "role": "mk",
+    "archetype": "prose",
+    "key": 2,
+    "got": 5,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/mk_02.txt",
+    "criterion": "tools",
+    "role": "mk",
+    "archetype": "prose",
+    "key": 3,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/mk_03.txt",
+    "criterion": "campaign",
+    "role": "mk",
+    "archetype": "table",
+    "key": 3,
+    "got": 5,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/mk_03.txt",
+    "criterion": "content",
+    "role": "mk",
+    "archetype": "table",
+    "key": 5,
+    "got": 2,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/mk_03.txt",
+    "criterion": "coordination",
+    "role": "mk",
+    "archetype": "table",
+    "key": 1,
+    "got": 3,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/mk_05.txt",
+    "criterion": "coordination",
+    "role": "mk",
+    "archetype": "gap",
+    "key": 3,
+    "got": 5,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/mk_06.txt",
+    "criterion": "coordination",
+    "role": "mk",
+    "archetype": "nontrad",
+    "key": 4,
+    "got": 2,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/mk_10.txt",
+    "criterion": "coordination",
+    "role": "mk",
+    "archetype": "long",
+    "key": 3,
+    "got": 5,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/mk_11.txt",
+    "criterion": "campaign",
+    "role": "mk",
+    "archetype": "standard",
+    "key": 1,
+    "got": 4,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/mk_12.txt",
+    "criterion": "campaign",
+    "role": "mk",
+    "archetype": "prose",
+    "key": 2,
+    "got": 5,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/mk_12.txt",
+    "criterion": "tools",
+    "role": "mk",
+    "archetype": "prose",
+    "key": 3,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/mk_13.txt",
+    "criterion": "campaign",
+    "role": "mk",
+    "archetype": "table",
+    "key": 3,
+    "got": 5,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/mk_13.txt",
+    "criterion": "content",
+    "role": "mk",
+    "archetype": "table",
+    "key": 5,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/mk_16.txt",
+    "criterion": "tools",
+    "role": "mk",
+    "archetype": "stuffed",
+    "key": 3,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/mk_17.txt",
+    "criterion": "campaign",
+    "role": "mk",
+    "archetype": "inject",
+    "key": 2,
+    "got": 4,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/mk_18.txt",
+    "criterion": "coordination",
+    "role": "mk",
+    "archetype": "short",
+    "key": 1,
+    "got": 3,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/mk_20.txt",
+    "criterion": "coordination",
+    "role": "mk",
+    "archetype": "gap",
+    "key": 3,
+    "got": 5,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/rn_02.txt",
+    "criterion": "safety",
+    "role": "rn",
+    "archetype": "prose",
+    "key": 4,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/rn_02.txt",
+    "criterion": "communication",
+    "role": "rn",
+    "archetype": "prose",
+    "key": 3,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/rn_02.txt",
+    "criterion": "teamwork",
+    "role": "rn",
+    "archetype": "prose",
+    "key": 5,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/rn_03.txt",
+    "criterion": "patient_care",
+    "role": "rn",
+    "archetype": "table",
+    "key": 3,
+    "got": 5,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/rn_04.txt",
+    "criterion": "patient_care",
+    "role": "rn",
+    "archetype": "changer",
+    "key": 4,
+    "got": 2,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/rn_04.txt",
+    "criterion": "communication",
+    "role": "rn",
+    "archetype": "changer",
+    "key": 5,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/rn_06.txt",
+    "criterion": "documentation",
+    "role": "rn",
+    "archetype": "nontrad",
+    "key": 5,
+    "got": 2,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/rn_08.txt",
+    "criterion": "patient_care",
+    "role": "rn",
+    "archetype": "inject",
+    "key": 3,
+    "got": 5,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/rn_08.txt",
+    "criterion": "safety",
+    "role": "rn",
+    "archetype": "inject",
+    "key": 4,
+    "got": 2,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/rn_09.txt",
+    "criterion": "patient_care",
+    "role": "rn",
+    "archetype": "short",
+    "key": 4,
+    "got": 2,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/rn_12.txt",
+    "criterion": "safety",
+    "role": "rn",
+    "archetype": "prose",
+    "key": 4,
+    "got": 2,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/rn_12.txt",
+    "criterion": "communication",
+    "role": "rn",
+    "archetype": "prose",
+    "key": 3,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/rn_12.txt",
+    "criterion": "teamwork",
+    "role": "rn",
+    "archetype": "prose",
+    "key": 5,
+    "got": 2,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/rn_13.txt",
+    "criterion": "patient_care",
+    "role": "rn",
+    "archetype": "table",
+    "key": 3,
+    "got": 5,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/rn_14.txt",
+    "criterion": "patient_care",
+    "role": "rn",
+    "archetype": "changer",
+    "key": 4,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/rn_14.txt",
+    "criterion": "communication",
+    "role": "rn",
+    "archetype": "changer",
+    "key": 5,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/rn_15.txt",
+    "criterion": "patient_care",
+    "role": "rn",
+    "archetype": "nontrad",
+    "key": 5,
+    "got": 3,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/rn_17.txt",
+    "criterion": "safety",
+    "role": "rn",
+    "archetype": "inject",
+    "key": 4,
+    "got": 2,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/rn_17.txt",
+    "criterion": "communication",
+    "role": "rn",
+    "archetype": "inject",
+    "key": 3,
+    "got": 1,
+    "state": "not_found"
+   },
+   {
+    "resume": "resumes/rn_18.txt",
+    "criterion": "safety",
+    "role": "rn",
+    "archetype": "short",
+    "key": 4,
+    "got": 2,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/rn_19.txt",
+    "criterion": "patient_care",
+    "role": "rn",
+    "archetype": "long",
+    "key": 4,
+    "got": 2,
+    "state": "scored"
+   },
+   {
+    "resume": "resumes/rn_19.txt",
+    "criterion": "communication",
+    "role": "rn",
+    "archetype": "long",
+    "key": 5,
+    "got": 2,
+    "state": "scored"
+   }
+  ]
+ },
+ "redaction": {
+  "name_unknown": {
+   "planted": 627,
+   "leaked": 0,
+   "leak_rate": 0.0,
+   "occurrences_left": 0,
+   "fragment_leaked": 4,
+   "fragment_leak_rate": 0.006,
+   "hard_obfuscated_planted": 4,
+   "hard_obfuscated_leaked": 0,
+   "per_category": {
+    "name": {
+     "planted": 64,
+     "leaked": 0,
+     "fragment_leaked": 4,
+     "leak_rate": 0.0
+    },
+    "address": {
+     "planted": 28,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "phone": {
+     "planted": 64,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "email": {
+     "planted": 32,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "link": {
+     "planted": 64,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "photo_reference": {
+     "planted": 32,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "date_of_birth": {
+     "planted": 32,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "age": {
+     "planted": 32,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "pronouns": {
+     "planted": 55,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "personal_detail": {
+     "planted": 96,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "institution": {
+     "planted": 64,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "graduation_year": {
+     "planted": 64,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    }
+   },
+   "keep_sentences": 160,
+   "keep_lost": 0,
+   "over_redaction_rate": 0.0,
+   "keep_soft": 32,
+   "keep_soft_lost": 0,
+   "files": 32,
+   "misses": [
+    {
+     "file": "leak/leak_03.txt",
+     "category": "name",
+     "exact_text_left": false,
+     "shape": "Aaa Aaaaaa"
+    },
+    {
+     "file": "leak/leak_07.txt",
+     "category": "name",
+     "exact_text_left": false,
+     "shape": "Aaa Aaaaa"
+    },
+    {
+     "file": "leak/leak_13.txt",
+     "category": "name",
+     "exact_text_left": false,
+     "shape": "Aaaaaaaa Aaa"
+    },
+    {
+     "file": "leak/leak_20.txt",
+     "category": "name",
+     "exact_text_left": false,
+     "shape": "Aaa Aaaaaaaaa"
+    }
+   ]
+  },
+  "name_known": {
+   "planted": 627,
+   "leaked": 0,
+   "leak_rate": 0.0,
+   "occurrences_left": 0,
+   "fragment_leaked": 0,
+   "fragment_leak_rate": 0.0,
+   "hard_obfuscated_planted": 4,
+   "hard_obfuscated_leaked": 0,
+   "per_category": {
+    "name": {
+     "planted": 64,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "address": {
+     "planted": 28,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "phone": {
+     "planted": 64,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "email": {
+     "planted": 32,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "link": {
+     "planted": 64,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "photo_reference": {
+     "planted": 32,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "date_of_birth": {
+     "planted": 32,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "age": {
+     "planted": 32,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "pronouns": {
+     "planted": 55,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "personal_detail": {
+     "planted": 96,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "institution": {
+     "planted": 64,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    },
+    "graduation_year": {
+     "planted": 64,
+     "leaked": 0,
+     "fragment_leaked": 0,
+     "leak_rate": 0.0
+    }
+   },
+   "keep_sentences": 160,
+   "keep_lost": 0,
+   "over_redaction_rate": 0.0,
+   "keep_soft": 32,
+   "keep_soft_lost": 0,
+   "files": 32,
+   "misses": []
+  }
+ },
+ "fairness": {
+  "cases": 8,
+  "steps": 9,
+  "steps_exact": 9,
+  "rates": 9,
+  "rates_ok": 9,
+  "ratios": 9,
+  "ratios_ok": 9,
+  "assessed_ok": 9,
+  "small_ok": 9,
+  "reference_ok": 9,
+  "flagged_ok": 9,
+  "indicator_ok": 9,
+  "cases_exact": 8,
+  "wrong": []
+ }
+}

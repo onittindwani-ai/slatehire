@@ -1,0 +1,13 @@
+Leah Garrison
+Contact: leah.garrison@inbox.example, (555) 0111-7111
+
+I am applying for the Backend Software Engineer position. Key skills: incident response, pair programming.
+
+For 3 years I was a Backend Software Engineer at Cobalt Ridge Ltd. Redesigned the PostgreSQL schema for inventory and added indexes that cut the slowest query from 8 seconds to under one second. Worked on backend services as part of a team.
+
+For 2 years I was a Assistant Backend Software Engineer at Meridian Works. Mentored 4 engineers into promotions, ran the weekly design review for 9 engineers, and wrote the onboarding guide every new hire uses.
+
+For 18 months I was a Junior Backend Software Engineer at Harlow Group. Took part in the on call rotation and fixed production alerts for the inventory service.
+
+I studied Computer Science at University of Westmere and finished in 2013.
+

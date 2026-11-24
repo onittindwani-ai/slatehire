@@ -1,0 +1,14 @@
+Trevor Yeboah
+Contact: trevor.yeboah@postnet.example, 555-0104-7204
+
+I am applying for the Backend Software Engineer position. Key skills: GraphQL, TDD, pair programming.
+
+For 3 years I was a Backend Software Engineer at Harlow Group. Used databases when building features. Reviewed pull requests from teammates and joined planning sessions each sprint.
+
+For 2 years I was a Assistant Backend Software Engineer at Bluepine Services. Raised test coverage on billing from 31 to 88 percent and added integration tests that caught 17 bugs before release.
+
+For 18 months I was a Junior Backend Software Engineer at Meridian Works. Led the API design for the billing platform used by 14 internal teams, serving 900,000 requests a day, and wrote the versioning policy the teams follow.
+
+I studied Computer Science at Hollis Bay University and finished in 2012.
+
+Career break for two years to care for a family member, now returning to work.

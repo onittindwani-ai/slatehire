@@ -1,0 +1,61 @@
+PERSONAL INFORMATION
+  Name: Wei Ncube
+  Telephone: +61 4 0000 7053
+  E-mail: wei.ncube@postnet.example
+
+WORK EXPERIENCE
+  Employer: Summit Lane Co
+  Position: Restaurant Kitchen Manager
+  Duration: 3 years
+  Main activities and responsibilities:
+    - Wrote the food safety plan for 14 kitchens, trained 3 cooks to certification and held the top inspection rating for 5 years.
+    - Reads about local history in spare time.
+    - Attended the monthly all hands meeting.
+    - Won the office table tennis tournament.
+    - Completed the mandatory induction and onboarding for new staff.
+
+  Employer: Bluepine Services
+  Position: Assistant Restaurant Kitchen Manager
+  Duration: 2 years
+  Main activities and responsibilities:
+    - Ran the pass during busy services and called orders to the line.
+    - Joined the company charity run team.
+    - Attended the monthly all hands meeting.
+    - Reads about local history in spare time.
+    - Completed the mandatory induction and onboarding for new staff.
+
+  Employer: Greenfield Operations
+  Position: Junior Restaurant Kitchen Manager
+  Duration: 18 months
+  Main activities and responsibilities:
+    - Reads about local history in spare time.
+    - Holds a full driving licence.
+    - Ordered food for the kitchen.
+    - Won the office table tennis tournament.
+    - Completed the mandatory induction and onboarding for new staff.
+
+  Employer: Meridian Works
+  Position: Restaurant Kitchen Manager
+  Duration: 4 years
+  Main activities and responsibilities:
+    - Led 8 staff, cut late arrivals by 12 percent and filled every shift with cross trained cooks.
+    - Holds a full driving licence.
+    - Enjoys hiking and photography.
+    - Joined the company charity run team.
+    - Completed the mandatory induction and onboarding for new staff.
+
+  Employer: Lanternbay Trading
+  Position: Assistant Restaurant Kitchen Manager
+  Duration: 1 year
+  Main activities and responsibilities:
+    - Joined the company charity run team.
+    - Holds a full driving licence.
+    - Enjoys hiking and photography.
+    - Completed the mandatory induction and onboarding for new staff.
+
+EDUCATION AND TRAINING
+  Culinary Arts, Universidad de Valmoral, 2017
+
+JOB RELATED SKILLS
+  food hygiene, menu development, line cook
+

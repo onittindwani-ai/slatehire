@@ -1,0 +1,22 @@
+BRIAN BELLAMY
+brian.bellamy@postnet.example | (555) 0100-7100 | Rivermead
+
+TARGET ROLE: Backend Software Engineer
+
+SKILLS
+pair programming
+
+EXPERIENCE
+Backend Software Engineer, Harlow Group (3 years)
+* Wrote SQL queries and migrations for a MySQL database behind the search service.
+* Helped when the service had problems in production.
+
+Assistant Backend Software Engineer, Cobalt Ridge Ltd (2 years)
+* Paired with 4 newer engineers each quarter and reviewed about 17 pull requests a month, with faster merges as a result.
+
+Junior Backend Software Engineer, Summit Lane Co (18 months)
+* Set the testing standard for the search team of 14 engineers, built the contract tests every service runs on each merge, and reduced escaped bugs by 35 percent over 3 years.
+
+EDUCATION
+Computer Science, Calder Valley College, 2006
+

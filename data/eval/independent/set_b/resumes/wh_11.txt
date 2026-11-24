@@ -1,0 +1,21 @@
+Application form answers: Lucía Bianchi (lucia.bianchi@mailbox.example, +91 98765 41040)
+
+
+
+Q: Which role are you applying for?
+A: Warehouse Operations Supervisor
+
+Q: List your skills.
+A: cycle counts, forklift safety, shift management
+
+Q: What did you do at Summit Lane Co (3 years, Warehouse Operations Supervisor)?
+A: Led 60 people across three shifts, promoted 5 of them to team lead and kept staff turnover under 8 percent for 2 years. Held daily safety briefings and checked forklift and pallet racking inspection sheets.
+
+Q: What did you do at Harlow Group (2 years, Assistant Warehouse Operations Supervisor)?
+A: Tried to make the work go faster.
+
+Q: What did you do at Greenfield Operations (18 months, Junior Warehouse Operations Supervisor)?
+A: Built a daily shortage and late order report in spreadsheets that let the manager avoid 24 expedited shipments a month.
+
+Q: Education?
+A: Logistics, Mount Alder Teachers College, 2010

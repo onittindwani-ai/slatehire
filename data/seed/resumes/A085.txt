@@ -1,0 +1,22 @@
+Thaddeus Ardenwood
+thaddeus.ardenwood@mail.example.test
+Phone: (555) 010-0132
+Tarn End, ST 07554
+linkedin.com/in/thaddeus-ardenwood-2782
+Date of birth: 19 November 1989
+![Photo of Thaddeus](photo.jpg)
+
+Summary
+She brings steady habits and 12 years of experience.
+
+Experience
+Data Analyst, Marlow & Finch Supply, 2018 to 2026
+Improved SQL queries, joins and aggregations on the warehouse database, which cut errors by 18 percent. Responsible for presenting and explaining results to stakeholders with a clear recommendation across the team, every week. Shadowed a senior colleague who handled cleaning exports. Organised the team lunch rota.
+Assistant, Tidewell Logistics, 2014 to 2018
+Handled routine weekly charts every day. Observed simple statistics during my first weeks and read about how it is done. Covered the front desk during holiday weeks.
+
+Education
+Diploma, Ashgrove State College, 2011
+
+Sincerely,
+Thaddeus

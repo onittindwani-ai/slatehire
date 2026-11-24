@@ -1,0 +1,329 @@
+{
+  "set": "set_b",
+  "rule": "see README",
+  "cases": [
+    {
+      "id": "unlabelled_excluded",
+      "description": "People with no voluntary label are not a group and are not used.",
+      "min_group_size": 5,
+      "steps": {
+        "screen": {
+          "A": {
+            "entered": 20,
+            "advanced": 10
+          },
+          "B": {
+            "entered": 20,
+            "advanced": 12
+          }
+        }
+      },
+      "expected": {
+        "screen": {
+          "rates": {
+            "A": "1/2",
+            "B": "3/5"
+          },
+          "assessed_groups": [
+            "A",
+            "B"
+          ],
+          "not_assessed_small": [],
+          "reference_group": "B",
+          "ratios": {
+            "A": "5/6",
+            "B": "1"
+          },
+          "flagged": [],
+          "indicator": "ok"
+        }
+      },
+      "hand_working": "Unlabelled ignored. A 1/2, B 12/20=3/5. Ref B. A ratio (1/2)/(3/5)=5/6 ok.",
+      "unlabelled": {
+        "screen": {
+          "entered": 30,
+          "advanced": 3
+        }
+      }
+    },
+    {
+      "id": "single_group",
+      "description": "One assessed group only: nothing to compare.",
+      "min_group_size": 5,
+      "steps": {
+        "screen": {
+          "A": {
+            "entered": 25,
+            "advanced": 10
+          }
+        }
+      },
+      "expected": {
+        "screen": {
+          "rates": {
+            "A": "2/5"
+          },
+          "assessed_groups": [
+            "A"
+          ],
+          "not_assessed_small": [],
+          "reference_group": null,
+          "ratios": {},
+          "flagged": [],
+          "indicator": "no_comparison"
+        }
+      },
+      "hand_working": "Only A. Fewer than two assessed groups: no_comparison."
+    },
+    {
+      "id": "unreduced_fractions",
+      "description": "Fractions reduce correctly and ratio is exact.",
+      "min_group_size": 5,
+      "steps": {
+        "screen": {
+          "A": {
+            "entered": 12,
+            "advanced": 7
+          },
+          "B": {
+            "entered": 12,
+            "advanced": 5
+          }
+        }
+      },
+      "expected": {
+        "screen": {
+          "rates": {
+            "A": "7/12",
+            "B": "5/12"
+          },
+          "assessed_groups": [
+            "A",
+            "B"
+          ],
+          "not_assessed_small": [],
+          "reference_group": "A",
+          "ratios": {
+            "A": "1",
+            "B": "5/7"
+          },
+          "flagged": [
+            "B"
+          ],
+          "indicator": "flag"
+        }
+      },
+      "hand_working": "A 7/12, B 5/12. Ratio (5/12)/(7/12)=5/7 about 0.714 flagged."
+    },
+    {
+      "id": "all_equal_rates",
+      "description": "Equal rates across three groups of different sizes.",
+      "min_group_size": 5,
+      "steps": {
+        "screen": {
+          "A": {
+            "entered": 15,
+            "advanced": 6
+          },
+          "B": {
+            "entered": 30,
+            "advanced": 12
+          },
+          "C": {
+            "entered": 10,
+            "advanced": 4
+          }
+        }
+      },
+      "expected": {
+        "screen": {
+          "rates": {
+            "A": "2/5",
+            "B": "2/5",
+            "C": "2/5"
+          },
+          "assessed_groups": [
+            "A",
+            "B",
+            "C"
+          ],
+          "not_assessed_small": [],
+          "reference_group": "A",
+          "ratios": {
+            "A": "1",
+            "B": "1",
+            "C": "1"
+          },
+          "flagged": [],
+          "indicator": "ok"
+        }
+      },
+      "hand_working": "All 2/5. Every ratio 1, none flagged."
+    },
+    {
+      "id": "group_exactly_min_size",
+      "description": "A group exactly at the smallest group size is assessed (size at least min).",
+      "min_group_size": 5,
+      "steps": {
+        "screen": {
+          "A": {
+            "entered": 5,
+            "advanced": 1
+          },
+          "B": {
+            "entered": 20,
+            "advanced": 10
+          }
+        }
+      },
+      "expected": {
+        "screen": {
+          "rates": {
+            "A": "1/5",
+            "B": "1/2"
+          },
+          "assessed_groups": [
+            "A",
+            "B"
+          ],
+          "not_assessed_small": [],
+          "reference_group": "B",
+          "ratios": {
+            "A": "2/5",
+            "B": "1"
+          },
+          "flagged": [
+            "A"
+          ],
+          "indicator": "flag"
+        }
+      },
+      "hand_working": "A 1/5 with n=5>=5 assessed. B 1/2 ref. A ratio (1/5)/(1/2)=2/5 flagged."
+    },
+    {
+      "id": "all_groups_small",
+      "description": "Every group below the smallest group size.",
+      "min_group_size": 5,
+      "steps": {
+        "screen": {
+          "A": {
+            "entered": 4,
+            "advanced": 2
+          },
+          "B": {
+            "entered": 3,
+            "advanced": 1
+          }
+        }
+      },
+      "expected": {
+        "screen": {
+          "rates": {
+            "A": "1/2",
+            "B": "1/3"
+          },
+          "assessed_groups": [],
+          "not_assessed_small": [
+            "A",
+            "B"
+          ],
+          "reference_group": null,
+          "ratios": {},
+          "flagged": [],
+          "indicator": "no_comparison"
+        }
+      },
+      "hand_working": "A n=4, B n=3, both under 5. No assessed group: no_comparison."
+    },
+    {
+      "id": "four_groups_mixed",
+      "description": "Four groups, one very small but at the minimum size.",
+      "min_group_size": 5,
+      "steps": {
+        "screen": {
+          "A": {
+            "entered": 60,
+            "advanced": 24
+          },
+          "B": {
+            "entered": 40,
+            "advanced": 18
+          },
+          "C": {
+            "entered": 20,
+            "advanced": 6
+          },
+          "D": {
+            "entered": 5,
+            "advanced": 2
+          }
+        }
+      },
+      "expected": {
+        "screen": {
+          "rates": {
+            "A": "2/5",
+            "B": "9/20",
+            "C": "3/10",
+            "D": "2/5"
+          },
+          "assessed_groups": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "not_assessed_small": [],
+          "reference_group": "B",
+          "ratios": {
+            "A": "8/9",
+            "B": "1",
+            "C": "2/3",
+            "D": "8/9"
+          },
+          "flagged": [
+            "C"
+          ],
+          "indicator": "flag"
+        }
+      },
+      "hand_working": "A 24/60=2/5, B 18/40=9/20, C 6/20=3/10, D 2/5. Ref B (9/20). A ratio (2/5)/(9/20)=8/9 ok. C ratio (3/10)/(9/20)=2/3 flagged. D ratio 8/9 ok."
+    },
+    {
+      "id": "min_size_changed",
+      "description": "Same counts, smallest group size 10: group B (n=8) is not assessed.",
+      "min_group_size": 10,
+      "steps": {
+        "screen": {
+          "A": {
+            "entered": 30,
+            "advanced": 15
+          },
+          "B": {
+            "entered": 8,
+            "advanced": 2
+          }
+        }
+      },
+      "expected": {
+        "screen": {
+          "rates": {
+            "A": "1/2",
+            "B": "1/4"
+          },
+          "assessed_groups": [
+            "A"
+          ],
+          "not_assessed_small": [
+            "B"
+          ],
+          "reference_group": null,
+          "ratios": {},
+          "flagged": [],
+          "indicator": "no_comparison"
+        }
+      },
+      "hand_working": "B n=8<10 not assessed, only A assessed: no_comparison. B rate 2/8=1/4 still shown."
+    }
+  ]
+}

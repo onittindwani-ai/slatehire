@@ -1,0 +1,37 @@
+PERSONAL INFORMATION
+Surname(s) / First name(s): Ashworth Joy
+Address: 760 Orchard Street, Lakeview, TX 75099
+Telephone: +1 555 0112 7312
+E-mail: joy.ashworth@mailbox.example
+
+Date of birth: 17 June 1986
+Age: 40
+Pronouns: she/her
+Family: married with one child
+Nationality: Polish
+Place of birth: Lagos
+Picture: see attached portrait file ashworth.png
+
+SUMMARY
+Backend Software Engineer with solid experience. 
+She ran the work described below and received strong reviews.
+
+EXPERIENCE
+
+* Wrote SQL queries and migrations for a MySQL database behind the inventory service.
+* Took part in the on call rotation and fixed production alerts for the inventory service.
+* Designed REST APIs for the inventory service that handled 12 million requests a day with 20 percent fewer errors.
+* Wrote unit tests for new features and ran them in the build pipeline.
+
+SKILLS: PostgreSQL, microservices, MySQL, TDD
+
+EDUCATION
+Computer Science, St. Aldric's University, Graduated: 2008
+Earlier study: Northfield Community College, Class of 2004
+
+LINKS
+github.com/joyashworth
+https://www.linkedin.com/in/joyashworth
+
+REFERENCE: Carlos Holloway, former manager, 555-0162-7262
+

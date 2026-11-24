@@ -1,0 +1,5 @@
+Vendor: Ashby API. Read 2026-11-23 with a page fetch (public docs, no account); only the first 100000 of 157750 characters of the page were read.
+Page: https://developers.ashbyhq.com/reference/candidatelist
+candidate_list.json holds what the page states: POST /candidate.list, basic auth, permission candidatesRead, request parameters syncToken and createdAfter, success response keys success, results, moreDataAvailable, syncToken and one example candidate.
+NOT read: the CandidateListRequest schema, so the request fields cursor and limit that the adapter sends, and the response field nextCursor it follows, are UNVERIFIED (the page says the endpoint paginates).
+Never run against the real service.

@@ -1,0 +1,12 @@
+Copied from the sibling repo pipecairn (mock/contracts/calcom/SOURCE.txt), copied 2026-11-23. Original header follows.
+
+Vendor: Cal.com API v2. Read 2026-11-23 with a page fetch (public docs, no account).
+Pages:
+  https://cal.com/docs/api-reference/v2/bookings/create-a-booking
+  https://cal.com/docs/api-reference/v2/slots/get-available-time-slots-for-an-event-type
+What the files hold:
+  booking.json  the documented required header value, required body fields and the example response values (uid, start, end).
+                The request body is ASSEMBLED from the page's per field examples (the page has no single full example).
+  slots.json    the documented header value, query parameters and the example response shape (data keyed by date, objects with start).
+A machine readable OpenAPI file was not fetched. The fetch tool returns page text, so these are excerpts, not the vendor's spec file.
+Never run against the real service.

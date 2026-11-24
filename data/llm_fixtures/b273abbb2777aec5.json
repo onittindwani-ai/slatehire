@@ -1,0 +1,7 @@
+{
+  "text": "{\"shown\": true, \"level\": 3, \"evidence\": \"Responsible for angry customers and heated complaint calls with calm apologies across the team, every week.\", \"reason\": \"Best match: 5 matching term(s); no number is shown.\"}",
+  "input_tokens": 150,
+  "output_tokens": 40,
+  "model": "claude-sonnet-5-5",
+  "prompt_preview": "[task:score_criterion]\nCRITERION_JSON: {\"id\":\"cs_deescalate\",\"name\":\"Calm handling of upset customers\",\"definition\":\"Evidence of calming a customer who is upset"
+}

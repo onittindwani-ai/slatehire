@@ -1,0 +1,35 @@
+Gregory Kowalczyk
+contact: gregory . kowalczyk [at] mailbox dot example
+mobile 555-0121-7221
+
+Date of birth: 08/13/1989
+Age: 37
+Pronouns: he/him
+Family: married with one child
+Nationality: Nigerian
+Health: excellent, no disabilities
+Picture: see attached portrait file kowalczyk.png
+
+SUMMARY
+Backend Software Engineer with solid experience. 
+He ran the work described below and received strong reviews.
+
+EXPERIENCE
+
+Redesigned the PostgreSQL schema for orders and added indexes that cut the slowest query from 12 seconds to under one second.
+Reviewed pull requests from teammates and joined planning sessions each sprint.
+Set the testing standard for the orders team of 6 engineers, built the contract tests every service runs on each merge, and reduced escaped bugs by 20 percent over 4 years.
+Built and maintained REST endpoints for the orders service using Node.
+
+SKILLS: monitoring, data modelling, incident response, mentoring
+
+EDUCATION
+Computer Science, Lakeshore State University, Graduated: 2011
+Earlier study: Calder Valley College, Class of 2007
+
+LINKS
+github.com/gregorykowalczyk
+https://www.linkedin.com/in/gregorykowalczyk
+
+REFERENCE: Joy Kessler, former manager, 555-0171-7271
+

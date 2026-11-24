@@ -1,0 +1,7 @@
+{
+  "text": "{\"shown\": true, \"level\": 4, \"evidence\": \"Redesigned customer emails with written replies in a friendly tone and reduced handling time\", \"reason\": \"Best match: 1 matching term(s); no number is shown.\"}",
+  "input_tokens": 150,
+  "output_tokens": 40,
+  "model": "claude-sonnet-5-5",
+  "prompt_preview": "[task:score_criterion]\nCRITERION_JSON: {\"id\":\"cs_improve\",\"name\":\"Improving how the team works\",\"definition\":\"Evidence of improving a support process or help ar"
+}

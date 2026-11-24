@@ -1,0 +1,24 @@
+PERSONAL INFORMATION
+  Name: Henrik Sharma
+  Telephone: +61 4 0000 7061
+  E-mail: henrik.sharma@postnet.example
+
+WORK EXPERIENCE
+  Employer: Greenfield Operations
+  Position: Restaurant Kitchen Manager
+  Duration: 3 years
+  Main activities and responsibilities:
+    - Brought food cost from 38 to 29 percent of sales by renegotiating 24 supplier prices and trimming the menu.
+
+  Employer: Harlow Group
+  Position: Assistant Restaurant Kitchen Manager
+  Duration: 2 years
+  Main activities and responsibilities:
+    - Worked busy services.
+
+EDUCATION AND TRAINING
+  Culinary Arts, Mount Alder Teachers College, 2005
+
+JOB RELATED SKILLS
+  menu development
+

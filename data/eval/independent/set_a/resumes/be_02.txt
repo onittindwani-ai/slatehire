@@ -1,0 +1,13 @@
+Carlos Pennington
+Contact: carlos.pennington@inbox.example, +1 555 0101 7301
+
+I am applying for the Backend Software Engineer position. Key skills: PostgreSQL, incident response.
+
+For 3 years I was a Backend Software Engineer at Summit Lane Co. Mentored 5 engineers into promotions, ran the weekly design review for 6 engineers, and wrote the onboarding guide every new hire uses. Redesigned the PostgreSQL schema for notifications and added indexes that cut the slowest query from 8 seconds to under one second.
+
+For 2 years I was a Assistant Backend Software Engineer at Cobalt Ridge Ltd. Took part in the on call rotation and fixed production alerts for the notifications service.
+
+For 18 months I was a Junior Backend Software Engineer at Bluepine Services. Worked on backend services as part of a team.
+
+I studied Computer Science at Hollis Bay University and finished in 2012.
+

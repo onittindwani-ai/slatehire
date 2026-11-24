@@ -1,0 +1,25 @@
+Thaddeus Castellane
+thaddeus.castellane@mail.example.test
+Phone: (555) 010-0189
+Brackenridge, ST 08557
+linkedin.com/in/thaddeus-castellane-7791
+![Photo of Thaddeus](photo.jpg)
+
+SUMMARY
+Reliable and steady worker who likes clear goals.
+
+
+SKILLS
+Skills: statistic, significance, regression, a/b, experiment, dashboard, chart, visuali, tableau
+
+EXPERIENCE
+Data Analyst, Brightwater Cooperative, 2021 to 2026
+- Responsible for presenting and explaining results to stakeholders with a clear recommendation across the team, every week.
+- Responsible for SQL queries, joins and aggregations on the warehouse database across the team, every week.
+- Covered the front desk during holiday weeks.
+Assistant, Tidewell Logistics, 2017 to 2021
+- Responsible for cleaning data, removing duplicates and validation checks across the team, every week.
+- Covered the front desk during holiday weeks.
+
+EDUCATION
+B.Sc., Tallis Heath College, 2005

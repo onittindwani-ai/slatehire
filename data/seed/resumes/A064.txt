@@ -1,0 +1,22 @@
+Winola Mirabeau
+<img src="logo.png" alt="Contact winola.mirabeau@mail.example.test">
+Phone: (555) 010-0154
+Brackenridge, ST 05176
+linkedin.com/in/winola-mirabeau-6003
+Date of birth: 2 January 1977
+![Photo of Winola](photo.jpg)
+
+SUMMARY
+Reliable and steady worker who likes clear goals.
+
+EXPERIENCE
+Data Analyst, Quillon Software, 2021 to 2026
+- Handled statistics, significance tests and experiment design independently every day.
+- Handled routine weekly charts every day.
+- Took part in the quarterly safety walk.
+Assistant, Greylock Utilities, 2017 to 2021
+- Responsible for cleaning data, removing duplicates and validation checks across the team, every week.
+- Covered the front desk during holiday weeks.
+
+EDUCATION
+B.A., Veldt University, 1999

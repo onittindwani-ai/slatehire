@@ -1,0 +1,2 @@
+Vendor: Workable API v3. NOT READ. The public reference pages https://workable.readme.io/reference/candidates, https://developers.workable.com/reference/candidates and https://www.workable.com/developers/reference/candidates returned 404 or a redirect to a 404 on 2026-11-23, and no machine readable spec was found.
+Nothing here is a contract: the adapter follows the field names in docs/facts/workable.md (a bearer token, GET /spi/v3/candidates, paging.next) which are UNVERIFIED against a current vendor page. Never run against the real service.

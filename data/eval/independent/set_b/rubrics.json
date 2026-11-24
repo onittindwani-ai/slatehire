@@ -1,0 +1,297 @@
+{
+  "set": "set_b",
+  "note": "Rubrics are unlocked drafts. A person locks them. The signature (criteria, blind setting, redaction version) is created by the system.",
+  "roles": [
+    {
+      "role_id": "wh",
+      "role": "Warehouse Operations Supervisor",
+      "blind": true,
+      "criteria": [
+        {
+          "id": "inventory",
+          "name": "Inventory control",
+          "definition": "Keeps stock records matching what is physically on the shelves.",
+          "weight": 4,
+          "anchors": {
+            "1": "No evidence about inventory control in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in inventory control (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in inventory control with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "cycle counts",
+            "inventory accuracy",
+            "stock control",
+            "WMS"
+          ],
+          "interview_question": "Tell me about a specific time you handled inventory control and what changed because of it."
+        },
+        {
+          "id": "safety",
+          "name": "Workplace safety",
+          "definition": "Prevents injuries and keeps the floor compliant.",
+          "weight": 5,
+          "anchors": {
+            "1": "No evidence about workplace safety in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in workplace safety (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in workplace safety with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "OSHA",
+            "forklift safety",
+            "safety briefings",
+            "hazard reporting"
+          ],
+          "interview_question": "Tell me about a specific time you handled workplace safety and what changed because of it."
+        },
+        {
+          "id": "leadership",
+          "name": "Leading shift teams",
+          "definition": "Schedules, directs and develops a crew.",
+          "weight": 4,
+          "anchors": {
+            "1": "No evidence about leading shift teams in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in leading shift teams (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in leading shift teams with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "team lead",
+            "shift management",
+            "rostering",
+            "coaching"
+          ],
+          "interview_question": "Tell me about a specific time you handled leading shift teams and what changed because of it."
+        },
+        {
+          "id": "throughput",
+          "name": "Throughput and process improvement",
+          "definition": "Moves more orders through the building with the same resources.",
+          "weight": 3,
+          "anchors": {
+            "1": "No evidence about throughput and process improvement in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in throughput and process improvement (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in throughput and process improvement with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "lean",
+            "picks per hour",
+            "process improvement",
+            "KPIs"
+          ],
+          "interview_question": "Tell me about a specific time you handled throughput and process improvement and what changed because of it."
+        },
+        {
+          "id": "systems",
+          "name": "Warehouse systems and reporting",
+          "definition": "Uses software and reports to run the operation.",
+          "weight": 2,
+          "anchors": {
+            "1": "No evidence about warehouse systems and reporting in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in warehouse systems and reporting (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in warehouse systems and reporting with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "WMS",
+            "SAP",
+            "Excel",
+            "reporting"
+          ],
+          "interview_question": "Tell me about a specific time you handled warehouse systems and reporting and what changed because of it."
+        }
+      ]
+    },
+    {
+      "role_id": "te",
+      "role": "Elementary School Teacher",
+      "blind": true,
+      "criteria": [
+        {
+          "id": "planning",
+          "name": "Lesson and unit planning",
+          "definition": "Plans lessons and units that meet the curriculum standards.",
+          "weight": 4,
+          "anchors": {
+            "1": "No evidence about lesson and unit planning in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in lesson and unit planning (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in lesson and unit planning with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "lesson planning",
+            "curriculum",
+            "unit plans",
+            "standards"
+          ],
+          "interview_question": "Tell me about a specific time you handled lesson and unit planning and what changed because of it."
+        },
+        {
+          "id": "classroom",
+          "name": "Classroom management",
+          "definition": "Keeps a calm, safe and productive room.",
+          "weight": 4,
+          "anchors": {
+            "1": "No evidence about classroom management in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in classroom management (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in classroom management with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "classroom management",
+            "routines",
+            "positive behaviour",
+            "discipline"
+          ],
+          "interview_question": "Tell me about a specific time you handled classroom management and what changed because of it."
+        },
+        {
+          "id": "differentiation",
+          "name": "Supporting different learners",
+          "definition": "Adapts teaching for children with different needs.",
+          "weight": 5,
+          "anchors": {
+            "1": "No evidence about supporting different learners in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in supporting different learners (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in supporting different learners with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "differentiation",
+            "special needs",
+            "English learners",
+            "IEP"
+          ],
+          "interview_question": "Tell me about a specific time you handled supporting different learners and what changed because of it."
+        },
+        {
+          "id": "assessment",
+          "name": "Assessment and feedback",
+          "definition": "Measures learning and uses results to change teaching.",
+          "weight": 3,
+          "anchors": {
+            "1": "No evidence about assessment and feedback in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in assessment and feedback (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in assessment and feedback with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "assessment",
+            "feedback",
+            "data driven instruction",
+            "testing"
+          ],
+          "interview_question": "Tell me about a specific time you handled assessment and feedback and what changed because of it."
+        },
+        {
+          "id": "family",
+          "name": "Communication with families",
+          "definition": "Keeps parents informed and involved.",
+          "weight": 3,
+          "anchors": {
+            "1": "No evidence about communication with families in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in communication with families (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in communication with families with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "parent communication",
+            "newsletters",
+            "conferences",
+            "family engagement"
+          ],
+          "interview_question": "Tell me about a specific time you handled communication with families and what changed because of it."
+        }
+      ]
+    },
+    {
+      "role_id": "kc",
+      "role": "Restaurant Kitchen Manager",
+      "blind": true,
+      "criteria": [
+        {
+          "id": "foodsafety",
+          "name": "Food safety and hygiene",
+          "definition": "Keeps food safe and the kitchen inspection ready.",
+          "weight": 5,
+          "anchors": {
+            "1": "No evidence about food safety and hygiene in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in food safety and hygiene (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in food safety and hygiene with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "HACCP",
+            "food hygiene",
+            "temperature logs",
+            "allergens"
+          ],
+          "interview_question": "Tell me about a specific time you handled food safety and hygiene and what changed because of it."
+        },
+        {
+          "id": "cost",
+          "name": "Cost control and ordering",
+          "definition": "Orders well and keeps food cost on target.",
+          "weight": 4,
+          "anchors": {
+            "1": "No evidence about cost control and ordering in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in cost control and ordering (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in cost control and ordering with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "food cost",
+            "ordering",
+            "inventory",
+            "supplier negotiation"
+          ],
+          "interview_question": "Tell me about a specific time you handled cost control and ordering and what changed because of it."
+        },
+        {
+          "id": "team",
+          "name": "Team leadership and scheduling",
+          "definition": "Builds the rota and leads the kitchen crew.",
+          "weight": 3,
+          "anchors": {
+            "1": "No evidence about team leadership and scheduling in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in team leadership and scheduling (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in team leadership and scheduling with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "scheduling",
+            "staff training",
+            "team leadership",
+            "hiring"
+          ],
+          "interview_question": "Tell me about a specific time you handled team leadership and scheduling and what changed because of it."
+        },
+        {
+          "id": "menu",
+          "name": "Menu and quality consistency",
+          "definition": "Produces dishes to a standard every time.",
+          "weight": 3,
+          "anchors": {
+            "1": "No evidence about menu and quality consistency in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in menu and quality consistency (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in menu and quality consistency with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "menu development",
+            "recipe cards",
+            "plating",
+            "consistency"
+          ],
+          "interview_question": "Tell me about a specific time you handled menu and quality consistency and what changed because of it."
+        },
+        {
+          "id": "service",
+          "name": "Service under pressure",
+          "definition": "Keeps the pass moving at the busiest times.",
+          "weight": 3,
+          "anchors": {
+            "1": "No evidence about service under pressure in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in service under pressure (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in service under pressure with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "expediting",
+            "line cook",
+            "dinner service",
+            "high volume"
+          ],
+          "interview_question": "Tell me about a specific time you handled service under pressure and what changed because of it."
+        }
+      ]
+    }
+  ]
+}

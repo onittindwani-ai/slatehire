@@ -1,0 +1,112 @@
+/* Slatehire additions on top of the shared kit. Tokens come from the kit (--sx-*). */
+.cf-page { display: grid; gap: var(--sx-space-3); animation: cf-in var(--sx-dur-page) var(--sx-ease-out) both; }
+@keyframes cf-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.cf-page > *, .cf-two > *, .cf-cols > *, .cf-stats > * { min-width: 0; max-width: 100%; }
+.sx-content { min-width: 0; }
+.cf-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--sx-space-2); }
+.cf-title { font-family: var(--sx-font-serif); font-weight: 400; font-size: var(--sx-text-h2); line-height: 1.1; margin: 0; }
+.cf-sub { color: var(--sx-ink-2); margin: 8px 0 0; max-width: 65ch; }
+.cf-mini { font-size: var(--sx-text-caption); color: var(--sx-ink-2); }
+.cf-h3 { font-size: var(--sx-text-body); margin: 0; font-weight: 600; }
+.cf-banner { min-height: 49px; height: 49px; overflow: hidden; box-sizing: border-box; display: flex; align-items: center; gap: var(--sx-space-2); padding: 8px var(--sx-space-3); font-size: var(--sx-text-caption); border-bottom: 1px solid var(--sx-line); background: var(--sx-warning-bg); color: var(--sx-ink); }
+.cf-banner--danger { background: var(--sx-danger-bg); }
+.cf-banner--live { background: var(--sx-success-bg); }
+.cf-banner--info { background: var(--sx-accent-soft); }
+.cf-grow { flex: 1; min-width: 0; }
+.cf-two { display: grid; grid-template-columns: 61.8fr 38.2fr; gap: var(--sx-space-3); align-items: start; }
+.cf-two--rev { grid-template-columns: 38.2fr 61.8fr; }
+.cf-cols { display: grid; gap: var(--sx-space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.cf-stats { display: grid; gap: var(--sx-space-2); grid-template-columns: repeat(auto-fit, minmax(min(100%, 130px), 1fr)); }
+.cf-stack { display: grid; gap: var(--sx-space-2); }
+.cf-stack > *, .cf-toolbar > * { min-width: 0; max-width: 100%; }
+.cf-toolbar { display: flex; flex-wrap: wrap; align-items: end; gap: var(--sx-space-2); }
+.cf-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 13px; border-radius: 999px; border: 1px solid var(--sx-line-strong); background: var(--sx-surface); font-size: var(--sx-text-caption); color: var(--sx-ink); }
+.cf-select { max-width: 100%; padding: 5px 13px; font-size: var(--sx-text-caption); border-radius: var(--sx-radius-1); border: 1px solid var(--sx-line-strong); background: var(--sx-surface); color: var(--sx-ink); font: inherit; min-height: 44px; }
+.cf-select:focus-visible, .cf-textarea:focus-visible, .cf-editor__input:focus-visible { outline: 2px solid var(--sx-focus); outline-offset: 1px; }
+.cf-textarea { width: 100%; min-height: 110px; resize: vertical; padding: 13px; border-radius: var(--sx-radius-2); border: 1px solid var(--sx-line-strong); background: var(--sx-surface); color: var(--sx-ink); font: inherit; box-sizing: border-box; }
+.cf-field { display: grid; gap: 8px 13px; align-items: center; padding: 8px 13px; border: 1px solid var(--sx-line); border-radius: var(--sx-radius-1); background: var(--sx-surface); }
+.cf-login { min-height: 100dvh; display: grid; place-items: center; padding: var(--sx-space-3); }
+.cf-login__card { width: min(100%, 420px); display: grid; gap: var(--sx-space-3); animation: cf-in var(--sx-dur-page) var(--sx-ease-out) both; }
+.cf-quote { border-left: 3px solid var(--sx-accent); padding-left: var(--sx-space-2); margin: 0; color: var(--sx-ink); overflow-wrap: anywhere; }
+.cf-show-sm { display: none; }
+
+/* resume viewer, score table, rubric editor, tables */
+.cf-resume { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; font-size: 16px; max-width: 65ch; padding: var(--sx-space-2) 0; }
+.cf-id { display: inline-block; padding: 0 8px; margin: 0 1px; border-radius: 6px; background: var(--sx-surface-2); border: 1px solid var(--sx-line-strong); color: var(--sx-ink-2); font-size: 11px; font-weight: 600; letter-spacing: .06em; line-height: 1.7; vertical-align: baseline; animation: cf-fade var(--sx-dur-hover) var(--sx-ease-out) both; }
+.cf-id--shown { background: var(--sx-accent-soft); border-color: var(--sx-accent); color: var(--sx-ink); font-size: inherit; font-weight: 500; letter-spacing: normal; padding: 0 4px; }
+@keyframes cf-fade { from { opacity: 0; } to { opacity: 1; } }
+.cf-ev { color: inherit; border-radius: 3px; border-bottom: 2px solid var(--sx-accent); background: color-mix(in srgb, var(--sx-accent) 14%, transparent); transition: background var(--sx-dur-hover) var(--sx-ease-out); scroll-margin: 120px; }
+.cf-ev--2 { background: color-mix(in srgb, var(--sx-accent) 24%, transparent); }
+.cf-ev--3 { background: color-mix(in srgb, var(--sx-accent) 34%, transparent); border-bottom-style: double; border-bottom-width: 4px; }
+.cf-scores { display: grid; gap: var(--sx-space-2); }
+.cf-total { display: flex; align-items: baseline; gap: 13px; flex-wrap: wrap; }
+.cf-total__n { font-family: var(--sx-font-serif); font-size: var(--sx-text-h1, 55px); line-height: 1; }
+.cf-crit { list-style: none; margin: 0; padding: 0; display: grid; gap: 13px; }
+.cf-crit__row { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 8em); gap: 13px; align-items: center; width: 100%; text-align: left; padding: 8px 13px; min-height: 44px; border: 1px solid var(--sx-line); border-radius: var(--sx-radius-1); background: var(--sx-surface); color: var(--sx-ink); font: inherit; cursor: pointer; transition: background var(--sx-dur-hover) var(--sx-ease-out), border-color var(--sx-dur-hover) var(--sx-ease-out); }
+.cf-crit__row:disabled { cursor: default; opacity: .8; }
+.cf-crit__row[data-active="true"], .cf-crit__row:not(:disabled):hover { background: var(--sx-accent-soft); border-color: var(--sx-accent); }
+.cf-crit__row:focus-visible { outline: 2px solid var(--sx-focus); outline-offset: 1px; }
+.cf-crit__name { display: grid; overflow-wrap: anywhere; }
+.cf-crit__lvl { font-size: var(--sx-text-caption); color: var(--sx-ink-2); text-align: right; }
+.cf-dots { display: inline-flex; gap: 4px; }
+.cf-dots i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--sx-line-strong); background: transparent; transition: background var(--sx-dur-hover) var(--sx-ease-out); }
+.cf-dots i[data-on="true"] { background: var(--sx-accent); border-color: var(--sx-accent); }
+.cf-quote--small { margin: 8px 0 0 13px; font-size: var(--sx-text-caption); }
+.cf-cand { display: grid; gap: 5px; cursor: pointer; min-width: 0; }
+.cf-cand__name { overflow-wrap: anywhere; }
+.cf-cand__foot { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.cf-cand__score { font-family: var(--sx-font-serif); font-size: var(--sx-text-h3, 27px); line-height: 1; }
+.cf-list { margin: 0; padding-left: 21px; display: grid; gap: 8px; overflow-wrap: anywhere; }
+.cf-pre { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; font-size: var(--sx-text-caption); background: var(--sx-surface-2); padding: 13px; border-radius: var(--sx-radius-1); margin: 8px 0; }
+.cf-table { width: 100%; border-collapse: collapse; font-size: var(--sx-text-caption); }
+.cf-table th, .cf-table td { padding: 8px 13px; border-bottom: 1px solid var(--sx-line); text-align: left; vertical-align: top; }
+.cf-table td.sx-num { text-align: right; }
+.cf-steps { margin: 0; padding-left: 21px; display: grid; gap: 8px; }
+.cf-weights { display: flex; height: 13px; border-radius: 13px; overflow: hidden; gap: 2px; }
+.cf-weights span { min-width: 8px; background: var(--sx-accent); opacity: .5; transition: flex-grow var(--sx-dur-chart) var(--sx-ease-out); }
+.cf-weights span[data-i="1"] { opacity: .65; } .cf-weights span[data-i="2"] { opacity: .8; } .cf-weights span[data-i="3"] { opacity: .95; } .cf-weights span[data-i="4"] { opacity: .35; }
+.cf-crit-edit { display: grid; gap: 13px; padding: var(--sx-space-2); border: 1px solid var(--sx-line); border-radius: var(--sx-radius-2); background: var(--sx-surface); min-width: 0; margin: 0; }
+.cf-crit-edit legend { font-weight: 600; padding: 0 8px; }
+.cf-crit-edit__top { display: grid; grid-template-columns: minmax(0, 1fr) 120px; gap: 13px; align-items: end; }
+.cf-tasks { list-style: none; margin: 0; padding: 0; display: grid; gap: 13px; }
+.cf-task { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 13px; align-items: start; min-height: 44px; cursor: pointer; }
+.cf-task input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--sx-accent); }
+
+@media (max-width: 1100px) { .cf-two, .cf-two--rev { grid-template-columns: 1fr; } }
+@media (max-width: 820px) {
+  .cf-hide-sm, .sx-topbar .sx-kbd { display: none; }
+  .cf-title { font-size: var(--sx-text-h3); }
+  .cf-show-sm { display: block; flex: 1; }
+  .cf-crit-edit__top { grid-template-columns: 1fr; }
+  .cf-crit__row { grid-template-columns: minmax(0, 1fr) auto; } .cf-crit__lvl { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .cf-page, .cf-login__card, .cf-id { animation: none; } .cf-weights span, .cf-ev, .cf-dots i, .cf-crit__row { transition: none; } }
+
+/* Round 5: phone top bar, drop zones, table columns, tap targets */
+.cf-iconify { gap: 6px; }
+@media (max-width: 820px) { .cf-iconify { padding-inline: 5px; min-width: 40px; min-height: 40px; } .sx-topbar { gap: 4px; } }
+.cf-drop { display: grid; gap: 8px; justify-items: start; padding: var(--sx-space-2); border: 1.5px dashed var(--sx-line-strong); border-radius: var(--sx-radius-2); background: var(--sx-surface); transition: background var(--sx-dur-hover) var(--sx-ease-out), border-color var(--sx-dur-hover) var(--sx-ease-out); }
+.cf-drop[data-over="true"] { background: var(--sx-accent-soft); border-color: var(--sx-accent); }
+.cf-drop[data-disabled] { opacity: .6; }
+.cf-drop input[type="file"] { max-width: 100%; min-height: 32px; }
+/* Every row of a table with row buttons needs the same width for them, or each row lays its columns out on its own and the headers no longer sit over their columns. */
+.cf-act-88 .sx-table__actions, .cf-act-88 [role="columnheader"][aria-label="Actions"] { width: 88px; }
+.cf-act-88 .sx-table__actions { display: flex; justify-content: flex-end; }
+.cf-page .sx-table__head, .cf-page .sx-table__row { min-width: 900px; } /* below this the flexible columns would shrink to nothing and the names would disappear: the table scrolls sideways instead */
+/* On a touch screen there is no hover to reveal a row's buttons, so they are always shown. */
+@media (hover: none) { .cf-page .sx-table__actions { opacity: 1; } }
+/* A table whose rows open nothing must not say "enter opens". */
+.cf-noopen .sx-table__footer > span:last-child { font-size: 0; }
+.cf-noopen .sx-table__footer > span:last-child::after { content: "j k move"; font-size: 12px; }
+.cf-linkbtn { all: unset; cursor: pointer; }
+.cf-linkbtn:focus-visible { outline: 2px solid var(--sx-focus); outline-offset: 2px; border-radius: 4px; }
+.cf-scroll-x { overflow-x: auto; max-width: 100%; }
+.cf-scroll-x > .cf-table { min-width: 560px; }
+.cf-task input { min-width: 20px; }
+.cf-approval-text { margin: 8px 0; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 12em; overflow: auto; }
+.cf-pagehint { margin: 0; }
+
+/* a note a person must read: lines in a resume that talk to the scorer, a score flag, a difference between scores, the fairness reading */
+.cf-flag { margin: 0; padding: 13px 21px; border-radius: var(--sx-radius-2); border: 1px solid var(--sx-line-strong); border-left: 4px solid var(--sx-accent); background: var(--sx-warning-bg); color: var(--sx-ink); overflow-wrap: anywhere; }
+ul.cf-flag { padding-left: 34px; display: grid; gap: 5px; }
+.cf-flag + .cf-flag { margin-top: 8px; }

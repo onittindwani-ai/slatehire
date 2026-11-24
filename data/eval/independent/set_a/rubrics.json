@@ -1,0 +1,297 @@
+{
+  "set": "set_a",
+  "note": "Rubrics are unlocked drafts. A person locks them. The signature (criteria, blind setting, redaction version) is created by the system.",
+  "roles": [
+    {
+      "role_id": "be",
+      "role": "Backend Software Engineer",
+      "blind": true,
+      "criteria": [
+        {
+          "id": "api_design",
+          "name": "API and service development",
+          "definition": "Builds and maintains server side APIs and services that other software or teams use.",
+          "weight": 5,
+          "anchors": {
+            "1": "No evidence about api and service development in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in api and service development (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in api and service development with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "REST",
+            "GraphQL",
+            "microservices",
+            "API design"
+          ],
+          "interview_question": "Tell me about a specific time you handled api and service development and what changed because of it."
+        },
+        {
+          "id": "data_db",
+          "name": "Databases and data modelling",
+          "definition": "Designs schemas, writes queries and keeps data correct and fast.",
+          "weight": 4,
+          "anchors": {
+            "1": "No evidence about databases and data modelling in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in databases and data modelling (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in databases and data modelling with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "SQL",
+            "PostgreSQL",
+            "MySQL",
+            "data modelling"
+          ],
+          "interview_question": "Tell me about a specific time you handled databases and data modelling and what changed because of it."
+        },
+        {
+          "id": "testing_quality",
+          "name": "Testing and code quality",
+          "definition": "Writes automated tests and keeps the code reviewable and safe to change.",
+          "weight": 3,
+          "anchors": {
+            "1": "No evidence about testing and code quality in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in testing and code quality (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in testing and code quality with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "unit testing",
+            "TDD",
+            "CI",
+            "code review"
+          ],
+          "interview_question": "Tell me about a specific time you handled testing and code quality and what changed because of it."
+        },
+        {
+          "id": "reliability",
+          "name": "Production operations and reliability",
+          "definition": "Keeps services running, responds to incidents and prevents repeats.",
+          "weight": 3,
+          "anchors": {
+            "1": "No evidence about production operations and reliability in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in production operations and reliability (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in production operations and reliability with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "on call",
+            "incident response",
+            "monitoring",
+            "SRE"
+          ],
+          "interview_question": "Tell me about a specific time you handled production operations and reliability and what changed because of it."
+        },
+        {
+          "id": "collab",
+          "name": "Collaboration and mentoring",
+          "definition": "Works with others, reviews their work and helps them grow.",
+          "weight": 2,
+          "anchors": {
+            "1": "No evidence about collaboration and mentoring in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in collaboration and mentoring (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in collaboration and mentoring with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "mentoring",
+            "pair programming",
+            "team player",
+            "code review"
+          ],
+          "interview_question": "Tell me about a specific time you handled collaboration and mentoring and what changed because of it."
+        }
+      ]
+    },
+    {
+      "role_id": "rn",
+      "role": "Registered Nurse, Medical Surgical Unit",
+      "blind": true,
+      "criteria": [
+        {
+          "id": "patient_care",
+          "name": "Direct patient care",
+          "definition": "Delivers safe hands on care to a set of patients each shift.",
+          "weight": 5,
+          "anchors": {
+            "1": "No evidence about direct patient care in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in direct patient care (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in direct patient care with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "patient care",
+            "bedside care",
+            "wound care",
+            "medication administration"
+          ],
+          "interview_question": "Tell me about a specific time you handled direct patient care and what changed because of it."
+        },
+        {
+          "id": "safety",
+          "name": "Medication safety and infection control",
+          "definition": "Prevents harm through checks, correct procedure and reporting.",
+          "weight": 5,
+          "anchors": {
+            "1": "No evidence about medication safety and infection control in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in medication safety and infection control (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in medication safety and infection control with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "infection control",
+            "medication safety",
+            "patient safety",
+            "hand hygiene"
+          ],
+          "interview_question": "Tell me about a specific time you handled medication safety and infection control and what changed because of it."
+        },
+        {
+          "id": "documentation",
+          "name": "Charting and documentation",
+          "definition": "Records care accurately and on time in the patient record.",
+          "weight": 3,
+          "anchors": {
+            "1": "No evidence about charting and documentation in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in charting and documentation (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in charting and documentation with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "charting",
+            "electronic health record",
+            "documentation",
+            "handover"
+          ],
+          "interview_question": "Tell me about a specific time you handled charting and documentation and what changed because of it."
+        },
+        {
+          "id": "communication",
+          "name": "Communication with patients and families",
+          "definition": "Explains care clearly and handles difficult conversations.",
+          "weight": 2,
+          "anchors": {
+            "1": "No evidence about communication with patients and families in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in communication with patients and families (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in communication with patients and families with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "patient education",
+            "family communication",
+            "discharge teaching",
+            "empathy"
+          ],
+          "interview_question": "Tell me about a specific time you handled communication with patients and families and what changed because of it."
+        },
+        {
+          "id": "teamwork",
+          "name": "Teamwork and emergency response",
+          "definition": "Works in the care team and responds to deteriorating patients.",
+          "weight": 2,
+          "anchors": {
+            "1": "No evidence about teamwork and emergency response in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in teamwork and emergency response (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in teamwork and emergency response with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "teamwork",
+            "rapid response",
+            "ACLS",
+            "BLS"
+          ],
+          "interview_question": "Tell me about a specific time you handled teamwork and emergency response and what changed because of it."
+        }
+      ]
+    },
+    {
+      "role_id": "mk",
+      "role": "Marketing Coordinator",
+      "blind": true,
+      "criteria": [
+        {
+          "id": "campaign",
+          "name": "Campaign execution",
+          "definition": "Plans, builds and launches marketing campaigns across channels.",
+          "weight": 4,
+          "anchors": {
+            "1": "No evidence about campaign execution in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in campaign execution (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in campaign execution with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "email marketing",
+            "social media",
+            "campaigns",
+            "paid ads"
+          ],
+          "interview_question": "Tell me about a specific time you handled campaign execution and what changed because of it."
+        },
+        {
+          "id": "content",
+          "name": "Content writing",
+          "definition": "Writes clear copy for blogs, newsletters and product pages.",
+          "weight": 4,
+          "anchors": {
+            "1": "No evidence about content writing in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in content writing (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in content writing with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "copywriting",
+            "blogging",
+            "SEO writing",
+            "newsletters"
+          ],
+          "interview_question": "Tell me about a specific time you handled content writing and what changed because of it."
+        },
+        {
+          "id": "analytics",
+          "name": "Analytics and reporting",
+          "definition": "Measures results and turns numbers into decisions.",
+          "weight": 3,
+          "anchors": {
+            "1": "No evidence about analytics and reporting in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in analytics and reporting (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in analytics and reporting with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "Google Analytics",
+            "reporting",
+            "A/B testing",
+            "dashboards"
+          ],
+          "interview_question": "Tell me about a specific time you handled analytics and reporting and what changed because of it."
+        },
+        {
+          "id": "tools",
+          "name": "Marketing tools and automation",
+          "definition": "Uses and configures marketing software to save manual work.",
+          "weight": 3,
+          "anchors": {
+            "1": "No evidence about marketing tools and automation in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in marketing tools and automation (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in marketing tools and automation with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "HubSpot",
+            "Mailchimp",
+            "marketing automation",
+            "CRM"
+          ],
+          "interview_question": "Tell me about a specific time you handled marketing tools and automation and what changed because of it."
+        },
+        {
+          "id": "coordination",
+          "name": "Coordination and deadlines",
+          "definition": "Keeps several people and tasks on schedule and on budget.",
+          "weight": 4,
+          "anchors": {
+            "1": "No evidence about coordination and deadlines in the resume, or only a bare keyword in a skills list with no activity described.",
+            "3": "Describes a concrete duty in coordination and deadlines (what was actually done) but gives no scale, no measurable result and no ownership.",
+            "5": "Shows owned or led work in coordination and deadlines with measured results, sustained over time, that others rely on or that grew other people."
+          },
+          "look_for": [
+            "project management",
+            "deadlines",
+            "stakeholders",
+            "budget"
+          ],
+          "interview_question": "Tell me about a specific time you handled coordination and deadlines and what changed because of it."
+        }
+      ]
+    }
+  ]
+}

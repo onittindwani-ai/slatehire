@@ -1,0 +1,981 @@
+{
+ "dated": "2026-11-23",
+ "note": "Judgements from sources and our own adapter work on the date shown, not benchmarks. A tool marked not run was never used against the real vendor.",
+ "weights": {
+  "fit": 35,
+  "setup": 15,
+  "reliability": 15,
+  "cost": 15,
+  "data": 10,
+  "integration": 10
+ },
+ "criteria_names": {
+  "fit": "Fit",
+  "setup": "Setup effort",
+  "reliability": "Reliability and upkeep",
+  "cost": "Cost",
+  "data": "Data control",
+  "integration": "Integration depth"
+ },
+ "groups": [
+  {
+   "id": "ats",
+   "job": "Where applicants already live (read only)",
+   "reference": "ashby",
+   "recommendation": {
+    "beginner": "Start with CSV upload or a pasted resume. It needs no account and nothing can change in your ATS.",
+    "implementer": "Pick the ATS your client already uses. All three adapters only read, were written from the vendor docs and ran only against local stand ins.",
+    "cost_sensitive": "CSV and the signed webhook cost nothing. Read each vendor price page yourself, none is quoted here.",
+    "open_source_when": "OpenCATS is the right call for a very small team that wants its own server and accepts an older interface. It is the wrong call when the client wants hosted support and an app they can use on a phone."
+   },
+   "tools": [
+    {
+     "id": "ashby",
+     "name": "Ashby",
+     "kind": "paid",
+     "supported_in_slatehire": "Read only candidate.list adapter from the docs, plus a local stand in",
+     "run": "not run against Ashby",
+     "sources": [
+      {
+       "url": "https://developers.ashbyhq.com/reference/candidatelist",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 80,
+       "evidence": "Full applicant records with resume file handles, which is what the first read needs."
+      },
+      "setup": {
+       "score": 70,
+       "evidence": "An API key from the admin settings. The exact menu path was not on the docs page we read."
+      },
+      "reliability": {
+       "score": 80,
+       "evidence": "Hosted product with a documented, versioned API."
+      },
+      "cost": {
+       "score": 55,
+       "evidence": "Paid product for hiring teams. See the vendor price page, no figure is quoted here."
+      },
+      "data": {
+       "score": 40,
+       "evidence": "Candidate data sits with the vendor."
+      },
+      "integration": {
+       "score": 70,
+       "evidence": "The adapter pages through candidate.list and downloads the resume through a guarded fetch."
+      }
+     }
+    },
+    {
+     "id": "workable",
+     "name": "Workable",
+     "kind": "paid",
+     "supported_in_slatehire": "Read only candidates adapter from the docs, plus a local stand in",
+     "run": "not run against Workable",
+     "sources": [
+      {
+       "url": "https://workable.readme.io/reference/generate-an-access-token",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 75,
+       "evidence": "Candidate list with resume metadata, but the resume link needs a second call that we could not confirm."
+      },
+      "setup": {
+       "score": 75,
+       "evidence": "Token is made under Integrations in the account menu and is shown once."
+      },
+      "reliability": {
+       "score": 80,
+       "evidence": "Hosted product with a bearer token API."
+      },
+      "cost": {
+       "score": 55,
+       "evidence": "Paid product. See the vendor price page, no figure is quoted here."
+      },
+      "data": {
+       "score": 40,
+       "evidence": "Candidate data sits with the vendor."
+      },
+      "integration": {
+       "score": 55,
+       "evidence": "The adapter follows paging.next. The resume download step is UNVERIFIED."
+      }
+     }
+    },
+    {
+     "id": "greenhouse",
+     "name": "Greenhouse",
+     "kind": "paid",
+     "supported_in_slatehire": "Read only Harvest v1 adapter from the docs, plus a local stand in",
+     "run": "not run against Greenhouse",
+     "sources": [
+      {
+       "url": "https://docs.greenhouse.io/harvest.html",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 75,
+       "evidence": "Rich candidate data with attachments, but the v1 and v2 API is announced for removal on 2026-08-31."
+      },
+      "setup": {
+       "score": 60,
+       "evidence": "Key is made under Configure, Dev Center, API Credential Management and needs a permission few people have."
+      },
+      "reliability": {
+       "score": 70,
+       "evidence": "Hosted and mature, but an API that is being replaced adds upkeep."
+      },
+      "cost": {
+       "score": 50,
+       "evidence": "Paid product aimed at larger teams. See the vendor price page, no figure is quoted here."
+      },
+      "data": {
+       "score": 40,
+       "evidence": "Candidate data sits with the vendor."
+      },
+      "integration": {
+       "score": 55,
+       "evidence": "The adapter follows the Link header. A v3 adapter is not built."
+      }
+     }
+    },
+    {
+     "id": "opencats",
+     "name": "OpenCATS",
+     "kind": "open source",
+     "supported_in_slatehire": "Not supported: no adapter",
+     "run": "not run",
+     "sources": [
+      {
+       "url": "https://github.com/opencats/OpenCATS",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 55,
+       "evidence": "A basic applicant tracker. Written from memory, UNVERIFIED: no API we could rely on was checked."
+      },
+      "setup": {
+       "score": 35,
+       "evidence": "You host a PHP and MySQL application yourself."
+      },
+      "reliability": {
+       "score": 45,
+       "evidence": "Updates are slow and security is your job."
+      },
+      "cost": {
+       "score": 95,
+       "evidence": "No license cost, you pay for the server."
+      },
+      "data": {
+       "score": 95,
+       "evidence": "Everything stays on your server."
+      },
+      "integration": {
+       "score": 0,
+       "evidence": "No adapter is built. Use CSV export and upload."
+      }
+     }
+    },
+    {
+     "id": "csv",
+     "name": "CSV upload and signed webhook",
+     "kind": "built in",
+     "supported_in_slatehire": "Built in and tested",
+     "run": "run and tested",
+     "sources": [
+      {
+       "url": "https://github.com/onittindwani-ai/slatehire",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 60,
+       "evidence": "Gets applicants in from any system that can export a file or post a signed message."
+      },
+      "setup": {
+       "score": 95,
+       "evidence": "No account and no keys."
+      },
+      "reliability": {
+       "score": 90,
+       "evidence": "Fewer moving parts than a live connection."
+      },
+      "cost": {
+       "score": 100,
+       "evidence": "No licence or usage cost, only the server you already run."
+      },
+      "data": {
+       "score": 100,
+       "evidence": "Nothing leaves your server."
+      },
+      "integration": {
+       "score": 100,
+       "evidence": "Fully built and tested."
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "calendar",
+   "job": "Interview invites",
+   "reference": "gcal",
+   "recommendation": {
+    "beginner": "Leave invites in the app at first (the default) and send the invite from your own calendar. Nothing is sent by mistake.",
+    "implementer": "Cal.com and Google Calendar adapters send only in live mode with a confirm. Both were written from docs and ran only against local stand ins.",
+    "cost_sensitive": "Google Calendar is free with a Google account. Cal.com can be hosted by you. Read the price pages yourself.",
+    "open_source_when": "Cal.com is the right call when the client wants scheduling on their own server. It is the wrong call when everyone already lives in Google Calendar."
+   },
+   "tools": [
+    {
+     "id": "gcal",
+     "name": "Google Calendar",
+     "kind": "paid",
+     "supported_in_slatehire": "Event insert adapter from the docs, plus a local stand in",
+     "run": "not run against Google",
+     "sources": [
+      {
+       "url": "https://developers.google.com/calendar",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 80,
+       "evidence": "Creates an event with attendees on a calendar people already use."
+      },
+      "setup": {
+       "score": 45,
+       "evidence": "Needs an OAuth token. Getting one is the hard part and is not automated here."
+      },
+      "reliability": {
+       "score": 90,
+       "evidence": "Mature and widely used."
+      },
+      "cost": {
+       "score": 80,
+       "evidence": "Free with an account for personal use. See the vendor page for business plans."
+      },
+      "data": {
+       "score": 40,
+       "evidence": "Data sits with Google."
+      },
+      "integration": {
+       "score": 65,
+       "evidence": "Creates events only. It does not read availability."
+      }
+     }
+    },
+    {
+     "id": "calcom",
+     "name": "Cal.com",
+     "kind": "open source",
+     "supported_in_slatehire": "Booking adapter from the docs, plus a local stand in",
+     "run": "not run against Cal.com",
+     "sources": [
+      {
+       "url": "https://cal.com/docs/api-reference/v2",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 75,
+       "evidence": "Books a slot for a candidate and interviewers through one call."
+      },
+      "setup": {
+       "score": 60,
+       "evidence": "API key and an event type id. Where they live in the dashboard was not confirmed."
+      },
+      "reliability": {
+       "score": 70,
+       "evidence": "Active project. Hosting it yourself adds upkeep."
+      },
+      "cost": {
+       "score": 80,
+       "evidence": "Free to self host. A hosted plan has a price page."
+      },
+      "data": {
+       "score": 85,
+       "evidence": "Can run on your own server."
+      },
+      "integration": {
+       "score": 70,
+       "evidence": "POST /bookings with the version header, tested on a local stand in."
+      }
+     }
+    },
+    {
+     "id": "seed-cal",
+     "name": "Stay in the app",
+     "kind": "built in",
+     "supported_in_slatehire": "Built in and tested (the default)",
+     "run": "run and tested",
+     "sources": [
+      {
+       "url": "https://github.com/onittindwani-ai/slatehire",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 40,
+       "evidence": "Records the plan only. You send the invite yourself."
+      },
+      "setup": {
+       "score": 100,
+       "evidence": "Nothing to set up: it is the default and works at once."
+      },
+      "reliability": {
+       "score": 100,
+       "evidence": "Nothing outside the app can fail, because nothing is sent."
+      },
+      "cost": {
+       "score": 100,
+       "evidence": "No cost at all, since no outside service is used."
+      },
+      "data": {
+       "score": 100,
+       "evidence": "Nothing leaves your server."
+      },
+      "integration": {
+       "score": 100,
+       "evidence": "Fully built: the plan is saved and the invite is marked as kept in the app."
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "signing",
+   "job": "Where an approved offer goes to be signed",
+   "reference": "breezedoc",
+   "recommendation": {
+    "beginner": "Use the offer file: open it in your signing tool and send it from there. Slatehire never sends an offer.",
+    "implementer": "No live signing call is built for any of these. The offer text is a file you paste in. Check each tool for what it can import.",
+    "cost_sensitive": "The file hand off costs nothing. Documenso is open source. Read the other price pages yourself.",
+    "open_source_when": "Documenso is the right call when signed contracts must stay on your own server. It is the wrong call when the client already has DocuSign and wants nothing new."
+   },
+   "tools": [
+    {
+     "id": "breezedoc",
+     "name": "Breezedoc",
+     "kind": "paid",
+     "supported_in_slatehire": "Not built: the API could not be confirmed. The file hand off is the path",
+     "run": "not run",
+     "sources": [
+      {
+       "url": "https://breezedoc.com/integrations/api",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 65,
+       "evidence": "Simple document signing for small teams. We could not confirm what its API offers."
+      },
+      "setup": {
+       "score": 80,
+       "evidence": "Sign in and upload a file."
+      },
+      "reliability": {
+       "score": 75,
+       "evidence": "A hosted product, but we could not check its uptime or API history."
+      },
+      "cost": {
+       "score": 70,
+       "evidence": "Paid with a free tier reported. See the vendor page, no figure is quoted here."
+      },
+      "data": {
+       "score": 40,
+       "evidence": "Documents sit with the vendor."
+      },
+      "integration": {
+       "score": 10,
+       "evidence": "No live call is built. The page we fetched was a login page."
+      }
+     }
+    },
+    {
+     "id": "documenso",
+     "name": "Documenso",
+     "kind": "open source",
+     "supported_in_slatehire": "Not built: file hand off only",
+     "run": "not run",
+     "sources": [
+      {
+       "url": "https://documenso.com",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 65,
+       "evidence": "Open source signing with an API, not checked by us for this use."
+      },
+      "setup": {
+       "score": 45,
+       "evidence": "Self hosting needs Docker and a database."
+      },
+      "reliability": {
+       "score": 60,
+       "evidence": "Young project. Upkeep is yours when self hosted."
+      },
+      "cost": {
+       "score": 85,
+       "evidence": "Free to self host, you pay for the server it runs on."
+      },
+      "data": {
+       "score": 95,
+       "evidence": "Documents stay on your server."
+      },
+      "integration": {
+       "score": 10,
+       "evidence": "No adapter is built."
+      }
+     }
+    },
+    {
+     "id": "docusign",
+     "name": "DocuSign",
+     "kind": "paid",
+     "supported_in_slatehire": "Not built: file hand off only",
+     "run": "not run",
+     "sources": [
+      {
+       "url": "https://www.docusign.com",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 85,
+       "evidence": "The best known signing tool, accepted almost everywhere."
+      },
+      "setup": {
+       "score": 50,
+       "evidence": "Needs an account and templates."
+      },
+      "reliability": {
+       "score": 90,
+       "evidence": "Mature and widely relied on, judged from general knowledge only."
+      },
+      "cost": {
+       "score": 35,
+       "evidence": "Priced per seat and per envelope on its price page. No figure is quoted here."
+      },
+      "data": {
+       "score": 35,
+       "evidence": "Documents sit with the vendor."
+      },
+      "integration": {
+       "score": 10,
+       "evidence": "No adapter is built. Written from general knowledge, UNVERIFIED."
+      }
+     }
+    },
+    {
+     "id": "filehand",
+     "name": "Offer file",
+     "kind": "built in",
+     "supported_in_slatehire": "Built in and tested (the default)",
+     "run": "run and tested",
+     "sources": [
+      {
+       "url": "https://github.com/onittindwani-ai/slatehire",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 60,
+       "evidence": "A plain text file of the approved offer for any signing tool."
+      },
+      "setup": {
+       "score": 100,
+       "evidence": "Nothing to set up: the file is written to the export folder."
+      },
+      "reliability": {
+       "score": 100,
+       "evidence": "A file cannot fail to send."
+      },
+      "cost": {
+       "score": 100,
+       "evidence": "No cost, it is a text file on your own disk."
+      },
+      "data": {
+       "score": 100,
+       "evidence": "Stays on your server."
+      },
+      "integration": {
+       "score": 100,
+       "evidence": "Fully built and tested, and the file name carries the candidate code."
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "mail",
+   "job": "Where application emails arrive",
+   "reference": "imap",
+   "recommendation": {
+    "beginner": "Start with the demo inbox, then CSV. Connect a mailbox only when you are ready.",
+    "implementer": "Plain IMAP works with Gmail (app password), Outlook and most hosts, and was tested against a local fake server. It only reads.",
+    "cost_sensitive": "IMAP is free with the mailbox you already have.",
+    "open_source_when": "Not a paid versus open source choice: IMAP is an open standard. A mailbox shared by many people may fit a form tool and the signed webhook better."
+   },
+   "tools": [
+    {
+     "id": "imap",
+     "name": "IMAP mailbox",
+     "kind": "open standard",
+     "supported_in_slatehire": "Built and tested against a local fake mail server",
+     "run": "run against a local stand in only",
+     "sources": [
+      {
+       "url": "https://support.google.com/mail",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 70,
+       "evidence": "Reads application emails and attachments from a shared inbox."
+      },
+      "setup": {
+       "score": 70,
+       "evidence": "Needs host, user and an app password. Two step verification must be on for Gmail."
+      },
+      "reliability": {
+       "score": 75,
+       "evidence": "Standard protocol. Providers change sign in rules now and then."
+      },
+      "cost": {
+       "score": 100,
+       "evidence": "No extra cost beyond the mailbox you already have."
+      },
+      "data": {
+       "score": 70,
+       "evidence": "Mail stays with the provider, Slatehire keeps only what it reads."
+      },
+      "integration": {
+       "score": 80,
+       "evidence": "Marks a message read only after it was added."
+      }
+     }
+    },
+    {
+     "id": "gmail",
+     "name": "Gmail (through IMAP)",
+     "kind": "paid",
+     "supported_in_slatehire": "Works through the IMAP adapter, not run live",
+     "run": "not run against Gmail",
+     "sources": [
+      {
+       "url": "https://support.google.com/mail",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 70,
+       "evidence": "Common for small companies."
+      },
+      "setup": {
+       "score": 60,
+       "evidence": "App password at myaccount.google.com/apppasswords."
+      },
+      "reliability": {
+       "score": 85,
+       "evidence": "Mature and stable, though sign in rules for apps change from time to time."
+      },
+      "cost": {
+       "score": 80,
+       "evidence": "Free for personal accounts. See the vendor page for business plans."
+      },
+      "data": {
+       "score": 40,
+       "evidence": "Data sits with Google."
+      },
+      "integration": {
+       "score": 60,
+       "evidence": "Used through IMAP only. No Gmail API."
+      }
+     }
+    },
+    {
+     "id": "webhook",
+     "name": "Signed webhook",
+     "kind": "built in",
+     "supported_in_slatehire": "Built and tested",
+     "run": "run and tested",
+     "sources": [
+      {
+       "url": "https://github.com/onittindwani-ai/slatehire",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 60,
+       "evidence": "One applicant per message from any form or ATS that can post JSON."
+      },
+      "setup": {
+       "score": 70,
+       "evidence": "Needs a shared secret on both sides."
+      },
+      "reliability": {
+       "score": 90,
+       "evidence": "A signature check and size limit on every message."
+      },
+      "cost": {
+       "score": 100,
+       "evidence": "No cost, it is one route of the app itself."
+      },
+      "data": {
+       "score": 100,
+       "evidence": "Nothing extra leaves your server."
+      },
+      "integration": {
+       "score": 100,
+       "evidence": "Fully built and tested."
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "scorer",
+   "job": "What reads the redacted resume",
+   "reference": "claude",
+   "recommendation": {
+    "beginner": "Use the offline rules scorer. It is plain, repeatable and every quote is checked by code.",
+    "implementer": "A language model can replace the proposal step and the quote check still applies. That path is built behind the shared model wrapper and tested against a local fake server and recorded fixtures; it was never run with a real key (UNVERIFIED live).",
+    "cost_sensitive": "The offline scorer costs nothing. A model is billed per use on the vendor price page.",
+    "open_source_when": "The rules scorer is the right call when a hiring decision must be explainable word for word. It is the wrong call when resumes are long, messy or in many languages."
+   },
+   "tools": [
+    {
+     "id": "claude",
+     "name": "A language model (Anthropic API)",
+     "kind": "paid",
+     "supported_in_slatehire": "Built behind the shared wrapper (SCORER=model), UNVERIFIED live",
+     "run": "run against a local stand in only",
+     "sources": [
+      {
+       "url": "https://docs.anthropic.com",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 80,
+       "evidence": "Reads messy text better than rules. Its answers must still pass the quote check."
+      },
+      "setup": {
+       "score": 60,
+       "evidence": "Needs an API key and a prompt that treats resumes as untrusted text."
+      },
+      "reliability": {
+       "score": 70,
+       "evidence": "Answers can differ run to run, so consistency is a test, not a given."
+      },
+      "cost": {
+       "score": 55,
+       "evidence": "Billed per use. See the vendor price page."
+      },
+      "data": {
+       "score": 40,
+       "evidence": "Resume text would be sent to the vendor, which needs a privacy decision."
+      },
+      "integration": {
+       "score": 60,
+       "evidence": "Built behind the shared model wrapper, one criterion per call, every quote and the total checked by code. Run only against a local fake server."
+      }
+     }
+    },
+    {
+     "id": "rules",
+     "name": "Offline rules scorer",
+     "kind": "built in",
+     "supported_in_slatehire": "Built and tested on a held out set",
+     "run": "run and tested",
+     "sources": [
+      {
+       "url": "https://github.com/onittindwani-ai/slatehire",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 60,
+       "evidence": "Finds the criteria words and the sentences around them. It misses what it has no words for."
+      },
+      "setup": {
+       "score": 100,
+       "evidence": "Nothing to set up: it ships with the app and needs no key."
+      },
+      "reliability": {
+       "score": 90,
+       "evidence": "Same text, same score, every time."
+      },
+      "cost": {
+       "score": 100,
+       "evidence": "No cost, it runs on your own server with no outside call."
+      },
+      "data": {
+       "score": 100,
+       "evidence": "Nothing leaves your server."
+      },
+      "integration": {
+       "score": 100,
+       "evidence": "Fully built, with verbatim quote checks."
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "db",
+   "job": "Where the data is stored",
+   "reference": "postgres",
+   "recommendation": {
+    "beginner": "SQLite for the demo and a single machine. Nothing to install.",
+    "implementer": "Postgres for any real deployment. The migrations were run up, down and up on both.",
+    "cost_sensitive": "SQLite is free and a file. Postgres is free software and your host charges for it.",
+    "open_source_when": "Both are open source. SQLite is the right call for one user on one machine. It is the wrong call when several services write at once."
+   },
+   "tools": [
+    {
+     "id": "postgres",
+     "name": "PostgreSQL",
+     "kind": "open source",
+     "supported_in_slatehire": "Built, migration cycle run on a throwaway server",
+     "run": "run (migrations)",
+     "sources": [
+      {
+       "url": "https://www.postgresql.org/docs/17/",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 90,
+       "evidence": "Handles many users and the job queue."
+      },
+      "setup": {
+       "score": 60,
+       "evidence": "Needs a server, or your host adds one."
+      },
+      "reliability": {
+       "score": 90,
+       "evidence": "Mature and well understood, with a long record in production."
+      },
+      "cost": {
+       "score": 80,
+       "evidence": "Free software. Hosting is billed by your host."
+      },
+      "data": {
+       "score": 90,
+       "evidence": "You hold the data, wherever you choose to host the server."
+      },
+      "integration": {
+       "score": 90,
+       "evidence": "The default for deploys."
+      }
+     }
+    },
+    {
+     "id": "sqlite",
+     "name": "SQLite",
+     "kind": "open source",
+     "supported_in_slatehire": "Built (the demo default)",
+     "run": "run and tested",
+     "sources": [
+      {
+       "url": "https://www.sqlite.org/docs.html",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 70,
+       "evidence": "Enough for one user."
+      },
+      "setup": {
+       "score": 100,
+       "evidence": "Nothing to set up: it is a single file next to the app."
+      },
+      "reliability": {
+       "score": 85,
+       "evidence": "Very stable, one writer at a time."
+      },
+      "cost": {
+       "score": 100,
+       "evidence": "No cost, and no server to pay for."
+      },
+      "data": {
+       "score": 100,
+       "evidence": "One file on your disk."
+      },
+      "integration": {
+       "score": 90,
+       "evidence": "Same models as Postgres."
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "hosting",
+   "job": "Where the app runs",
+   "reference": "railway",
+   "recommendation": {
+    "beginner": "Run it on your own computer with the demo first. When ready, Vercel for the web app and Railway for the API is the easiest pair.",
+    "implementer": "Vercel and Railway are the easiest. Hetzner with Docker Compose is the cheapest and most controlled. Nothing here was deployed to a real account.",
+    "cost_sensitive": "A small Hetzner server runs everything. Read the vendor price pages yourself.",
+    "open_source_when": "A Hetzner server is the right call when you want one bill and full control and can manage updates. It is the wrong call when nobody will watch the server."
+   },
+   "tools": [
+    {
+     "id": "railway",
+     "name": "Railway",
+     "kind": "paid",
+     "supported_in_slatehire": "Dockerfiles and a config file, never deployed",
+     "run": "not run on Railway",
+     "sources": [
+      {
+       "url": "https://docs.railway.com",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 80,
+       "evidence": "Runs the API, the worker and Postgres from one repo."
+      },
+      "setup": {
+       "score": 80,
+       "evidence": "Connect the repo and set variables."
+      },
+      "reliability": {
+       "score": 75,
+       "evidence": "Hosted. Config as code is deprecated, so settings live in the dashboard."
+      },
+      "cost": {
+       "score": 60,
+       "evidence": "Billed by use. See the vendor price page."
+      },
+      "data": {
+       "score": 40,
+       "evidence": "Data sits on their servers."
+      },
+      "integration": {
+       "score": 70,
+       "evidence": "Dockerfile paths and a health check are set."
+      }
+     }
+    },
+    {
+     "id": "vercel",
+     "name": "Vercel",
+     "kind": "paid",
+     "supported_in_slatehire": "Next.js web app settings, never deployed",
+     "run": "not run on Vercel",
+     "sources": [
+      {
+       "url": "https://vercel.com/docs",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 80,
+       "evidence": "Best fit for the Next.js web app only."
+      },
+      "setup": {
+       "score": 85,
+       "evidence": "Import the repo, set the root to apps/web."
+      },
+      "reliability": {
+       "score": 85,
+       "evidence": "Hosted, previews and rollback."
+      },
+      "cost": {
+       "score": 60,
+       "evidence": "A free tier exists. See the vendor price page."
+      },
+      "data": {
+       "score": 40,
+       "evidence": "Pages and logs sit with the vendor."
+      },
+      "integration": {
+       "score": 70,
+       "evidence": "Set API_BASE_URL and SESSION_SECRET."
+      }
+     }
+    },
+    {
+     "id": "hetzner",
+     "name": "Hetzner",
+     "kind": "paid",
+     "supported_in_slatehire": "Docker Compose, Caddy and a cloud init file, never deployed",
+     "run": "not run on Hetzner",
+     "sources": [
+      {
+       "url": "https://docs.hetzner.com",
+       "checked": "2026-11-23"
+      }
+     ],
+     "scores": {
+      "fit": {
+       "score": 80,
+       "evidence": "One server runs the whole system."
+      },
+      "setup": {
+       "score": 40,
+       "evidence": "You manage the server, the firewall and updates."
+      },
+      "reliability": {
+       "score": 60,
+       "evidence": "Reliability is your job."
+      },
+      "cost": {
+       "score": 90,
+       "evidence": "Usually the cheapest. See the vendor price page."
+      },
+      "data": {
+       "score": 90,
+       "evidence": "You hold the server."
+      },
+      "integration": {
+       "score": 70,
+       "evidence": "Compose, Caddy and a backup script are written."
+      }
+     }
+    }
+   ]
+  }
+ ],
+ "unscored_named": [
+  {
+   "name": "Cloudflare Tunnel and Cloudflare DNS",
+   "why": "Named in the deploy guides for webhook testing and a custom domain. Infrastructure, not a choice Slatehire depends on."
+  },
+  {
+   "name": "Anthropic API as a live scorer",
+   "why": "Scored above as a language model option. The live path is built and only run against a local fake server (UNVERIFIED live)."
+  }
+ ]
+}

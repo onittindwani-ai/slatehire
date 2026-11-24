@@ -1,0 +1,26 @@
+PETER WHITFIELD
+peter.whitfield@inbox.example | 555-0103-7203 | Ashford
+
+TARGET ROLE: Backend Software Engineer
+
+SKILLS
+GraphQL, SQL, incident response
+
+EXPERIENCE
+Backend Software Engineer, Cobalt Ridge Ltd (3 years)
+* Led incident response for orders for 5 years, ran 11 post incident reviews and drove the change that moved availability from 99.5 to 99.95 percent.
+* Worked well with the people on my team.
+
+Assistant Backend Software Engineer, Bluepine Services (2 years)
+* Wrote unit tests for new features and ran them in the build pipeline.
+
+Junior Backend Software Engineer, Ironwood Partners (18 months)
+* Designed REST APIs for the orders service that handled 12 million requests a day with 50 percent fewer errors.
+
+Earlier career, Redfern Haulage (6 years)
+* Worked as a night security guard at a car park.
+* Fitted kitchens for a joinery company.
+
+EDUCATION
+Computer Science, Brookhaven Technical College, 2020
+

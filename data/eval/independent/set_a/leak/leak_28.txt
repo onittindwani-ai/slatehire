@@ -1,0 +1,35 @@
+Beth Tanaka                     555-0127-7227
+Backend Software Engineer       beth.tanaka@mailbox.example
+                                1507 Maple Court, Ashford, NC 27502
+
+Date of birth: 25 June 1984
+Age: 42
+Pronouns: he/him
+Marital status: single
+Nationality: Brazilian
+Gender: male
+Photo: headshot_tanaka.jpg
+
+SUMMARY
+Backend Software Engineer with solid experience. 
+He led the work described below and received strong reviews.
+
+EXPERIENCE
+
+Built and maintained REST endpoints for the orders service using Node.
+Redesigned the MySQL schema for orders and added indexes that cut the slowest query from 8 seconds to under one second.
+Mentored 4 engineers into promotions, ran the weekly design review for 14 engineers, and wrote the onboarding guide every new hire uses.
+Led incident response for orders for 3 years, ran 11 post incident reviews and drove the change that moved availability from 99.5 to 99.95 percent.
+
+SKILLS: API design, pair programming, on call, mentoring
+
+EDUCATION
+Computer Science, Northfield Community College, Graduated: 2007
+Earlier study: Calder Valley College, Class of 2003
+
+LINKS
+github.com/bethtanaka
+https://www.linkedin.com/in/bethtanaka
+
+REFERENCE: Peter Tanaka, former manager, +1 555 0177 7377
+

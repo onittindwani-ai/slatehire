@@ -1,0 +1,46 @@
+RACHEL MBEKI
+rachel.mbeki@postnet.example | 555-0109-7209 | Pinecrest
+
+TARGET ROLE: Backend Software Engineer
+
+SKILLS
+GraphQL, on call, pair programming
+
+EXPERIENCE
+Backend Software Engineer, Ironwood Partners (3 years)
+* Joined the company charity run team.
+* Won the office table tennis tournament.
+* Enjoys hiking and photography.
+* Raised test coverage on billing from 31 to 72 percent and added integration tests that caught 11 bugs before release.
+* Completed the mandatory induction and onboarding for new staff.
+
+Assistant Backend Software Engineer, Meridian Works (2 years)
+* Enjoys hiking and photography.
+* Reviewed pull requests from teammates and joined planning sessions each sprint.
+* Holds a full driving licence.
+* Won the office table tennis tournament.
+* Completed the mandatory induction and onboarding for new staff.
+
+Junior Backend Software Engineer, Harlow Group (18 months)
+* Reads about local history in spare time.
+* Joined the company charity run team.
+* Led the API design for the billing platform used by 14 internal teams, serving 12 million requests a day, and wrote the versioning policy the teams follow.
+* Enjoys hiking and photography.
+* Completed the mandatory induction and onboarding for new staff.
+
+Backend Software Engineer, Cobalt Ridge Ltd (4 years)
+* Holds a full driving licence.
+* Won the office table tennis tournament.
+* Enjoys hiking and photography.
+* Used databases when building features.
+* Completed the mandatory induction and onboarding for new staff.
+
+Assistant Backend Software Engineer, Lanternbay Trading (1 year)
+* Holds a full driving licence.
+* Joined the company charity run team.
+* Attended the monthly all hands meeting.
+* Completed the mandatory induction and onboarding for new staff.
+
+EDUCATION
+Computer Science, Calder Valley College, 2019
+

@@ -1,0 +1,7 @@
+{
+  "text": "{\"shown\": true, \"level\": 1, \"evidence\": \"Observed troubleshooting during my first weeks and read about how it is done.\", \"reason\": \"Best match: 1 matching term(s); no number is shown.\"}",
+  "input_tokens": 150,
+  "output_tokens": 40,
+  "model": "claude-sonnet-5-5",
+  "prompt_preview": "[task:score_criterion]\nCRITERION_JSON: {\"id\":\"cs_diagnosis\",\"name\":\"Troubleshooting and diagnosing problems\",\"definition\":\"Evidence of finding the cause of a cu"
+}

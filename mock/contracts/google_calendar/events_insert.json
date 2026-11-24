@@ -1,0 +1,12 @@
+{
+  "method": "POST",
+  "path": "/calendar/v3/calendars/{calendarId}/events",
+  "calendar_id_primary": "primary",
+  "scopes_any_of": ["https://www.googleapis.com/auth/calendar", "https://www.googleapis.com/auth/calendar.events", "https://www.googleapis.com/auth/calendar.app.created", "https://www.googleapis.com/auth/calendar.events.owned"],
+  "body_required": ["start", "end"],
+  "start_end_fields": ["date", "dateTime", "timeZone"],
+  "datetime_format": "RFC3339",
+  "query_optional": {"sendUpdates": ["all", "externalOnly", "none"], "sendNotifications": "deprecated", "conferenceDataVersion": [0, 1], "maxAttendees": "integer", "supportsAttachments": "boolean"},
+  "attendee_fields": ["email", "displayName", "comment", "optional", "resource", "additionalGuests", "responseStatus"],
+  "attendee_email_required": true
+}

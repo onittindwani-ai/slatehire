@@ -1,0 +1,109 @@
+{
+ "roles": {
+  "support": {
+   "title": "Customer Support Specialist",
+   "criteria": [
+    {
+     "id": "cs_written",
+     "name": "Written communication with customers",
+     "topic": "writing clear, kind answers to customers",
+     "question": "Tell me about a written answer to a customer that you are proud of. What did the customer need, what did you write, and what happened next?"
+    },
+    {
+     "id": "cs_diagnosis",
+     "name": "Troubleshooting and diagnosing problems",
+     "topic": "finding the cause of a customer's problem",
+     "question": "Walk me through a problem you could not see the cause of at first. How did you narrow it down?"
+    },
+    {
+     "id": "cs_tools",
+     "name": "Support tools and systems",
+     "topic": "working in a ticket queue, chat and a knowledge base",
+     "question": "Which support tools have you used every day, and how did you keep records useful for the next person?"
+    },
+    {
+     "id": "cs_deescalate",
+     "name": "Calm handling of upset customers",
+     "topic": "calming a customer who is upset",
+     "question": "Describe a conversation with a very upset customer. What did you say first, and how did it end?"
+    },
+    {
+     "id": "cs_improve",
+     "name": "Improving how the team works",
+     "topic": "improving a support process or help article",
+     "question": "Tell me about a change you made so the same customer problem happened less often."
+    }
+   ]
+  },
+  "ops": {
+   "title": "Operations Coordinator",
+   "criteria": [
+    {
+     "id": "ops_schedule",
+     "name": "Scheduling and coordinating people and deliveries",
+     "topic": "planning schedules for people and deliveries",
+     "question": "Tell me about a week when the plan fell apart. How did you re-plan it?"
+    },
+    {
+     "id": "ops_vendor",
+     "name": "Working with suppliers",
+     "topic": "managing suppliers and orders",
+     "question": "Describe a supplier problem you had to sort out and how you handled the conversation."
+    },
+    {
+     "id": "ops_data",
+     "name": "Tracking work in spreadsheets and reports",
+     "topic": "tracking work and stock in spreadsheets",
+     "question": "Show me how you keep track of orders or stock. How do you avoid mistakes?"
+    },
+    {
+     "id": "ops_process",
+     "name": "Writing and improving routines",
+     "topic": "writing down and improving a routine",
+     "question": "Tell me about a routine you wrote or changed. How did you know it worked?"
+    },
+    {
+     "id": "ops_budget",
+     "name": "Cost awareness",
+     "topic": "keeping spending within a budget",
+     "question": "Tell me about a time you found a cost that could be cut. What did you do?"
+    }
+   ]
+  },
+  "analyst": {
+   "title": "Data Analyst",
+   "criteria": [
+    {
+     "id": "da_sql",
+     "name": "Querying data with SQL",
+     "topic": "writing queries against a database",
+     "question": "Describe a hard query you wrote. How did you check that the numbers were right?"
+    },
+    {
+     "id": "da_viz",
+     "name": "Charts and dashboards",
+     "topic": "building charts and dashboards",
+     "question": "Tell me about a dashboard you built. Who used it and what did they decide with it?"
+    },
+    {
+     "id": "da_stats",
+     "name": "Statistics and tests",
+     "topic": "using statistics to compare options",
+     "question": "Describe a time you compared two options with numbers. How sure were you, and why?"
+    },
+    {
+     "id": "da_clean",
+     "name": "Cleaning and checking data",
+     "topic": "checking data quality",
+     "question": "Tell me about wrong data you found. How did you find it and how did you stop it coming back?"
+    },
+    {
+     "id": "da_story",
+     "name": "Explaining findings to non specialists",
+     "topic": "explaining results to people who are not analysts",
+     "question": "Tell me about explaining an analysis to someone who does not work with data. What did they do afterwards?"
+    }
+   ]
+  }
+ }
+}

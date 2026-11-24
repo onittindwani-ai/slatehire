@@ -1,0 +1,7 @@
+{
+  "text": "{\"shown\": true, \"level\": 3, \"evidence\": \"Took care of routine customer emails each week.\", \"reason\": \"Best match: 1 matching term(s); no number is shown.\"}",
+  "input_tokens": 150,
+  "output_tokens": 40,
+  "model": "claude-sonnet-5-5",
+  "prompt_preview": "[task:score_criterion]\nCRITERION_JSON: {\"id\":\"cs_written\",\"name\":\"Written communication with customers\",\"definition\":\"Evidence of writing clear, kind answers to"
+}

@@ -1,0 +1,14 @@
+CURRICULUM VITAE: Brian Mbeki
+brian.mbeki@inbox.example / 555-0105-7205
+
+Skills | PostgreSQL; TDD
+
+Employer | Role | Detail
+--- | --- | ---
+Community Food Bank (volunteer) | Participant | Set the testing standard for the orders team of 9 engineers, built the contract tests every service runs on each merge, and reduced escaped bugs by 50 percent over 3 years.
+Community Food Bank (volunteer) | Participant | Paired with 8 newer engineers each quarter and reviewed about 24 pull requests a month, with faster merges as a result.
+Self directed portfolio project | Participant | Wrote SQL queries and migrations for a MySQL database behind the orders service.
+Evening certificate course project | Participant | Helped when the service had problems in production.
+
+Education | Computer Science | University of Westmere | 2005
+

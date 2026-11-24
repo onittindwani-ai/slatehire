@@ -1,0 +1,14 @@
+CURRICULUM VITAE: Hannah Tanaka
+hannah.tanaka@postnet.example / 555-0102-7202
+
+Skills | mentoring
+
+Employer | Role | Detail
+--- | --- | ---
+Northgate Systems | Backend Software Engineer | Tested my own code before release.
+Northgate Systems | Backend Software Engineer | Cut incident response time for notifications from 40 minutes to 12 by adding dashboards and runbooks.
+Ironwood Partners | Assistant Backend Software Engineer | Built and maintained REST endpoints for the notifications service using Java.
+Meridian Works | Junior Backend Software Engineer | Owned the data model for notifications across 6 services, planned a zero downtime migration of 40,000 rows on PostgreSQL, and trained 8 engineers on query tuning.
+
+Education | Computer Science | St. Aldric's University | 2008
+

@@ -1,0 +1,33 @@
+# Written but not run by the author (no hosted repository existed when it was made).
+name: ci
+on: [push, pull_request]
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -e packages/core-py -e "apps/api[dev]" pytest-cov
+      - run: python -m pytest
+      - run: python tools/eval_redaction.py
+      - run: python tools/eval_scoring.py
+      - run: python tools/score_tools.py --check
+      - run: python tools/check_docs.py
+      - run: python tools/scan_secrets.py
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -e packages/core-py -e "apps/api[dev]"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm build
+      - run: pnpm exec playwright install chrome
+        working-directory: apps/web
+      - run: pnpm e2e

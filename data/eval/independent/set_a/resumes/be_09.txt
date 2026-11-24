@@ -1,0 +1,12 @@
+CURRICULUM VITAE: Peter Delacroix
+peter.delacroix@mailbox.example / +1 555 0108 7308
+
+Skills | REST; SQL; TDD; mentoring
+
+Employer | Role | Detail
+--- | --- | ---
+Northgate Systems | Backend Software Engineer | Cut incident response time for billing from 40 minutes to 15 by adding dashboards and runbooks.
+Greenfield Operations | Assistant Backend Software Engineer | Wrote unit tests for new features and ran them in the build pipeline.
+
+Education | Computer Science | Lakeshore State University | 2006
+

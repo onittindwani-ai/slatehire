@@ -1,0 +1,23 @@
+Rafferty Hartnell
+<img src="logo.png" alt="Contact rafferty.hartnell@mail.example.test">
+Phone: (555) 010-0195
+Tarn End, ST 02005
+linkedin.com/in/rafferty-hartnell-6080
+
+SUMMARY
+She brings steady habits and 12 years of experience.
+
+EXPERIENCE
+Data Analyst, Hearthstone Clinics, 2018 to 2026
+- Observed simple statistics during my first weeks and read about how it is done.
+- Observed SQL queries during my first weeks and read about how it is done.
+- Built and led presenting and explaining results to stakeholders with a clear recommendation for 6 people, coached 3 new hires and saved about 35 hours a week.
+- Welcomed visitors and signed them in.
+2021 to 2023: career break.
+Assistant, Greylock Utilities, 2014 to 2018
+- Shadowed a senior colleague who handled cleaning exports.
+- Built and led dashboards, charts and visualizations in Tableau for 8 people, coached 6 new hires and saved about 30 hours a week.
+- Took part in the quarterly safety walk.
+
+EDUCATION
+Diploma, Veldt University, 2000

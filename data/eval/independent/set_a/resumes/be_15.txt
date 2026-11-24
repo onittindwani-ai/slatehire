@@ -1,0 +1,14 @@
+CURRICULUM VITAE: Maya Duarte
+maya.duarte@inbox.example / 555-0114-7214
+
+Skills | on call; pair programming
+
+Employer | Role | Detail
+--- | --- | ---
+Community Food Bank (volunteer) | Participant | Used databases when building features.
+Community Food Bank (volunteer) | Participant | Raised test coverage on billing from 44 to 72 percent and added integration tests that caught 11 bugs before release.
+Self directed portfolio project | Participant | Reviewed pull requests from teammates and joined planning sessions each sprint.
+Evening certificate course project | Participant | Led the API design for the billing platform used by 6 internal teams, serving 900,000 requests a day, and wrote the versioning policy the teams follow.
+
+Education | Computer Science | Brookhaven Technical College | 2015
+

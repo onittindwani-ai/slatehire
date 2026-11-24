@@ -1,0 +1,35 @@
+Omar Brennan - Backend Software Engineer
+(555) 0115-7115 / omar.brennan@postnet.example
+24 Birchwood Terrace, Lakeview, TX 75099
+
+Date of birth: 02/10/1997
+Age: 29
+Pronouns: she/her
+Family: married with one child
+Nationality: Nigerian
+Health: excellent, no disabilities
+[photo attached: passport style picture]
+
+SUMMARY
+Backend Software Engineer with solid experience. 
+She led the work described below and received strong reviews.
+
+EXPERIENCE
+
+Led the API design for the notifications platform used by 6 internal teams, serving 2 million requests a day, and wrote the versioning policy the teams follow.
+Mentored 3 engineers into promotions, ran the weekly design review for 6 engineers, and wrote the onboarding guide every new hire uses.
+Redesigned the MySQL schema for notifications and added indexes that cut the slowest query from 30 seconds to under one second.
+Raised test coverage on notifications from 31 to 81 percent and added integration tests that caught 36 bugs before release.
+
+SKILLS: TDD, unit testing, data modelling, code review
+
+EDUCATION
+Computer Science, Hollis Bay University, Graduated: 2018
+Earlier study: University of Westmere, Class of 2014
+
+LINKS
+https://omarbrennan.portfolio.example
+linkedin.com/in/omarbrennan-61a
+
+REFERENCE: Sofia Holloway, former manager, (555) 0165-7165
+

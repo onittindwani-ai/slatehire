@@ -1,0 +1,14 @@
+CURRICULUM VITAE: Omar Holloway
+omar.holloway@inbox.example / +1 555 0112 7312
+
+Skills | incident response; mentoring
+
+Employer | Role | Detail
+--- | --- | ---
+Greenfield Operations | Backend Software Engineer | Owned the data model for billing across 9 services, planned a zero downtime migration of 40,000 rows on PostgreSQL, and trained 5 engineers on query tuning.
+Greenfield Operations | Backend Software Engineer | Built and maintained REST endpoints for the billing service using Go.
+Bluepine Services | Assistant Backend Software Engineer | Cut incident response time for billing from 90 minutes to 15 by adding dashboards and runbooks.
+Summit Lane Co | Junior Backend Software Engineer | Tested my own code before release.
+
+Education | Computer Science | Hollis Bay University | 2008
+

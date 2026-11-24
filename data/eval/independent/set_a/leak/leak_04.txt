@@ -1,0 +1,34 @@
+Trevor Nakamura                 555-0103-7203
+Backend Software Engineer       trevor.nakamura@inbox.example
+                                760 Orchard Street, Fairmont, OH 44123
+
+Date of birth: 06/17/1993
+Age: 33
+Pronouns: they/them
+Marital status: married, two children
+Nationality: Brazilian
+Health: excellent, no disabilities
+Picture: see attached portrait file nakamura.png
+
+SUMMARY
+Backend Software Engineer with solid experience. 
+
+EXPERIENCE
+
+Mentored 4 engineers into promotions, ran the weekly design review for 6 engineers, and wrote the onboarding guide every new hire uses.
+Led the API design for the search platform used by 6 internal teams, serving 12 million requests a day, and wrote the versioning policy the teams follow.
+Raised test coverage on search from 31 to 88 percent and added integration tests that caught 36 bugs before release.
+Cut incident response time for search from 90 minutes to 15 by adding dashboards and runbooks.
+
+SKILLS: on call, mentoring, REST, PostgreSQL
+
+EDUCATION
+Computer Science, University of Westmere, Graduated: 2015
+Earlier study: Hollis Bay University, Class of 2011
+
+LINKS
+https://trevornakamura.portfolio.example
+https://www.linkedin.com/in/trevornakamura
+
+REFERENCE: Gregory Sandoval, former manager, 555-0153-7253
+

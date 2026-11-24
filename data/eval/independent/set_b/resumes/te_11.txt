@@ -1,0 +1,21 @@
+Application form answers: Fatima Rossi (fatima.rossi@inbox.example, +91 98765 41047)
+
+
+
+Q: Which role are you applying for?
+A: Elementary School Teacher
+
+Q: List your skills.
+A: lesson planning
+
+Q: What did you do at Cobalt Ridge Ltd (3 years, Elementary School Teacher)?
+A: Marked student work. Set classroom routines and handled behaviour with a clear set of rules in a class of 28.
+
+Q: What did you do at Meridian Works (2 years, Assistant Elementary School Teacher)?
+A: Coordinated support plans for 17 students with special needs across 9 classes and coached teachers and aides on adapting lessons.
+
+Q: What did you do at Bluepine Services (18 months, Junior Elementary School Teacher)?
+A: Held 17 parent conferences a year with 85 percent of families attending and followed up in writing.
+
+Q: Education?
+A: Education, Universidad de Valmoral, 2019

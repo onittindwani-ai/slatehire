@@ -1,0 +1,7 @@
+{
+  "text": "{\"shown\": true, \"level\": 5, \"evidence\": \"Led the ticket queue, helpdesk and knowledge base for a team of 12, trained 3 colleagues and owned the results, cutting errors by 30 percent.\", \"reason\": \"Best match: 4 matching term(s); a number or result is shown.\"}",
+  "input_tokens": 150,
+  "output_tokens": 40,
+  "model": "claude-sonnet-5-5",
+  "prompt_preview": "[task:score_criterion]\nCRITERION_JSON: {\"id\":\"cs_tools\",\"name\":\"Support tools and systems\",\"definition\":\"Evidence of working in a ticket queue, chat and a knowl"
+}

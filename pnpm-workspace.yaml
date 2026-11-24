@@ -1,0 +1,3 @@
+packages:
+  - packages/ui-kit
+  - apps/web

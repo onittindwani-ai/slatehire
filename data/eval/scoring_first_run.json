@@ -1,0 +1,29 @@
+{
+ "note": "Held out set, first run, saved untouched. Rules scorer, not a language model. Same author as the rules: not independent.",
+ "resumes": 60,
+ "criteria_checked": 300,
+ "found_correctly": 233,
+ "found_wrongly": 14,
+ "missed": 13,
+ "correctly_absent": 40,
+ "precision": 0.943,
+ "recall": 0.947,
+ "level_exact": 0.485,
+ "level_within_one": 0.854,
+ "levels_compared": 233,
+ "mean_score_by_label": {
+  "1": 1.75,
+  "2": 1.89,
+  "3": 3.08,
+  "4": 3.22,
+  "5": 4.42
+ },
+ "rank_agreement_spearman": {
+  "all": 0.807,
+  "support": 0.652,
+  "ops": 0.866,
+  "analyst": 0.851
+ },
+ "rejected_scores": 0,
+ "quotes": 348
+}

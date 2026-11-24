@@ -1,0 +1,24 @@
+Application form answers: Mateusz Lindholm (mateusz.lindholm@mailbox.example, +44 7700 900148)
+
+
+
+Q: Which role are you applying for?
+A: Warehouse Operations Supervisor
+
+Q: What did you do at Cobalt Ridge Ltd (3 years, Warehouse Operations Supervisor)?
+A: Used the computer system at work. Reads about local history in spare time. Joined the company charity run team. Won the office table tennis tournament. Completed the mandatory induction and onboarding for new staff.
+
+Q: What did you do at Northgate Systems (2 years, Assistant Warehouse Operations Supervisor)?
+A: Enjoys hiking and photography. Won the office table tennis tournament. Holds a full driving licence. Ran the process improvement programme that raised daily shipments from 3,000 to 3,400 orders over 3 years with no extra headcount. Completed the mandatory induction and onboarding for new staff.
+
+Q: What did you do at Greenfield Operations (18 months, Junior Warehouse Operations Supervisor)?
+A: Raised inventory accuracy from 86 to 97 percent by introducing bin level cycle counts across 6 zones. Joined the company charity run team. Attended the monthly all hands meeting. Won the office table tennis tournament. Completed the mandatory induction and onboarding for new staff.
+
+Q: What did you do at Harlow Group (4 years, Warehouse Operations Supervisor)?
+A: Reads about local history in spare time. Attended the monthly all hands meeting. Won the office table tennis tournament. Scheduled and supervised a shift crew of 8 and handled attendance and breaks. Completed the mandatory induction and onboarding for new staff.
+
+Q: What did you do at Lanternbay Trading (1 year, Assistant Warehouse Operations Supervisor)?
+A: Reads about local history in spare time. Won the office table tennis tournament. Enjoys hiking and photography. Completed the mandatory induction and onboarding for new staff.
+
+Q: Education?
+A: Logistics, Nordhavn University of Applied Sciences, 2017

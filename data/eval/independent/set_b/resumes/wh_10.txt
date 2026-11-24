@@ -1,0 +1,61 @@
+PERSONAL INFORMATION
+  Name: Lucía Moreau
+  Telephone: +34 600 55 39 49
+  E-mail: lucia.moreau@postnet.example
+
+WORK EXPERIENCE
+  Employer: Northgate Systems
+  Position: Warehouse Operations Supervisor
+  Duration: 3 years
+  Main activities and responsibilities:
+    - Joined the company charity run team.
+    - Paid attention to safety.
+    - Won the office table tennis tournament.
+    - Reads about local history in spare time.
+    - Completed the mandatory induction and onboarding for new staff.
+
+  Employer: Bluepine Services
+  Position: Assistant Warehouse Operations Supervisor
+  Duration: 2 years
+  Main activities and responsibilities:
+    - Attended the monthly all hands meeting.
+    - Won the office table tennis tournament.
+    - Owned inventory accuracy for a site holding 40,000 items, held it above 99 percent for 5 years and taught 4 leads the counting method.
+    - Reads about local history in spare time.
+    - Completed the mandatory induction and onboarding for new staff.
+
+  Employer: Harlow Group
+  Position: Junior Warehouse Operations Supervisor
+  Duration: 18 months
+  Main activities and responsibilities:
+    - Led a shift of 12 and cut overtime by 12 percent through better rostering.
+    - Attended the monthly all hands meeting.
+    - Reads about local history in spare time.
+    - Holds a full driving licence.
+    - Completed the mandatory induction and onboarding for new staff.
+
+  Employer: Meridian Works
+  Position: Warehouse Operations Supervisor
+  Duration: 4 years
+  Main activities and responsibilities:
+    - Reads about local history in spare time.
+    - Attended the monthly all hands meeting.
+    - Used a warehouse management system to receive, put away and ship orders.
+    - Joined the company charity run team.
+    - Completed the mandatory induction and onboarding for new staff.
+
+  Employer: Lanternbay Trading
+  Position: Assistant Warehouse Operations Supervisor
+  Duration: 1 year
+  Main activities and responsibilities:
+    - Holds a full driving licence.
+    - Won the office table tennis tournament.
+    - Reads about local history in spare time.
+    - Completed the mandatory induction and onboarding for new staff.
+
+EDUCATION AND TRAINING
+  Logistics, Kestrel Heights College, 2012
+
+JOB RELATED SKILLS
+  inventory accuracy, lean, SAP
+

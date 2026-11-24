@@ -1,0 +1,12 @@
+CURRICULUM VITAE: Samuel Morrow
+samuel.morrow@mailbox.example / +1 555 0117 7317
+
+Skills | REST; PostgreSQL; mentoring
+
+Employer | Role | Detail
+--- | --- | ---
+Summit Lane Co | Backend Software Engineer | Redesigned the PostgreSQL schema for notifications and added indexes that cut the slowest query from 30 seconds to under one second.
+Meridian Works | Assistant Backend Software Engineer | Tested my own code before release.
+
+Education | Computer Science | University of Westmere | 2018
+

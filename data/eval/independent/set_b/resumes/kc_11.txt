@@ -1,0 +1,21 @@
+Application form answers: Aoife Sharma (aoife.sharma@inbox.example, +44 7700 900154)
+
+
+
+Q: Which role are you applying for?
+A: Restaurant Kitchen Manager
+
+Q: List your skills.
+A: staff training, line cook
+
+Q: What did you do at Northgate Systems (3 years, Restaurant Kitchen Manager)?
+A: Ordered from suppliers weekly and tracked the food cost against sales. Cooked many dishes.
+
+Q: What did you do at Summit Lane Co (2 years, Assistant Restaurant Kitchen Manager)?
+A: Hired, trained and led a brigade of 35, promoted 8 cooks to sous chef and kept turnover under 8 percent for 4 years.
+
+Q: What did you do at Ironwood Partners (18 months, Junior Restaurant Kitchen Manager)?
+A: Brought average ticket time from 26 to 18 minutes at the dinner rush by reorganising stations.
+
+Q: Education?
+A: Culinary Arts, Universidad de Valmoral, 2008
