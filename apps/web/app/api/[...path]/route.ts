@@ -1,5 +1,7 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { lastHop } from "@/lib/clientIp";
+import { MAX_BODY_API, readLimited, safePath } from "@/lib/proxyGuard";
 
 const API = process.env.API_BASE_URL ?? "http://127.0.0.1:8000";
 const HOP = new Set(["connection", "keep-alive", "transfer-encoding", "content-encoding", "content-length"]);
@@ -7,8 +9,8 @@ const HOP = new Set(["connection", "keep-alive", "transfer-encoding", "content-e
 /** Forward /api/* to the private API. Adds the session from the cookie. Mutations need the x-slatehire header, which a cross site page cannot send. */
 async function forward(request: Request, ctx: { params: Promise<{ path: string[] }> }) {
   const { path } = await ctx.params;
-  const joined = path.join("/");
-  if (joined.startsWith("auth/login") || joined.startsWith("webhooks") || joined.startsWith("tools")) return NextResponse.json({ error: { message: "Not found." } }, { status: 404 });
+  const joined = safePath(path); // refuses ".", "..", encoded slashes and the private top level names (auth, webhooks, tools), by whole segment
+  if (joined === null) return NextResponse.json({ error: { message: "Not found." } }, { status: 404 });
   if (!["GET", "HEAD"].includes(request.method) && request.headers.get("x-slatehire") !== "1") {
     return NextResponse.json({ error: { message: "Missing request header." } }, { status: 400 });
   }
@@ -19,12 +21,15 @@ async function forward(request: Request, ctx: { params: Promise<{ path: string[]
   const headers: Record<string, string> = { accept: request.headers.get("accept") ?? "*/*", connection: "close" };
   const ct = request.headers.get("content-type");
   if (ct) headers["content-type"] = ct;
-  const fn = request.headers.get("x-filename");
-  if (fn) headers["x-filename"] = fn.slice(0, 200);
+  for (const name of ["x-filename", "x-applicant-name", "x-applicant-email"]) {
+    const v = request.headers.get(name);
+    if (v) headers[name] = v.slice(0, 400);
+  }
   if (token) headers["x-session"] = token;
-  const ip = request.headers.get("x-forwarded-for");
+  const ip = lastHop(request.headers.get("x-forwarded-for")); // only the address the closest proxy saw: earlier entries are typed by the visitor
   if (ip) headers["x-forwarded-for"] = ip;
-  const body = ["GET", "HEAD"].includes(request.method) ? undefined : await request.arrayBuffer();
+  const body = ["GET", "HEAD"].includes(request.method) ? undefined : await readLimited(request, MAX_BODY_API);
+  if (body === null) return NextResponse.json({ error: { message: "The request is too large." } }, { status: 413 });
   const send = () => fetch(`${API}/api/${joined}${url.search}`, {
     method: request.method, headers, body, signal: request.signal, cache: "no-store",
   });

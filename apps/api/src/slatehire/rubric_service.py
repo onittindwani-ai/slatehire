@@ -26,7 +26,7 @@ def latest(s: Session, role_id: int, locked_only: bool = False) -> Rubric | None
     return s.scalars(q.order_by(Rubric.version.desc())).first()
 
 
-def create_role(s: Session, actor: str, title: str, team: str = "", description: str = "", key: str | None = None) -> Role:
+def create_role(s: Session, actor: str, title: str, team: str = "", description: str = "", key: str | None = None, company: str = "") -> Role:
     need_person(actor)
     key = key or slug(title)
     if any(r.title.strip().lower() == title.strip().lower() for r in s.scalars(select(Role))):
@@ -34,16 +34,18 @@ def create_role(s: Session, actor: str, title: str, team: str = "", description:
     if s.scalars(select(Role).where(Role.key == key)).first():
         raise RuleError(f"A role with the key '{key}' already exists.")
     r = Role(key=key, title=title.strip(), team=team.strip(), description=description.strip())
-    r.job_post = job_post_draft(r)
+    r.job_post = job_post_draft(r, None, company)
     s.add(r)
     s.flush()
     record_audit(s, actor, "role.created", f"role:{r.id}", {"key": key})
     return r
 
 
-def job_post_draft(role: Role, criteria: list[dict] | None = None) -> str:
+def job_post_draft(role: Role, criteria: list[dict] | None = None, company: str = "") -> str:
     """A plain job post written from the role and the rubric. A template, not a language model. A person edits it before it is used."""
     lines = [f"# {role.title}", ""]
+    if company.strip():
+        lines += [f"Company: {company.strip()}", ""]
     if role.team:
         lines += [f"Team: {role.team}", ""]
     lines += [role.description.strip() or "[Write two or three sentences about the work and who it helps.]", "", "## What we will look at", ""]
@@ -81,19 +83,19 @@ def edit(s: Session, rubric: Rubric, actor: str, criteria: list[dict] | None = N
     return rubric
 
 
-def lock(s: Session, rubric: Rubric, actor: str, now) -> Rubric:
+def lock(s: Session, rubric: Rubric, actor: str, now, company: str = "", extra_terms: list[str] | None = None) -> Rubric:
     """Lock the rubric. After this its criteria, weights, anchors, blind setting and redaction version are fixed and signed by a fingerprint."""
     need_person(actor)
     if rubric.locked:
         raise RuleError("This rubric is already locked.")
-    problems = rubrics.validate(rubric.criteria)
+    problems = rubrics.validate(rubric.criteria) + rubrics.proxy_problems(rubric.criteria, extra_terms)
     if problems:
         raise RuleError("Fix this before you lock: " + " ".join(problems))
     rubric.fingerprint = rubrics.fingerprint(rubric.criteria, rubric.blind, rubric.redaction_version)
     rubric.locked, rubric.locked_by, rubric.locked_at = True, actor, now
     role = s.get(Role, rubric.role_id)
     if role is not None:
-        role.job_post = job_post_draft(role, rubric.criteria) if "[Add the rubric criteria" in (role.job_post or "") else role.job_post
+        role.job_post = job_post_draft(role, rubric.criteria, company) if "[Add the rubric criteria" in (role.job_post or "") else role.job_post
     s.flush()
     record_audit(s, actor, "rubric.locked", f"rubric:{rubric.id}", {"version": rubric.version, "fingerprint": rubric.fingerprint, "blind": rubric.blind})
     return rubric

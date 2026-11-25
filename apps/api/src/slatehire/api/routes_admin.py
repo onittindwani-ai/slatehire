@@ -14,6 +14,7 @@ from slatehire.models import Application, Offer
 from slatehire.registry import CATEGORIES, ENV_VARS
 from sendora_core.approvals import ApprovalError, decide
 from sendora_core.audit import record_audit, verify_audit_chain
+from sendora_core.auth import clean_email
 from sendora_core.models import Approval, AuditEntry
 
 router = APIRouter(prefix="/api", tags=["admin"])
@@ -33,7 +34,7 @@ def _offer_of(s: Session, a: Approval) -> dict | None:
     if o is None:
         return None
     app = s.get(Application, o.application_id)
-    return {"id": o.id, "title": o.title, "start_date": o.start_date, "terms": o.terms, "status": o.status, "application_id": o.application_id, "stage": app.stage if app else None}
+    return {"id": o.id, "title": o.title, "start_date": o.start_date, "terms": o.terms, "body": o.body, "created_by": o.created_by, "status": o.status, "application_id": o.application_id, "stage": app.stage if app else None}
 
 
 class DecideIn(BaseModel):
@@ -49,6 +50,12 @@ def decide_approval(approval_id: int, body: DecideIn, s: Session = Depends(db), 
         app = s.get(Application, o.application_id) if o else None
         if app is not None and app.stage in ("declined", "withdrawn"):
             raise HTTPException(409, "This person is no longer in the process, so there is no offer to decide.")
+        # The second person must be someone who did not write the terms. The base only refuses the person who clicked "Ask for approval", so a
+        # favour (author drafts, a colleague asks, the author approves) would otherwise leave one person in control of both. Terms cannot be edited after
+        # they are drafted, so the person who drafted them is also the last person who changed them.
+        # (Someone who only asked for the approval is refused by the base below, with its own message.)
+        if o is not None and clean_email(u["user"]) == clean_email(o.created_by or "") and clean_email(u["user"]) != clean_email(pending.requested_by or ""):
+            raise HTTPException(403, "You wrote these terms, so a different person has to approve them.")
     try:
         a = decide(s, approval_id, body.approve, u["user"], u["role"], body.note or None)
     except ApprovalError as exc:

@@ -27,7 +27,7 @@ class UTCDateTime(DateTime):
 
 
 def make_engine(url: str) -> Engine:
-    kwargs: dict = {"future": True}
+    kwargs: dict = {"future": True, "hide_parameters": True}  # a database error never prints the values of the failed statement (names, amounts, text)
     if url.startswith("sqlite"):
         kwargs["connect_args"] = {"check_same_thread": False}
     engine = create_engine(url, **kwargs)

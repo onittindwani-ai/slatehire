@@ -75,6 +75,8 @@ class Worker:
                 job.result = handler(s, payload) or {}
                 job.status, job.finished_at = "done", utcnow()
             except Exception as exc:
+                s.rollback()  # a failed statement leaves the transaction unusable until it is rolled back
+                job = s.get(Job, job_id)
                 job.last_error = f"{type(exc).__name__}: {exc}"[:2000]
                 if job.attempts >= job.max_attempts:
                     job.status, job.finished_at = "failed", utcnow()

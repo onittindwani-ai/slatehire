@@ -24,9 +24,18 @@ def blind_enforced(s: Session, app: Application) -> bool:
     return bool(rub and rub.blind and app.stage == "applied")
 
 
+KNOWN_SOURCES = frozenset({"paste", "upload", "csv", "email", "webhook", "ashby", "workable", "greenhouse", "load test"})
+
+
+def source_label(c: Candidate, hidden: bool) -> str:
+    """Where the application came from. While identity is hidden only a known channel is shown: a CSV file can carry any text in this column ("Stanford career fair",
+    "referral from Jo"), and free text is exactly what blind mode keeps from the first reader."""
+    return c.source if not hidden or (c.source or "").lower() in KNOWN_SOURCES else "other"
+
+
 def person(c: Candidate, hidden: bool) -> dict:
     if hidden:
-        return {"code": c.code, "name": f"Candidate {c.code}", "email": None, "phone": None, "school": None, "source": c.source, "hidden": True}
+        return {"code": c.code, "name": f"Candidate {c.code}", "email": None, "phone": None, "school": None, "source": source_label(c, True), "hidden": True}
     return {"code": c.code, "name": c.full_name, "email": c.email or None, "phone": c.phone or None, "school": c.school or None, "source": c.source, "hidden": False}
 
 
@@ -35,7 +44,8 @@ def row(s: Session, app: Application, c: Candidate, role: Role, rub_id: int | No
     hide = blind_enforced(s, app) if hidden is None else hidden
     p = person(c, hide)
     return {"id": app.id, "code": c.code, "name": p["name"], "hidden": hide, "role": role.key, "role_title": role.title, "stage": app.stage, "total": sc.total if sc else None, "covered": sc.covered if sc else None,
-            "flags": len(sc.flags) if sc else 0, "source": c.source, "updated_at": iso(app.updated_at), "deleted": c.purged_at is not None}
+            "flags": len(sc.flags) if sc else 0, "source": source_label(c, hide), "updated_at": iso(app.updated_at), "deleted": c.purged_at is not None,
+            "attention": "resume_missing" if (app.note or "").startswith("Resume missing") else None}
 
 
 def pieces(res: Resume | None, items: list[dict], reveal: bool) -> list[dict]:

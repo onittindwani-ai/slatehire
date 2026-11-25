@@ -25,3 +25,5 @@ demo.sqlite3-*
 !.env.example
 *.pem
 *.key
+exports/
+**/exports/

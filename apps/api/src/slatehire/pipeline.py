@@ -58,7 +58,7 @@ def move(s: Session, app: Application, to: str, actor: str, note: str, now, sett
     if to in TERMINAL or to == "shortlisted":
         app.decided_by, app.decision_note = actor, note
     s.flush()
-    record_audit(s, actor, f"application.{to}", f"application:{app.id}", {"from": app.history[-2]["stage"], "note": note[:200]})
+    record_audit(s, actor, f"application.{to}", f"application:{app.id}", {"from": app.history[-2]["stage"], "note_chars": len(note)})  # the words stay on the application, where a delete removes them; the append only log holds no free text
     record_event(s, "application.moved", "application", app.id, {"to": to})
     return app
 

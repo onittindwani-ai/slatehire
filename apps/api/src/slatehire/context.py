@@ -65,10 +65,10 @@ class Ctx:
         return None
 
     def now(self, session: Session):
-        return clock.now(session, self.settings.demo_mode)
+        return clock.now(session, self.settings.demo_shortcuts)
 
     def today(self, session: Session) -> date:
-        return clock.today(session, self.settings.demo_mode)
+        return clock.today(session, self.settings.demo_shortcuts)
 
 
 def set_state(session: Session, key: str, value: str) -> None:

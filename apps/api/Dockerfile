@@ -16,4 +16,4 @@ ENV FORWARDED_ALLOW_IPS=127.0.0.1
 EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=5s CMD python -c "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8000/health')"
 # Migrations run on start for Postgres. SQLite creates its own tables.
-CMD ["sh", "-c", "case \"$DATABASE_URL\" in postgres*) alembic upgrade head;; esac; exec python -m uvicorn slatehire.api.app:app_from_env --factory --host 0.0.0.0 --port 8000 --proxy-headers"]
+CMD ["sh", "-c", "case \"$DATABASE_URL\" in postgres*) alembic upgrade head;; esac; exec python -m uvicorn slatehire.api.app:app_from_env --factory --host 0.0.0.0 --port 8000 --proxy-headers --no-access-log"]

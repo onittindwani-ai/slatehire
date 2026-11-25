@@ -10,12 +10,14 @@ from sqlalchemy.orm import Session
 from slatehire import pipeline
 from slatehire.errors import RuleError, need_person
 from slatehire.models import Application, Candidate, Offer, Role
+from slatehire.textclean import one_line
 from sendora_core.approvals import request_approval, require_approved
 from sendora_core.audit import record_audit
 from sendora_core.safety import KillSwitchError
 
 TEMPLATE = """OFFER OF EMPLOYMENT (DRAFT FOR REVIEW)
 
+From: {company}
 To: {name}
 Role: {title}
 Planned start date: {start}
@@ -27,7 +29,7 @@ This draft was prepared from a template. It is not legal advice and it has not b
 """
 
 
-def create(s: Session, app: Application, actor: str, title: str, start_date: str, terms: str, today: date, min_scorecards: int) -> Offer:
+def create(s: Session, app: Application, actor: str, title: str, start_date: str, terms: str, today: date, min_scorecards: int, company: str = "") -> Offer:
     need_person(actor)
     if app.stage not in ("interviewing", "offer"):
         raise RuleError("An offer is drafted for someone who has been interviewed.")
@@ -45,8 +47,9 @@ def create(s: Session, app: Application, actor: str, title: str, start_date: str
     if len((terms or "").strip()) < 20:
         raise RuleError("Write the terms yourself (pay, hours, anything agreed). The system never writes terms.")
     cand = s.get(Candidate, app.candidate_id)
-    body = TEMPLATE.format(name=cand.full_name, title=title.strip(), start=start_date, terms=terms.strip())
-    row = Offer(application_id=app.id, title=title.strip(), start_date=start_date, terms=terms.strip(), body=body, status="draft", created_by=actor)
+    title = one_line(title, 200)
+    body = TEMPLATE.format(company=one_line(company, 120) or "(company name not set)", name=one_line(cand.full_name, 200), title=title, start=start_date, terms=terms.strip())  # one line each: a name can never add a paragraph
+    row = Offer(application_id=app.id, title=title, start_date=start_date, terms=terms.strip(), body=body, status="draft", created_by=actor)
     s.add(row)
     s.flush()
     record_audit(s, actor, "offer.drafted", f"offer:{row.id}", {"application": app.id})

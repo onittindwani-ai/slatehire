@@ -6,7 +6,7 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 
 ### `SESSION_SECRET`
 - **Required:** Yes (always)
-- **What it does:** Signs the session cookie. Anyone who knows it can sign in as anyone.
+- **What it does:** Signs the session cookie. Anyone who knows it can sign in as anyone. It must be 32 or more characters. Outside demo mode the API and the worker refuse to start on the example value from `.env.example` or on a short one.
 - **How to get it:**
 1. Run `python3 -c "import secrets; print(secrets.token_urlsafe(48))"`.
 2. Paste the result as the value. Use a different one for every install.
@@ -31,9 +31,9 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 
 ### `MODE and DEMO_MODE`
 - **Required:** Yes
-- **What it does:** `MODE=draft` sends nothing (no calendar invites). `live` allows a confirmed invite. `DEMO_MODE=true` loads fictional data and offline adapters only.
+- **What it does:** `MODE=draft` sends nothing (no calendar invites). `live` allows a confirmed invite. `DEMO_MODE=true` loads fictional data, offline adapters and the public demo sign ins (the demo password, the data reset button and the clock buttons). The moment `OWNER_PASSWORD_HASH` is set every one of those shortcuts is off, even if this stays `true`. The default in `.env.example` is `false`.
 - **How to get it:**
-1. Keep `MODE=draft` and `DEMO_MODE=true` for the demo.
+1. Set `DEMO_MODE=true` (and leave `OWNER_PASSWORD_HASH` empty) only for the demo with fictional people.
 2. For a real install set `DEMO_MODE=false` first, then work through the go live checklist before `MODE=live`.
 - **Cost:** Free.
 - **Where to put it:** Local: your `.env` file. Vercel: Project, Settings, Environment Variables (web variables only). Railway: the service, Variables tab. Hetzner: the `.env` file next to `docker-compose.yml` on the server.
@@ -43,10 +43,10 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 
 ### `OWNER_EMAIL, OWNER_PASSWORD_HASH`
 - **Required:** Yes outside demo mode
-- **What it does:** The owner sign in. The password is stored as an Argon2 hash.
+- **What it does:** The owner sign in. The password is stored as an Argon2 hash. `OWNER_EMAIL` must be your own address: the example address is refused outside demo mode.
 - **How to get it:**
 1. Run `python3 tools/hash_password.py` and type a long password when asked.
-2. Paste the hash as `OWNER_PASSWORD_HASH` and your email as `OWNER_EMAIL`.
+2. Paste the hash as `OWNER_PASSWORD_HASH` (inside single quotes in a `.env` file) and your email as `OWNER_EMAIL`.
 - **Cost:** Free.
 - **Where to put it:** Local: your `.env` file. Vercel: Project, Settings, Environment Variables (web variables only). Railway: the service, Variables tab. Hetzner: the `.env` file next to `docker-compose.yml` on the server.
 - **Check it:** Sign in on the login page.
@@ -85,9 +85,9 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 
 ## Hiring rules (decided defaults, change them for your company)
 
-### `RETENTION_DAYS, FAIRNESS_MIN_GROUP, FAIRNESS_THRESHOLD, MIN_SCORECARDS, BLIND_DEFAULT, REDACT_INSTITUTIONS`
+### `RETENTION_DAYS, OPEN_RETENTION_DAYS, FAIRNESS_MIN_GROUP, FAIRNESS_THRESHOLD, MIN_SCORECARDS, BLIND_DEFAULT, REDACT_INSTITUTIONS, PROXY_TERMS`
 - **Required:** No (defaults exist)
-- **What it does:** Days to keep a declined or withdrawn applicant (365), the smallest group the fairness page compares (10), the threshold as a fraction (4/5), scorecards needed before an offer (2), whether new rubrics start blind, and whether schools are hidden. These are the decided defaults. The implementer can change any of them for the client's company and country with the client's adviser.
+- **What it does:** Days to keep a declined or withdrawn applicant (365), days after which the personal data of an applicant nobody ever decided on is deleted (`OPEN_RETENTION_DAYS`, 730, 0 means never), the smallest group the fairness page compares (10, never below 2; a smaller group is shown as "fewer than N" with no counts), the threshold as a fraction (4/5), scorecards needed before an offer (2), whether new rubrics start blind, whether schools are hidden, and extra words a rubric may not look for (`PROXY_TERMS`, comma separated: words that stand in for age, school or language; a built in list is always checked too). These are the decided defaults. The implementer can change any of them for the client's company and country with the client's adviser.
 - **How to get it:**
 1. Decide each with your adviser.
 2. Set the values. `RETENTION_DAYS` under 30 triggers a warning.
@@ -97,9 +97,9 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 - **If it is wrong you see:** A problem line such as `RETENTION_DAYS is under 30.`
 
 
-### `EXPORT_DIR, UPLOAD_MAX_BYTES, SEED_DIR`
+### `EXPORT_DIR, UPLOAD_MAX_BYTES, SEED_DIR, MAX_BODY_BYTES`
 - **Required:** No
-- **What it does:** Where offer files are written, the largest upload (5000000 bytes) and where the demo seed lives.
+- **What it does:** Where offer files are written, the largest resume upload (`UPLOAD_MAX_BYTES`, 5000000 bytes), where the data folder with the starting rubrics lives (`SEED_DIR`, set automatically when you run from the repository and by the Docker image) and the largest request of any kind the API reads (`MAX_BODY_BYTES`, 26214400 bytes). A request larger than the limit is refused before it is read.
 - **How to get it:**
 1. Make sure the folder exists and the app can write to it. On Railway and Hetzner attach a volume.
 - **Cost:** Free; a volume may cost on your host.
@@ -145,7 +145,7 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 - **If it is wrong you see:** `The service refused the key.`
 - **Status:** Permission name VERIFIED (developers.ashbyhq.com/reference/candidatelist, 2026-11-23). Menu path UNVERIFIED. Never run live.
 
-### `WORKABLE_TOKEN, WORKABLE_SUBDOMAIN`
+### `WORKABLE_TOKEN, WORKABLE_SUBDOMAIN, WORKABLE_BASE_URL`
 - **Required:** Only if you use Workable
 - **What it does:** A bearer token and your account subdomain (the base is `https://<subdomain>.workable.com/spi/v3`).
 - **How to get it:**
@@ -210,7 +210,7 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 - **If it is wrong you see:** `Cal.com refused the key.`
 - **Status:** Request shape VERIFIED (cal.com/docs/api-reference/v2, 2026-11-22). Dashboard path UNVERIFIED. Never run live.
 
-### `GOOGLE_ACCESS_TOKEN, GOOGLE_CALENDAR_ID`
+### `GOOGLE_ACCESS_TOKEN, GOOGLE_CALENDAR_ID, GOOGLE_BASE_URL`
 - **Required:** Only for Google Calendar
 - **What it does:** Creates events with `events.insert`. The adapter takes an access token you already have; it does not run the sign in flow.
 - **How to get it:**
@@ -235,7 +235,7 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 
 ## Model, web and hosting
 
-### `ANTHROPIC_API_KEY, LLM_BACKEND, SCORER, LLM_HARD_MODEL, LLM_BULK_MODEL`
+### `ANTHROPIC_API_KEY, LLM_BACKEND, LLM_MODE, SCORER, LLM_HARD_MODEL, LLM_BULK_MODEL, LLM_MODEL, ANTHROPIC_BASE_URL, ANTHROPIC_VERSION`
 - **Required:** No
 - **What it does:** Not needed for the demo or for scoring by the built in rules. `LLM_BACKEND` is `offline` (default, the built in rules stand in, no account), `fixture` (recorded answers from `LLM_FIXTURES_DIR`) or `anthropic` (a real model, needs the key, UNVERIFIED live: it has only been run against a local fake server). `SCORER` is `rules` (default) or `model`: with `SCORER=model` and a model backend, each criterion is scored by the model one at a time, from the redacted resume only, and the code checks every quote against the redacted text and adds up the total. A model never moves, rejects or messages anyone. Turning it on is a choice to make with your lawyer's advice, see doc 14.
 - **How to get it:**
@@ -248,9 +248,44 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 - **If it is wrong you see:** `The model backend is anthropic but ANTHROPIC_API_KEY is empty.` or `SCORER is model but LLM_BACKEND is offline, so the rules score.`
 
 
+### `COMPANY_NAME, APP_NAME`
+- **Required:** `COMPANY_NAME` is required for a live start
+- **What it does:** `COMPANY_NAME` is the company every offer file and job post speaks for. `APP_NAME` is the name in logs. The example `Example Company` is a placeholder: `python3 tools/doctor.py` lists it as a PROBLEM and a live start (`MODE=live`, `DEMO_MODE=false`) is refused while it, or the example `OWNER_EMAIL`, is unchanged.
+- **How to get it:**
+1. Set `COMPANY_NAME` to your own company name.
+2. Leave `APP_NAME` as it is.
+- **Cost:** Free.
+- **Where to put it:** - **Where to put it:** Local: your `.env` file. Vercel: Project, Settings, Environment Variables (web variables only). Railway: the service, Variables tab. Hetzner: the `.env` file next to `docker-compose.yml` on the server.
+- **Check it:** - **Check it:** `python3 tools/doctor.py` (it prints the variable name, never the value)
+- **If it is wrong you see:** An offer file would name the wrong company. The doctor names the placeholder.
+
+
+### `ALLOW_DEMO_SERVER`
+- **Required:** No (keep `false`)
+- **What it does:** Lets a throw away demo run on a server database. Leave it `false`: a demo on a real database would load fictional people into it, with public demo passwords.
+- **How to get it:**
+1. Leave `false`.
+- **Cost:** Free.
+- **Where to put it:** - **Where to put it:** Local: your `.env` file. Vercel: Project, Settings, Environment Variables (web variables only). Railway: the service, Variables tab. Hetzner: the `.env` file next to `docker-compose.yml` on the server.
+- **Check it:** - **Check it:** `python3 tools/doctor.py` (it prints the variable name, never the value)
+- **If it is wrong you see:** With `DEMO_MODE=true` on Postgres and this `false` the API refuses to start and says why.
+
+
+### `LLM_TIMEOUT, LLM_MAX_TOKENS, LLM_MAX_RETRIES, LLM_CALL_BUDGET, LLM_BUDGET_USD, LLM_THINKING, LLM_FIXTURES_DIR, LLM_RECORD, LLM_REDACT, LLM_LOG_PROMPTS`
+- **Required:** No
+- **What it does:** Used only when `LLM_BACKEND` is `anthropic` or `fixture`. `LLM_TIMEOUT` is seconds to wait for one answer, `LLM_MAX_TOKENS` the longest answer, `LLM_MAX_RETRIES` how often a failed call is tried again. `LLM_CALL_BUDGET` is the most live model calls one process makes and `LLM_BUDGET_USD` the most tracked spend; leave them empty for no limit. `LLM_THINKING=off` asks for the lowest thinking setting where the model allows it. `LLM_FIXTURES_DIR` is where recorded answers are read, `LLM_RECORD` saves every live answer there. `LLM_REDACT` (default `true`) keeps full prompts and keys out of logs and saved answers; `LLM_LOG_PROMPTS` (default `false`) logs a shortened, redacted prompt.
+- **How to get it:**
+1. Keep the defaults.
+2. Set both budgets before you turn a real model on.
+- **Cost:** Only calls to a real model cost anything.
+- **Where to put it:** - **Where to put it:** Local: your `.env` file. Vercel: Project, Settings, Environment Variables (web variables only). Railway: the service, Variables tab. Hetzner: the `.env` file next to `docker-compose.yml` on the server.
+- **Check it:** - **Check it:** `python3 tools/doctor.py` (it prints the variable name, never the value)
+- **If it is wrong you see:** At the limit the app falls back to the built in rules. Turning `LLM_REDACT` off would put candidate text in logs.
+
+
 ### `API_BASE_URL, INSECURE_COOKIES`
 - **Required:** Yes on the web host
-- **What it does:** `API_BASE_URL` is the private address of the API the web app forwards to. `INSECURE_COOKIES=1` is only for plain http on localhost.
+- **What it does:** `API_BASE_URL` is the private address of the API the web app forwards to. `INSECURE_COOKIES=1` is only for plain http on localhost. In the compose file the web container receives only these two, not the rest of `.env`.
 - **How to get it:**
 1. Local: `http://127.0.0.1:8000`.
 2. Vercel: the public https address of your Railway or Hetzner API.
@@ -263,9 +298,9 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 
 ### `POSTGRES_PASSWORD`
 - **Required:** Yes with Docker Compose
-- **What it does:** The password of the Postgres container in `docker-compose.yml`.
+- **What it does:** The password of the Postgres container in `docker-compose.yml`. The app itself does not read it: compose puts it into `DATABASE_URL`.
 - **How to get it:**
-1. Generate a long random string.
+1. Run `openssl rand -hex 24` and paste the result. Letters and digits only, so it is safe inside a URL.
 2. Set it in `.env` next to the compose file.
 - **Cost:** Free.
 - **Where to put it:** Local: your `.env` file. Vercel: Project, Settings, Environment Variables (web variables only). Railway: the service, Variables tab. Hetzner: the `.env` file next to `docker-compose.yml` on the server.

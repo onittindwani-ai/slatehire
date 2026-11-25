@@ -118,7 +118,12 @@ class _IMAP(socketserver.StreamRequestHandler):
                         self._w(tag.encode() + b" OK done\r\n")
                     else:
                         body = msg["raw"]
-                        self._w(f"* {uid} FETCH (UID {uid} RFC822 {{{len(body)}}}\r\n".encode() + body + b")\r\n" + tag.encode() + b" OK done\r\n")
+                        peek = "PEEK" in a2.upper()
+                        if not peek:  # RFC 3501 6.4.5: fetching RFC822 or BODY[] sets \\Seen on the server; only BODY.PEEK[] leaves the message unread
+                            with self.store.lock:
+                                msg["seen"] = True
+                        label = "BODY[]" if "BODY" in a2.upper() else "RFC822"
+                        self._w(f"* {uid} FETCH (UID {uid} {label} {{{len(body)}}}\r\n".encode() + body + b")\r\n" + tag.encode() + b" OK done\r\n")
                 elif sub == "STORE":
                     uid = int(a2.split(" ", 1)[0])
                     with self.store.lock:

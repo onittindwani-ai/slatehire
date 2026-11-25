@@ -227,3 +227,34 @@ def test_an_empty_setting_means_not_set_and_never_crashes_a_number_field(tmp_pat
     assert WithNumber(_env_file=str(env)).event_type_id is None
     monkeypatch.setenv("EVENT_TYPE_ID", "42")
     assert WithNumber(_env_file=None).event_type_id == 42
+
+
+# ---- found by the Deskfern and Booklantern fixes
+def test_a_job_that_fails_on_a_database_error_still_records_its_failure(factory):
+    from sqlalchemy import text
+
+    from sendora_core.db import session_scope
+
+    def breaks_the_transaction(session, payload):
+        session.execute(text("INSERT INTO table_that_does_not_exist VALUES (1)"))
+
+    with session_scope(factory) as s:
+        job = jobs.enqueue(s, "x", max_attempts=1)
+        job_id = job.id
+    jobs.Worker(factory, {"x": breaks_the_transaction}).run_once()
+    with session_scope(factory) as s:
+        j = s.get(Job, job_id)
+        assert j.status == "failed" and "OperationalError" in j.last_error
+
+
+def test_a_database_error_does_not_print_the_values_of_the_statement(tmp_path):
+    from sqlalchemy import text
+    from sqlalchemy.exc import OperationalError
+
+    from sendora_core.db import make_engine
+
+    eng = make_engine(f"sqlite:///{tmp_path}/e.sqlite3")
+    with eng.connect() as c:
+        with pytest.raises(OperationalError) as e:
+            c.execute(text("INSERT INTO nope VALUES (:secret)"), {"secret": "Jane Doe 4111-1111"})
+    assert "Jane Doe" not in str(e.value) and "4111" not in str(e.value)

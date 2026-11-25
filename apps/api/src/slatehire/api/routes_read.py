@@ -7,10 +7,10 @@ from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from slatehire import fairness_service, interviews, pipeline, rubric_service, scoring_service
-from slatehire.api.deps import db, get_ctx, get_or_404, user
-from slatehire.api.serializers import blind_enforced, iso, person, pieces, row
+from slatehire.api.deps import db, get_ctx, get_or_404, user, writer
+from slatehire.api.serializers import blind_enforced, iso, person, pieces, row, source_label
 from slatehire.context import Ctx
-from slatehire.models import Application, Candidate, FairnessReport, Interview, OnboardingTask, Offer, Resume, Role, Rubric, Score
+from slatehire.models import Application, Candidate, FairnessReport, IntakeLog, Interview, OnboardingTask, Offer, Resume, Role, Rubric, Score
 from slatehire.onboarding import progress
 from sendora_core.audit import record_audit
 from sendora_core.auth import WRITE_ROLES
@@ -26,6 +26,25 @@ def _role_ctx(s: Session):
     return roles, rubs
 
 
+def stale_jobs(s: Session) -> list[str]:
+    """Recurring jobs (the mailbox, scoring, the retention sweep) that have not finished for three of their own intervals. If the worker is stopped or a job keeps failing,
+    nobody is told by silence: this is the list the top of the page shows."""
+    from sendora_core.db import utcnow
+    from sendora_core.models import Job
+    from slatehire.jobs import INTERVALS
+
+    now, late = utcnow(), []
+    for kind, secs in INTERVALS.items():
+        last = s.scalars(select(Job).where(Job.kind == kind, Job.status == "done").order_by(Job.id.desc())).first()
+        newest = s.scalars(select(Job).where(Job.kind == kind).order_by(Job.id.desc())).first()
+        if newest is None:
+            continue  # never queued: a worker that was never started is shown by the worker health, not here
+        ref = last.finished_at if last is not None and last.finished_at else newest.created_at
+        if (now - (ref if ref.tzinfo else ref.replace(tzinfo=now.tzinfo))).total_seconds() > 3 * secs:
+            late.append(kind)
+    return late
+
+
 @router.get("/overview", summary="Numbers for the top of the page")
 def overview(s: Session = Depends(db), ctx: Ctx = Depends(get_ctx)):
     roles, rubs = _role_ctx(s)
@@ -33,7 +52,17 @@ def overview(s: Session = Depends(db), ctx: Ctx = Depends(get_ctx)):
     pend = s.scalar(select(func.count()).select_from(Approval).where(Approval.status == "pending")) or 0
     q = scoring_service.quote_check(s)
     return {"funnel": funnel, "roles": len(roles), "roles_unlocked": sum(1 for r in rubs.values() if r is None), "pending_approvals": pend, "unscored": len(scoring_service.unscored(s)), "evidence": {"quotes": q["quotes"], "invalid": q["invalid"], "valid_percent": q["valid_percent"]},
-            "today": ctx.today(s).isoformat(), "overdue_tasks": sum(1 for t in s.scalars(select(OnboardingTask).where(OnboardingTask.done.is_(False))) if date.fromisoformat(t.due_on) < ctx.today(s))}
+            "stale_jobs": stale_jobs(s), "today": ctx.today(s).isoformat(), "overdue_tasks": sum(1 for t in s.scalars(select(OnboardingTask).where(OnboardingTask.done.is_(False))) if date.fromisoformat(t.due_on) < ctx.today(s))}
+
+
+@router.get("/intake/log", summary="Every application that came in by email, an ATS or a form and was not added, with the reason (owner and approver). Nobody leaves the funnel without a line here.")
+def intake_log(status: str | None = Query(None, pattern="^(added|duplicate|rejected)$"), limit: int = Query(100, ge=1, le=500), s: Session = Depends(db), u: dict = Depends(writer)):
+    q = select(IntakeLog).order_by(IntakeLog.id.desc()).limit(limit)
+    if status:
+        q = q.where(IntakeLog.status == status)
+    else:
+        q = q.where(IntakeLog.status != "added")
+    return [{"id": r.id, "source": r.source, "ref": r.ref, "status": r.status, "detail": r.detail, "at": iso(r.created_at)} for r in s.scalars(q)]
 
 
 @router.get("/roles", summary="Roles with their rubric state")
@@ -107,7 +136,8 @@ def applications(role: str | None = None, stage: str | None = None, limit: int =
         hide = blind_enforced(s, app) if rub else False
         p = person(c, hide)
         out.append({"id": app.id, "code": c.code, "name": p["name"], "hidden": hide, "role": roles[app.role_id].key, "role_title": roles[app.role_id].title, "stage": app.stage, "total": sc.total if sc else None, "covered": sc.covered if sc else None,
-                    "flags": len(sc.flags) if sc else 0, "source": c.source, "updated_at": iso(app.updated_at), "deleted": c.purged_at is not None})
+                    "flags": len(sc.flags) if sc else 0, "source": source_label(c, hide), "updated_at": iso(app.updated_at), "deleted": c.purged_at is not None,
+                    "attention": "resume_missing" if (app.note or "").startswith("Resume missing") else None})
     return out
 
 
@@ -149,7 +179,7 @@ def workspace(app_id: int, reveal: bool = False, s: Session = Depends(db), ctx: 
     tasks = list(s.scalars(select(OnboardingTask).where(OnboardingTask.application_id == app.id).order_by(OnboardingTask.phase, OnboardingTask.due_on)))
     return {
         "id": app.id, "stage": app.stage, "role": {"key": role.key, "title": role.title}, "person": person(c, hide), "blind": {"enforced": enforced, "showing": hide, "rubric_setting": bool(rub and rub.blind)},
-        "history": app.history, "decided_by": app.decided_by, "decision_note": app.decision_note, "deleted": c.purged_at is not None,
+        "history": app.history, "decided_by": app.decided_by, "decision_note": app.decision_note, "note": app.note, "deleted": c.purged_at is not None,
         "rubric": None if shown is None else {"id": shown.id, "version": shown.version, "fingerprint": shown.fingerprint, "signature_ok": rubric_service.verify_signature(shown), "blind": shown.blind, "criteria": shown.criteria},
         "current_version": None if rub is None else rub.version,
         "score": None if sc is None else {"id": sc.id, "total": sc.total, "covered": sc.covered, "items": sc.items, "flags": sc.flags, "scorer": sc.scorer, "at": iso(sc.created_at)},
@@ -205,11 +235,18 @@ def onboarding_list(s: Session = Depends(db), ctx: Ctx = Depends(get_ctx)):
     return out
 
 
-@router.get("/fairness", summary="The latest fairness report, if one was run")
-def fairness_latest(role: str = "all", s: Session = Depends(db)):
-    rep = s.scalars(select(FairnessReport).where(FairnessReport.role_key == role).order_by(FairnessReport.id.desc())).first()
+@router.get("/fairness", summary="The latest fairness report, if one was run, and the latest one that flagged a group")
+def fairness_latest(role: str = "all", s: Session = Depends(db), ctx: Ctx = Depends(get_ctx)):
+    reports = list(s.scalars(select(FairnessReport).where(FairnessReport.role_key == role).order_by(FairnessReport.id.desc())))
+    rep = reports[0] if reports else None
+    flagged = next((r for r in reports if r.payload.get("flagged")), None)  # a newer clean report must not bury an older one that flagged a group
     labelled = fairness_service.labelled_count(s)
-    return {"report": None if rep is None else {"id": rep.id, "created_at": iso(rep.created_at), "created_by": rep.created_by, "payload": rep.payload}, "labelled": labelled, "history": [{"id": r.id, "role": r.role_key, "at": iso(r.created_at), "flagged": len(r.payload.get("flagged", []))} for r in s.scalars(select(FairnessReport).order_by(FairnessReport.id.desc()).limit(10))]}
+
+    def view(r: FairnessReport | None):
+        return None if r is None else {"id": r.id, "created_at": iso(r.created_at), "created_by": r.created_by, "payload": r.payload}
+
+    return {"report": view(rep), "latest_flagged": view(flagged) if flagged is not None and flagged is not rep else None, "labelled": labelled, "min_group_floor": ctx.settings.fairness_min_group,
+            "history": [{"id": r.id, "role": r.role_key, "at": iso(r.created_at), "flagged": len(r.payload.get("flagged", []))} for r in s.scalars(select(FairnessReport).order_by(FairnessReport.id.desc()).limit(10))]}
 
 
 @router.get("/evals", summary="Quote check, computed now over every stored score")

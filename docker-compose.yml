@@ -69,9 +69,9 @@ services:
       dockerfile: apps/web/Dockerfile
     restart: unless-stopped
     logging: *logging
-    env_file: .env
     environment:
       API_BASE_URL: http://api:8000
+      INSECURE_COOKIES: ${INSECURE_COOKIES:-}  # the web container gets only what it needs, not the whole .env (no database password, no session secret)
     depends_on:
       api:
         condition: service_healthy

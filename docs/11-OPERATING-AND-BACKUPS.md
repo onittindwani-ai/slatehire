@@ -11,7 +11,7 @@ The worker deletes people who were declined or withdrawn longer ago than `RETENT
 
 ## Backups
 - SQLite: copy the database file while the API is stopped, or use the `.backup` command.
-- Postgres: `pg_dump` nightly to storage outside the server. `deploy/hetzner/backup.sh` does this for the Compose setup. Test a restore once.
+- Postgres: `pg_dump` nightly to storage outside the server. `deploy/hetzner/backup.sh` does this for the Compose setup, with a copy of the exports folder, an empty dump treated as a failure and files readable by the owner only. Encrypt them before they leave the machine; they hold candidate data. Test a restore once.
 - The export folder holds offer files. Back it up with the database.
 
 A restore brings back deleted people. If you restore after a deletion request, delete them again.

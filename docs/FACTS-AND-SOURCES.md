@@ -11,7 +11,7 @@ Every outside fact has a file in [facts](facts/) with the source address, the da
 | Cal.com | [calcom](facts/calcom.md) | 2026-11-22 | Booking call VERIFIED |
 | Google Calendar | [google-calendar](facts/google-calendar.md) | 2026-11-22 | Event call VERIFIED |
 | Mailbox over IMAP | [gmail](facts/gmail.md) | 2026-11-22 | App password steps VERIFIED |
-| Hosting | [hosting](facts/hosting.md) | 2026-11-22 | Mixed, Docker UNVERIFIED |
+| Hosting | [hosting](facts/hosting.md) | 2026-11-22 | Mixed, never deployed to a real host (CI builds the images) |
 | Libraries | [libraries](facts/libraries.md) | 2026-11-23 | From lock files |
 | Four fifths rule | [four-fifths-rule](facts/four-fifths-rule.md) | 2026-11-23 | VERIFIED |
 

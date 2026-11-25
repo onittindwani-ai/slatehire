@@ -23,7 +23,7 @@ PREV = {"shortlisted": None, "interviewed": "shortlisted", "offered": "interview
 def set_labels(s: Session, mapping: dict[str, str], actor: str) -> dict:
     """mapping: candidate code -> the label the person chose to give. Replaces an earlier label. Never guesses."""
     need_person(actor)
-    codes = {c.code: c.id for c in s.scalars(select(Candidate))}
+    codes = {c.code: c.id for c in s.scalars(select(Candidate)) if c.purged_at is None}  # a deleted person gets no new label
     apps = {a.candidate_id: a.id for a in s.scalars(select(Application).order_by(Application.id))}
     done = unknown = 0
     for code, label in mapping.items():
@@ -74,10 +74,12 @@ def counts(s: Session, role_key: str | None) -> tuple[dict, dict]:
     return out, {"people": people, "labelled": sum(1 for a in labels)}
 
 
-def run(s: Session, actor: str, role_key: str | None, min_group: int, threshold: str = "4/5") -> FairnessReport:
+def run(s: Session, actor: str, role_key: str | None, min_group: int, threshold: str = "4/5", floor: int = 2) -> FairnessReport:
+    """`floor` is FAIRNESS_MIN_GROUP from the settings: a report can ask for a larger smallest group, never a smaller one, so nobody can shrink it to read a handful of people."""
     need_person(actor)
     if not 2 <= min_group <= 200:
         raise RuleError("The smallest group size is between 2 and 200.")
+    min_group = max(min_group, floor)
     try:
         thr = Fraction(threshold)
     except (ValueError, ZeroDivisionError) as exc:

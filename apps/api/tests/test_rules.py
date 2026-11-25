@@ -273,8 +273,10 @@ def test_fairness_report_counts_labels_and_never_guesses(world):
         p = rep.payload
         assert p["disclaimer"].startswith("This is an indicator") and p["min_group"] == 10
         first = p["stages"]["shortlisted"]["groups"]
-        assert sum(g["entered"] for g in first.values()) == 90
         assert first["undisclosed"]["status"] == "undisclosed"
+        assert all(g["entered"] is None and g["selected"] is None and g["fewer_than"] == 10 for g in first.values() if g["status"] == "too_few")  # a small group shows no counts at all
+        wide = fairness_service.run(s, "o@x.test", "all", 2).payload["stages"]["shortlisted"]["groups"]  # the counts add up to everyone when no group is too small to show
+        assert sum(g["entered"] for g in wide.values()) == 90
         small = fairness_service.run(s, "o@x.test", "all", 200).payload
         assert all(g["status"] in ("too_few", "undisclosed") for g in small["stages"]["shortlisted"]["groups"].values())
         with pytest.raises(RuleError):

@@ -49,7 +49,8 @@ def owner(request: Request) -> dict:
 
 
 def demo_only(request: Request) -> None:
-    if not request.app.state.ctx.settings.demo_mode:
+    """The demo routes (clock, reset, tick, stress) exist only while demo shortcuts are on: DEMO_MODE and no owner password hash."""
+    if not request.app.state.ctx.settings.demo_shortcuts:
         raise HTTPException(404, "Not found.")
 
 

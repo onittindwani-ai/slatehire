@@ -13,7 +13,8 @@ from slatehire.api.app import create_app  # noqa: E402
 from slatehire.config import Settings  # noqa: E402
 from slatehire.context import Ctx  # noqa: E402
 from sendora_core import models as _core  # noqa: E402,F401
-from sendora_core.db import Base, make_engine, make_session_factory  # noqa: E402
+from slatehire.dbsetup import make_private_engine  # noqa: E402
+from sendora_core.db import Base, make_session_factory  # noqa: E402
 
 DATA = str(ROOT / "data")
 
@@ -33,7 +34,7 @@ def make_settings(tmp_path, **kw) -> Settings:
 
 def make_ctx(tmp_path, **kw) -> Ctx:
     s = make_settings(tmp_path, **kw)
-    eng = make_engine(s.database_url)
+    eng = make_private_engine(s.database_url)
     Base.metadata.create_all(eng)
     return Ctx(s, make_session_factory(eng))
 

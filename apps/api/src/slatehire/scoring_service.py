@@ -27,6 +27,8 @@ def score_application(s: Session, app: Application, actor: str, now, scorer=None
         raise RuleError("Lock the rubric for this role before anyone is scored.")
     if not rubric_service.verify_signature(rub):
         raise RuleError("The locked rubric no longer matches its signature. Nothing was scored. Check the audit log.")
+    if (app.note or "").startswith("Resume missing"):
+        raise RuleError("No readable resume arrived for this applicant, so there is nothing to score. Ask for a text or PDF version and add it.")
     res = s.scalars(select(Resume).where(Resume.application_id == app.id)).first()
     if res is None or not res.redacted_text:
         raise RuleError("There is no resume text for this application (it may have been deleted).")
@@ -46,6 +48,8 @@ def unscored(s: Session) -> list[Application]:
     out = []
     for app in s.scalars(select(Application).where(Application.stage == "applied").order_by(Application.id)):
         rub = rubric_service.latest(s, app.role_id, locked_only=True)
+        if (app.note or "").startswith("Resume missing"):
+            continue  # a person asks for the file first; a score of nothing would put the applicant at the bottom of the list
         if rub is not None and latest_score(s, app.id, rub.id) is None:
             out.append(app)
     return out

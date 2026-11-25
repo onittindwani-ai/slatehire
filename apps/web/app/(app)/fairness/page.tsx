@@ -5,7 +5,7 @@ import { Badge, Button, Card, EmptyState, Field, formatWhen, notify } from "@sen
 import { FileDrop, Textarea } from "@/components/Parts";
 import { ListSkeleton, LoadError, PageHead } from "@/components/Parts";
 import { get, post } from "@/lib/api";
-import { READ_ONLY, useRole } from "@/lib/hooks";
+import { useRole } from "@/lib/hooks";
 import type { FairnessCell, FairnessResp, RoleRow } from "@/lib/types";
 
 const STEP = { shortlisted: "Shortlisted from all applicants", interviewed: "Interviewed from the shortlisted", offered: "Offered from the interviewed", hired: "Hired from the offered" } as const;
@@ -13,7 +13,7 @@ const STEP = { shortlisted: "Shortlisted from all applicants", interviewed: "Int
 function status(c: FairnessCell) {
   if (c.status === "flagged") return <Badge tone="warning">Below four fifths of the highest rate</Badge>;
   if (c.status === "reference") return <Badge tone="accent">Highest rate, the comparison</Badge>;
-  if (c.status === "too_few") return <Badge>Too few to say</Badge>;
+  if (c.status === "too_few") return <Badge>{c.fewer_than ? `Fewer than ${c.fewer_than} people` : "Too few to say"}</Badge>;
   if (c.status === "undisclosed") return <Badge>No label given</Badge>;
   if (c.status === "not_computable") return <Badge>Nobody selected</Badge>;
   return <Badge tone="success">Within four fifths</Badge>;
@@ -41,27 +41,29 @@ function Labels() {
 
 export default function FairnessPage() {
   const qc = useQueryClient();
-  const { canWrite } = useRole();
+  const { owner } = useRole();
   const [role, setRole] = useState("all");
-  const [min, setMin] = useState("10");
+  const [min, setMin] = useState("");
   const roles = useQuery({ queryKey: ["roles"], queryFn: () => get<RoleRow[]>("/roles") });
   const q = useQuery({ queryKey: ["fairness", role], queryFn: () => get<FairnessResp>(`/fairness?role=${role}`) });
-  const run = useMutation({ mutationFn: () => post("/fairness/run", { role, min_group: Number(min) }), onSuccess: () => { notify.success("Report saved."); qc.invalidateQueries({ queryKey: ["fairness"] }); }, onError: (e: Error) => notify.error("Not run", e.message) });
+  const run = useMutation({ mutationFn: () => post("/fairness/run", { role, ...(min === "" ? {} : { min_group: Number(min) }) }), onSuccess: () => { notify.success("Report saved."); qc.invalidateQueries({ queryKey: ["fairness"] }); }, onError: (e: Error) => notify.error("Not run", e.message) });
   if (q.isError) return <div className="cf-page"><PageHead title="Fairness" /><LoadError error={q.error} onRetry={() => q.refetch()} what="the fairness report" /></div>;
   const rep = q.data?.report?.payload;
-  const minOk = /^\d+$/.test(min) && Number(min) >= 2 && Number(min) <= 200;
+  const floor = q.data?.min_group_floor ?? 2;
+  const minOk = min === "" || (/^\d+$/.test(min) && Number(min) >= floor && Number(min) <= 200);
   return (
     <div className="cf-page">
       <PageHead title="Fairness" sub="An indicator for a person to look at. It is not a finding of discrimination and it is not legal advice. Hiring software is regulated in some places, so check the rules where you hire." />
       <Card title="Run a report" headingLevel={2}>
         <div className="cf-toolbar">
           <label className="sx-label" style={{ display: "grid", gap: 8 }}>Role<select className="cf-select" value={role} onChange={(e) => setRole(e.target.value)}><option value="all">All roles</option>{(roles.data ?? []).map((r) => <option key={r.key} value={r.key}>{r.title}</option>)}</select></label>
-          <Field label="Smallest group to compare" inputMode="numeric" value={min} onChange={setMin} validate={(v) => (/^\d+$/.test(v) && Number(v) >= 2 && Number(v) <= 200 ? null : "Use a number from 2 to 200")} hint="Groups smaller than this are shown with counts only." />
-          <Button variant="primary" disabled={!canWrite || !minOk} disabledReason={!canWrite ? READ_ONLY : "Use a number from 2 to 200"} onClick={async () => { await run.mutateAsync(); }}>Run the report</Button>
+          <Field label="Smallest group to compare" inputMode="numeric" value={min} onChange={setMin} validate={(v) => (v === "" || (/^\d+$/.test(v) && Number(v) >= floor && Number(v) <= 200) ? null : `Use a number from ${floor} to 200`)} hint={`Leave empty for the default (${floor}). A group smaller than this is shown as "fewer than N" with no counts, so nobody can be picked out.`} />
+          <Button variant="primary" disabled={!owner || !minOk} disabledReason={!owner ? "Only the owner can run the report" : `Use a number from ${floor} to 200`} onClick={async () => { await run.mutateAsync(); }}>Run the report</Button>
         </div>
         <p className="cf-mini">Labels are voluntary and kept apart from scoring: {q.data?.labelled ?? 0} people gave one. Anyone without a label is counted as no label. Nobody is guessed.</p>
       </Card>
       <Labels />
+      {q.data?.latest_flagged ? <p className="cf-flag" role="note">An earlier report ({formatWhen(new Date(q.data.latest_flagged.created_at))}, by {q.data.latest_flagged.created_by}) flagged {q.data.latest_flagged.payload.flagged.length} group step(s): {q.data.latest_flagged.payload.flagged.map((f: string[]) => `${f[1]} at ${f[0]}`).join("; ")}. A newer report that is clean does not erase that, so look at the process that produced it.</p> : null}
       {!q.data ? <ListSkeleton /> : !rep ? <EmptyState title="No report yet" body="Run one above. It counts who reached each step, by group." /> : (
         <>
           <p className="cf-flag" role="note">{rep.disclaimer} Saved {formatWhen(new Date(q.data.report!.created_at))} by {q.data.report!.created_by}. {rep.flagged.length ? `${rep.flagged.length} group step(s) are below four fifths of the highest rate: a reason to look at the process, not a verdict.` : "No group is below four fifths of the highest rate at any step."}</p>
@@ -70,7 +72,7 @@ export default function FairnessPage() {
             return (
               <Card key={st} title={STEP[st]} headingLevel={2}>
                 <div className="cf-scroll-x"><table className="cf-table" aria-label={STEP[st]}><thead><tr><th scope="col">Group</th><th scope="col">Entered</th><th scope="col">Selected</th><th scope="col">Rate</th><th scope="col">Ratio to highest</th><th scope="col">Reading</th></tr></thead>
-                  <tbody>{Object.entries(s.groups).map(([g, c]) => <tr key={g}><th scope="row">{g}</th><td className="sx-num">{c.entered}</td><td className="sx-num">{c.selected}</td><td className="sx-num">{c.rate_pct}%</td><td className="sx-num">{c.ratio_dec ?? "n/a"}</td><td>{status(c)}</td></tr>)}</tbody></table></div>
+                  <tbody>{Object.entries(s.groups).map(([g, c]) => <tr key={g}><th scope="row">{g}</th><td className="sx-num">{c.entered ?? "n/a"}</td><td className="sx-num">{c.selected ?? "n/a"}</td><td className="sx-num">{c.rate_pct == null ? "n/a" : `${c.rate_pct}%`}</td><td className="sx-num">{c.ratio_dec ?? "n/a"}</td><td>{status(c)}</td></tr>)}</tbody></table></div>
                 {s.notes.includes("no_comparison") ? <p className="cf-mini">Only one group is big enough, so there is nobody to compare it with.</p> : null}
                 {s.notes.includes("no_group_big_enough") ? <p className="cf-mini">No group reaches the smallest size, so no ratio is shown.</p> : null}
               </Card>);

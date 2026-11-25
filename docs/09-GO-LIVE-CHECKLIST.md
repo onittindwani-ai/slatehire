@@ -4,7 +4,7 @@ Tick every line before you set `MODE=live` or put real applicants in.
 
 1. [ ] [Business basics](02-BUSINESS-BASICS-CHECK.md) done, including the privacy notice and the retention period.
 2. [ ] Hiring tool rules checked where you recruit (notice, bias audit, human review). Slatehire keeps a person in every decision, but that is not a legal opinion.
-3. [ ] `DEMO_MODE=false`, a strong `SESSION_SECRET`, owner and approver password hashes set.
+3. [ ] `DEMO_MODE=false`, a `SESSION_SECRET` of 32 or more random characters, owner and approver password hashes set, and your own `COMPANY_NAME` and `OWNER_EMAIL`. A live start is refused while the company name or the owner address is still the example. The approver must be a different person from whoever writes the offers: the person who wrote the terms cannot approve them.
 4. [ ] HTTPS in front of the web app and the API kept private.
 5. [ ] Rubrics written by the hiring manager, read by one other person, then locked. Blind setting chosen on purpose.
 6. [ ] Weights and words to look for reviewed for anything that could stand in for a protected trait (for example a school name or a gap in work).

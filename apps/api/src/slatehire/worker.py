@@ -3,13 +3,15 @@
 from __future__ import annotations
 
 import logging
+import os
 import signal
 import time
 
 from slatehire.config import Settings
 from slatehire.context import Ctx
+from slatehire.dbsetup import make_private_engine
 from slatehire.jobs import make_handlers, schedule_due
-from sendora_core.db import Base, make_engine, make_session_factory, session_scope
+from sendora_core.db import Base, make_session_factory, session_scope
 from sendora_core.jobs import Worker
 
 log = logging.getLogger("slatehire.worker")
@@ -21,10 +23,16 @@ def run_once(ctx: Ctx, worker: Worker) -> int:
     return worker.drain(limit=50)
 
 
+def load_settings() -> Settings:
+    """The worker reads the same environment file as the API (ENV_FILE, default .env), so the two never run on different settings."""
+    return Settings(_env_file=os.environ.get("ENV_FILE", ".env"))
+
+
 def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-    settings = Settings()
-    engine = make_engine(settings.database_url)
+    settings = load_settings()
+    settings.check_runtime()  # same refusal as the API: an example secret, a demo on a server database, a placeholder identity on a live install
+    engine = make_private_engine(settings.database_url)
     import slatehire.models  # noqa: F401
     from sendora_core import models as _c  # noqa: F401
 
@@ -35,7 +43,7 @@ def main() -> None:
     stop = {"now": False}
     signal.signal(signal.SIGTERM, lambda *_: stop.update(now=True))
     signal.signal(signal.SIGINT, lambda *_: stop.update(now=True))
-    log.info("worker started: mode=%s demo=%s", settings.mode.value, settings.demo_mode)
+    log.info("worker started: mode=%s demo=%s", settings.mode.value, settings.demo_shortcuts)
     while not stop["now"]:
         try:
             n = run_once(ctx, worker)

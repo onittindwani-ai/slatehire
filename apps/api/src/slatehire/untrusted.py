@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import unicodedata
 from dataclasses import dataclass
 
 PATTERNS = [
@@ -30,14 +31,76 @@ class Flag:
     why: str
 
 
+ZERO_WIDTH = {"\u200b", "\u200c", "\u200d", "\u2060", "\ufeff", "\u00ad"}
+# Letters from other alphabets that look like Latin ones. "ignоre" with a Cyrillic o is the same instruction to a model and a different string to a pattern.
+LOOKALIKE = str.maketrans({"а": "a", "е": "e", "о": "o", "р": "p", "с": "c", "у": "y", "х": "x", "і": "i", "ѕ": "s", "ј": "j", "ԁ": "d", "һ": "h", "ɡ": "g", "ν": "v", "ο": "o", "α": "a", "ε": "e", "ι": "i", "κ": "k", "ρ": "p", "τ": "t", "υ": "u", "χ": "x"})
+
+
+def _fold(text: str) -> tuple[str, list[int]]:
+    """A copy used for finding instructions: invisible characters dropped, width variants and look alike letters folded, accents removed, runs of spaces made one.
+    Returns the copy and, for each of its characters, the offset in the original, so a match can be reported where it really is."""
+    out: list[str] = []
+    idx: list[int] = []
+    prev_space = False
+    for i, ch in enumerate(text):
+        if ch in ZERO_WIDTH or unicodedata.category(ch) == "Cf":
+            continue
+        n = unicodedata.normalize("NFKC", ch)
+        if len(n) == 1:
+            ch = n
+        ch = ch.translate(LOOKALIKE)
+        d = unicodedata.normalize("NFD", ch)
+        if len(d) > 1 and unicodedata.combining(d[1]) and d[0].isascii():
+            ch = d[0]
+        if ch != "\n" and ch.isspace():
+            if prev_space:
+                continue
+            ch, prev_space = " ", True
+        else:
+            prev_space = False
+        out.append(ch)
+        idx.append(i)
+    return "".join(out), idx
+
+
+def _hit(rx_list, line: str) -> str | None:
+    return next((why for rx, why in rx_list if rx.search(line)), None)
+
+
+def _hit_across(rx_list, line: str, joined: str) -> str | None:
+    """A match in two lines joined that starts in the first line and ends in the second, so an instruction only counts here when the break really splits it."""
+    for rx, why in rx_list:
+        for m in rx.finditer(joined):
+            if m.start() < len(line) < m.end():
+                return why
+    return None
+
+
 def find_injection(text: str) -> list[Flag]:
-    """Whole lines (or sentences in one long line) that match. Offsets are in `text`."""
-    out: list[Flag] = []
+    """Whole lines (or sentences in one long line) that match, found on a folded copy of the text (look alike letters, hidden characters and extra spaces do not hide an instruction)
+    and also across a line break (an instruction split over two lines is still one). Offsets are in `text`."""
+    clean, idx = _fold(text)
+    lines = clean.split("\n")
+    spans: list[tuple[int, int, str]] = []
     pos = 0
-    for line in text.split("\n"):
-        for rx, why in RX:
-            if rx.search(line):
-                out.append(Flag(pos, pos + len(line), why))
-                break
+    for n, line in enumerate(lines):
+        why = _hit(RX, line)
+        end = pos + len(line)
+        if why is None and n + 1 < len(lines) and lines[n + 1].strip() and line.strip():
+            joined = line + " " + lines[n + 1]
+            why = _hit_across(RX, line, joined)
+            if why is not None:
+                end = pos + len(joined)  # both lines are the instruction
+        if why is not None:
+            spans.append((pos, end, why))
         pos += len(line) + 1
+    out: list[Flag] = []
+    for a, b, why in spans:
+        if b <= a or a >= len(idx):
+            continue
+        start, stop = idx[a], idx[min(b, len(idx)) - 1] + 1
+        if out and start <= out[-1].end:  # a pair that overlaps the previous one is one flag
+            out[-1] = Flag(out[-1].start, max(out[-1].end, stop), out[-1].why)
+        else:
+            out.append(Flag(start, stop, why))
     return out

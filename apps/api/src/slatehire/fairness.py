@@ -3,7 +3,8 @@
 Selection rate at a step = people selected at that step / people who entered that step (the step conversion). The impact ratio of a
 group = its rate / the highest rate among groups big enough to compare. A group is flagged when its ratio is below the threshold
 (default four fifths, as in the US Uniform Guidelines, 29 CFR 1607.4 D); a ratio exactly at the threshold is not flagged. A group whose
-entering count is below `min_group` is "too few to say": it is shown with its counts but is neither a reference nor compared.
+entering count is below `min_group` is "too few to say": it is neither a reference nor compared. The arithmetic keeps its counts, but `to_json` (what is saved and shown) blanks them:
+a group that small is a handful of people, and its counts would say what happened to each of them.
 Demographic data enters ONLY here. No scoring, redaction or interview code imports this module or reads that data.
 """
 
@@ -68,6 +69,8 @@ def report(counts: dict[str, dict[str, tuple[int, int]]], min_group: int = 10, t
 def to_json(rep: dict) -> dict:
     """Fractions as strings and as decimals, ready for the API."""
     def cell(row: dict) -> dict:
+        if row["status"] == "too_few":
+            return {**row, "entered": None, "selected": None, "rate": None, "rate_pct": None, "ratio": None, "ratio_dec": None, "p_value": None, "fewer_than": rep["min_group"]}
         return {**row, "rate": str(row["rate"]), "rate_pct": round(float(row["rate"]) * 100, 1), "ratio": None if row["ratio"] is None else str(row["ratio"]), "ratio_dec": None if row["ratio"] is None else round(float(row["ratio"]), 3)}
     return {"min_group": rep["min_group"], "threshold": str(rep["threshold"]), "flagged": rep["flagged"], "notes": rep["notes"],
             "stages": {st: {"reference": r["reference"], "notes": r["notes"], "groups": {g: cell(row) for g, row in r["groups"].items()}} for st, r in rep["stages"].items()},
