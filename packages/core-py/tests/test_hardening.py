@@ -31,6 +31,16 @@ def test_a_real_deployment_refuses_an_example_or_short_session_secret(tmp_path, 
         create_base_app(s)
 
 
+def test_an_owner_password_needs_a_real_session_secret_even_in_demo_mode(tmp_path):
+    class WithOwner(BaseAppSettings):
+        owner_password_hash: str | None = None
+
+    owner = WithOwner(database_url=f"sqlite:///{tmp_path}/o.sqlite3", _env_file=None, demo_mode=True, owner_password_hash="'pbkdf2$test-only'")
+    assert any("SESSION_SECRET" in e for e in owner.runtime_errors())  # the public example secret would let anyone forge an owner token
+    assert not WithOwner(database_url=f"sqlite:///{tmp_path}/p.sqlite3", _env_file=None, demo_mode=True, owner_password_hash="'pbkdf2$test-only'", session_secret=GOOD_SECRET).runtime_errors()
+    assert not cfg(tmp_path, demo_mode=True).runtime_errors()  # a plain offline demo still starts
+
+
 def test_a_real_deployment_with_a_random_secret_starts(tmp_path):
     create_base_app(cfg(tmp_path, demo_mode=False, session_secret=GOOD_SECRET))
 
@@ -258,3 +268,28 @@ def test_a_database_error_does_not_print_the_values_of_the_statement(tmp_path):
         with pytest.raises(OperationalError) as e:
             c.execute(text("INSERT INTO nope VALUES (:secret)"), {"secret": "Jane Doe 4111-1111"})
     assert "Jane Doe" not in str(e.value) and "4111" not in str(e.value)
+
+
+def test_health_tells_a_stranger_nothing_but_ok(tmp_path):
+    from sendora_core.settings import Mode
+
+    app = create_base_app(cfg(tmp_path, mode=Mode.LIVE, kill_switch=True, demo_mode=False, session_secret=GOOD_SECRET), lambda: None)
+    assert TestClient(app).get("/health").json() == {"status": "ok"}
+
+
+def test_the_audit_chain_is_verified_in_batches_and_a_window_misses_only_old_edits(tmp_path):
+    from sendora_core.audit import record_audit, verify_audit_chain
+    from sendora_core.db import create_all, make_engine, make_session_factory
+    from sendora_core.models import AuditEntry
+
+    engine = make_engine(f"sqlite:///{tmp_path}/chain.sqlite3")
+    create_all(engine)
+    with make_session_factory(engine)() as s:
+        for i in range(1300):
+            record_audit(s, "t", "x", str(i), {"i": i})
+        s.commit()
+        assert verify_audit_chain(s) == (True, None)
+        s.execute(AuditEntry.__table__.update().where(AuditEntry.id == 5).values(actor="someone-else"))
+        s.commit()
+        assert verify_audit_chain(s) == (False, 5)
+        assert verify_audit_chain(s, limit=100) == (True, None)  # an edit older than the window is outside it, by design (documented)

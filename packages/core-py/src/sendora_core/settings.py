@@ -98,13 +98,16 @@ class BaseAppSettings(BaseSettings):
     def runtime_errors(self) -> list[str]:
         """Problems that stop the app from starting. Checked once when the API or the worker starts."""
         out: list[str] = []
-        if not self.demo_mode:
+        # The session secret must be real whenever a real owner exists: DEMO_MODE off, or an owner password set (also while DEMO_MODE stays on).
+        # A pure demo with no owner password keeps the public demo logins and a demo secret, nothing else. MODE=live with DEMO_MODE on is reported by problems().
+        needs_real_secret = not self.demo_mode or bool(getattr(self, "owner_password_hash", None))
+        if needs_real_secret:
             if len(self.session_secret) < MIN_SECRET_LENGTH or PLACEHOLDER_SECRET.search(self.session_secret):
                 out.append(
                     f"SESSION_SECRET is missing, too short (under {MIN_SECRET_LENGTH} characters) or still an example value. "
                     "Anyone who has read the public code could sign in as the owner. Create one with: python3 -c \"import secrets; print(secrets.token_urlsafe(48))\""
                 )
-        elif self.database_url.startswith("postgresql") and not self.allow_demo_server:
+        if self.demo_mode and self.database_url.startswith("postgresql") and not self.allow_demo_server:
             out.append(
                 "DEMO_MODE is true while DATABASE_URL points at a server database. A demo has public logins and a reset button that erases the data. "
                 "Set DEMO_MODE=false (and OWNER_PASSWORD_HASH), or set ALLOW_DEMO_SERVER=true for a throw away trial."

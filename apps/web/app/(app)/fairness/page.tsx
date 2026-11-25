@@ -56,8 +56,10 @@ export default function FairnessPage() {
       <PageHead title="Fairness" sub="An indicator for a person to look at. It is not a finding of discrimination and it is not legal advice. Hiring software is regulated in some places, so check the rules where you hire." />
       <Card title="Run a report" headingLevel={2}>
         <div className="cf-toolbar">
-          <label className="sx-label" style={{ display: "grid", gap: 8 }}>Role<select className="cf-select" value={role} onChange={(e) => setRole(e.target.value)}><option value="all">All roles</option>{(roles.data ?? []).map((r) => <option key={r.key} value={r.key}>{r.title}</option>)}</select></label>
-          <Field label="Smallest group to compare" inputMode="numeric" value={min} onChange={setMin} validate={(v) => (v === "" || (/^\d+$/.test(v) && Number(v) >= floor && Number(v) <= 200) ? null : `Use a number from ${floor} to 200`)} hint={`Leave empty for the default (${floor}). A group smaller than this is shown as "fewer than N" with no counts, so nobody can be picked out.`} />
+          <label className="sx-label" style={{ display: "grid", gap: 8 }}>Role<select className="cf-select" style={{ minWidth: 260 }} value={role} onChange={(e) => setRole(e.target.value)}><option value="all">All roles</option>{(roles.data ?? []).map((r) => <option key={r.key} value={r.key}>{r.title}</option>)}</select></label>
+          <div style={{ flex: "1 1 360px" }}>
+            <Field label="Smallest group to compare" inputMode="numeric" value={min} onChange={setMin} validate={(v) => (v === "" || (/^\d+$/.test(v) && Number(v) >= floor && Number(v) <= 200) ? null : `Use a number from ${floor} to 200`)} hint={`Leave empty for the default (${floor}). A group smaller than this is shown as "fewer than N" with no counts, so nobody can be picked out.`} />
+          </div>
           <Button variant="primary" disabled={!owner || !minOk} disabledReason={!owner ? "Only the owner can run the report" : `Use a number from ${floor} to 200`} onClick={async () => { await run.mutateAsync(); }}>Run the report</Button>
         </div>
         <p className="cf-mini">Labels are voluntary and kept apart from scoring: {q.data?.labelled ?? 0} people gave one. Anyone without a label is counted as no label. Nobody is guessed.</p>

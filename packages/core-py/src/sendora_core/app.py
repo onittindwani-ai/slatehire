@@ -107,7 +107,7 @@ def create_base_app(settings: BaseAppSettings, factory: sessionmaker[Session] | 
 
     @app.get("/health")
     def health():
-        return {"status": "ok", "app": settings.app_name, "mode": settings.mode.value, "kill_switch": settings.kill_switch}
+        return {"status": "ok"}  # a stranger learns nothing about the mode or the kill switch; signed in people read those from the app
 
     @app.get("/ready")
     def ready():
