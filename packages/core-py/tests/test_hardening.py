@@ -293,3 +293,8 @@ def test_the_audit_chain_is_verified_in_batches_and_a_window_misses_only_old_edi
         s.commit()
         assert verify_audit_chain(s) == (False, 5)
         assert verify_audit_chain(s, limit=100) == (True, None)  # an edit older than the window is outside it, by design (documented)
+
+
+def test_the_session_secret_never_shows_in_the_text_of_the_settings(tmp_path):
+    s = cfg(tmp_path, session_secret=GOOD_SECRET)
+    assert GOOD_SECRET not in repr(s) and GOOD_SECRET not in str(s)

@@ -42,7 +42,7 @@ class BaseAppSettings(BaseSettings):
 
     app_name: str = "sendora-system"
     database_url: str = "sqlite:///./app.sqlite3"
-    session_secret: str = Field(default="dev-only-change-me-please-32-bytes!", min_length=16)
+    session_secret: str = Field(default="dev-only-change-me-please-32-bytes!", min_length=16, repr=False)
     mode: Mode = Mode.DRAFT
     kill_switch: bool = False
     llm_mode: LLMMode = LLMMode.FIXTURE
