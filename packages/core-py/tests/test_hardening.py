@@ -208,3 +208,22 @@ def test_a_missing_account_takes_the_same_path_and_never_passes():
     assert verify_password_or_dummy("a-good-password-1", h) is True
     assert verify_password_or_dummy("wrong-password-1", h) is False
     assert verify_password_or_dummy("a-good-password-1", None) is False
+
+
+# ---- empty lines of .env.example (found by the Docker job on GitHub: CALCOM_EVENT_TYPE_ID= crashed the API)
+def test_an_empty_setting_means_not_set_and_never_crashes_a_number_field(tmp_path, monkeypatch):
+    class WithNumber(BaseAppSettings):
+        event_type_id: int | None = None
+        seed_dir: str = "default-dir"
+
+    monkeypatch.setenv("EVENT_TYPE_ID", "")
+    monkeypatch.setenv("SEED_DIR", "")
+    s = WithNumber(_env_file=None)
+    assert s.event_type_id is None and s.seed_dir == "default-dir"
+    env = tmp_path / ".env"
+    env.write_text("EVENT_TYPE_ID=\nSEED_DIR=\n")
+    monkeypatch.delenv("EVENT_TYPE_ID")
+    monkeypatch.delenv("SEED_DIR")
+    assert WithNumber(_env_file=str(env)).event_type_id is None
+    monkeypatch.setenv("EVENT_TYPE_ID", "42")
+    assert WithNumber(_env_file=None).event_type_id == 42

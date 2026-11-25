@@ -37,7 +37,8 @@ class ConfigError(RuntimeError):
 
 
 class BaseAppSettings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore", env_prefix="")
+    # env_ignore_empty: a line such as CALCOM_EVENT_TYPE_ID= (copied from .env.example) means "not set", it must not crash a number setting
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore", env_prefix="", env_ignore_empty=True)
 
     app_name: str = "sendora-system"
     database_url: str = "sqlite:///./app.sqlite3"
