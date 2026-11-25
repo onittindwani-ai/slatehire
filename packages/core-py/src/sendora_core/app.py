@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 import uuid
 from collections.abc import Callable
 
@@ -115,7 +116,8 @@ def create_base_app(settings: BaseAppSettings, factory: sessionmaker[Session] | 
             with factory() as s:
                 s.execute(text("SELECT 1"))
         except Exception as exc:
-            return JSONResponse({"status": "not_ready", "reason": type(exc).__name__}, 503)
+            logging.getLogger("sendora.ready").warning("readiness check failed: %s", type(exc).__name__)  # the cause goes to the log, not to a stranger
+            return JSONResponse({"status": "not_ready"}, 503)
         return {"status": "ready"}
 
     @app.get("/api/events/stream")

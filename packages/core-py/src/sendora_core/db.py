@@ -29,7 +29,7 @@ class UTCDateTime(DateTime):
 def make_engine(url: str) -> Engine:
     kwargs: dict = {"future": True, "hide_parameters": True}  # a database error never prints the values of the failed statement (names, amounts, text)
     if url.startswith("sqlite"):
-        kwargs["connect_args"] = {"check_same_thread": False}
+        kwargs["connect_args"] = {"check_same_thread": False, "timeout": 30}  # wait up to 30 s for a write lock (the default 5 s turned two busy writers into "database is locked")
     engine = create_engine(url, **kwargs)
     if url.startswith("sqlite"):
 

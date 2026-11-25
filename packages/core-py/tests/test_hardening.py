@@ -309,3 +309,20 @@ def test_an_unpriced_model_is_never_free_and_a_look_alike_local_address_is_not_l
     assert not any("ANTHROPIC_BASE_URL" in p for p in cfg(tmp_path, anthropic_base_url="http://localhost:9000").problems())
     assert any("ANTHROPIC_BASE_URL" in p for p in cfg(tmp_path, anthropic_base_url="http://localhost.evil.net").problems())
     assert any("ANTHROPIC_BASE_URL" in p for p in cfg(tmp_path, anthropic_base_url="http://127.0.0.1.evil.net/x").problems())
+
+
+def test_ready_names_no_cause_and_sqlite_waits_for_a_busy_writer(tmp_path):
+    def broken():
+        raise RuntimeError("password=hunter2 host=db.internal")
+
+    app = create_base_app(cfg(tmp_path, demo_mode=False, session_secret=GOOD_SECRET), broken)
+    r = TestClient(app).get("/ready")
+    assert r.status_code == 503 and r.json() == {"status": "not_ready"}
+    from sendora_core.db import make_engine
+
+    engine = make_engine(f"sqlite:///{tmp_path}/w.sqlite3")
+    raw = engine.raw_connection()
+    try:
+        assert raw.driver_connection.execute("PRAGMA busy_timeout").fetchone()[0] == 30000
+    finally:
+        raw.close()
