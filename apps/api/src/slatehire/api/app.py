@@ -13,6 +13,7 @@ from slatehire.config import Settings
 from slatehire.context import Ctx
 from slatehire.datadir import REPO_DATA, MARKER
 from slatehire.dbsetup import make_private_engine
+from slatehire.dbupgrade import add_missing_columns
 from sendora_core.app import SESSION_COOKIE, create_base_app
 from sendora_core.auth import read_session_token
 from sendora_core.db import Base, make_session_factory
@@ -47,6 +48,7 @@ def create_app(settings: Settings | None = None, ctx: Ctx | None = None) -> Fast
 
         if settings.database_url.startswith("sqlite"):
             Base.metadata.create_all(engine)  # SQLite zero setup path. Postgres uses `alembic upgrade head`.
+            add_missing_columns(engine)  # a database file from an older version gets the columns added since
         ctx = Ctx(settings, make_session_factory(engine))
         if not settings.seed_dir and (REPO_DATA / MARKER).is_file():
             ctx.settings.seed_dir = str(REPO_DATA)  # a source checkout; an installed copy must be told with SEED_DIR

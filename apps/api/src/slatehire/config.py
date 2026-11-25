@@ -98,7 +98,7 @@ class Settings(BaseAppSettings):
         return [t.strip().lower() for t in self.proxy_terms.split(",") if t.strip()]
 
     def problems(self) -> list[str]:
-        out = [p for p in super().problems() if not (self.demo_mode and p.startswith("MODE is live while DEMO_MODE"))]
+        out = list(super().problems())  # includes "MODE is live while DEMO_MODE is true": a demo never leaves draft mode (see Ctx.effective), and the page says so
         if not self.demo_mode and not self.owner_password_hash:
             out.append("OWNER_PASSWORD_HASH is empty. Create one with tools/hash_password.py and set it before you run outside demo mode.")
         if self.demo_mode and self.owner_password_hash:

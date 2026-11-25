@@ -28,8 +28,10 @@ def test_roles_come_from_the_base_and_the_viewer_cannot_write(client):
 
 def test_a_viewer_can_read_everything_and_change_nothing(client):
     h = login(client, "viewer@example.test")
-    for path in ("/api/overview", "/api/applications", "/api/pipeline", "/api/interviews", "/api/offers", "/api/approvals", "/api/fairness"):
+    for path in ("/api/overview", "/api/applications", "/api/pipeline", "/api/interviews", "/api/approvals", "/api/fairness"):
         assert client.get(path, headers=h).status_code == 200, path
+    for path in ("/api/offers", "/api/audit", "/api/audit/verify"):  # pay terms and the audit log are for the owner and the approver (round 2 audit); the viewer once read offers
+        assert client.get(path, headers=h).status_code == 403, path
     spec = client.get("/openapi.json").json()
     refused = 0
     for path, ops in spec["paths"].items():

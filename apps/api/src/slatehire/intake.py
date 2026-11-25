@@ -9,12 +9,12 @@ from dataclasses import replace
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
-from slatehire import redaction
+from slatehire import language, redaction, suppression
 from slatehire.errors import RuleError
-from slatehire.ingest import MISSING_RESUME, RESUME_MISSING_NOTE, Applicant
+from slatehire.ingest import LANGUAGE_NOTE, MISSING_RESUME, RESUME_MISSING_NOTE, Applicant
 from slatehire.models import Application, Candidate, IntakeLog, Resume, Role
 from slatehire.textclean import clean_text, one_line, safe_ref
-from slatehire.untrusted import find_injection
+from slatehire.untrusted import INJECTION_SCAN, entries, find_injection
 from sendora_core.audit import record_audit
 from sendora_core.events import record_event
 
@@ -41,6 +41,7 @@ def _dupe(s: Session, a: Applicant, role: Role, text: str) -> bool:
     return any((r.original_text or "").strip() == text for r in s.scalars(q))  # with no email, the same name and the same resume is still the same application
 
 
+ERASED_DETAIL = "This person was deleted earlier (on request or by the retention rule), so they were not added again. If they applied again on purpose, the owner can lift this: see docs/13."
 EMAIL = re.compile(r"[^@\s]+@[^@\s]+\.[^@\s]+")
 
 
@@ -80,21 +81,27 @@ def add_applicant(s: Session, a: Applicant, role: Role, actor: str, now, *, code
     if why:
         s.add(IntakeLog(source=a.source or "paste", ref=(a.email or a.name or a.external_ref or "unknown")[:160], status="rejected", detail=why[:300], created_at=now))
         return None, "rejected"
+    if suppression.is_suppressed(s, a.email, a.source or "paste", a.external_ref):
+        s.add(IntakeLog(source=a.source or "paste", ref="erased applicant", status="rejected", detail=ERASED_DETAIL, created_at=now))  # nothing readable about the person is written down again
+        return None, "rejected"
     if _dupe(s, a, role, text):
         s.add(IntakeLog(source=a.source or "paste", ref=(a.email or a.name or a.external_ref or "unknown")[:160], status="duplicate", detail="Already applied for this role.", created_at=now))
         return None, "duplicate"
     cand = Candidate(code=code or next_code(s), full_name=a.name.strip(), email=a.email.strip().lower(), phone=a.phone, school=a.school, source=a.source or "paste", external_ref=a.external_ref, created_at=now)
     s.add(cand)
     s.flush()
-    app = Application(candidate_id=cand.id, role_id=role.id, stage="applied", history=[{"stage": "applied", "by": actor, "at": now.isoformat(), "note": "Applied."}], note=RESUME_MISSING_NOTE if missing else "", created_at=now, updated_at=now)
+    lang = "en" if missing else language.detect(text)
+    flag = RESUME_MISSING_NOTE if missing else LANGUAGE_NOTE if lang == "other" else ""
+    app = Application(candidate_id=cand.id, role_id=role.id, stage="applied", history=[{"stage": "applied", "by": actor, "at": now.isoformat(), "note": "Applied."}], note=flag, created_at=now, updated_at=now)
     s.add(app)
     s.flush()
     inst = settings.redact_institutions if settings is not None else True
     red = redaction.redact(text, [a.name], [a.school] if a.school else None, institutions=inst)
     inj = find_injection(red.redacted)
     s.add(Resume(application_id=app.id, original_text=text, redacted_text=red.redacted, segments=red.segments, counts=red.counts, redaction_version=red.version, filename=a.filename,
-                 injection=[{"why": f.why, "text": red.redacted[f.start:f.end][:160]} for f in inj]))
-    s.add(IntakeLog(source=a.source or "paste", ref=(a.email or cand.code)[:160], status="added", detail=f"{cand.code} for {role.key}" + (". The resume could not be read, so the applicant is flagged." if missing else ""), created_at=now))
+                 injection=entries(red.redacted, inj), injection_scan=INJECTION_SCAN, language=lang))
+    note = ". The resume could not be read, so the applicant is flagged." if missing else ". The resume is not in English, so it is not scored: a person reads it." if lang == "other" else ""
+    s.add(IntakeLog(source=a.source or "paste", ref=(a.email or cand.code)[:160], status="added", detail=f"{cand.code} for {role.key}" + note, created_at=now))
     record_audit(s, actor, "applicant.added", f"application:{app.id}", {"code": cand.code, "role": role.key, "source": a.source or "paste", "resume_sha": hashlib.sha256(text.encode()).hexdigest()[:12]})
     record_event(s, "applicant.added", "application", app.id, {"role": role.key})
     return app, "added"

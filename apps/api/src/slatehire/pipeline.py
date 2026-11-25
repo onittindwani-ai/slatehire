@@ -5,7 +5,8 @@ from __future__ import annotations
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
-from slatehire import rubric_service, scoring_service
+from slatehire import interviews, rubric_service, scoring_service
+from slatehire.attention import LANGUAGE, attention_of
 from slatehire.errors import RuleError, need_person
 from slatehire.models import TERMINAL, Application, Interview, Offer, Scorecard
 from sendora_core.audit import record_audit
@@ -38,7 +39,7 @@ def move(s: Session, app: Application, to: str, actor: str, note: str, now, sett
     note = (note or "").strip()
     if to in NEED_NOTE and len(note) < 8:
         raise RuleError("Write the reason in your own words (at least a short sentence). A person decides every outcome and the reason is kept.")
-    if to == "shortlisted":
+    if to == "shortlisted" and attention_of(app) != LANGUAGE:  # a resume in another language is read by a person, who may shortlist without a score
         rub = rubric_service.latest(s, app.role_id, locked_only=True)
         if rub is None or scoring_service.latest_score(s, app.id, rub.id) is None:
             raise RuleError("Score this applicant under the locked rubric before shortlisting.")
@@ -55,6 +56,7 @@ def move(s: Session, app: Application, to: str, actor: str, note: str, now, sett
     app.stage, app.updated_at = to, now
     if to in NEED_NOTE:
         _close_offer(s, app, actor, now)
+        interviews.cancel_open(s, app, actor)
     if to in TERMINAL or to == "shortlisted":
         app.decided_by, app.decision_note = actor, note
     s.flush()

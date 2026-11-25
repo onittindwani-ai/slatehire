@@ -197,7 +197,7 @@ What Slatehire has for each: IMAP mailbox: Built and tested against a local fake
 - Reliability and upkeep (75): Standard protocol. Providers change sign in rules now and then.
 - Cost (100): No extra cost beyond the mailbox you already have.
 - Data control (70): Mail stays with the provider, Slatehire keeps only what it reads.
-- Integration depth (80): Marks a message read only after it was added.
+- Integration depth (80): Reads only mail whose subject has the word Application, and marks a message read only after it was dealt with.
 - Sources: https://support.google.com/mail (checked 2026-11-23)
 
 **Evidence, Gmail (through IMAP)**

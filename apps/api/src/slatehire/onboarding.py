@@ -51,6 +51,8 @@ def create_plan(s: Session, app: Application, actor: str, start: date) -> list[O
 
 def add_task(s: Session, app: Application, actor: str, phase: int, title: str, owner: str, due_on: str) -> OnboardingTask:
     need_person(actor)
+    if app.stage != "hired":
+        raise RuleError("A task is added to the plan of someone who has been hired.")
     if phase not in (30, 60, 90):
         raise RuleError("The phase is 30, 60 or 90.")
     try:

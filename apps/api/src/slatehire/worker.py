@@ -10,6 +10,7 @@ import time
 from slatehire.config import Settings
 from slatehire.context import Ctx
 from slatehire.dbsetup import make_private_engine
+from slatehire.dbupgrade import add_missing_columns
 from slatehire.jobs import make_handlers, schedule_due
 from sendora_core.db import Base, make_session_factory, session_scope
 from sendora_core.jobs import Worker
@@ -38,6 +39,7 @@ def main() -> None:
 
     if settings.database_url.startswith("sqlite"):
         Base.metadata.create_all(engine)
+        add_missing_columns(engine)
     ctx = Ctx(settings, make_session_factory(engine))
     worker = Worker(ctx.factory, make_handlers(ctx))
     stop = {"now": False}

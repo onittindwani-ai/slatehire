@@ -571,7 +571,7 @@
       },
       "integration": {
        "score": 80,
-       "evidence": "Marks a message read only after it was added."
+       "evidence": "Reads only mail whose subject has the word Application, and marks a message read only after it was dealt with."
       }
      }
     },

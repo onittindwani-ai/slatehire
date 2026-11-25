@@ -6,7 +6,7 @@ What it never does: reject anyone because of a score, guess a protected attribut
 
 ## Entities (tables start with cf_)
 
-Role, Rubric (versions, a lock, a signature), Candidate (a neutral code such as A001), Application (stage and history), Resume (original text, redacted text, segments), Score (items with quotes, total, flags), Interview (kit, interviewers, time), Scorecard (one per interviewer, append only), Offer, OnboardingTask, Demographic (voluntary labels, read only by the fairness module), FairnessReport, IntakeLog, State. The base adds Approval, AuditEntry (hash chained), Event, Job and CostEntry.
+Role, Rubric (versions, a lock, a signature), Candidate (a neutral code such as A001), Application (stage and history), Resume (original text, redacted text, segments, where the flagged lines are, the language), Score (items with quotes, total, flags), Interview (kit, interviewers, time), Scorecard (one per interviewer, append only), Offer, OnboardingTask, Demographic (voluntary labels, read only by the fairness module), FairnessReport, IntakeLog, State. The base adds Approval, AuditEntry (hash chained), Event, Job and CostEntry.
 
 ## Pipeline
 

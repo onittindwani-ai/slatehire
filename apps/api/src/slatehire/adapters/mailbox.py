@@ -28,8 +28,11 @@ class SeedMailbox:
         return True, "Offline demo adapter."
 
 
+APPLICATION_WORD = "Application"  # the server is asked for unread mail whose subject has this word: every other message in a shared mailbox is never fetched, stored or marked read
+
+
 class ImapMailbox:
-    """IMAP (Gmail with an app password, Outlook, any host). Reads unseen messages WITHOUT marking them read (BODY.PEEK[], never RFC822, which sets the
+    """IMAP (Gmail with an app password, Outlook, any host). Reads unseen messages whose subject has the word Application, WITHOUT marking them read (BODY.PEEK[], never RFC822, which sets the
     seen flag on the server the moment it is fetched), and marks them seen only after the caller stored them. The connection checks the server's certificate
     and host name; plain text is accepted only for a mail server on this same computer."""
 
@@ -60,7 +63,7 @@ class ImapMailbox:
     def fetch_new(self, limit: int = 50) -> list[tuple[str, bytes]]:
         m = self._open()
         try:
-            _t, data = m.uid("SEARCH", None, "UNSEEN")
+            _t, data = m.uid("SEARCH", None, "UNSEEN", "SUBJECT", f'"{APPLICATION_WORD}"')  # the server filters: a colleague's unread mail is never even fetched
             uids = (data[0] or b"").split()[:limit]
             out = []
             for u in uids:

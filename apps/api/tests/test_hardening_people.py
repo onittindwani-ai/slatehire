@@ -114,7 +114,7 @@ def test_the_sweep_rewrites_the_offer_file_of_a_person_who_declined_after_it_was
 def test_delete_on_request_does_the_same_through_the_api(tmp_path):
     ctx, c, hs, flow = declined_after_hand_off(tmp_path)
     file = next((tmp_path / "exports").glob("offer-*.txt"))
-    assert c.delete(f"/api/candidates/{flow['app_id']}", headers=hs["owner"]).json() == {"ok": True}
+    assert c.delete(f"/api/candidates/{flow['app_id']}", headers=hs["owner"]).json()["ok"] is True
     assert "Hopper" not in file.read_text()
     assert c.delete(f"/api/candidates/{flow['app_id']}", headers=hs["approver"]).status_code == 403
 

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from urllib.parse import urlparse
 from enum import StrEnum
 from typing import Literal
 
@@ -132,6 +133,7 @@ class BaseAppSettings(BaseSettings):
             out.append("LLM_BACKEND is fixture but LLM_FIXTURES_DIR is empty.")
         if self.llm_record and not self.llm_fixtures_dir:
             out.append("LLM_RECORD is on but LLM_FIXTURES_DIR is empty.")
-        if not self.anthropic_base_url.startswith(("https://", "http://127.0.0.1", "http://localhost")):
+        base_url = urlparse(self.anthropic_base_url)
+        if not (base_url.scheme == "https" or (base_url.scheme == "http" and base_url.hostname in {"127.0.0.1", "localhost", "::1"})):
             out.append("ANTHROPIC_BASE_URL must start with https:// (plain http is only for 127.0.0.1 or localhost tests).")
         return out

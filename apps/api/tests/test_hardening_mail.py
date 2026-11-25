@@ -158,7 +158,7 @@ def test_nothing_is_marked_read_when_the_save_fails(tmp_path, monkeypatch):
 def test_a_message_that_is_not_added_says_why_on_the_list(tmp_path):
     with FakeMailServers() as srv:
         ctx = installed(tmp_path, srv)
-        srv.store.deliver(mail("Dee <dee@mail.example.test>", "Hello there"))  # no role in the subject
+        srv.store.deliver(mail("Dee <dee@mail.example.test>", "Application"))  # no role in the subject
         srv.store.deliver(mail("Eve <eve@mail.example.test>", "Application for Astronaut"))  # a role that does not exist
         srv.store.deliver(mail("Fay <fay@mail.example.test>", "Application for Customer Support Specialist", message_id="<f@x>"))
         srv.store.deliver(mail("Fay <fay@mail.example.test>", "Application for Customer Support Specialist", message_id="<f@x>"))  # the same message again
@@ -197,7 +197,7 @@ def test_a_person_can_read_the_not_added_list_through_the_api(tmp_path):
 
     with FakeMailServers() as srv:
         ctx = installed(tmp_path, srv)
-        srv.store.deliver(mail("Dee <dee@mail.example.test>", "Hello there"))
+        srv.store.deliver(mail("Dee <dee@mail.example.test>", "Application"))
         run(ctx)
         c = TestClient(create_app(ctx.settings, ctx), base_url="http://api.test")
         rows = c.get("/api/intake/log", headers=sign_in(c)).json()

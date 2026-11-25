@@ -19,7 +19,7 @@ export default function CandidatesPage() {
   const q = useQuery({ queryKey: ["applications"], queryFn: () => get<AppRow[]>("/applications") });
   const rows = useMemo(() => (q.data ?? []).filter((r) => (!role || r.role === role) && (!stage || r.stage === stage) && (!text || `${r.name} ${r.code}`.toLowerCase().includes(text.toLowerCase()))), [q.data, role, stage, text]);
   const columns: Column<AppRow>[] = [
-    { key: "name", header: "Candidate", width: "2fr", sortValue: (r) => r.name, render: (r) => <span><button type="button" className="cf-linkbtn" tabIndex={-1} onClick={() => router.push(`/candidates/${r.id}`)}>{r.name}</button>{r.hidden ? <> <Badge tone="accent">Blind</Badge></> : null}{r.attention === "resume_missing" ? <> <Badge tone="warning">Resume missing</Badge></> : null}</span> },
+    { key: "name", header: "Candidate", width: "2fr", sortValue: (r) => r.name, render: (r) => <span><button type="button" className="cf-linkbtn" tabIndex={-1} onClick={() => router.push(`/candidates/${r.id}`)}>{r.name}</button>{r.hidden ? <> <Badge tone="accent">Blind</Badge></> : null}{r.attention === "resume_missing" ? <> <Badge tone="warning">Resume missing</Badge></> : null}{r.attention === "language" ? <> <Badge tone="warning">Not scored: language</Badge></> : null}</span> },
     { key: "role", header: "Role", width: "1.4fr", sortValue: (r) => r.role_title, render: (r) => r.role_title },
     { key: "stage", header: "Stage", width: "120px", sortValue: (r) => r.stage, render: (r) => STAGE_LABEL[r.stage] ?? r.stage },
     { key: "total", header: "Score", width: "80px", align: "right", sortValue: (r) => r.total ?? -1, render: (r) => (r.total == null ? "None" : r.total.toFixed(1)) },

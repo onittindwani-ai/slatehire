@@ -298,3 +298,14 @@ def test_the_audit_chain_is_verified_in_batches_and_a_window_misses_only_old_edi
 def test_the_session_secret_never_shows_in_the_text_of_the_settings(tmp_path):
     s = cfg(tmp_path, session_secret=GOOD_SECRET)
     assert GOOD_SECRET not in repr(s) and GOOD_SECRET not in str(s)
+
+
+def test_an_unpriced_model_is_never_free_and_a_look_alike_local_address_is_not_local(tmp_path):
+    from sendora_core.costs import CostTracker
+
+    tracker = CostTracker.__new__(CostTracker)
+    tracker.prices = {"known": (3.0, 15.0), "dear": (5.0, 25.0)}
+    assert tracker.cost_usd("never-heard-of-it", 1_000_000, 0) == 5.0
+    assert not any("ANTHROPIC_BASE_URL" in p for p in cfg(tmp_path, anthropic_base_url="http://localhost:9000").problems())
+    assert any("ANTHROPIC_BASE_URL" in p for p in cfg(tmp_path, anthropic_base_url="http://localhost.evil.net").problems())
+    assert any("ANTHROPIC_BASE_URL" in p for p in cfg(tmp_path, anthropic_base_url="http://127.0.0.1.evil.net/x").problems())

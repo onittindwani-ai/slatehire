@@ -39,6 +39,8 @@ def _add_email(s: Session, ctx: Ctx, raw: bytes, now) -> tuple[str, str]:
     except ingest.IngestError as exc:
         return "rejected", str(exc)
     role = s.scalars(select(Role).where(Role.key == a.role_key)).first() if a.role_key else None
+    if role is None and a.extra.get("role_ambiguous"):
+        return "rejected", "The subject fits more than one role (" + ", ".join(a.extra["role_ambiguous"][:4]) + "). Add this person by hand under the right one, or ask them to write the exact role title."
     if role is None:
         return "rejected", "The subject does not name one of your roles. Write it as: Application for <role title>."
     _app, status = intake.add_applicant(s, a, role, "mailbox", now, settings=ctx.settings)

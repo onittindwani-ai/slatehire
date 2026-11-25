@@ -6,6 +6,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from slatehire import rubric_service, scoring_service
+from slatehire.attention import attention_of
 from slatehire.models import Application, Candidate, Resume, Role
 
 
@@ -45,7 +46,7 @@ def row(s: Session, app: Application, c: Candidate, role: Role, rub_id: int | No
     p = person(c, hide)
     return {"id": app.id, "code": c.code, "name": p["name"], "hidden": hide, "role": role.key, "role_title": role.title, "stage": app.stage, "total": sc.total if sc else None, "covered": sc.covered if sc else None,
             "flags": len(sc.flags) if sc else 0, "source": source_label(c, hide), "updated_at": iso(app.updated_at), "deleted": c.purged_at is not None,
-            "attention": "resume_missing" if (app.note or "").startswith("Resume missing") else None}
+            "attention": attention_of(app)}
 
 
 def pieces(res: Resume | None, items: list[dict], reveal: bool) -> list[dict]:

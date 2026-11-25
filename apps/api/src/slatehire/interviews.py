@@ -70,9 +70,15 @@ def plan(s: Session, app: Application, actor: str, interviewers: list[str], star
 def invite(s: Session, ctx, interview: Interview, actor: str, confirm: bool) -> dict:
     """Send the calendar invite. This invites a real person, so it needs live mode, the kill switch off and an explicit confirm."""
     need_person(actor)
+    app = s.get(Application, interview.application_id)
+    if interview.status in ("invited", "done"):
+        return {"sent": False, "already": True, "reason": "The invite for this interview was already sent. Nothing was sent again."}
+    if interview.status != "planned":
+        raise RuleError(f"This interview is {interview.status}, so no invite is sent.")
+    if app.stage not in ("shortlisted", "interviewing"):
+        raise RuleError("Only shortlisted people are invited. This applicant is no longer in the interview stages.")
     if ctx.effective(s).kill_switch:
         return {"sent": False, "reason": "The kill switch is on, so no invite was sent."}
-    app = s.get(Application, interview.application_id)
     cand = s.get(Candidate, app.candidate_id)
     role = s.get(Role, app.role_id)
     if interview.starts_at is None:
@@ -88,8 +94,20 @@ def invite(s: Session, ctx, interview: Interview, actor: str, confirm: bool) -> 
     return {"sent": True, "reason": out["detail"]}
 
 
+def cancel_open(s: Session, app: Application, actor: str) -> int:
+    """Interviews that were planned or invited for someone who left the process are cancelled, so nobody sits in a call for a person who was declined. Done interviews stay as they are."""
+    n = 0
+    for iv in s.scalars(select(Interview).where(Interview.application_id == app.id, Interview.status.in_(("planned", "invited")))):
+        iv.status = "cancelled"
+        record_audit(s, actor, "interview.cancelled", f"interview:{iv.id}", {"why": "candidate left the process"})
+        n += 1
+    return n
+
+
 def submit_scorecard(s: Session, interview: Interview, actor: str, ratings: dict, comments: dict, recommendation: str, now) -> Scorecard:
     need_person(actor)
+    if interview.status == "cancelled":
+        raise RuleError("This interview was cancelled because the candidate left the process.")
     who = actor.lower()
     if who not in interview.interviewers:
         raise RuleError("Only a named interviewer can send a scorecard for this interview.")
@@ -111,7 +129,7 @@ def submit_scorecard(s: Session, interview: Interview, actor: str, ratings: dict
     s.flush()
     if len(s.scalars(select(Scorecard).where(Scorecard.interview_id == interview.id)).all()) >= len(interview.interviewers):
         interview.status = "done"
-    record_audit(s, who, "scorecard.sent", f"interview:{interview.id}", {"recommendation": recommendation})
+    record_audit(s, who, "scorecard.sent", f"interview:{interview.id}", {})  # that one was sent, never what it says: the log can be read by people who have not sent theirs
     return row
 
 

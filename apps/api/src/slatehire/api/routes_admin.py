@@ -7,23 +7,25 @@ from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from slatehire.api.deps import db, get_ctx, owner, writer
+from slatehire.api.deps import db, get_ctx, owner, user, writer
 from slatehire.api.serializers import iso
 from slatehire.context import Ctx, set_state
 from slatehire.models import Application, Offer
 from slatehire.registry import CATEGORIES, ENV_VARS
 from sendora_core.approvals import ApprovalError, decide
 from sendora_core.audit import record_audit, verify_audit_chain
-from sendora_core.auth import clean_email
+from sendora_core.auth import WRITE_ROLES, clean_email
 from sendora_core.models import Approval, AuditEntry
 
 router = APIRouter(prefix="/api", tags=["admin"])
 
 
-@router.get("/approvals", summary="Pending and recent approvals")
-def approvals(s: Session = Depends(db)):
+@router.get("/approvals", summary="Pending and recent approvals. The terms of an offer are shown to the owner and the approver only.")
+def approvals(s: Session = Depends(db), u: dict = Depends(user)):
     rows = list(s.scalars(select(Approval).order_by(Approval.id.desc()).limit(100)))
-    return [{"id": a.id, "action": a.action, "summary": a.summary, "risk": a.risk, "status": a.status, "requested_by": a.requested_by, "decided_by": a.decided_by, "note": a.decision_note, "created_at": iso(a.created_at), "payload": a.payload, "offer": _offer_of(s, a)} for a in rows]
+    can_see_terms = u["role"] in WRITE_ROLES
+    return [{"id": a.id, "action": a.action, "summary": a.summary, "risk": a.risk, "status": a.status, "requested_by": a.requested_by, "decided_by": a.decided_by, "note": a.decision_note if can_see_terms else None, "created_at": iso(a.created_at), "payload": a.payload,
+             "offer": _offer_of(s, a) if can_see_terms else None} for a in rows]
 
 
 def _offer_of(s: Session, a: Approval) -> dict | None:
@@ -57,9 +59,10 @@ def decide_approval(approval_id: int, body: DecideIn, s: Session = Depends(db), 
         if o is not None and clean_email(u["user"]) == clean_email(o.created_by or "") and clean_email(u["user"]) != clean_email(pending.requested_by or ""):
             raise HTTPException(403, "You wrote these terms, so a different person has to approve them.")
     try:
-        a = decide(s, approval_id, body.approve, u["user"], u["role"], body.note or None)
+        a = decide(s, approval_id, body.approve, u["user"], u["role"], None)  # the base writes the note into the append only audit log, where nothing can take it out again
     except ApprovalError as exc:
         raise HTTPException(409, str(exc)) from exc
+    a.decision_note = (body.note or "").strip() or None  # the words stay on the approval, where a delete of the candidate removes them
     if a.action == "offer.approve":
         o = s.get(Offer, int(a.payload.get("offer_id", 0)))
         if o is not None and o.approval_id == a.id:
@@ -77,13 +80,13 @@ def _utc(v: str) -> str:
     return (t if t.tzinfo else t.replace(tzinfo=timezone.utc)).isoformat()
 
 
-@router.get("/audit", summary="Audit log, newest first")
-def audit(limit: int = Query(100, ge=1, le=1000), s: Session = Depends(db)):
+@router.get("/audit", summary="Audit log, newest first (owner only: it names who did what to whom, and who sent a scorecard before the others may look)")
+def audit(limit: int = Query(100, ge=1, le=1000), s: Session = Depends(db), u: dict = Depends(owner)):
     return [{"id": e.id, "actor": e.actor, "action": e.action, "target": e.target, "detail": e.detail, "at": _utc(e.created_at)} for e in s.scalars(select(AuditEntry).order_by(AuditEntry.id.desc()).limit(limit))]
 
 
-@router.get("/audit/verify", summary="Check the audit chain has not been edited")
-def audit_verify(s: Session = Depends(db)):
+@router.get("/audit/verify", summary="Check the audit chain has not been edited (owner only)")
+def audit_verify(s: Session = Depends(db), u: dict = Depends(owner)):
     ok, bad = verify_audit_chain(s)
     return {"ok": ok, "first_bad_id": bad, "entries": s.scalar(select(__import__("sqlalchemy").func.count()).select_from(AuditEntry))}
 

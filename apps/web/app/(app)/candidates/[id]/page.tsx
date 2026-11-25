@@ -50,6 +50,7 @@ export default function CandidatePage() {
       {showing ? <Card title="Contact" headingLevel={3}><p style={{ margin: 0 }}>{w.person.email ?? "No email"} {w.person.phone ? `, ${w.person.phone}` : ""} {w.person.school ? `, ${w.person.school}` : ""}. Source: {w.person.source}.</p></Card> : null}
       <div className="cf-two">
         <Card title="Resume" headingLevel={2}>
+          {w.attention ? <div className="cf-flag" role="note"><strong>{w.attention === "language" ? "Not scored: language." : "Resume missing."}</strong> {w.attention === "language" ? "This resume does not look like English, and the scorer reads English words only, so it was not scored. Read it yourself. It can be shortlisted without a score." : "No readable resume arrived, so nothing was scored. Ask the applicant for a text or PDF version."}</div> : null}
           {w.resume.injection.length ? <div className="cf-flag cf-flag--claim" role="note"><strong>This resume talks to the scorer.</strong> {`It ${w.resume.injection.map((x) => x.why).join("; ")}.`} Those lines are not scored and never quoted. Read them yourself.</div> : null}
           {w.resume.pieces.length ? <ResumeViewer pieces={w.resume.pieces} showIdentity={showing} focus={focus} criteria={w.rubric?.criteria ?? []} scores={w.score?.items ?? []} /> : <EmptyState title="No resume text" body="The resume was deleted or never had readable text." />}
         </Card>

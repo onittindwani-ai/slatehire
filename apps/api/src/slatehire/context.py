@@ -36,7 +36,7 @@ class Ctx:
         upd: dict[str, Any] = {}
         if kill and kill.value == "1":
             upd["kill_switch"] = True
-        if force and force.value == "1":
+        if (force and force.value == "1") or (self.settings.demo_mode and self.settings.mode is Mode.LIVE):  # a demo never writes to the outside world, whatever MODE says
             upd["mode"] = Mode.DRAFT
         return self.settings.model_copy(update=upd) if upd else self.settings
 

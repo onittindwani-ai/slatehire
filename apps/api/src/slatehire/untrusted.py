@@ -13,7 +13,7 @@ PATTERNS = [
     (r"\b(?:do not|don't|never)\s+(?:reject|screen out|filter)\b", "asks not to be rejected"),
     (r"\b(?:system prompt|you are now|as an ai (?:model|assistant)|new instructions?|developer mode)\b", "pretends to be an instruction"),
     (r"\b(?:5|five)\s*(?:/|out of)\s*(?:5|five)\b[^\n]{0,30}\b(?:everything|all)\b", "asks for top scores"),
-    (r"(?:^|[.!?:]\s+)\W*(?:note|message|attention|instruction|reminder)s?\s+(?:to|for)\s+(?:the\s+)?(?:ai|a\.i\.|llm|model|assistant|bot|reviewers?|scorers?|graders?|evaluators?|screeners?|screening|recruiters?|hiring (?:manager|system|team)|automated|algorithm|ats)\b", "talks to the scorer"),
+    (r"(?:^|[.!?:]\s{1,3})\W{0,5}(?:note|message|attention|instruction|reminder)s?\s+(?:to|for)\s+(?:the\s+)?(?:ai|a\.i\.|llm|model|assistant|bot|reviewers?|scorers?|graders?|evaluators?|screeners?|screening|recruiters?|hiring (?:manager|system|team)|automated|algorithm|ats)\b", "talks to the scorer"),
     (r"\b(?:if|when)\s+you\s+are\s+(?:an?\s+)?(?:ai|llm|language model|bot|automated|assistant|algorithm|screening)\b", "talks to the scorer"),
     (r"\b(?:rate|score|rank|grade|mark|evaluate|assess)\s+(?:this|the|my)\s+(?:candidate|applicant|resume|cv|application|profile)\s+(?:as\s+|at\s+|with\s+)?(?:the\s+)?(?:highest|top|best|excellent|perfect|outstanding|5|five|maximum|max|full)\b", "asks for top scores"),
     (r"\b(?:this|the)\s+(?:candidate|applicant)\s+(?:must|should|has to|needs to)\s+be\s+(?:hired|shortlisted|advanced|interviewed|selected|ranked|scored|rated|given|accepted|moved)\b", "asks to be advanced"),
@@ -22,6 +22,7 @@ PATTERNS = [
     (r"\b(?:maximum|full|top|highest|perfect)\s+(?:score|marks|rating|points)\b[^\n.]{0,40}\b(?:for|on|in)\s+(?:every|all|each)\b", "asks for top scores"),
 ]
 RX = [(re.compile(p, re.I), why) for p, why in PATTERNS]
+INJECTION_SCAN = 1  # the version of the scan whose result is stored on a resume (with the place of each flag); a stored scan of an older version is read again once
 
 
 @dataclass(frozen=True)
@@ -76,26 +77,65 @@ def _hit_across(rx_list, line: str, joined: str) -> str | None:
     return None
 
 
-def find_injection(text: str) -> list[Flag]:
-    """Whole lines (or sentences in one long line) that match, found on a folded copy of the text (look alike letters, hidden characters and extra spaces do not hide an instruction)
-    and also across a line break (an instruction split over two lines is still one). Offsets are in `text`."""
-    clean, idx = _fold(text)
-    lines = clean.split("\n")
-    spans: list[tuple[int, int, str]] = []
+LINE_CAP = 2000  # a longer line is read in pieces of at most this many characters, so no pattern ever works on more than a short stretch at a time
+OVERLAP = 300  # when a single sentence is longer than LINE_CAP it is cut with this much shared, so an instruction on the cut is still whole in one piece
+SENTENCE_END = re.compile(r"[.!?]\s+")
+
+
+def _pieces(line: str) -> list[tuple[int, str]]:
+    """A long line as (offset, text) pieces of at most LINE_CAP characters, cut at sentence ends where there are any."""
+    if len(line) <= LINE_CAP:
+        return [(0, line)]
+    out: list[tuple[int, str]] = []
+    start = last = 0
+    for m in SENTENCE_END.finditer(line):
+        if m.end() - start > LINE_CAP and last > start:
+            out.append((start, line[start:last]))
+            start = last
+        last = m.end()
+    out.append((start, line[start:]))
+    final: list[tuple[int, str]] = []
+    for off, text in out:  # a stretch with no sentence end at all is cut in overlapping pieces
+        if len(text) <= LINE_CAP:
+            final.append((off, text))
+            continue
+        i = 0
+        while i < len(text):
+            final.append((off + i, text[i:i + LINE_CAP]))
+            if i + LINE_CAP >= len(text):
+                break
+            i += LINE_CAP - OVERLAP
+    return final
+
+
+def _units(clean: str) -> list[tuple[int, str]]:
+    units: list[tuple[int, str]] = []
     pos = 0
-    for n, line in enumerate(lines):
+    for line in clean.split("\n"):
+        units.extend((pos + off, piece) for off, piece in _pieces(line))
+        pos += len(line) + 1
+    return units
+
+
+def find_injection(text: str) -> list[Flag]:
+    """Whole lines (or, in a very long line, the stretch of about 2,000 characters around the match) that match, found on a folded copy of the text (look alike letters, hidden
+    characters and extra spaces do not hide an instruction) and also across a line break (an instruction split over two lines is still one). Offsets are in `text`.
+    Every pattern is bounded and no pattern sees more than LINE_CAP characters at once, so a hostile file costs time in proportion to its length and no more."""
+    clean, idx = _fold(text)
+    units = _units(clean)
+    spans: list[tuple[int, int, str]] = []
+    for n, (pos, line) in enumerate(units):
         why = _hit(RX, line)
         end = pos + len(line)
-        if why is None and n + 1 < len(lines) and lines[n + 1].strip() and line.strip():
-            joined = line + " " + lines[n + 1]
+        if why is None and n + 1 < len(units) and units[n + 1][1].strip() and line.strip():
+            joined = line + " " + units[n + 1][1]
             why = _hit_across(RX, line, joined)
             if why is not None:
-                end = pos + len(joined)  # both lines are the instruction
+                end = min(pos + len(joined), units[n + 1][0] + len(units[n + 1][1]))  # both lines are the instruction
         if why is not None:
             spans.append((pos, end, why))
-        pos += len(line) + 1
     out: list[Flag] = []
-    for a, b, why in spans:
+    for a, b, why in sorted(spans):
         if b <= a or a >= len(idx):
             continue
         start, stop = idx[a], idx[min(b, len(idx)) - 1] + 1
@@ -104,3 +144,8 @@ def find_injection(text: str) -> list[Flag]:
         else:
             out.append(Flag(start, stop, why))
     return out
+
+
+def entries(text: str, flags: list[Flag]) -> list[dict]:
+    """The flags as stored on a resume: why, a short piece of the text, and where it sits (start and end in `text`), so the place never has to be searched for again."""
+    return [{"why": f.why, "text": text[f.start:f.end][:160], "start": f.start, "end": f.end} for f in flags]

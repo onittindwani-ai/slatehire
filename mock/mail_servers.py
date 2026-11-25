@@ -1,7 +1,7 @@
 """A tiny fake SMTP and IMAP server for tests and the demo. Not a real mail server.
 
 SMTP: EHLO, AUTH PLAIN, MAIL, RCPT, DATA, RSET, NOOP, QUIT. Accepted messages land in `MailStore.outbox`.
-IMAP: CAPABILITY, LOGIN, SELECT, UID SEARCH (ALL, UNSEEN), UID FETCH (RFC822), UID STORE (flags), NOOP, LOGOUT.
+IMAP: CAPABILITY, LOGIN, SELECT, UID SEARCH (ALL, UNSEEN, SUBJECT "text", case blind like a real server), UID FETCH (RFC822), UID STORE (flags), NOOP, LOGOUT.
 Messages in `MailStore.inbox` are what the IMAP client sees. It speaks only what Python's smtplib and imaplib send.
 """
 
@@ -25,6 +25,13 @@ class MailStore:
             uid = len(self.inbox) + 1
             self.inbox.append({"uid": uid, "raw": raw, "seen": False})
             return uid
+
+
+def _subject(raw: bytes) -> str:
+    """The Subject header of a stored message, decoded the way a mail server compares it."""
+    from email import message_from_bytes, policy
+
+    return str(message_from_bytes(raw, policy=policy.default).get("Subject", ""))
 
 
 class _SMTP(socketserver.StreamRequestHandler):
@@ -108,7 +115,9 @@ class _IMAP(socketserver.StreamRequestHandler):
                 sub = sub.upper()
                 if sub == "SEARCH":
                     with self.store.lock:
-                        uids = [m["uid"] for m in self.store.inbox if ("UNSEEN" not in a2.upper() or not m["seen"])]
+                        want = re.search(r'SUBJECT\s+(?:"([^"]*)"|(\S+))', a2, re.I)
+                        needle = ((want.group(1) if want.group(1) is not None else want.group(2)) if want else "").lower()
+                        uids = [m["uid"] for m in self.store.inbox if ("UNSEEN" not in a2.upper() or not m["seen"]) and (not needle or needle in _subject(m["raw"]).lower())]
                     self._w(("* SEARCH " + " ".join(map(str, uids))).strip().encode() + b"\r\n" + tag.encode() + b" OK done\r\n")
                 elif sub == "FETCH":
                     uid = int(a2.split(" ", 1)[0])

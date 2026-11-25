@@ -131,3 +131,37 @@ def level_of(sentence: str, n_hits: int = 1) -> int:
     if base == 4 and lead and (sustained or (number and result)):
         base = 5
     return base
+
+
+# ---------------------------------------------------------------- which language
+
+# Common function words that belong to one language and are rare in English. A resume with many of them is not English, and the English word rules below would find
+# "no evidence" in it for every criterion and put the person at the bottom of the board without anyone being told.
+OTHER_LANGUAGE_WORDS = frozenset("""de la el en los las que por con para una del su sus pero como tambien anos trabajo experiencia empresa gestion
+le les des du est dans pour avec une sur qui ans experience entreprise gestion aux ce cette
+und der die das mit von fur nicht ist ein eine im zu auf den dem bei jahre erfahrung unternehmen
+nao uma os as dos das em um experiencia empresa anos
+che di il per nel della dei degli anni esperienza azienda sono
+een het voor met niet zijn jaar ervaring""".split())
+ENGLISH_FUNCTION_WORDS = frozenset("the and of to for with was were that this from by at my our is are have has had which their been will across into using also over within".split())
+_LETTERS = re.compile(r"[^\W\d_]+")
+_ACCENTS = str.maketrans("áàâäãéèêëíìîïóòôöõúùûüçñß", "aaaaaeeeeiiiiooooouuuucns")
+
+
+def detect(text: str) -> str:
+    """"en" (or something this check cannot tell apart from it), "other" when the resume is plainly written in another language or script, "unknown" when it is too short to tell.
+    A rough count of function words, not a language model: it is wrong for a resume that mixes languages, and it is right to send those to a person."""
+    letters = [c for c in text if c.isalpha()]
+    if len(letters) < 80:
+        return "unknown"
+    beyond_latin = sum(1 for c in letters if ord(c) > 0x024F)
+    if beyond_latin / len(letters) > 0.3:
+        return "other"
+    words = [w.lower().translate(_ACCENTS) for w in _LETTERS.findall(text)]
+    if len(words) < 40:
+        return "en"
+    foreign = sum(1 for w in words if w in OTHER_LANGUAGE_WORDS)
+    english = sum(1 for w in words if w in ENGLISH_FUNCTION_WORDS)
+    if foreign >= 8 and foreign / len(words) >= 0.12 and foreign > 2 * english:
+        return "other"
+    return "en"

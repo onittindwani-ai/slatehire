@@ -3,12 +3,13 @@ from __future__ import annotations
 from datetime import date, datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Query
-from sqlalchemy import func, select
+from sqlalchemy import func, or_, select
 from sqlalchemy.orm import Session
 
 from slatehire import fairness_service, interviews, pipeline, rubric_service, scoring_service
 from slatehire.api.deps import db, get_ctx, get_or_404, user, writer
 from slatehire.api.serializers import blind_enforced, iso, person, pieces, row, source_label
+from slatehire.attention import attention_of
 from slatehire.context import Ctx
 from slatehire.models import Application, Candidate, FairnessReport, IntakeLog, Interview, OnboardingTask, Offer, Resume, Role, Rubric, Score
 from slatehire.onboarding import progress
@@ -47,22 +48,44 @@ def stale_jobs(s: Session) -> list[str]:
 
 @router.get("/overview", summary="Numbers for the top of the page")
 def overview(s: Session = Depends(db), ctx: Ctx = Depends(get_ctx)):
+    """Loaded with every page, so it never walks every resume: counts are counts, the quote check is kept until a score or a resume changes, and the waiting list is one query per role."""
     roles, rubs = _role_ctx(s)
     funnel = pipeline.funnel(s)
     pend = s.scalar(select(func.count()).select_from(Approval).where(Approval.status == "pending")) or 0
-    q = scoring_service.quote_check(s)
-    return {"funnel": funnel, "roles": len(roles), "roles_unlocked": sum(1 for r in rubs.values() if r is None), "pending_approvals": pend, "unscored": len(scoring_service.unscored(s)), "evidence": {"quotes": q["quotes"], "invalid": q["invalid"], "valid_percent": q["valid_percent"]},
-            "stale_jobs": stale_jobs(s), "today": ctx.today(s).isoformat(), "overdue_tasks": sum(1 for t in s.scalars(select(OnboardingTask).where(OnboardingTask.done.is_(False))) if date.fromisoformat(t.due_on) < ctx.today(s))}
+    q = scoring_service.quote_summary(s)
+    today = ctx.today(s)
+    overdue = s.scalar(select(func.count()).select_from(OnboardingTask).where(OnboardingTask.done.is_(False), OnboardingTask.due_on < today.isoformat())) or 0
+    return {"funnel": funnel, "roles": len(roles), "roles_unlocked": sum(1 for r in rubs.values() if r is None), "pending_approvals": pend, "unscored": scoring_service.count_unscored(s), "evidence": {"quotes": q["quotes"], "invalid": q["invalid"], "valid_percent": q["valid_percent"]},
+            "stale_jobs": stale_jobs(s), "today": today.isoformat(), "overdue_tasks": int(overdue)}
 
 
-@router.get("/intake/log", summary="Every application that came in by email, an ATS or a form and was not added, with the reason (owner and approver). Nobody leaves the funnel without a line here.")
+def _blind_refs(s: Session, refs: set[str]) -> dict[str, str]:
+    """For each reference on the list (an email, a name or a code, in lower case) that belongs to someone whose identity is still hidden, the neutral code to show instead.
+    Without this the list names, with the real address, the very applicants the rest of the app keeps anonymous until the shortlist decision."""
+    if not refs:
+        return {}
+    found: dict[str, str] = {}
+    q = select(Candidate).where(or_(func.lower(Candidate.email).in_(refs), func.lower(Candidate.full_name).in_(refs), func.lower(Candidate.code).in_(refs)))
+    for c in s.scalars(q):
+        if c.purged_at is not None:
+            continue
+        if any(blind_enforced(s, a) for a in s.scalars(select(Application).where(Application.candidate_id == c.id))):
+            for key in (c.email.lower(), c.full_name.lower(), c.code.lower()):
+                if key in refs:
+                    found[key] = c.code
+    return found
+
+
+@router.get("/intake/log", summary="Every application that came in by email, an ATS or a form and was not added, with the reason (owner and approver). Nobody leaves the funnel without a line here. A person whose identity is still hidden is shown by their neutral code.")
 def intake_log(status: str | None = Query(None, pattern="^(added|duplicate|rejected)$"), limit: int = Query(100, ge=1, le=500), s: Session = Depends(db), u: dict = Depends(writer)):
     q = select(IntakeLog).order_by(IntakeLog.id.desc()).limit(limit)
     if status:
         q = q.where(IntakeLog.status == status)
     else:
         q = q.where(IntakeLog.status != "added")
-    return [{"id": r.id, "source": r.source, "ref": r.ref, "status": r.status, "detail": r.detail, "at": iso(r.created_at)} for r in s.scalars(q)]
+    rows = list(s.scalars(q))
+    hidden = _blind_refs(s, {r.ref.lower() for r in rows})
+    return [{"id": r.id, "source": r.source, "ref": f"Candidate {hidden[r.ref.lower()]}" if r.ref.lower() in hidden else r.ref, "status": r.status, "detail": r.detail, "at": iso(r.created_at)} for r in rows]
 
 
 @router.get("/roles", summary="Roles with their rubric state")
@@ -137,7 +160,7 @@ def applications(role: str | None = None, stage: str | None = None, limit: int =
         p = person(c, hide)
         out.append({"id": app.id, "code": c.code, "name": p["name"], "hidden": hide, "role": roles[app.role_id].key, "role_title": roles[app.role_id].title, "stage": app.stage, "total": sc.total if sc else None, "covered": sc.covered if sc else None,
                     "flags": len(sc.flags) if sc else 0, "source": source_label(c, hide), "updated_at": iso(app.updated_at), "deleted": c.purged_at is not None,
-                    "attention": "resume_missing" if (app.note or "").startswith("Resume missing") else None})
+                    "attention": attention_of(app)})
     return out
 
 
@@ -179,7 +202,7 @@ def workspace(app_id: int, reveal: bool = False, s: Session = Depends(db), ctx: 
     tasks = list(s.scalars(select(OnboardingTask).where(OnboardingTask.application_id == app.id).order_by(OnboardingTask.phase, OnboardingTask.due_on)))
     return {
         "id": app.id, "stage": app.stage, "role": {"key": role.key, "title": role.title}, "person": person(c, hide), "blind": {"enforced": enforced, "showing": hide, "rubric_setting": bool(rub and rub.blind)},
-        "history": app.history, "decided_by": app.decided_by, "decision_note": app.decision_note, "note": app.note, "deleted": c.purged_at is not None,
+        "history": app.history, "decided_by": app.decided_by, "decision_note": app.decision_note, "note": app.note, "attention": attention_of(app), "deleted": c.purged_at is not None,
         "rubric": None if shown is None else {"id": shown.id, "version": shown.version, "fingerprint": shown.fingerprint, "signature_ok": rubric_service.verify_signature(shown), "blind": shown.blind, "criteria": shown.criteria},
         "current_version": None if rub is None else rub.version,
         "score": None if sc is None else {"id": sc.id, "total": sc.total, "covered": sc.covered, "items": sc.items, "flags": sc.flags, "scorer": sc.scorer, "at": iso(sc.created_at)},
@@ -211,14 +234,14 @@ def interview_one(interview_id: int, s: Session = Depends(db), u: dict = Depends
             "kit": i.kit, "probe_areas": interviews.probe_areas(s, app), "calendar_detail": i.calendar_detail, **interviews.view(s, i, u["user"])}
 
 
-@router.get("/offers", summary="Offers")
-def offer_list(s: Session = Depends(db)):
+@router.get("/offers", summary="Offers (owner and approver: they hold pay terms and names)")
+def offer_list(s: Session = Depends(db), u: dict = Depends(writer)):
     out = []
     for o in s.scalars(select(Offer).order_by(Offer.id.desc())):
         app = s.get(Application, o.application_id)
         c = s.get(Candidate, app.candidate_id)
         ap = s.get(Approval, o.approval_id) if o.approval_id else None
-        out.append({"id": o.id, "application_id": app.id, "name": c.full_name, "code": c.code, "title": o.title, "start_date": o.start_date, "status": o.status, "terms": o.terms, "body": o.body, "handoff_ref": o.handoff_ref, "created_by": o.created_by,
+        out.append({"id": o.id, "application_id": app.id, "name": person(c, blind_enforced(s, app))["name"], "code": c.code, "title": o.title, "start_date": o.start_date, "status": o.status, "terms": o.terms, "body": o.body, "handoff_ref": o.handoff_ref, "created_by": o.created_by,
                     "approval": None if ap is None else {"id": ap.id, "status": ap.status, "requested_by": ap.requested_by, "decided_by": ap.decided_by}})
     return out
 
@@ -230,7 +253,7 @@ def onboarding_list(s: Session = Depends(db), ctx: Ctx = Depends(get_ctx)):
     for app in s.scalars(select(Application).where(Application.id.in_(select(OnboardingTask.application_id).distinct()))):
         c, role = s.get(Candidate, app.candidate_id), s.get(Role, app.role_id)
         ts = list(s.scalars(select(OnboardingTask).where(OnboardingTask.application_id == app.id).order_by(OnboardingTask.phase, OnboardingTask.due_on)))
-        out.append({"application_id": app.id, "name": c.full_name, "role": role.title, "progress": progress(ts, today), "today": today.isoformat(),
+        out.append({"application_id": app.id, "name": person(c, blind_enforced(s, app))["name"], "role": role.title, "progress": progress(ts, today), "today": today.isoformat(),
                     "tasks": [{"id": t.id, "phase": t.phase, "title": t.title, "owner": t.owner, "due_on": t.due_on, "done": t.done, "overdue": (not t.done) and date.fromisoformat(t.due_on) < today} for t in ts]})
     return out
 

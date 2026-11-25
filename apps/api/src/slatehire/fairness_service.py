@@ -5,6 +5,7 @@ An indicator for a person to look at. It is not a finding of discrimination and 
 
 from __future__ import annotations
 
+import re
 from fractions import Fraction
 
 from sqlalchemy import select
@@ -16,6 +17,7 @@ from slatehire.models import Application, Candidate, Demographic, FairnessReport
 from slatehire.pipeline import reached
 from sendora_core.audit import record_audit
 
+THRESHOLD_SHAPE = re.compile(r"\d{1,6}(?:/\d{1,6}|\.\d{1,6})?")
 STEP_STAGE = {"shortlisted": "shortlisted", "interviewed": "interviewing", "offered": "offer", "hired": "hired"}
 PREV = {"shortlisted": None, "interviewed": "shortlisted", "offered": "interviewing", "hired": "offer"}
 
@@ -80,8 +82,10 @@ def run(s: Session, actor: str, role_key: str | None, min_group: int, threshold:
     if not 2 <= min_group <= 200:
         raise RuleError("The smallest group size is between 2 and 200.")
     min_group = max(min_group, floor)
+    if not THRESHOLD_SHAPE.fullmatch(threshold.strip()):  # no exponents, no huge numbers: Fraction("1e999999999") would take the server minutes
+        raise RuleError("The threshold is a fraction such as 4/5, or a decimal such as 0.8.")
     try:
-        thr = Fraction(threshold)
+        thr = Fraction(threshold.strip())
     except (ValueError, ZeroDivisionError) as exc:
         raise RuleError("The threshold is a fraction such as 4/5.") from exc
     if not 0 < thr < 1:

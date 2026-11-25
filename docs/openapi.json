@@ -174,6 +174,7 @@
      "read"
     ],
     "summary": "Numbers for the top of the page",
+    "description": "Loaded with every page, so it never walks every resume: counts are counts, the quote check is kept until a score or a resume changes, and the waiting list is one query per role.",
     "operationId": "overview_api_overview_get",
     "responses": {
      "200": {
@@ -192,7 +193,7 @@
     "tags": [
      "read"
     ],
-    "summary": "Every application that came in by email, an ATS or a form and was not added, with the reason (owner and approver). Nobody leaves the funnel without a line here.",
+    "summary": "Every application that came in by email, an ATS or a form and was not added, with the reason (owner and approver). Nobody leaves the funnel without a line here. A person whose identity is still hidden is shown by their neutral code.",
     "operationId": "intake_log_api_intake_log_get",
     "parameters": [
      {
@@ -591,7 +592,7 @@
     "tags": [
      "read"
     ],
-    "summary": "Offers",
+    "summary": "Offers (owner and approver: they hold pay terms and names)",
     "operationId": "offer_list_api_offers_get",
     "responses": {
      "200": {
@@ -1273,6 +1274,64 @@
     }
    }
   },
+  "/api/suppression": {
+   "get": {
+    "tags": [
+     "write"
+    ],
+    "summary": "How many deleted people are kept as one way hashes so they are not added again (owner). Nothing readable is stored.",
+    "operationId": "suppression_info_api_suppression_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/suppression/lift": {
+   "post": {
+    "tags": [
+     "write"
+    ],
+    "summary": "Let one address apply again, because the person applied again on purpose (owner)",
+    "operationId": "suppression_lift_api_suppression_lift_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/LiftIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/api/applications/{app_id}/interviews": {
    "post": {
     "tags": [
@@ -1776,7 +1835,7 @@
     "tags": [
      "admin"
     ],
-    "summary": "Pending and recent approvals",
+    "summary": "Pending and recent approvals. The terms of an offer are shown to the owner and the approver only.",
     "operationId": "approvals_api_approvals_get",
     "responses": {
      "200": {
@@ -1845,7 +1904,7 @@
     "tags": [
      "admin"
     ],
-    "summary": "Audit log, newest first",
+    "summary": "Audit log, newest first (owner only: it names who did what to whom, and who sent a scorecard before the others may look)",
     "operationId": "audit_api_audit_get",
     "parameters": [
      {
@@ -1888,7 +1947,7 @@
     "tags": [
      "admin"
     ],
-    "summary": "Check the audit chain has not been edited",
+    "summary": "Check the audit chain has not been edited (owner only)",
     "operationId": "audit_verify_api_audit_verify_get",
     "responses": {
      "200": {
@@ -2382,6 +2441,21 @@
      "labels"
     ],
     "title": "LabelsIn"
+   },
+   "LiftIn": {
+    "properties": {
+     "email": {
+      "type": "string",
+      "maxLength": 254,
+      "minLength": 3,
+      "title": "Email"
+     }
+    },
+    "type": "object",
+    "required": [
+     "email"
+    ],
+    "title": "LiftIn"
    },
    "Login": {
     "properties": {

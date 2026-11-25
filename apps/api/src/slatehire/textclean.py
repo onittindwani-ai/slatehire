@@ -9,7 +9,7 @@ import hashlib
 import re
 
 _CONTROL = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")
-_SPACE = re.compile(r"[\s\u0085  ​-‏‪-‮⁠﻿]+")
+_SPACE = re.compile("[\\s\\u0085\\u2028\\u2029\\u200b-\\u200f\\u202a-\\u202e\\u2060\\ufeff]+")
 
 
 def clean_text(value: str | None, limit: int | None = None) -> str:

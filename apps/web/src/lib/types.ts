@@ -6,7 +6,7 @@ export interface RubricRow { id: number; role_id: number; version: number; crite
 export interface RoleRow { id: number; key: string; title: string; team: string; status: string; description: string; job_post: string; applicants: number; funnel: Record<string, number>; rubric: { id: number; version: number; locked: boolean; blind: boolean } | null; scoring_rubric: number | null }
 export interface Card { id: number; code: string; name: string; hidden: boolean; role: string; role_title: string; total: number | null; flags: number; stage: string }
 export interface Board { [stage: string]: { count: number; cards: Card[] } | { declined: number; withdrawn: number } }
-export interface AppRow { id: number; code: string; name: string; hidden: boolean; role: string; role_title: string; stage: string; total: number | null; covered: number | null; flags: number; source: string; updated_at: string | null; deleted: boolean; attention?: "resume_missing" | null }
+export interface AppRow { id: number; code: string; name: string; hidden: boolean; role: string; role_title: string; stage: string; total: number | null; covered: number | null; flags: number; source: string; updated_at: string | null; deleted: boolean; attention?: "resume_missing" | "language" | null }
 export interface IntakeLogRow { id: number; source: string; ref: string; status: string; detail: string; at: string | null }
 export interface Quote { text: string; start: number }
 export interface ScoreItem { criterion_id: string; state: "scored" | "not_found" | "rejected"; value: number | null; quotes: Quote[]; rationale: string; problem?: string | null }
@@ -15,7 +15,7 @@ export interface Workspace {
   id: number; stage: string; role: { key: string; title: string }; current_version: number | null;
   person: { code: string; name: string; email: string | null; phone: string | null; school: string | null; source: string; hidden: boolean };
   blind: { enforced: boolean; showing: boolean; rubric_setting: boolean };
-  history: { stage: string; by: string; at: string; note: string }[]; decided_by: string | null; decision_note: string; deleted: boolean;
+  history: { stage: string; by: string; at: string; note: string }[]; decided_by: string | null; decision_note: string; note?: string; attention?: "resume_missing" | "language" | null; deleted: boolean;
   rubric: { id: number; version: number; fingerprint: string; signature_ok: boolean; blind: boolean; criteria: Criterion[] } | null;
   score: { id: number; total: number; covered: number; items: ScoreItem[]; flags: { kind: string; detail: string; text?: string }[]; scorer: string; at: string } | null;
   resume: { pieces: Piece[]; counts: Record<string, number>; injection: { why: string; text: string }[]; filename: string };

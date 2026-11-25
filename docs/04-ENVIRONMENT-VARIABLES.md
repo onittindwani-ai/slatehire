@@ -55,7 +55,7 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 
 ### `APPROVER_EMAIL, APPROVER_PASSWORD_HASH, VIEWER_EMAIL, VIEWER_PASSWORD_HASH, MEMBERS_JSON, LOGIN_BURST`
 - **Required:** Yes if more than one person works in it
-- **What it does:** A second person who can approve offers and send scorecards. `MEMBERS_JSON` is a list of extra approvers: `[{"email":"a@b.co","password_hash":"...","role":"approver"}]`. A second owner cannot be added. `VIEWER_EMAIL` and `VIEWER_PASSWORD_HASH` make a read only sign in (for example a hiring manager who only looks): it opens every page and changes nothing, and it cannot show a hidden identity. In `MEMBERS_JSON` use `"role":"viewer"` for more of them. `LOGIN_BURST` (default 5) is how many sign in tries one address and email may make in a row before a short wait; the browser tests raise it, leave it at 5 in real use.
+- **What it does:** A second person who can approve offers and send scorecards. `MEMBERS_JSON` is a list of extra approvers: `[{"email":"a@b.co","password_hash":"...","role":"approver"}]`. A second owner cannot be added. `VIEWER_EMAIL` and `VIEWER_PASSWORD_HASH` make a read only sign in (for example a hiring manager who only looks): it opens the pipeline, candidates, interviews, fairness and approvals pages (without the pay terms) and changes nothing, it cannot open the Offers page or the audit log, and it cannot show a hidden identity. In `MEMBERS_JSON` use `"role":"viewer"` for more of them. `LOGIN_BURST` (default 5) is how many sign in tries one address and email may make in a row before a short wait; the browser tests raise it, leave it at 5 in real use.
 - **How to get it:**
 1. Make a hash for each person with `tools/hash_password.py`.
 2. Set the variables.

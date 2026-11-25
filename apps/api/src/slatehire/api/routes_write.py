@@ -9,7 +9,7 @@ from pydantic import BaseModel, Field, StringConstraints, field_validator
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from slatehire import fairness_service, ingest, intake, interviews, offers, onboarding, pipeline, retention, rubric_service, scoring_service
+from slatehire import fairness_service, ingest, intake, interviews, offers, onboarding, pipeline, retention, rubric_service, scoring_service, suppression
 from slatehire.adapters.fetch import safe_fetch
 from slatehire.api.bodies import read_limited
 from slatehire.api.deps import db, get_ctx, get_or_404, owner, rule, writer
@@ -247,8 +247,25 @@ def move(app_id: int, b: MoveIn, s: Session = Depends(db), ctx: Ctx = Depends(ge
 @router.delete("/candidates/{app_id}", summary="Delete a candidate's personal data now (owner)")
 def delete_candidate(app_id: int, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(owner)):
     app = get_or_404(s, Application, app_id, "application")
-    rule(retention.purge, s, app, u["user"], ctx.now(s), "deleted on request", ctx.settings.export_dir)  # the offer file written for the signing tool is rewritten without the name too
-    return {"ok": True}
+    kept = rule(retention.purge, s, app, u["user"], ctx.now(s), "deleted on request", ctx.settings.export_dir)  # the offer file written for the signing tool is rewritten without the name too
+    return {"ok": True, "suppressed": bool(kept), "note": SUPPRESSED_NOTE if kept else "Deleted. This person had no address or outside reference, so nothing could be kept to stop them being added again."}
+
+
+SUPPRESSED_NOTE = "Deleted. A one way hash of the address (and of the outside reference) was kept, so the same person is not added again by a mailbox, an ATS pull or a webhook retry. It holds nothing readable. The owner can lift it if the person applies again on purpose."
+
+
+class LiftIn(BaseModel):
+    email: str = Field(min_length=3, max_length=254)
+
+
+@router.get("/suppression", summary="How many deleted people are kept as one way hashes so they are not added again (owner). Nothing readable is stored.")
+def suppression_info(s: Session = Depends(db), u: dict = Depends(owner)):
+    return {"count": suppression.count(s), "note": SUPPRESSED_NOTE}
+
+
+@router.post("/suppression/lift", summary="Let one address apply again, because the person applied again on purpose (owner)")
+def suppression_lift(b: LiftIn, s: Session = Depends(db), u: dict = Depends(owner)):
+    return {"removed": suppression.lift(s, b.email, u["user"])}
 
 
 # interviews
@@ -275,7 +292,9 @@ class InviteIn(BaseModel):
 
 @router.post("/interviews/{interview_id}/invite", summary="Send the calendar invite. Needs live mode and an explicit confirm; draft mode sends nothing.")
 def invite(interview_id: int, b: InviteIn, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
-    iv = get_or_404(s, Interview, interview_id, "interview")
+    iv = s.get(Interview, interview_id, with_for_update=True)  # two clicks at once take turns (Postgres), so the second one finds the invite already sent
+    if iv is None:
+        raise HTTPException(404, "No such interview.")
     return rule(interviews.invite, s, ctx, iv, u["user"], b.confirm)
 
 

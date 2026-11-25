@@ -7,22 +7,30 @@ import re
 from datetime import timedelta
 from pathlib import Path
 
-from sqlalchemy import delete, select, update
+from sqlalchemy import delete, func, select, update
 from sqlalchemy.orm import Session
 
+from slatehire import suppression
 from slatehire.errors import RuleError, need_person
-from slatehire.models import TERMINAL, Application, Candidate, Demographic, IntakeLog, Interview, Offer, Resume, Score, Scorecard
+from slatehire.models import TERMINAL, Application, Candidate, Demographic, IntakeLog, Interview, OnboardingTask, Offer, Resume, Score, Scorecard
 from sendora_core.audit import record_audit
+from sendora_core.models import Approval
 
 OPEN_STAGES = ("applied", "shortlisted", "interviewing", "offer")
 GONE = "(deleted)"
 
 
-def _without(text: str, name: str) -> str:
-    """The text with the full name and every part of it (first name, last name) replaced, as whole words, so a first name alone does not stay behind."""
-    if not text or not name or not name.strip():
+def _without(text: str, name: str, *private: str) -> str:
+    """The text with the full name and every part of it (first name, last name) replaced, as whole words, so a first name alone does not stay behind. Any other private
+    string (the email address, the phone number) is taken out wherever it appears, in any capitals."""
+    if not text:
         return text
-    out = text.replace(name, GONE)
+    out = text
+    for item in (p for p in private if p and p.strip()):
+        out = re.sub(re.escape(item.strip()), GONE, out, flags=re.I)
+    if not name or not name.strip():
+        return out
+    out = out.replace(name, GONE)
     for token in {t for t in re.split(r"[\s,.\-]+", name) if len(t) >= 3}:
         out = re.sub(rf"(?<![A-Za-z]){re.escape(token)}(?![A-Za-z])", GONE, out, flags=re.I)
     return out
@@ -40,33 +48,41 @@ def _rewrite_offer_file(export_dir: str | Path | None, offer: Offer) -> bool:
     return True
 
 
-def purge(s: Session, app: Application, actor: str, now, why: str, export_dir: str | Path | None = None) -> None:
-    """Delete one candidate's personal data. Core updates are used on scorecards on purpose: the ORM guard protects them from edits, not from a deletion order."""
+def purge(s: Session, app: Application, actor: str, now, why: str, export_dir: str | Path | None = None) -> bool:
+    """Delete one candidate's personal data. Core updates are used on scorecards on purpose: the ORM guard protects them from edits, not from a deletion order.
+    Returns True when a one way hash of the person was kept so that they are not added again (see suppression.py)."""
     cand = s.get(Candidate, app.candidate_id)
     if cand.purged_at is not None:
         raise RuleError("This candidate was already deleted.")
-    name, email, ref, code = cand.full_name, cand.email, cand.external_ref, cand.code
+    name, email, ref, code, phone, source = cand.full_name, cand.email, cand.external_ref, cand.code, cand.phone, cand.source
     s.execute(delete(Resume).where(Resume.application_id == app.id))
     s.execute(delete(Demographic).where(Demographic.application_id == app.id))
     for sc in s.scalars(select(Score).where(Score.application_id == app.id)):
-        sc.items = [{**it, "quotes": [], "rationale": "Removed when the candidate was deleted."} for it in sc.items]
+        sc.items = [{**it, "quotes": [], "rejected_quotes": [], "rationale": "Removed when the candidate was deleted."} for it in sc.items]  # a rejected quote is a piece of the resume too
         sc.flags = []
     ids = [i for (i,) in s.execute(select(Interview.id).where(Interview.application_id == app.id))]
     if ids:
         s.execute(update(Scorecard).where(Scorecard.interview_id.in_(ids)).values(comments={}))
     for o in s.scalars(select(Offer).where(Offer.application_id == app.id)):
-        o.body, o.terms = _without(o.body, name), _without(o.terms, name)
+        o.body, o.terms = _without(o.body, name, email, phone), _without(o.terms, name, email, phone)
         _rewrite_offer_file(export_dir, o)
-    refs = [r for r in {email, name, ref, code} if r]
+        ap = s.get(Approval, o.approval_id) if o.approval_id else None
+        if ap is not None:
+            ap.decision_note = None  # what the approver wrote about the offer may carry the name
+    for t in s.scalars(select(OnboardingTask).where(OnboardingTask.application_id == app.id)):
+        t.title = _without(t.title, name, email, phone)  # a task a person added by hand ("send the laptop to ...")
+    refs = [r.lower()[:160] for r in {email, name, ref, code} if r]
     if refs:
-        s.execute(delete(IntakeLog).where(IntakeLog.ref.in_([r[:160] for r in refs])))  # the intake list kept the address or the name of this person
+        s.execute(delete(IntakeLog).where(func.lower(IntakeLog.ref).in_(refs)))  # the intake list kept the address or the name of this person, in the capitals it was typed in
     # What people wrote about the person goes too; the stage names, who moved them and when stay.
     app.history = [{k: v for k, v in h.items() if k != "note"} | {"note": ""} for h in app.history]
     app.decision_note = ""
     app.note = ""
-    cand.full_name, cand.email, cand.phone, cand.school, cand.external_ref, cand.purged_at = GONE, "", "", "", None, now
+    kept = suppression.record(s, email, source, ref, now) > 0
+    cand.full_name, cand.email, cand.phone, cand.school, cand.source, cand.external_ref, cand.purged_at = GONE, "", "", "", "", None, now
     s.flush()
     record_audit(s, actor, "candidate.deleted", f"application:{app.id}", {"code": code, "why": why[:120]})
+    return kept
 
 
 def _aware(value, now):

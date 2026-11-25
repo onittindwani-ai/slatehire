@@ -21,7 +21,7 @@ Worker (python -m slatehire.worker) -> jobs: mailbox, scoring, retention, onboar
 6. An offer needs person written terms, enough scorecards and a second person's approval, then a file is written.
 
 ## Data
-`<!--n:tables-->14<!--/n-->` tables, `<!--n:api_paths-->57<!--/n-->` API paths. The audit log is hash chained. Demographic labels live apart from everything else.
+`<!--n:tables-->15<!--/n-->` tables, `<!--n:api_paths-->59<!--/n-->` API paths. The audit log is hash chained. Demographic labels live apart from everything else.
 
 ## What is not here
 No outbound email, no automatic rejection, no model call in the default path.

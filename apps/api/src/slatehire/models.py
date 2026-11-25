@@ -88,7 +88,9 @@ class Resume(Base):
     counts: Mapped[dict] = mapped_column(JSON, default=dict)
     redaction_version: Mapped[str] = mapped_column(String(10), default="1")
     filename: Mapped[str] = mapped_column(String(200), default="")
-    injection: Mapped[list] = mapped_column(JSON, default=list)
+    injection: Mapped[list] = mapped_column(JSON, default=list)  # each entry: why, text, and where it sits in redacted_text (start, end) once injection_scan is 1
+    injection_scan: Mapped[int] = mapped_column(Integer, default=0, server_default="0")  # 1: the lines that talk to the scorer were found when the resume was saved and their places are stored; 0: an older row, read once and then stored
+    language: Mapped[str] = mapped_column(String(10), default="en", server_default="en")  # en, other (the scorer reads English only, so nothing is scored) or unknown (too short to tell)
 
 
 class Score(Base):
@@ -184,4 +186,13 @@ class IntakeLog(Base):
     ref: Mapped[str] = mapped_column(String(160), index=True)
     status: Mapped[str] = mapped_column(String(20))  # added, duplicate, rejected
     detail: Mapped[str] = mapped_column(String(300), default="")
+    created_at: Mapped[datetime] = mapped_column(UTCDateTime, default=utcnow)
+
+
+class Suppression(Base):
+    """A person who was erased and must not be added again by a mailbox, an ATS pull or a webhook retry. Holds a salted one way hash and the date, nothing readable."""
+    __tablename__ = "cf_suppression"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    digest: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    kind: Mapped[str] = mapped_column(String(10))  # email or ref (an outside reference such as a Message-ID or an ATS id)
     created_at: Mapped[datetime] = mapped_column(UTCDateTime, default=utcnow)
