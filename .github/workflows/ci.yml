@@ -80,7 +80,9 @@ jobs:
             echo "ALLOW_DEMO_SERVER=true"  # a throw away demo on Postgres, which the app refuses otherwise
           } >> .env
       - run: docker compose build
-      - run: docker compose up -d
+      - name: Start the stack
+        run: |
+          docker compose up -d || { docker compose ps -a; docker compose logs --tail 120 api worker web; exit 1; }
       - name: The API and the web app answer
         run: |
           for i in $(seq 1 60); do

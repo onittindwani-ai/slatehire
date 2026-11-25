@@ -221,5 +221,5 @@ def test_onboarding_tasks_can_be_ticked_and_added(client):
 
 
 def test_demo_routes_do_not_exist_outside_demo_mode(tmp_path):
-    c = TestClient(create_app(make_settings(tmp_path, demo_mode=False, session_secret="Rt7Kq2Vw9Xm4Zc8Lb3Nf6Hy1Js5Dp0Ga2Ue7Tq4Wi9", owner_password_hash="x")))
+    c = TestClient(create_app(make_settings(tmp_path, demo_mode=False, session_secret="test-only-Rt7Kq2Vw9Xm4Zc8Lb3Nf6Hy1Js5Dp0Ga2Ue7Tq4Wi9", owner_password_hash="x")))
     assert c.post("/api/auth/login", json={"email": "owner@example.test", "password": "demo-password-1"}).status_code == 401

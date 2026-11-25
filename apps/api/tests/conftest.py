@@ -27,7 +27,8 @@ HOOK = "hook-secret-for-tests"
 
 
 def make_settings(tmp_path, **kw) -> Settings:
-    return Settings(database_url=f"sqlite:///{tmp_path / 't.sqlite3'}", session_secret="test-secret-test-secret", seed_dir=DATA, export_dir=str(tmp_path / "exports"), application_webhook_secret=HOOK, _env_file=None, **kw)
+    kw = {"session_secret": "test-secret-test-secret", **kw}
+    return Settings(database_url=f"sqlite:///{tmp_path / 't.sqlite3'}", seed_dir=DATA, export_dir=str(tmp_path / "exports"), application_webhook_secret=HOOK, _env_file=None, **kw)
 
 
 def make_ctx(tmp_path, **kw) -> Ctx:
