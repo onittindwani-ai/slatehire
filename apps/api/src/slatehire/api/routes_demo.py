@@ -15,12 +15,12 @@ router = APIRouter(prefix="/api/demo", tags=["demo"], dependencies=[Depends(demo
 
 
 @router.get("/state", summary="The demo clock")
-def state(s: Session = Depends(db), ctx: Ctx = Depends(get_ctx)):
+def state(s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx)):
     return {"now": ctx.now(s).isoformat()}
 
 
 @router.post("/reset", summary="Reset to the seed data and a fresh clock")
-def reset(s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(owner)):
+def reset(s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(owner)):
     try:
         return demo.reset(s, ctx)
     except FileNotFoundError as exc:
@@ -28,7 +28,7 @@ def reset(s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depen
 
 
 @router.post("/tick", summary="Run the jobs once, now: the next application email arrives and waiting applicants are scored")
-def tick(s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+def tick(s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     from slatehire.jobs import run_cycle
 
     return run_cycle(s, ctx)
@@ -39,7 +39,7 @@ class AdvanceIn(BaseModel):
 
 
 @router.post("/advance", summary="Move the demo clock forward")
-def advance(b: AdvanceIn, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+def advance(b: AdvanceIn, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     return {"now": clock.advance(s, b.hours).isoformat()}
 
 
@@ -48,7 +48,7 @@ class StressIn(BaseModel):
 
 
 @router.post("/stress-candidates", summary="Add many fictional applications, to check that long tables stay fast")
-def stress(b: StressIn, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(owner)):
+def stress(b: StressIn, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(owner)):
     from sqlalchemy import select
 
     from slatehire.models import Application, Candidate, Role

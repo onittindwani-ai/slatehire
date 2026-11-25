@@ -47,7 +47,7 @@ def stale_jobs(s: Session) -> list[str]:
 
 
 @router.get("/overview", summary="Numbers for the top of the page")
-def overview(s: Session = Depends(db), ctx: Ctx = Depends(get_ctx)):
+def overview(s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx)):
     """Loaded with every page, so it never walks every resume: counts are counts, the quote check is kept until a score or a resume changes, and the waiting list is one query per role."""
     roles, rubs = _role_ctx(s)
     funnel = pipeline.funnel(s)
@@ -77,7 +77,7 @@ def _blind_refs(s: Session, refs: set[str]) -> dict[str, str]:
 
 
 @router.get("/intake/log", summary="Every application that came in by email, an ATS or a form and was not added, with the reason (owner and approver). Nobody leaves the funnel without a line here. A person whose identity is still hidden is shown by their neutral code.")
-def intake_log(status: str | None = Query(None, pattern="^(added|duplicate|rejected)$"), limit: int = Query(100, ge=1, le=500), s: Session = Depends(db), u: dict = Depends(writer)):
+def intake_log(status: str | None = Query(None, pattern="^(added|duplicate|rejected)$"), limit: int = Query(100, ge=1, le=500), s: Session = Depends(db, scope="function"), u: dict = Depends(writer)):
     q = select(IntakeLog).order_by(IntakeLog.id.desc()).limit(limit)
     if status:
         q = q.where(IntakeLog.status == status)
@@ -89,7 +89,7 @@ def intake_log(status: str | None = Query(None, pattern="^(added|duplicate|rejec
 
 
 @router.get("/roles", summary="Roles with their rubric state")
-def roles(s: Session = Depends(db)):
+def roles(s: Session = Depends(db, scope="function")):
     out = []
     for r in s.scalars(select(Role).order_by(Role.id)):
         lat, lock = rubric_service.latest(s, r.id), rubric_service.latest(s, r.id, locked_only=True)
@@ -105,13 +105,13 @@ def _rubric(r: Rubric) -> dict:
 
 
 @router.get("/roles/{role_id}/rubrics", summary="Every version of the rubric for a role")
-def rubrics(role_id: int, s: Session = Depends(db)):
+def rubrics(role_id: int, s: Session = Depends(db, scope="function")):
     get_or_404(s, Role, role_id, "role")
     return [_rubric(r) for r in s.scalars(select(Rubric).where(Rubric.role_id == role_id).order_by(Rubric.version.desc()))]
 
 
 @router.get("/pipeline", summary="Cards for the board: the top of each stage, with the real count")
-def board(role: str | None = None, per_stage: int = Query(40, ge=1, le=200), s: Session = Depends(db)):
+def board(role: str | None = None, per_stage: int = Query(40, ge=1, le=200), s: Session = Depends(db, scope="function")):
     roles, rubs = _role_ctx(s)
     q = select(Application)
     if role:
@@ -141,7 +141,7 @@ def board(role: str | None = None, per_stage: int = Query(40, ge=1, le=200), s: 
 
 
 @router.get("/applications", summary="Every application, for the table")
-def applications(role: str | None = None, stage: str | None = None, limit: int = Query(20000, ge=1, le=50000), s: Session = Depends(db)):
+def applications(role: str | None = None, stage: str | None = None, limit: int = Query(20000, ge=1, le=50000), s: Session = Depends(db, scope="function")):
     roles, rubs = _role_ctx(s)
     q = select(Application, Candidate).join(Candidate, Candidate.id == Application.candidate_id).order_by(Application.id)
     if stage:
@@ -180,7 +180,7 @@ def _audit_reveal(s: Session, who: str, app_id: int) -> None:
 
 
 @router.get("/applications/{app_id}", summary="One candidate workspace. Identity is hidden while blind mode is enforced.")
-def workspace(app_id: int, reveal: bool = False, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(user)):
+def workspace(app_id: int, reveal: bool = False, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(user)):
     app = get_or_404(s, Application, app_id, "application")
     c, role = s.get(Candidate, app.candidate_id), s.get(Role, app.role_id)
     enforced = blind_enforced(s, app)
@@ -214,7 +214,7 @@ def workspace(app_id: int, reveal: bool = False, s: Session = Depends(db), ctx: 
 
 
 @router.get("/interviews", summary="Interviews with who sent a scorecard")
-def interview_list(s: Session = Depends(db)):
+def interview_list(s: Session = Depends(db, scope="function")):
     out = []
     for i in s.scalars(select(Interview).order_by(Interview.id.desc())):
         app = s.get(Application, i.application_id)
@@ -226,7 +226,7 @@ def interview_list(s: Session = Depends(db)):
 
 
 @router.get("/interviews/{interview_id}", summary="One interview: the kit, and the scorecards the signed in person may see")
-def interview_one(interview_id: int, s: Session = Depends(db), u: dict = Depends(user)):
+def interview_one(interview_id: int, s: Session = Depends(db, scope="function"), u: dict = Depends(user)):
     i = get_or_404(s, Interview, interview_id, "interview")
     app = s.get(Application, i.application_id)
     c, role = s.get(Candidate, app.candidate_id), s.get(Role, app.role_id)
@@ -235,7 +235,7 @@ def interview_one(interview_id: int, s: Session = Depends(db), u: dict = Depends
 
 
 @router.get("/offers", summary="Offers (owner and approver: they hold pay terms and names)")
-def offer_list(s: Session = Depends(db), u: dict = Depends(writer)):
+def offer_list(s: Session = Depends(db, scope="function"), u: dict = Depends(writer)):
     out = []
     for o in s.scalars(select(Offer).order_by(Offer.id.desc())):
         app = s.get(Application, o.application_id)
@@ -247,7 +247,7 @@ def offer_list(s: Session = Depends(db), u: dict = Depends(writer)):
 
 
 @router.get("/onboarding", summary="Onboarding plans")
-def onboarding_list(s: Session = Depends(db), ctx: Ctx = Depends(get_ctx)):
+def onboarding_list(s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx)):
     out = []
     today = ctx.today(s)
     for app in s.scalars(select(Application).where(Application.id.in_(select(OnboardingTask.application_id).distinct()))):
@@ -259,7 +259,7 @@ def onboarding_list(s: Session = Depends(db), ctx: Ctx = Depends(get_ctx)):
 
 
 @router.get("/fairness", summary="The latest fairness report, if one was run, and the latest one that flagged a group")
-def fairness_latest(role: str = "all", s: Session = Depends(db), ctx: Ctx = Depends(get_ctx)):
+def fairness_latest(role: str = "all", s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx)):
     reports = list(s.scalars(select(FairnessReport).where(FairnessReport.role_key == role).order_by(FairnessReport.id.desc())))
     rep = reports[0] if reports else None
     flagged = next((r for r in reports if r.payload.get("flagged")), None)  # a newer clean report must not bury an older one that flagged a group
@@ -273,5 +273,5 @@ def fairness_latest(role: str = "all", s: Session = Depends(db), ctx: Ctx = Depe
 
 
 @router.get("/evals", summary="Quote check, computed now over every stored score")
-def evals(s: Session = Depends(db)):
+def evals(s: Session = Depends(db, scope="function")):
     return {"quote_check": scoring_service.quote_check(s)}

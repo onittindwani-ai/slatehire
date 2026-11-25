@@ -30,7 +30,7 @@ class ApplicantIn(BaseModel):
 
 
 @router.post("/api/webhooks/application", summary="Signed webhook: one applicant. Header x-signature is the hex HMAC SHA256 of the raw body.")
-async def application_webhook(request: Request, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx)):
+async def application_webhook(request: Request, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx)):
     secret = ctx.settings.application_webhook_secret
     body = await read_limited(request, MAX_BODY, "The application")  # refused by its declared length before a byte is read, or cut off while it arrives
     if not secret or not verify_webhook_signature(secret, body, request.headers.get("x-signature", "")):

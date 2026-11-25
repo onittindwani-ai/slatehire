@@ -32,7 +32,7 @@ class RoleIn(BaseModel):
 
 
 @router.post("/roles", summary="Create a role with a starter job post")
-def create_role(b: RoleIn, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+def create_role(b: RoleIn, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     r = rule(rubric_service.create_role, s, u["user"], b.title, b.team, b.description, None, ctx.settings.company_name)
     return {"id": r.id, "key": r.key}
 
@@ -44,7 +44,7 @@ class RoleEdit(BaseModel):
 
 
 @router.put("/roles/{role_id}", summary="Edit the description, the job post or the open or closed state")
-def edit_role(role_id: int, b: RoleEdit, s: Session = Depends(db), u: dict = Depends(writer)):
+def edit_role(role_id: int, b: RoleEdit, s: Session = Depends(db, scope="function"), u: dict = Depends(writer)):
     r = get_or_404(s, Role, role_id, "role")
     for k, v in b.model_dump(exclude_none=True).items():
         setattr(r, k, v)
@@ -53,7 +53,7 @@ def edit_role(role_id: int, b: RoleEdit, s: Session = Depends(db), u: dict = Dep
 
 
 @router.post("/roles/{role_id}/job-post", summary="Write a fresh job post from the role and the rubric (a template, not a language model)")
-def job_post(role_id: int, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+def job_post(role_id: int, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     r = get_or_404(s, Role, role_id, "role")
     rub = rubric_service.latest(s, r.id)
     r.job_post = rubric_service.job_post_draft(r, rub.criteria if rub else None, ctx.settings.company_name)
@@ -89,7 +89,7 @@ def _blind_off_is_owner_only(b: "RubricIn", u: dict) -> None:
 
 
 @router.post("/roles/{role_id}/rubric", summary="Start a rubric draft (a new version when one is locked)")
-def new_rubric(role_id: int, b: RubricIn, s: Session = Depends(db), u: dict = Depends(writer)):
+def new_rubric(role_id: int, b: RubricIn, s: Session = Depends(db, scope="function"), u: dict = Depends(writer)):
     _blind_off_is_owner_only(b, u)
     role = get_or_404(s, Role, role_id, "role")
     prev = rubric_service.latest(s, role.id)
@@ -103,14 +103,14 @@ def new_rubric(role_id: int, b: RubricIn, s: Session = Depends(db), u: dict = De
 
 
 @router.put("/rubrics/{rubric_id}", summary="Edit an unlocked rubric")
-def edit_rubric(rubric_id: int, b: RubricIn, s: Session = Depends(db), u: dict = Depends(writer)):
+def edit_rubric(rubric_id: int, b: RubricIn, s: Session = Depends(db, scope="function"), u: dict = Depends(writer)):
     _blind_off_is_owner_only(b, u)
     r = get_or_404(s, Rubric, rubric_id, "rubric")
     return _rubric(rule(rubric_service.edit, s, r, u["user"], [c.model_dump() for c in b.criteria] if b.criteria is not None else None, b.blind))
 
 
 @router.post("/rubrics/{rubric_id}/check", summary="Plain language problems that would stop a lock")
-def check_rubric(rubric_id: int, s: Session = Depends(db)):
+def check_rubric(rubric_id: int, s: Session = Depends(db, scope="function")):
     from slatehire import rubrics
 
     r = get_or_404(s, Rubric, rubric_id, "rubric")
@@ -118,7 +118,7 @@ def check_rubric(rubric_id: int, s: Session = Depends(db)):
 
 
 @router.post("/rubrics/{rubric_id}/lock", summary="Lock the rubric. A person does this; after it, nothing in it can change.")
-def lock_rubric(rubric_id: int, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+def lock_rubric(rubric_id: int, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     r = get_or_404(s, Rubric, rubric_id, "rubric")
     return _rubric(rule(rubric_service.lock, s, r, u["user"], ctx.now(s), ctx.settings.company_name, ctx.settings.proxy_term_list()))
 
@@ -142,7 +142,7 @@ def _intake(s: Session, ctx: Ctx, a: Applicant, role_key: str, actor: str):
 
 
 @router.post("/applicants", summary="Add one applicant by pasting the resume or giving a web address")
-def add_one(b: PasteIn, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+def add_one(b: PasteIn, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     text = b.resume_text
     if not text and b.resume_url:
         try:
@@ -154,7 +154,7 @@ def add_one(b: PasteIn, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u
 
 
 @router.post("/applicants/file", summary="Upload one resume file (text, markdown or PDF) for a role. The name and email go in the x-applicant-name and x-applicant-email headers (URL encoded), so they never sit in an address that a server logs.")
-async def add_file(request: Request, role: str, name: str | None = None, email: str | None = None, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+async def add_file(request: Request, role: str, name: str | None = None, email: str | None = None, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     fn = (request.headers.get("x-filename") or "resume.txt")[:200]
     who = unquote(request.headers.get("x-applicant-name", "")) or (name or "")  # the query form still works for older callers
     mail = unquote(request.headers.get("x-applicant-email", "")) or (email or "")
@@ -169,7 +169,7 @@ async def add_file(request: Request, role: str, name: str | None = None, email: 
 
 
 @router.post("/applicants/csv", summary="Upload a CSV: name, email, phone, role, resume_text, source, school")
-async def add_csv(request: Request, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+async def add_csv(request: Request, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     data = await read_limited(request, ctx.settings.upload_max_bytes, "The file")
     try:
         rows = ingest.from_csv(data)
@@ -194,14 +194,14 @@ async def add_csv(request: Request, s: Session = Depends(db), ctx: Ctx = Depends
 
 
 @router.post("/intake/mailbox", summary="Read new application emails now")
-def read_mailbox(s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+def read_mailbox(s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     from slatehire.jobs import job_mailbox
 
     return job_mailbox(s, ctx)
 
 
 @router.post("/intake/ats", summary="Pull applicants from the ATS you selected (read only)")
-def pull_ats(role: str, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+def pull_ats(role: str, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     r = rule(intake.role_by_key, s, role)
     try:
         found = ctx.adapter(s, "ats").list_applicants()
@@ -220,7 +220,7 @@ class ScoreIn(BaseModel):
 
 
 @router.post("/applications/{app_id}/score", summary="Score under the locked rubric (an aid; it never moves anyone)")
-def score(app_id: int, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+def score(app_id: int, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     app = get_or_404(s, Application, app_id, "application")
     sc = rule(scoring_service.score_application, s, app, u["user"], ctx.now(s), ctx.scorer(s))
     return {"id": sc.id, "total": sc.total, "covered": sc.covered}
@@ -232,7 +232,7 @@ class MoveIn(BaseModel):
 
 
 @router.post("/applications/{app_id}/move", summary="A person moves an application. Declining or withdrawing needs a written reason.")
-def move(app_id: int, b: MoveIn, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+def move(app_id: int, b: MoveIn, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     app = s.get(Application, app_id, with_for_update=True)  # two people moving the same application at once take turns (Postgres; SQLite has one writer anyway)
     if app is None:
         raise HTTPException(404, "No such application.")
@@ -245,7 +245,7 @@ def move(app_id: int, b: MoveIn, s: Session = Depends(db), ctx: Ctx = Depends(ge
 
 
 @router.delete("/candidates/{app_id}", summary="Delete a candidate's personal data now (owner)")
-def delete_candidate(app_id: int, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(owner)):
+def delete_candidate(app_id: int, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(owner)):
     app = get_or_404(s, Application, app_id, "application")
     kept = rule(retention.purge, s, app, u["user"], ctx.now(s), "deleted on request", ctx.settings.export_dir)  # the offer file written for the signing tool is rewritten without the name too
     return {"ok": True, "suppressed": bool(kept), "note": SUPPRESSED_NOTE if kept else "Deleted. This person had no address or outside reference, so nothing could be kept to stop them being added again."}
@@ -259,12 +259,12 @@ class LiftIn(BaseModel):
 
 
 @router.get("/suppression", summary="How many deleted people are kept as one way hashes so they are not added again (owner). Nothing readable is stored.")
-def suppression_info(s: Session = Depends(db), u: dict = Depends(owner)):
+def suppression_info(s: Session = Depends(db, scope="function"), u: dict = Depends(owner)):
     return {"count": suppression.count(s), "note": SUPPRESSED_NOTE}
 
 
 @router.post("/suppression/lift", summary="Let one address apply again, because the person applied again on purpose (owner)")
-def suppression_lift(b: LiftIn, s: Session = Depends(db), u: dict = Depends(owner)):
+def suppression_lift(b: LiftIn, s: Session = Depends(db, scope="function"), u: dict = Depends(owner)):
     return {"removed": suppression.lift(s, b.email, u["user"])}
 
 
@@ -277,7 +277,7 @@ class InterviewIn(BaseModel):
 
 
 @router.post("/applications/{app_id}/interviews", summary="Plan an interview. The kit is the same for everyone in the role.")
-def plan_interview(app_id: int, b: InterviewIn, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+def plan_interview(app_id: int, b: InterviewIn, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     app = get_or_404(s, Application, app_id, "application")
     when = b.starts_at.astimezone(timezone.utc) if b.starts_at and b.starts_at.tzinfo else (b.starts_at.replace(tzinfo=timezone.utc) if b.starts_at else None)
     iv = rule(interviews.plan, s, app, u["user"], b.interviewers, when, b.minutes, b.kind, ctx.now(s))
@@ -291,7 +291,7 @@ class InviteIn(BaseModel):
 
 
 @router.post("/interviews/{interview_id}/invite", summary="Send the calendar invite. Needs live mode and an explicit confirm; draft mode sends nothing.")
-def invite(interview_id: int, b: InviteIn, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+def invite(interview_id: int, b: InviteIn, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     iv = s.get(Interview, interview_id, with_for_update=True)  # two clicks at once take turns (Postgres), so the second one finds the invite already sent
     if iv is None:
         raise HTTPException(404, "No such interview.")
@@ -305,7 +305,7 @@ class ScorecardIn(BaseModel):
 
 
 @router.post("/interviews/{interview_id}/scorecards", summary="Send your scorecard. It cannot be changed after.")
-def scorecard(interview_id: int, b: ScorecardIn, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+def scorecard(interview_id: int, b: ScorecardIn, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     iv = get_or_404(s, Interview, interview_id, "interview")
     rule(interviews.submit_scorecard, s, iv, u["user"], b.ratings, b.comments, b.recommendation, ctx.now(s))
     return {"ok": True}
@@ -319,27 +319,27 @@ class OfferIn(BaseModel):
 
 
 @router.post("/applications/{app_id}/offer", summary="Draft an offer. A person writes the terms.")
-def draft_offer(app_id: int, b: OfferIn, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+def draft_offer(app_id: int, b: OfferIn, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     app = get_or_404(s, Application, app_id, "application")
     o = rule(offers.create, s, app, u["user"], b.title, b.start_date, b.terms, ctx.today(s), ctx.settings.min_scorecards, ctx.settings.company_name)
     return {"id": o.id}
 
 
 @router.post("/offers/{offer_id}/request-approval", summary="Ask a second person to approve the offer")
-def offer_approval(offer_id: int, s: Session = Depends(db), u: dict = Depends(writer)):
+def offer_approval(offer_id: int, s: Session = Depends(db, scope="function"), u: dict = Depends(writer)):
     o = get_or_404(s, Offer, offer_id, "offer")
     return {"status": rule(offers.ask_approval, s, o, u["user"]).status}
 
 
 @router.post("/offers/{offer_id}/hand-off", summary="Write the approved offer to a file for your signing tool. Nothing is sent to the candidate.")
-def hand_off(offer_id: int, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+def hand_off(offer_id: int, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     o = get_or_404(s, Offer, offer_id, "offer")
     return rule(offers.hand_off, s, ctx, o, u["user"])
 
 
 # onboarding
 @router.post("/applications/{app_id}/onboarding", summary="Make the 30, 60, 90 day plan for someone who was hired")
-def make_plan(app_id: int, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+def make_plan(app_id: int, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     app = get_or_404(s, Application, app_id, "application")
     o = s.scalars(select(Offer).where(Offer.application_id == app.id)).first()
     rows = rule(onboarding.create_plan, s, app, u["user"], date.fromisoformat(o.start_date) if o else ctx.today(s))
@@ -354,7 +354,7 @@ class TaskIn(BaseModel):
 
 
 @router.post("/applications/{app_id}/onboarding/tasks", summary="Add a task to a plan")
-def add_task(app_id: int, b: TaskIn, s: Session = Depends(db), u: dict = Depends(writer)):
+def add_task(app_id: int, b: TaskIn, s: Session = Depends(db, scope="function"), u: dict = Depends(writer)):
     app = get_or_404(s, Application, app_id, "application")
     return {"id": rule(onboarding.add_task, s, app, u["user"], b.phase, b.title, b.owner, b.due_on).id}
 
@@ -364,7 +364,7 @@ class TaskPatch(BaseModel):
 
 
 @router.patch("/onboarding/tasks/{task_id}", summary="Tick a task off or reopen it")
-def patch_task(task_id: int, b: TaskPatch, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
+def patch_task(task_id: int, b: TaskPatch, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     t = get_or_404(s, OnboardingTask, task_id, "task")
     t.done, t.done_at = b.done, (ctx.now(s) if b.done else None)
     record_audit(s, u["user"], "onboarding.task_done" if b.done else "onboarding.task_reopened", f"task:{t.id}", {})
@@ -379,7 +379,7 @@ class FairnessIn(BaseModel):
 
 
 @router.post("/fairness/run", summary="Run the fairness indicator and save the report (owner). The smallest group can be raised, never lowered below FAIRNESS_MIN_GROUP.")
-def fairness_run(b: FairnessIn, s: Session = Depends(db), ctx: Ctx = Depends(get_ctx), u: dict = Depends(owner)):
+def fairness_run(b: FairnessIn, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(owner)):
     st = ctx.settings
     r = rule(fairness_service.run, s, u["user"], b.role, b.min_group or st.fairness_min_group, b.threshold or st.fairness_threshold, st.fairness_min_group)
     return {"id": r.id, "min_group": r.min_group}
@@ -390,5 +390,5 @@ class LabelsIn(BaseModel):
 
 
 @router.post("/fairness/labels", summary="Import voluntary group labels by candidate code (owner). Nobody is guessed.")
-def fairness_labels(b: LabelsIn, s: Session = Depends(db), u: dict = Depends(owner)):
+def fairness_labels(b: LabelsIn, s: Session = Depends(db, scope="function"), u: dict = Depends(owner)):
     return rule(fairness_service.set_labels, s, b.labels, u["user"])
