@@ -20,8 +20,66 @@ from sendora_core.sse import event_stream
 SESSION_COOKIE = "sx_session"
 
 
+MAX_OPEN_STREAMS = 50  # live event streams one process serves at the same time
+
+
+class BodyTooLarge(Exception):
+    pass
+
+
+class LimitBodySize:
+    """Refuses a request body larger than `limit` bytes before the app reads it: by Content-Length when the client states one,
+    and by counting bytes while they arrive when it does not (chunked). A client cannot make the process hold more than `limit`."""
+
+    def __init__(self, app, limit: int):
+        self.app, self.limit = app, limit
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            return await self.app(scope, receive, send)
+        declared = next((v for k, v in scope["headers"] if k == b"content-length"), None)
+        try:
+            if declared is not None and int(declared) > self.limit:
+                return await self._refuse(send)
+        except ValueError:
+            return await self._refuse(send)
+        seen = 0
+
+        async def counted():
+            nonlocal seen
+            message = await receive()
+            if message["type"] == "http.request":
+                seen += len(message.get("body", b""))
+                if seen > self.limit:
+                    raise BodyTooLarge()
+            return message
+
+        started = False
+
+        async def tracked_send(message):
+            nonlocal started
+            if message["type"] == "http.response.start":
+                started = True
+            await send(message)
+
+        try:
+            await self.app(scope, counted, tracked_send)
+        except BodyTooLarge:
+            if not started:
+                await self._refuse(send)
+
+    async def _refuse(self, send):
+        body = b'{"error":{"code":"http_413","message":"The request is too large."}}'
+        await send({"type": "http.response.start", "status": 413, "headers": [(b"content-type", b"application/json"), (b"content-length", str(len(body)).encode())]})
+        await send({"type": "http.response.body", "body": body})
+
+
 def create_base_app(settings: BaseAppSettings, factory: sessionmaker[Session] | None = None) -> FastAPI:
-    app = FastAPI(title=settings.app_name, docs_url="/docs", openapi_url="/openapi.json")
+    settings.check_runtime()  # refuses to start on an unsafe configuration (example session secret, a demo on a server database)
+    # The interactive docs and the schema list every route, so they are on for a demo and off for a real deployment.
+    app = FastAPI(title=settings.app_name, docs_url="/docs" if settings.demo_mode else None, openapi_url="/openapi.json" if settings.demo_mode else None, redoc_url=None)
+    app.add_middleware(LimitBodySize, limit=settings.max_body_bytes)
+    app.state.open_streams = 0
     if factory is None:
         factory = make_session_factory(make_engine(settings.database_url))
     app.state.settings, app.state.factory = settings, factory
@@ -62,8 +120,18 @@ def create_base_app(settings: BaseAppSettings, factory: sessionmaker[Session] | 
 
     @app.get("/api/events/stream")
     async def stream(request: Request, after: int = 0, prefix: str | None = None):
-        gen = event_stream(factory, after, prefix, is_disconnected=lambda: False, max_idle_polls=None)
-        return StreamingResponse(gen, media_type="text/event-stream", headers={"cache-control": "no-cache", "x-accel-buffering": "no"})
+        if app.state.open_streams >= MAX_OPEN_STREAMS:
+            raise HTTPException(429, "Too many live streams are open. Close another tab and try again.")
+
+        async def counted():
+            app.state.open_streams += 1
+            try:
+                async for frame in event_stream(factory, after, prefix, is_disconnected=request.is_disconnected, max_idle_polls=None):
+                    yield frame
+            finally:
+                app.state.open_streams -= 1
+
+        return StreamingResponse(counted(), media_type="text/event-stream", headers={"cache-control": "no-cache", "x-accel-buffering": "no"})
 
     return app
 

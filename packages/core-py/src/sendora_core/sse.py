@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import inspect
 import json
 from collections.abc import AsyncIterator, Callable
 
@@ -29,8 +30,12 @@ async def event_stream(
     idle = 0
     cursor = after_id
     while True:
-        if is_disconnected and is_disconnected():
-            return
+        if is_disconnected:
+            gone = is_disconnected()
+            if inspect.isawaitable(gone):
+                gone = await gone
+            if gone:
+                return
         with session_scope(factory) as s:
             rows = recent_events(s, cursor, kind_prefix=kind_prefix)
             frames = [format_sse(e.kind, {"id": e.id, "entity_type": e.entity_type, "entity_id": e.entity_id, "payload": e.payload}, e.id) for e in rows]

@@ -9,3 +9,7 @@
 7. Check the audit chain on the Audit log page.
 
 The `packages/` folder is a copy of the shared base and is never edited here. Roll back by restoring the database backup and checking out the previous version.
+
+## Pinned packages
+
+`constraints.txt` pins every third party Python package to the version the tests ran against, so an install today gives the same set as the one that was tested (`make install`, the Docker image and CI all use it). After a deliberate upgrade of a package, install the new version, run the tests, then rewrite the file with `tools/make_constraints.py` from the hub repository (`sendora-ai-systems`).

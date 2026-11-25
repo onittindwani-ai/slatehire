@@ -39,6 +39,27 @@ def verify_password(password: str, hashed: str) -> bool:
         return False
 
 
+_dummy_hash: str | None = None
+
+
+def verify_password_or_dummy(password: str, hashed: str | None) -> bool:
+    """Like verify_password, but when there is no account (hashed is None) it still does the same amount of work against a throw away hash,
+    so the answer time does not tell a stranger which email addresses are accounts. Always False for a missing account."""
+    global _dummy_hash
+    if hashed is None:
+        if _dummy_hash is None:
+            _dummy_hash = _ph.hash("not-a-real-account-password")
+        verify_password(password, _dummy_hash)
+        return False
+    return verify_password(password, hashed)
+
+
+def clean_email(raw: str) -> str:
+    """One spelling per address (trimmed, lower case, at most 254 characters), used for the account lookup AND the throttle key,
+    so adding spaces or capitals never gives an attacker a fresh set of tries."""
+    return (raw or "").strip().lower()[:254]
+
+
 def _b64(b: bytes) -> str:
     return base64.urlsafe_b64encode(b).rstrip(b"=").decode()
 
@@ -60,17 +81,17 @@ def read_session_token(secret: str, token: str, now: float | None = None) -> dic
     try:
         body, sig = token.split(".", 1)
         good = _b64(hmac.new(secret.encode(), body.encode(), hashlib.sha256).digest())
-        if not hmac.compare_digest(sig, good):
+        if not hmac.compare_digest(sig.encode(), good.encode()):
             return None
         data = json.loads(_unb64(body))
         if data["exp"] < (now or time.time()) or data["r"] not in ROLES:
             return None
         return {"user": data["u"], "role": data["r"]}
-    except (ValueError, KeyError, json.JSONDecodeError):
+    except (ValueError, KeyError, TypeError, AttributeError, json.JSONDecodeError):
         return None
 
 
 def verify_webhook_signature(secret: str, body: bytes, signature_hex: str) -> bool:
     """Generic HMAC SHA256 webhook check with constant time compare. Vendor specific schemes live in adapters."""
     good = hmac.new(secret.encode(), body, hashlib.sha256).hexdigest()
-    return hmac.compare_digest(good, signature_hex.lower())
+    return hmac.compare_digest(good.encode(), (signature_hex or "").lower().encode())

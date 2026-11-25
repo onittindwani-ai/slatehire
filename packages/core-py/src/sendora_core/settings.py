@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from enum import StrEnum
 from typing import Literal
 
@@ -27,6 +28,14 @@ class LLMBackendKind(StrEnum):
     ANTHROPIC = "anthropic"
 
 
+PLACEHOLDER_SECRET = re.compile(r"(dev-only|change-?me|demo-secret|example|replace|placeholder|xxxx|secret-here|your-secret)", re.I)
+MIN_SECRET_LENGTH = 32
+
+
+class ConfigError(RuntimeError):
+    """The settings cannot be used safely. The message lists every problem in plain words and never holds a secret."""
+
+
 class BaseAppSettings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore", env_prefix="")
 
@@ -40,6 +49,10 @@ class BaseAppSettings(BaseSettings):
     llm_hard_model: str = "claude-sonnet-5-5"
     llm_bulk_model: str = "claude-haiku-5-5"
     demo_mode: bool = True
+    # A demo (DEMO_MODE=true) keeps public demo logins and a data reset button, so it refuses to start on a server database (Postgres)
+    # unless this is set on purpose, for example for a throw away trial on a private network.
+    allow_demo_server: bool = False  # ALLOW_DEMO_SERVER
+    max_body_bytes: int = Field(default=26_214_400, ge=1024)  # MAX_BODY_BYTES: a request larger than this is refused before it is read (25 MB)
     # Model path. LLM_BACKEND wins when set. When it is empty, LLM_MODE=live means anthropic and anything else means offline.
     llm_backend: LLMBackendKind | None = None
     llm_model: str | None = None  # LLM_MODEL: one model id for both the hard and the bulk kind
@@ -75,13 +88,40 @@ class BaseAppSettings(BaseSettings):
             return self.llm_model
         return self.llm_hard_model if kind == "hard" else self.llm_bulk_model
 
+    @property
+    def demo_shortcuts(self) -> bool:
+        """True when the public demo password and the demo data reset may exist: a demo with no owner password set.
+        Setting OWNER_PASSWORD_HASH turns every demo shortcut off, so a real owner never shares the system with a public login."""
+        return self.demo_mode and not getattr(self, "owner_password_hash", None)
+
+    def runtime_errors(self) -> list[str]:
+        """Problems that stop the app from starting. Checked once when the API or the worker starts."""
+        out: list[str] = []
+        if not self.demo_mode:
+            if len(self.session_secret) < MIN_SECRET_LENGTH or PLACEHOLDER_SECRET.search(self.session_secret):
+                out.append(
+                    f"SESSION_SECRET is missing, too short (under {MIN_SECRET_LENGTH} characters) or still an example value. "
+                    "Anyone who has read the public code could sign in as the owner. Create one with: python3 -c \"import secrets; print(secrets.token_urlsafe(48))\""
+                )
+        elif self.database_url.startswith("postgresql") and not self.allow_demo_server:
+            out.append(
+                "DEMO_MODE is true while DATABASE_URL points at a server database. A demo has public logins and a reset button that erases the data. "
+                "Set DEMO_MODE=false (and OWNER_PASSWORD_HASH), or set ALLOW_DEMO_SERVER=true for a throw away trial."
+            )
+        return list(dict.fromkeys(out))
+
+    def check_runtime(self) -> None:
+        errors = self.runtime_errors()
+        if errors:
+            raise ConfigError("The settings are not safe to start with:\n- " + "\n- ".join(errors))
+
     def problems(self) -> list[str]:
         """Plain language list of config problems for tools/doctor.py. Never includes secret values."""
-        out: list[str] = []
+        out: list[str] = list(self.runtime_errors())
         if self.mode is Mode.LIVE and self.demo_mode:
             out.append("MODE is live while DEMO_MODE is true. Set DEMO_MODE=false before going live.")
-        if self.session_secret.startswith("dev-only") and self.mode is Mode.LIVE:
-            out.append("SESSION_SECRET is still the development value. Generate a long random one.")
+        if (self.session_secret.startswith("dev-only") or PLACEHOLDER_SECRET.search(self.session_secret)) and self.demo_mode and self.mode is Mode.LIVE:
+            out.append("SESSION_SECRET is still an example value. Generate a long random one.")
         if self.effective_llm_backend is LLMBackendKind.ANTHROPIC and not self.anthropic_api_key:
             out.append("The model backend is anthropic (LLM_BACKEND or LLM_MODE=live) but ANTHROPIC_API_KEY is empty.")
         if self.effective_llm_backend is LLMBackendKind.FIXTURE and not self.llm_fixtures_dir:
