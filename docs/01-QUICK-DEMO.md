@@ -5,13 +5,13 @@ Everything in the demo is fictional: <!--n:seed.applicants-->90<!--/n--> applica
 ## With Docker (not run here; the CI workflow builds the images and starts the stack on a GitHub machine)
 1. Copy `.env.example` to `.env`, then set `DEMO_MODE=true` and `POSTGRES_PASSWORD` (any letters and digits: `openssl rand -hex 24`) in it. The example is not a demo on purpose, so a real install never starts with public passwords. The Docker demo also needs `ALLOW_DEMO_SERVER=true`, because the compose file uses Postgres.
 2. Run `docker compose up`.
-3. Open http://localhost:3000 and sign in with `owner@example.test` and the demo password shown on the sign in page.
+3. Open http://localhost:3000 and sign in with `owner@example.test` and the demo password `demo-password-1`. (The sign in page shows it only when the web app was built with `NEXT_PUBLIC_DEMO_HINT=1`; it is the same for every demo and works only while `DEMO_MODE=true` and no `OWNER_PASSWORD_HASH` is set.)
 
 ## Without Docker
 1. `make install` (needs uv or Python 3.12, and pnpm: run `corepack enable` or `npm i -g pnpm` if you do not have it).
 2. In one terminal: `DEMO_MODE=true SESSION_SECRET=demo-secret-change-me-please make api`. (The demo needs `DEMO_MODE=true` in your shell or in `.env`: the example file is set up for a real install.)
 3. In another: `pnpm build && pnpm --filter web start`.
-4. Open http://localhost:3000.
+4. Open http://localhost:3000 and sign in with `owner@example.test` and `demo-password-1`.
 
 ## The path to try
 1. **Pipeline.** Cards in Applied show "Candidate A0xx", not names. That is blind mode.

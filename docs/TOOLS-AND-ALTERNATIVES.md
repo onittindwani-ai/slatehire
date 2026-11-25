@@ -326,7 +326,7 @@ What Slatehire has for each: Railway: Dockerfiles and a config file, never deplo
 - Reliability and upkeep (85): Hosted, previews and rollback.
 - Cost (60): A free tier exists. See the vendor price page.
 - Data control (40): Pages and logs sit with the vendor.
-- Integration depth (70): Set API_BASE_URL and SESSION_SECRET.
+- Integration depth (70): Set API_BASE_URL (the web app reads no secret).
 - Sources: https://vercel.com/docs (checked 2026-11-23)
 
 **Evidence, Hetzner**

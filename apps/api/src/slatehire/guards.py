@@ -22,11 +22,18 @@ def _never(mapper, connection, target) -> None:
     raise RuleError(f"{type(target).__name__} rows are append only. They cannot be changed or deleted.")
 
 
+def _listen(target, name: str, fn) -> None:
+    if not event.contains(target, name, fn):  # calling install twice must not stack a second copy of the guard
+        event.listen(target, name, fn)
+
+
 def install() -> None:
-    event.listen(Rubric, "before_update", _locked_rubric_changed)
+    """Switch the guards on. The API (`create_app`) and the worker call this at start, so the rules hold in the real process and not only in the tests. Safe to call again."""
+    _listen(Rubric, "before_update", _locked_rubric_changed)
     for cls in (AuditEntry, Scorecard):
-        event.listen(cls, "before_update", _never)
-        event.listen(cls, "before_delete", _never)
+        _listen(cls, "before_update", _never)
+        _listen(cls, "before_delete", _never)
 
 
-install()
+def installed() -> bool:
+    return event.contains(Rubric, "before_update", _locked_rubric_changed) and event.contains(Scorecard, "before_delete", _never) and event.contains(AuditEntry, "before_update", _never)

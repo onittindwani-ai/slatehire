@@ -10,6 +10,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from slatehire import fairness_service, ingest, intake, interviews, offers, onboarding, pipeline, retention, rubric_service, scoring_service, suppression
+from slatehire.adapters.ats import NEED_JOB
 from slatehire.adapters.fetch import safe_fetch
 from slatehire.api.bodies import read_limited
 from slatehire.api.deps import db, get_ctx, get_or_404, owner, rule, writer
@@ -41,13 +42,14 @@ class RoleEdit(BaseModel):
     description: str | None = Field(default=None, max_length=4000)
     job_post: str | None = Field(default=None, max_length=12000)
     status: str | None = Field(default=None, pattern="^(open|closed)$")
+    ats_job_id: str | None = Field(default=None, max_length=120, pattern=r"^[\w.:\-]*$")  # the job in your ATS that this role is (Greenhouse job id, Workable shortcode, Ashby job id); empty clears it
 
 
 @router.put("/roles/{role_id}", summary="Edit the description, the job post or the open or closed state")
 def edit_role(role_id: int, b: RoleEdit, s: Session = Depends(db, scope="function"), u: dict = Depends(writer)):
     r = get_or_404(s, Role, role_id, "role")
     for k, v in b.model_dump(exclude_none=True).items():
-        setattr(r, k, v)
+        setattr(r, k, v.strip() if k == "ats_job_id" else v)
     record_audit(s, u["user"], "role.edited", f"role:{r.id}", {k: True for k in b.model_dump(exclude_none=True)})
     return {"ok": True}
 
@@ -143,13 +145,14 @@ def _intake(s: Session, ctx: Ctx, a: Applicant, role_key: str, actor: str):
 
 @router.post("/applicants", summary="Add one applicant by pasting the resume or giving a web address")
 def add_one(b: PasteIn, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
-    text = b.resume_text
+    text, extra, original = b.resume_text, {}, b""
     if not text and b.resume_url:
         try:
-            text = rule(ingest.text_from_bytes, safe_fetch(b.resume_url, allow_http_local=ctx.settings.allow_http_local_targets), b.resume_url.rsplit("/", 1)[-1] or "resume.txt")
+            got = ingest.read_resume(safe_fetch(b.resume_url, allow_http_local=ctx.settings.allow_http_local_targets), b.resume_url.rsplit("/", 1)[-1] or "resume.txt")
         except (AdapterError, ingest.IngestError) as exc:
             raise HTTPException(400, str(exc)) from exc
-    a = Applicant(b.name, b.email, b.phone, b.role, text, "", "paste", b.school)
+        text, extra, original = got.text, {"notes": got.notes()}, got.original
+    a = Applicant(b.name, b.email, b.phone, b.role, text, "", "paste", b.school, extra=extra, original=original)
     return _intake(s, ctx, a, b.role, u["user"])
 
 
@@ -162,10 +165,10 @@ async def add_file(request: Request, role: str, name: str | None = None, email: 
         raise HTTPException(400, "Give the applicant's name.")
     data = await read_limited(request, ctx.settings.upload_max_bytes, "The file")
     try:
-        text = ingest.text_from_bytes(data, fn)
+        got = ingest.read_resume(data, fn)
     except ingest.IngestError as exc:
         raise HTTPException(400, str(exc)) from exc
-    return _intake(s, ctx, Applicant(who, mail, "", role, text, fn, "upload"), role, u["user"])
+    return _intake(s, ctx, Applicant(who, mail, "", role, got.text, fn, "upload", extra={"notes": got.notes()}, original=got.original), role, u["user"])
 
 
 @router.post("/applicants/csv", summary="Upload a CSV: name, email, phone, role, resume_text, source, school")
@@ -203,8 +206,13 @@ def read_mailbox(s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(
 @router.post("/intake/ats", summary="Pull applicants from the ATS you selected (read only)")
 def pull_ats(role: str, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(writer)):
     r = rule(intake.role_by_key, s, role)
+    if ctx.settings.ats_adapter != "seed" and not (r.ats_job_id or "").strip():  # without a job, every candidate for every job in the ATS would be put into this role
+        raise HTTPException(400, NEED_JOB)
+    job = r.ats_job_id or ""
+    adapter = ctx.adapter(s, "ats")
+    s.commit()  # let go of the write lock before the network: the ATS can take seconds to answer
     try:
-        found = ctx.adapter(s, "ats").list_applicants()
+        found = adapter.list_applicants(job_id=job)
     except AdapterError as exc:
         raise HTTPException(502, str(exc)) from exc
     out = {"added": 0, "duplicate": 0, "rejected": 0}
@@ -244,18 +252,23 @@ def move(app_id: int, b: MoveIn, s: Session = Depends(db, scope="function"), ctx
     return {"stage": app.stage, "onboarding_tasks": plan}
 
 
-@router.delete("/candidates/{app_id}", summary="Delete a candidate's personal data now (owner)")
+@router.delete("/candidates/{app_id}", summary="Delete a person's personal data now (owner): this application and every other application with the same address. The answer says exactly what was removed.")
 def delete_candidate(app_id: int, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(owner)):
     app = get_or_404(s, Application, app_id, "application")
-    kept = rule(retention.purge, s, app, u["user"], ctx.now(s), "deleted on request", ctx.settings.export_dir)  # the offer file written for the signing tool is rewritten without the name too
-    return {"ok": True, "suppressed": bool(kept), "note": SUPPRESSED_NOTE if kept else "Deleted. This person had no address or outside reference, so nothing could be kept to stop them being added again."}
+    got = rule(retention.purge_person, s, app, u["user"], ctx.now(s), "deleted on request", ctx.settings.export_dir)  # the offer file written for the signing tool is rewritten without the name too
+    n = got["applications"]
+    return {"ok": True, "suppressed": bool(got["suppressed"]), "applications_deleted": n, "also_deleted": got["also_removed"], "removed": {k: v for k, v in got.items() if isinstance(v, int) and not isinstance(v, bool)},
+            "note": (f"Deleted {n} application{'s' if n != 1 else ''} of this person. " if n > 1 else "Deleted. ") + (SUPPRESSED_NOTE_TAIL if got["suppressed"] else "This person had no address or outside reference, so nothing could be kept to stop them being added again.")}
 
 
-SUPPRESSED_NOTE = "Deleted. A one way hash of the address (and of the outside reference) was kept, so the same person is not added again by a mailbox, an ATS pull or a webhook retry. It holds nothing readable. The owner can lift it if the person applies again on purpose."
+SUPPRESSED_NOTE_TAIL = "A one way hash of the address (and of the outside reference) is kept, so the same person is not added again by a mailbox, an ATS pull or a webhook retry. It holds nothing readable. The owner can lift it if the person applies again on purpose."
+SUPPRESSED_NOTE = "Deleted. " + SUPPRESSED_NOTE_TAIL
 
 
 class LiftIn(BaseModel):
-    email: str = Field(min_length=3, max_length=254)
+    email: str = Field(default="", max_length=254)
+    reference: str = Field(default="", max_length=120)  # the outside reference the person arrived under (a webhook external_ref, an ATS id), for someone who had no address
+    source: str = Field(default="", max_length=80)  # webhook, ashby, workable, greenhouse or email: the reference counts only for the source it came from
 
 
 @router.get("/suppression", summary="How many deleted people are kept as one way hashes so they are not added again (owner). Nothing readable is stored.")
@@ -265,7 +278,9 @@ def suppression_info(s: Session = Depends(db, scope="function"), u: dict = Depen
 
 @router.post("/suppression/lift", summary="Let one address apply again, because the person applied again on purpose (owner)")
 def suppression_lift(b: LiftIn, s: Session = Depends(db, scope="function"), u: dict = Depends(owner)):
-    return {"removed": suppression.lift(s, b.email, u["user"])}
+    if not b.email.strip() and not b.reference.strip():
+        raise HTTPException(400, "Give the address, or the outside reference and its source.")
+    return {"removed": suppression.lift(s, b.email, u["user"], b.source, b.reference.strip() or None)}
 
 
 # interviews

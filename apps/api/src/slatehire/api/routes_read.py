@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import date, datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi.responses import Response
 from sqlalchemy import func, or_, select
 from sqlalchemy.orm import Session
 
@@ -11,7 +12,7 @@ from slatehire.api.deps import db, get_ctx, get_or_404, user, writer
 from slatehire.api.serializers import blind_enforced, iso, person, pieces, row, source_label
 from slatehire.attention import attention_of
 from slatehire.context import Ctx
-from slatehire.models import Application, Candidate, FairnessReport, IntakeLog, Interview, OnboardingTask, Offer, Resume, Role, Rubric, Score
+from slatehire.models import Application, Candidate, FairnessReport, IntakeLog, Interview, OnboardingTask, Offer, Resume, ResumeFile, Role, Rubric, Score
 from slatehire.onboarding import progress
 from sendora_core.audit import record_audit
 from sendora_core.auth import WRITE_ROLES
@@ -94,7 +95,7 @@ def roles(s: Session = Depends(db, scope="function")):
     for r in s.scalars(select(Role).order_by(Role.id)):
         lat, lock = rubric_service.latest(s, r.id), rubric_service.latest(s, r.id, locked_only=True)
         cnt = pipeline.funnel(s, r.id)
-        out.append({"id": r.id, "key": r.key, "title": r.title, "team": r.team, "status": r.status, "description": r.description, "job_post": r.job_post, "applicants": sum(cnt.values()), "funnel": cnt,
+        out.append({"id": r.id, "key": r.key, "title": r.title, "team": r.team, "status": r.status, "description": r.description, "job_post": r.job_post, "ats_job_id": r.ats_job_id or "", "applicants": sum(cnt.values()), "funnel": cnt,
                     "rubric": None if lat is None else {"id": lat.id, "version": lat.version, "locked": lat.locked, "blind": lat.blind}, "scoring_rubric": None if lock is None else lock.version})
     return out
 
@@ -110,7 +111,12 @@ def rubrics(role_id: int, s: Session = Depends(db, scope="function")):
     return [_rubric(r) for r in s.scalars(select(Rubric).where(Rubric.role_id == role_id).order_by(Rubric.version.desc()))]
 
 
-@router.get("/pipeline", summary="Cards for the board: the top of each stage, with the real count")
+def _blind(rub, app: Application) -> bool:
+    """The same rule as `blind_enforced`, with the role's locked rubric already in hand (no query per person)."""
+    return bool(rub and rub.blind and app.stage == "applied")
+
+
+@router.get("/pipeline", summary="Cards for the board: the top of each stage, with the real count. People who need a person first (a resume nobody could read, one not in English) come first and are never cut off by the limit.")
 def board(role: str | None = None, per_stage: int = Query(40, ge=1, le=200), s: Session = Depends(db, scope="function")):
     roles, rubs = _role_ctx(s)
     q = select(Application)
@@ -129,13 +135,17 @@ def board(role: str | None = None, per_stage: int = Query(40, ge=1, le=200), s: 
         rub = rubs.get(app.role_id)
         sc = (scores.get((app.id, rub.id)) if rub else None) or newest.get(app.id)  # a person scored under an earlier version keeps that score until read again
         rows.append((app, sc))
-    rows.sort(key=lambda x: (-(x[1].total if x[1] else -1), x[0].id))
+    # Someone who needs a person (no score is coming) sorts first and is never dropped by the limit; everyone else is by score, highest first.
+    rows.sort(key=lambda x: (0 if attention_of(x[0]) else 1, -(x[1].total if x[1] else -1), x[0].id))
+    shown: dict[str, int] = {}
     for app, sc in rows:
         col = out[app.stage]
         col["count"] += 1
-        if len(col["cards"]) < per_stage:
-            c, hide = cands[app.candidate_id], blind_enforced(s, app)
-            col["cards"].append({"id": app.id, "code": c.code, "name": person(c, hide)["name"], "hidden": hide, "role": roles[app.role_id].key, "role_title": roles[app.role_id].title, "total": sc.total if sc else None, "flags": len(sc.flags) if sc else 0, "stage": app.stage})
+        needs_person = attention_of(app)
+        if needs_person or shown.get(app.stage, 0) < per_stage:
+            shown[app.stage] = shown.get(app.stage, 0) + (0 if needs_person else 1)
+            c, hide = cands[app.candidate_id], _blind(rubs.get(app.role_id), app)
+            col["cards"].append({"id": app.id, "code": c.code, "name": person(c, hide)["name"], "hidden": hide, "role": roles[app.role_id].key, "role_title": roles[app.role_id].title, "total": sc.total if sc else None, "flags": len(sc.flags) if sc else 0, "stage": app.stage, "attention": needs_person})
     out["closed"] = {"declined": pipeline.funnel(s, None)["declined"], "withdrawn": pipeline.funnel(s, None)["withdrawn"]}
     return out
 
@@ -156,7 +166,7 @@ def applications(role: str | None = None, stage: str | None = None, limit: int =
     for app, c in s.execute(q.limit(limit)).all():
         rub = rubs.get(app.role_id)
         sc = (scores.get((app.id, rub.id)) if rub else None) or newest.get(app.id)
-        hide = blind_enforced(s, app) if rub else False
+        hide = _blind(rub, app)
         p = person(c, hide)
         out.append({"id": app.id, "code": c.code, "name": p["name"], "hidden": hide, "role": roles[app.role_id].key, "role_title": roles[app.role_id].title, "stage": app.stage, "total": sc.total if sc else None, "covered": sc.covered if sc else None,
                     "flags": len(sc.flags) if sc else 0, "source": source_label(c, hide), "updated_at": iso(app.updated_at), "deleted": c.purged_at is not None,
@@ -206,11 +216,25 @@ def workspace(app_id: int, reveal: bool = False, s: Session = Depends(db, scope=
         "rubric": None if shown is None else {"id": shown.id, "version": shown.version, "fingerprint": shown.fingerprint, "signature_ok": rubric_service.verify_signature(shown), "blind": shown.blind, "criteria": shown.criteria},
         "current_version": None if rub is None else rub.version,
         "score": None if sc is None else {"id": sc.id, "total": sc.total, "covered": sc.covered, "items": sc.items, "flags": sc.flags, "scorer": sc.scorer, "at": iso(sc.created_at)},
-        "resume": {"pieces": pieces(res, sc.items if sc else [], reveal=not hide), "counts": res.counts if res else {}, "injection": res.injection if res else [], "filename": ("" if res is None else "resume file" if hide and res.filename else res.filename)},  # a file name often carries the person's name
+        "resume": {"pieces": pieces(res, sc.items if sc else [], reveal=not hide), "counts": res.counts if res else {}, "injection": res.injection if res else [], "filename": ("" if res is None else "resume file" if hide and res.filename else res.filename),  # a file name often carries the person's name
+                   "notes": [] if res is None else [{"kind": n.get("kind"), "detail": n.get("detail"), **({} if hide else {"private": n.get("private", "")})} for n in (res.notes or [])],  # what the reader of the file found; the file names and the hidden text itself only when identity is shown
+                   "has_original_file": bool(s.scalar(select(func.count()).select_from(ResumeFile).where(ResumeFile.application_id == app.id)))},
         "probe_areas": interviews.probe_areas(s, app), "interviews": [{"id": i.id, "kind": i.kind, "starts_at": iso(i.starts_at), "minutes": i.minutes, "status": i.status, "interviewers": i.interviewers, "calendar_detail": i.calendar_detail} for i in ivs],
         "offer": None if offer is None else {"id": offer.id, "status": offer.status, "title": offer.title, "start_date": offer.start_date, "handoff_ref": offer.handoff_ref},
         "onboarding": {"tasks": [{"id": t.id, "phase": t.phase, "title": t.title, "owner": t.owner, "due_on": t.due_on, "done": t.done} for t in tasks], "progress": progress(tasks, ctx.today(s))} if tasks else None,
     }
+
+
+@router.get("/applications/{app_id}/original", summary="The resume file as it arrived (a PDF), so a person can look at what a reader could not show. Not while identity is hidden: the file holds the name and contact details.")
+def original_file(app_id: int, s: Session = Depends(db, scope="function"), u: dict = Depends(writer)):
+    app = get_or_404(s, Application, app_id, "application")
+    if blind_enforced(s, app):
+        raise HTTPException(403, "The resume file shows the name and contact details, so it is not available while identity is hidden for this role.")
+    f = s.scalars(select(ResumeFile).where(ResumeFile.application_id == app.id)).first()
+    if f is None:
+        raise HTTPException(404, "No original file is kept for this application (it was not a PDF, it was too large to keep, or the person was deleted).")
+    _audit_reveal(s, u["user"], app.id)
+    return Response(f.content, media_type=f.media_type, headers={"content-disposition": 'attachment; filename="resume.pdf"', "x-content-type-options": "nosniff", "cache-control": "no-store"})
 
 
 @router.get("/interviews", summary="Interviews with who sent a scorecard")
@@ -272,6 +296,6 @@ def fairness_latest(role: str = "all", s: Session = Depends(db, scope="function"
             "history": [{"id": r.id, "role": r.role_key, "at": iso(r.created_at), "flagged": len(r.payload.get("flagged", []))} for r in s.scalars(select(FairnessReport).order_by(FairnessReport.id.desc()).limit(10))]}
 
 
-@router.get("/evals", summary="Quote check, computed now over every stored score")
+@router.get("/evals", summary="Quote check over every stored score, kept until a score or a resume is added or removed")
 def evals(s: Session = Depends(db, scope="function")):
-    return {"quote_check": scoring_service.quote_check(s)}
+    return {"quote_check": scoring_service.quote_summary(s)}

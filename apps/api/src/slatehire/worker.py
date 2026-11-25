@@ -7,6 +7,7 @@ import os
 import signal
 import time
 
+from slatehire import guards
 from slatehire.config import Settings
 from slatehire.context import Ctx
 from slatehire.dbsetup import make_private_engine
@@ -19,7 +20,7 @@ log = logging.getLogger("slatehire.worker")
 
 
 def run_once(ctx: Ctx, worker: Worker) -> int:
-    with session_scope(ctx.factory) as s:
+    with session_scope(ctx.write_factory) as s:
         schedule_due(s, ctx)
     return worker.drain(limit=50)
 
@@ -29,9 +30,10 @@ def load_settings() -> Settings:
     return Settings(_env_file=os.environ.get("ENV_FILE", ".env"))
 
 
-def main() -> None:
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-    settings = load_settings()
+def setup(settings: Settings | None = None) -> tuple[Settings, Ctx, Worker]:
+    """Everything the worker needs before its loop: the guards, the settings check, the database and the job handlers. Split from main() so a test can start it without the loop."""
+    guards.install()  # the append only and locked rubric rules must hold in the worker as well as in the API
+    settings = settings or load_settings()
     settings.check_runtime()  # same refusal as the API: an example secret, a demo on a server database, a placeholder identity on a live install
     engine = make_private_engine(settings.database_url)
     import slatehire.models  # noqa: F401
@@ -41,7 +43,12 @@ def main() -> None:
         Base.metadata.create_all(engine)
         add_missing_columns(engine)
     ctx = Ctx(settings, make_session_factory(engine))
-    worker = Worker(ctx.factory, make_handlers(ctx))
+    return settings, ctx, Worker(ctx.write_factory, make_handlers(ctx))
+
+
+def main() -> None:
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+    settings, ctx, worker = setup()
     stop = {"now": False}
     signal.signal(signal.SIGTERM, lambda *_: stop.update(now=True))
     signal.signal(signal.SIGINT, lambda *_: stop.update(now=True))

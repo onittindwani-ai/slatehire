@@ -349,7 +349,7 @@
     "tags": [
      "read"
     ],
-    "summary": "Cards for the board: the top of each stage, with the real count",
+    "summary": "Cards for the board: the top of each stage, with the real count. People who need a person first (a resume nobody could read, one not in English) come first and are never cut off by the limit.",
     "operationId": "board_api_pipeline_get",
     "parameters": [
      {
@@ -528,6 +528,46 @@
     }
    }
   },
+  "/api/applications/{app_id}/original": {
+   "get": {
+    "tags": [
+     "read"
+    ],
+    "summary": "The resume file as it arrived (a PDF), so a person can look at what a reader could not show. Not while identity is hidden: the file holds the name and contact details.",
+    "operationId": "original_file_api_applications__app_id__original_get",
+    "parameters": [
+     {
+      "name": "app_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "App Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/api/interviews": {
    "get": {
     "tags": [
@@ -671,7 +711,7 @@
     "tags": [
      "read"
     ],
-    "summary": "Quote check, computed now over every stored score",
+    "summary": "Quote check over every stored score, kept until a score or a resume is added or removed",
     "operationId": "evals_api_evals_get",
     "responses": {
      "200": {
@@ -1239,7 +1279,7 @@
     "tags": [
      "write"
     ],
-    "summary": "Delete a candidate's personal data now (owner)",
+    "summary": "Delete a person's personal data now (owner): this application and every other application with the same address. The answer says exactly what was removed.",
     "operationId": "delete_candidate_api_candidates__app_id__delete",
     "parameters": [
      {
@@ -2447,14 +2487,23 @@
      "email": {
       "type": "string",
       "maxLength": 254,
-      "minLength": 3,
-      "title": "Email"
+      "title": "Email",
+      "default": ""
+     },
+     "reference": {
+      "type": "string",
+      "maxLength": 120,
+      "title": "Reference",
+      "default": ""
+     },
+     "source": {
+      "type": "string",
+      "maxLength": 80,
+      "title": "Source",
+      "default": ""
      }
     },
     "type": "object",
-    "required": [
-     "email"
-    ],
     "title": "LiftIn"
    },
    "Login": {
@@ -2610,6 +2659,19 @@
        }
       ],
       "title": "Status"
+     },
+     "ats_job_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 120,
+        "pattern": "^[\\w.:\\-]*$"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Ats Job Id"
      }
     },
     "type": "object",

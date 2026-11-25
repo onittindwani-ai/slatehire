@@ -102,6 +102,8 @@ def test_the_sweep_rewrites_the_offer_file_of_a_person_who_declined_after_it_was
     with ctx.factory() as s:
         assert retention.sweep(s, ctx.now(s), 365, export_dir=ctx.settings.export_dir) == 1
         s.commit()
+    assert not file.exists()  # the file name carried the offer title, so the file is written again under a neutral name
+    file = next((tmp_path / "exports").glob("offer-*-erased.txt"))
     text = file.read_text()
     assert "Grace" not in text and "Hopper" not in text and "(deleted)" in text and "OFFER OF EMPLOYMENT" in text
     with ctx.factory() as s:
@@ -115,7 +117,7 @@ def test_delete_on_request_does_the_same_through_the_api(tmp_path):
     ctx, c, hs, flow = declined_after_hand_off(tmp_path)
     file = next((tmp_path / "exports").glob("offer-*.txt"))
     assert c.delete(f"/api/candidates/{flow['app_id']}", headers=hs["owner"]).json()["ok"] is True
-    assert "Hopper" not in file.read_text()
+    assert not file.exists() and "Hopper" not in next((tmp_path / "exports").glob("offer-*-erased.txt")).read_text()
     assert c.delete(f"/api/candidates/{flow['app_id']}", headers=hs["approver"]).status_code == 403
 
 

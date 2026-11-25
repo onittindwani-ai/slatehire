@@ -11,10 +11,18 @@ The worker deletes people who were declined or withdrawn longer ago than `RETENT
 
 ## Backups
 - SQLite: copy the database file while the API is stopped, or use the `.backup` command.
-- Postgres: `pg_dump` nightly to storage outside the server. `deploy/hetzner/backup.sh` does this for the Compose setup, with a copy of the exports folder, an empty dump treated as a failure and files readable by the owner only. Encrypt them before they leave the machine; they hold candidate data. Test a restore once.
+- Postgres: `pg_dump` nightly to storage outside the server. `deploy/hetzner/backup.sh` does this for the Compose setup, with a copy of the exports folder, an empty dump treated as a failure and files readable by the owner only. Encrypt them before they leave the machine; they hold candidate data. The newest 14 of each are kept, and with `BACKUP_COPY_TO` set the other machine mirrors that (`rsync --delete`), so an old backup that rotates out here is removed there too. Use a folder on that machine that holds nothing else.
 - The export folder holds offer files. Back it up with the database.
+- Every deletion appends the one way hashes of the person (nothing readable) to `erased-hashes.txt` in the export folder. Each backup saves a copy as `erased-hashes-<time>.txt` and adds it to `erased-hashes-all.txt`, a list that only grows and is never rotated.
 
-A restore brings back deleted people. If you restore after a deletion request, delete them again.
+## Restore, and erase again
+A restore brings back the people who were deleted after the backup was made. Run it like this on the Compose server:
+
+```
+sh deploy/hetzner/restore.sh /var/backups/slatehire/slatehire-<time>.dump /var/backups/slatehire/exports-<time>.tar
+```
+
+It stops the API and the worker, replaces the database, restores the exports and then runs `python -m slatehire.reapply -` with `erased-hashes-all.txt` from the same folder: every hash in the list is remembered again and every live person who matches one is deleted again. It prints how many. It needs the same `SUPPRESSION_KEY` in `.env` that the data was erased under, which is why the key is kept outside the database. Without the list (the file is missing) nobody is erased again and the script says so: delete the people who asked by hand. On SQLite copy the database file back, then run `python -m slatehire.reapply erased-hashes-all.txt`. Test a restore on a copy once, before you need it.
 
 ## The kill switch
 Owner only, top bar, Pause all. It stops calendar invites and offer files at once. Turn it off from the banner.

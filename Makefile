@@ -1,6 +1,6 @@
 PY=.venv/bin/python
 
-.PHONY: e2e install test seed-check doctor check-env api worker web e2e counts docs-check
+.PHONY: e2e install test seed-check doctor check-env api worker web e2e counts docs-check migrate
 
 install:
 	@if command -v uv >/dev/null 2>&1; then \
@@ -29,6 +29,9 @@ check-env:
 
 api:
 	$(PY) -m uvicorn slatehire.api.app:app_from_env --factory --port 8000 --proxy-headers
+
+migrate:
+	cd apps/api && ../../$(PY) -m alembic upgrade head
 
 worker:
 	$(PY) -m slatehire.worker

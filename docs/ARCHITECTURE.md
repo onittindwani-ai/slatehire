@@ -15,13 +15,13 @@ Worker (python -m slatehire.worker) -> jobs: mailbox, scoring, retention, onboar
 ## One applicant, end to end
 1. Intake stores the original text in a private field and a redacted copy.
 2. The scorer sees only the redacted copy, with the locked rubric, and returns a level and quotes per criterion.
-3. Code checks each quote is a word for word piece of the redacted text and flags any line that talks to the scorer.
+3. Code checks each quote is a word for word piece of the redacted text and flags any line that talks to the scorer (left out of scoring) or only looks like an instruction (flagged, still scored), and text hidden in a PDF (left out, flagged).
 4. A person moves the application. Only a person can.
 5. Scorecards are written independently and stay hidden until each person sends theirs.
 6. An offer needs person written terms, enough scorecards and a second person's approval, then a file is written.
 
 ## Data
-`<!--n:tables-->15<!--/n-->` tables, `<!--n:api_paths-->59<!--/n-->` API paths. The audit log is hash chained. Demographic labels live apart from everything else.
+`<!--n:tables-->17<!--/n-->` tables, `<!--n:api_paths-->60<!--/n-->` API paths. The audit log is hash chained. Demographic labels live apart from everything else.
 
 ## What is not here
 No outbound email, no automatic rejection, no model call in the default path.

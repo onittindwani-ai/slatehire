@@ -13,7 +13,7 @@ from sqlalchemy.orm import Session
 
 from slatehire import fairness
 from slatehire.errors import RuleError, need_person
-from slatehire.models import Application, Candidate, Demographic, FairnessReport, Role
+from slatehire.models import Application, Candidate, Demographic, FairnessAggregate, FairnessReport, Role
 from slatehire.pipeline import reached
 from sendora_core.audit import record_audit
 
@@ -52,28 +52,67 @@ def labelled_count(s: Session) -> int:
     return int(s.scalar(select(func.count()).select_from(Demographic)) or 0)
 
 
+def _steps_of(app: Application) -> dict[str, tuple[int, int]]:
+    """For each step, (entered, passed) of one person: 1 and 1 when they reached it, 1 and 0 when they were in the step before and went no further."""
+    out: dict[str, tuple[int, int]] = {}
+    for step, stage in STEP_STAGE.items():
+        prev = PREV[step]
+        if prev is None or reached(app, prev):
+            out[step] = (1, 1 if reached(app, stage) else 0)
+    return out
+
+
+def fold(s: Session, app: Application, now) -> bool:
+    """Before a person's label is deleted with them, add what they contributed to the fairness counts to a running total: role, step, group label and month, nothing else (no name,
+    no address, no day). Without it every deletion would turn a labelled person into "undisclosed", and after a year of retention sweeps the report could compare nobody. Done once per
+    application. People deleted before this release were not folded and keep counting as undisclosed."""
+    if app.fairness_folded:
+        return False
+    row = s.get(Demographic, app.id)
+    group = row.group_label if row is not None else fairness.UNDISCLOSED
+    month = now.strftime("%Y-%m")
+    for step, (entered, passed) in _steps_of(app).items():
+        agg = s.scalars(select(FairnessAggregate).where(FairnessAggregate.role_id == app.role_id, FairnessAggregate.step == step, FairnessAggregate.group_label == group, FairnessAggregate.month == month)).first()
+        if agg is None:
+            agg = FairnessAggregate(role_id=app.role_id, step=step, group_label=group, month=month, entered=0, passed=0, people=0)
+            s.add(agg)
+        agg.entered, agg.passed = agg.entered + entered, agg.passed + passed
+        if step == "shortlisted":
+            agg.people += 1  # every person is counted once, on the first step
+    app.fairness_folded = True
+    s.flush()
+    return True
+
+
 def counts(s: Session, role_key: str | None) -> tuple[dict, dict]:
+    """Counts from the people who are still here plus the totals kept from people who were deleted."""
     q = select(Application)
+    agg_q = select(FairnessAggregate)
     if role_key and role_key != "all":
         role = s.scalars(select(Role).where(Role.key == role_key)).first()
         if role is None:
             raise RuleError("No such role.")
         q = q.where(Application.role_id == role.id)
+        agg_q = agg_q.where(FairnessAggregate.role_id == role.id)
     labels = {d.application_id: d.group_label for d in s.scalars(select(Demographic))}
     out: dict[str, dict[str, list[int]]] = {st: {} for st in fairness.STAGES}
     people = 0
     for app in s.scalars(q):
+        if app.fairness_folded:
+            continue  # already in the totals below
         people += 1
         g = labels.get(app.id, fairness.UNDISCLOSED)
-        for step, stage in STEP_STAGE.items():
-            prev = PREV[step]
-            entered = prev is None or reached(app, prev)
-            if not entered:
-                continue
+        for step, (entered, passed) in _steps_of(app).items():
             cell = out[step].setdefault(g, [0, 0])
-            cell[0] += 1
-            cell[1] += 1 if reached(app, stage) else 0
-    return out, {"people": people, "labelled": sum(1 for a in labels)}
+            cell[0] += entered
+            cell[1] += passed
+    kept = 0
+    for agg in s.scalars(agg_q):
+        cell = out[agg.step].setdefault(agg.group_label, [0, 0])
+        cell[0] += agg.entered
+        cell[1] += agg.passed
+        kept += agg.people
+    return out, {"people": people + kept, "labelled": sum(1 for a in labels), "kept_from_deleted": kept}
 
 
 def run(s: Session, actor: str, role_key: str | None, min_group: int, threshold: str = "4/5", floor: int = 2) -> FairnessReport:

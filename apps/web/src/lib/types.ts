@@ -3,8 +3,8 @@ export interface Settings { mode: string; effective_mode: string; kill_switch: b
 export interface Overview { funnel: Record<string, number>; roles: number; roles_unlocked: number; pending_approvals: number; unscored: number; evidence: { quotes: number; invalid: number; valid_percent: number }; today: string; overdue_tasks: number }
 export interface Criterion { id: string; name: string; description?: string; weight: number; anchors: Record<string, string>; look_for: string[]; question?: string }
 export interface RubricRow { id: number; role_id: number; version: number; criteria: Criterion[]; locked: boolean; locked_by: string | null; locked_at: string | null; fingerprint: string; blind: boolean; redaction_version: string; signature_ok: boolean | null }
-export interface RoleRow { id: number; key: string; title: string; team: string; status: string; description: string; job_post: string; applicants: number; funnel: Record<string, number>; rubric: { id: number; version: number; locked: boolean; blind: boolean } | null; scoring_rubric: number | null }
-export interface Card { id: number; code: string; name: string; hidden: boolean; role: string; role_title: string; total: number | null; flags: number; stage: string }
+export interface RoleRow { id: number; key: string; title: string; team: string; status: string; description: string; job_post: string; applicants: number; funnel: Record<string, number>; rubric: { id: number; version: number; locked: boolean; blind: boolean } | null; scoring_rubric: number | null; ats_job_id?: string }
+export interface Card { id: number; code: string; name: string; hidden: boolean; role: string; role_title: string; total: number | null; flags: number; stage: string; attention?: "resume_missing" | "language" | null }
 export interface Board { [stage: string]: { count: number; cards: Card[] } | { declined: number; withdrawn: number } }
 export interface AppRow { id: number; code: string; name: string; hidden: boolean; role: string; role_title: string; stage: string; total: number | null; covered: number | null; flags: number; source: string; updated_at: string | null; deleted: boolean; attention?: "resume_missing" | "language" | null }
 export interface IntakeLogRow { id: number; source: string; ref: string; status: string; detail: string; at: string | null }
@@ -18,7 +18,7 @@ export interface Workspace {
   history: { stage: string; by: string; at: string; note: string }[]; decided_by: string | null; decision_note: string; note?: string; attention?: "resume_missing" | "language" | null; deleted: boolean;
   rubric: { id: number; version: number; fingerprint: string; signature_ok: boolean; blind: boolean; criteria: Criterion[] } | null;
   score: { id: number; total: number; covered: number; items: ScoreItem[]; flags: { kind: string; detail: string; text?: string }[]; scorer: string; at: string } | null;
-  resume: { pieces: Piece[]; counts: Record<string, number>; injection: { why: string; text: string }[]; filename: string };
+  resume: { pieces: Piece[]; counts: Record<string, number>; injection: { why: string; text: string; level?: "attack" | "possible" }[]; filename: string; notes: { kind: string; detail: string; private?: string }[]; has_original_file: boolean };
   probe_areas: { criterion_id: string; name: string; why: string }[];
   interviews: { id: number; kind: string; starts_at: string | null; minutes: number; status: string; interviewers: string[]; calendar_detail: string }[];
   offer: { id: number; status: string; title: string; start_date: string; handoff_ref: string | null } | null;

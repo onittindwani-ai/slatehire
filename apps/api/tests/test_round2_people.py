@@ -379,7 +379,7 @@ def test_an_older_resume_row_is_scanned_once_and_the_place_of_the_flag_is_stored
     c.post(f"/api/applications/{a['application_id']}/score", headers=h)
     with db(c) as s:
         res = s.scalars(select(Resume)).first()
-        assert res.injection_scan == 1 and res.injection and res.injection[0]["start"] < res.injection[0]["end"]
+        assert res.injection_scan == untrusted.INJECTION_SCAN and res.injection and res.injection[0]["start"] < res.injection[0]["end"]
         res.injection, res.injection_scan = [{"why": "old", "text": "x"}], 0  # a row written before the scan was stored
         s.commit()
     calls = []
@@ -389,7 +389,7 @@ def test_an_older_resume_row_is_scanned_once_and_the_place_of_the_flag_is_stored
     assert c.get("/api/evals", headers=h).json()["quote_check"]["invalid"] == 0
     assert len(calls) == 1  # read again once, then kept
     with db(c) as s:
-        assert s.scalars(select(Resume)).first().injection_scan == 1
+        assert s.scalars(select(Resume)).first().injection_scan == untrusted.INJECTION_SCAN
 
 
 # ---- not English ----

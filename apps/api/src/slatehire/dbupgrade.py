@@ -1,12 +1,14 @@
 """Columns added after the first release, for the SQLite zero setup path. `create_all` makes missing tables but never adds a column to a table that already exists, so a
-database file made by an older version would fail with "no such column". Postgres installs use `alembic upgrade head` instead (migration 0002)."""
+database file made by an older version would fail with "no such column". Postgres installs use `alembic upgrade head` instead (migrations 0002 and 0003)."""
 
 from __future__ import annotations
 
 from sqlalchemy import inspect, text
 from sqlalchemy.engine import Engine
 
-ADDED_COLUMNS = (("cf_resume", "injection_scan", "INTEGER NOT NULL DEFAULT 0"), ("cf_resume", "language", "VARCHAR(10) NOT NULL DEFAULT 'en'"))
+ADDED_COLUMNS = (("cf_resume", "injection_scan", "INTEGER NOT NULL DEFAULT 0"), ("cf_resume", "language", "VARCHAR(10) NOT NULL DEFAULT 'en'"), ("cf_resume", "notes", "JSON NOT NULL DEFAULT '[]'"),
+                 ("cf_application", "fairness_folded", "BOOLEAN NOT NULL DEFAULT 0"), ("cf_role", "ats_job_id", "VARCHAR(120) NOT NULL DEFAULT ''"),
+                 ("cf_suppression", "scheme", "VARCHAR(8) NOT NULL DEFAULT 'salt'"), ("cf_suppression", "group_id", "VARCHAR(32) NOT NULL DEFAULT ''"))
 
 
 def add_missing_columns(engine: Engine) -> list[str]:

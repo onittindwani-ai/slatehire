@@ -22,6 +22,7 @@ OWNER = "sam@rivera.example.test"
 APPROVER = "pat@rivera.example.test"
 THIRD = "robin@rivera.example.test"
 HOOK = "test-only-hook-secret"
+SUPPRESSION_KEY = "test-only-Sk4Pq8Zw2Vn6Xc1Jb9Rm3Th7Yd5Ga0Le"
 IDENTITY = dict(owner_email=OWNER, company_name="Rivera Works")
 
 
@@ -34,7 +35,7 @@ def real_settings(tmp_path, **kw) -> Settings:
     """A real install: demo off, a real secret, an owner and an approver with real (test) passwords, its own database and export folder."""
     members = f'[{{"email": "{THIRD}", "password_hash": {_q(pw_hash())}, "role": "approver"}}]'
     base = dict(database_url=f"sqlite:///{tmp_path / 'r.sqlite3'}", export_dir=str(tmp_path / "exports"), demo_mode=False, session_secret=REAL_SECRET, owner_password_hash=pw_hash(),
-                approver_email=APPROVER, approver_password_hash=pw_hash(), members_json=members, application_webhook_secret=HOOK, seed_dir="", _env_file=None, **IDENTITY)
+                approver_email=APPROVER, approver_password_hash=pw_hash(), members_json=members, application_webhook_secret=HOOK, suppression_key=SUPPRESSION_KEY, seed_dir="", _env_file=None, **IDENTITY)
     base.update(kw)
     return Settings(**base)
 

@@ -17,5 +17,9 @@ Run `python3 tools/doctor.py` first. It tests each connection and prints a plain
 | A person is not on the fairness table | The group is under `FAIRNESS_MIN_GROUP` people | It shows as "fewer than N" with no counts, on purpose |
 | Doctor says an adapter is not set | A required variable is empty | See [variables](04-ENVIRONMENT-VARIABLES.md) |
 | Audit page says the chain is broken | A row was edited outside the app | Restore the last backup and investigate who has database access |
+| The settings page says every visitor looks like one address | The API does not trust the visitor address the web app passes on | Set `FORWARDED_ALLOW_IPS` on the API ([Vercel](06-DEPLOY-VERCEL.md), [Railway](07-DEPLOY-RAILWAY.md), [Hetzner](08-DEPLOY-HETZNER.md)) |
+| An ATS pull says it needs a job id | The role has no ATS job id | Write it on the Roles page ("Your ATS") |
+| A resume shows "Hidden text found" | The PDF holds text a reader cannot see; it was left out of the score | Open the original file (identity shown) and read it |
+| The API stops and names `SUPPRESSION_KEY` | The key of the erasure hashes is not set | Set it ([variables](04-ENVIRONMENT-VARIABLES.md)) |
 | Export file missing | The export folder is not writable | Fix `EXPORT_DIR` or attach a volume |
 | Upload refused | File is over `UPLOAD_MAX_BYTES` or not a supported type | Split or convert it |

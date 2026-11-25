@@ -40,6 +40,10 @@ class Settings(BaseAppSettings):
     seed_dir: str = ""
     export_dir: str = "./exports"
     upload_max_bytes: int = 5_000_000
+    keep_original_max_bytes: int = Field(default=2_000_000, ge=0)  # KEEP_ORIGINAL_MAX_BYTES: a PDF resume up to this size is kept as it arrived, so a person can open it (hidden text, layout); erased with the person. 0 keeps none.
+    # Erasure that lasts. The key that the one way hashes of erased people are made with. It lives in the environment, never in the database or a backup of it, so a copy of the data cannot be used
+    # to test whether a known address was erased. Required outside the demo.
+    suppression_key: str = ""  # SUPPRESSION_KEY: 32 or more random characters (python3 -c "import secrets; print(secrets.token_urlsafe(48))"). Keep the same value for as long as you keep the data.
 
     ats_adapter: str = "seed"  # seed, ashby, workable, greenhouse
     ashby_api_key: str = ""
@@ -63,6 +67,8 @@ class Settings(BaseAppSettings):
     imap_user: str = ""
     imap_password: str = ""
     imap_use_ssl: bool = True
+    imap_max_message_bytes: int = Field(default=10_000_000, ge=100_000)  # IMAP_MAX_MESSAGE_BYTES: a message larger than this is never downloaded; it is listed under "Not added" and marked read
+    imap_max_run_bytes: int = Field(default=60_000_000, ge=1_000_000)  # IMAP_MAX_RUN_BYTES: the most message bytes one mailbox run holds in memory; the rest waits for the next run
     allow_http_local_targets: bool = False
     scorer: Literal["rules", "model"] = "rules"  # SCORER=model scores one criterion at a time with the model, only when LLM_BACKEND is fixture or anthropic; the quote and total checks run either way
 
@@ -90,9 +96,14 @@ class Settings(BaseAppSettings):
         out = super().runtime_errors()
         if self.mode is Mode.LIVE and not self.demo_mode:
             out += self.identity_problems()
+        if not self.demo_mode and (self.owner_password_hash or self.mode is Mode.LIVE) and not self.suppression_key_ok():  # a real owner exists: this install holds real people
+            out.append("SUPPRESSION_KEY is missing or too short (under 32 characters). It is the key of the one way hashes that stop an erased person being added again; without it a copy of the database could be used to test whether a known address was erased. Create one with: python3 -c \"import secrets; print(secrets.token_urlsafe(48))\"")
         if self.mailbox_adapter == "imap" and not self.imap_use_ssl and not is_loopback(self.imap_host):
             out.append("IMAP_USE_SSL=false is only allowed for a mail server on this same computer (127.0.0.1). The mailbox password would cross the network in clear text. Turn it back on.")
         return list(dict.fromkeys(out))
+
+    def suppression_key_ok(self) -> bool:
+        return len(self.suppression_key.strip()) >= 32
 
     def proxy_term_list(self) -> list[str]:
         return [t.strip().lower() for t in self.proxy_terms.split(",") if t.strip()]
@@ -105,6 +116,8 @@ class Settings(BaseAppSettings):
             out.append("DEMO_MODE is true but an owner password is set. The public demo password is switched off; set DEMO_MODE=false for a real install.")
         if not self.demo_mode:
             out += [p for p in self.identity_problems() if p not in out]
+            if not self.suppression_key_ok() and not any("SUPPRESSION_KEY" in p for p in out):
+                out.append("SUPPRESSION_KEY is empty. It is required as soon as an owner password is set: it is the key of the one way hashes that stop a deleted person being added again.")
             if not (self.approver_email or self.members_json):
                 out.append("No second person can sign in (APPROVER_EMAIL or MEMBERS_JSON is empty), so no offer can be approved: the person who writes the terms cannot approve them.")
             if self.allow_http_local_targets:

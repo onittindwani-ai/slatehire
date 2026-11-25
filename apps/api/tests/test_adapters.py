@@ -31,18 +31,18 @@ def tc(mock, base="http://testserver"):
 
 def test_ashby_pages_through_candidates_skips_do_not_contact_and_reads_the_resume():
     m = AshbyMock()
-    got = Ashby(st(ashby_api_key=m.key), tc(m)).list_applicants()
-    assert len(got) == 4 and all("replies to customer emails" in a.resume_text for a in got) and all(a.external_ref for a in got)
+    got = Ashby(st(ashby_api_key=m.key), tc(m)).list_applicants(job_id="job-1")
+    assert len(got) == 3 and all("replies to customer emails" in a.resume_text for a in got) and all(a.external_ref for a in got)
     with pytest.raises(AdapterError, match="refused"):
-        Ashby(st(ashby_api_key="wrong"), tc(m)).list_applicants()
+        Ashby(st(ashby_api_key="wrong"), tc(m)).list_applicants(job_id="job-1")
 
 
 def test_workable_and_greenhouse_follow_their_paging_and_skip_disqualified():
     wm = WorkableMock()
-    got = Workable(st(workable_token=wm.token, workable_subdomain="demo"), tc(wm, "http://testserver/spi/v3")).list_applicants()
-    assert len(got) == 3 and all(a.resume_text for a in got)
+    got = Workable(st(workable_token=wm.token, workable_subdomain="demo"), tc(wm, "http://testserver/spi/v3")).list_applicants(job_id="SUP")
+    assert len(got) == 2 and all(a.resume_text for a in got)
     g = GreenhouseMock()
-    rows = Greenhouse(st(greenhouse_token=g.token), tc(g)).list_applicants()
+    rows = Greenhouse(st(greenhouse_token=g.token), tc(g)).list_applicants(job_id="77")
     assert [a.name for a in rows] == ["Fictional Hire1", "Fictional Hire2", "Fictional Hire3"]
 
 

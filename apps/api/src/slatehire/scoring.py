@@ -12,7 +12,7 @@ from dataclasses import dataclass
 
 from slatehire import evidence, language
 from slatehire.redaction import PLACEHOLDER_RE
-from slatehire.untrusted import find_injection
+from slatehire.untrusted import ATTACK, find_injection
 
 SCORER = "offline rules v2 (not a language model)"
 SPLIT = re.compile(r"(?<=[.;!?])\s+")
@@ -122,9 +122,9 @@ def score_resume(criteria: list[dict], redacted: str, scorer=None) -> dict:
     `scorer` is None for the rules above, or a model scorer (`model_tasks.ModelScorer`) with the same call shape. Either way every quote is checked here against the redacted text, and
     the total is arithmetic done here: nothing a scorer says can skip the check or set the total."""
     inj = find_injection(redacted)
-    blocked = [(f.start, f.end) for f in inj]
+    blocked = [(f.start, f.end) for f in inj if f.level == ATTACK]  # only a line aimed at the reader is left out; one that merely has the words of an instruction is scored and flagged
     sents = sentences(redacted, blocked)
-    items, flags = [], [{"kind": "instruction_in_resume", "detail": f.why, "text": redacted[f.start:f.end][:160]} for f in inj]
+    items, flags = [], [{"kind": "instruction_in_resume" if f.level == ATTACK else "possible_instruction", "detail": f.why, "text": redacted[f.start:f.end][:160]} for f in inj]
     for c in criteria:
         raw = scorer(c, redacted, sents, blocked) if scorer is not None else propose(c, sents)
         it = evidence.verify_item(raw, redacted, blocked)

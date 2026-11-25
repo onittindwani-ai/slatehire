@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -114,9 +114,9 @@ def test_integration(category: str, ctx: Ctx = Depends(get_ctx), u: dict = Depen
 
 
 @router.get("/settings", summary="Mode, kill switch and config problems")
-def get_settings(s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx)):
+def get_settings(request: Request, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx)):
     eff, st = ctx.effective(s), ctx.settings
-    return {"mode": st.mode.value, "effective_mode": eff.mode.value, "kill_switch": eff.kill_switch, "demo_mode": st.demo_mode, "problems": st.problems(), "scorer": "offline rules (not a language model)", "llm_backend": st.effective_llm_backend.value,
+    return {"mode": st.mode.value, "effective_mode": eff.mode.value, "kill_switch": eff.kill_switch, "demo_mode": st.demo_mode, "problems": st.problems() + request.app.state.login_guard.warnings(), "scorer": "offline rules (not a language model)", "llm_backend": st.effective_llm_backend.value,
             "rules": {"retention_days": st.retention_days, "fairness_min_group": st.fairness_min_group, "fairness_threshold": st.fairness_threshold, "min_scorecards": st.min_scorecards, "blind_default": st.blind_default},
             "adapters": {c: getattr(st, f"{c}_adapter") for c in CATEGORIES}}
 
@@ -127,7 +127,7 @@ class SettingsIn(BaseModel):
 
 
 @router.post("/settings", summary="Turn the kill switch or draft mode on or off (owner only). The app can never switch live mode on.")
-def post_settings(body: SettingsIn, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(owner)):
+def post_settings(request: Request, body: SettingsIn, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(owner)):
     if body.kill_switch is not None:
         set_state(s, "kill_switch", "1" if body.kill_switch else "0")
         record_audit(s, u["user"], "settings.kill_switch", None, {"on": body.kill_switch})
@@ -135,4 +135,4 @@ def post_settings(body: SettingsIn, s: Session = Depends(db, scope="function"), 
         set_state(s, "force_draft", "1" if body.force_draft else "0")
         record_audit(s, u["user"], "settings.force_draft", None, {"on": body.force_draft})
     s.flush()
-    return get_settings(s, ctx)
+    return get_settings(request, s, ctx)

@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 
 from fastapi import HTTPException, Request
+from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import Session
 
 from slatehire.context import Ctx
@@ -14,11 +15,25 @@ def get_ctx(request: Request) -> Ctx:
     return request.app.state.ctx
 
 
+def _writes(request: Request) -> bool:
+    """Does this request change anything? A change, a reveal that is written to the audit log, and the download of the original file are written for sure. A page load is not."""
+    return request.method not in ("GET", "HEAD", "OPTIONS") or request.query_params.get("reveal") in ("1", "true") or request.url.path.endswith("/original")
+
+
 def db(request: Request) -> Iterator[Session]:
-    s = request.app.state.ctx.factory()
+    """One session per request. A request that writes takes the write lock when it starts (BEGIN IMMEDIATE on SQLite), so it never reads first and then finds the lock taken. A page load reads on
+    its own snapshot and is never held up by a writer; the cache it may save on the way (the quote check) is skipped, not an error, when a writer has the lock."""
+    ctx = request.app.state.ctx
+    writes = _writes(request)
+    s = (ctx.write_factory if writes else ctx.factory)()
     try:
         yield s
-        s.commit()
+        try:
+            s.commit()
+        except OperationalError as exc:
+            if writes or "locked" not in str(exc).lower():
+                raise
+            s.rollback()  # a page load that could not save its cache while someone else was writing
     except Exception:
         s.rollback()
         raise

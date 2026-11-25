@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from sqlalchemy import JSON, Boolean, Float, ForeignKey, Integer, String, Text, UniqueConstraint
+from sqlalchemy import JSON, Boolean, Float, ForeignKey, Integer, LargeBinary, String, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column
 
 from sendora_core.db import Base, UTCDateTime, utcnow
@@ -32,6 +32,7 @@ class Role(Base):
     status: Mapped[str] = mapped_column(String(16), default="open")
     description: Mapped[str] = mapped_column(Text, default="")
     job_post: Mapped[str] = mapped_column(Text, default="")
+    ats_job_id: Mapped[str] = mapped_column(String(120), default="", server_default="")  # the job in your ATS that this role is; an ATS pull for the role brings in only the people who applied to it
     created_at: Mapped[datetime] = mapped_column(UTCDateTime, default=utcnow)
 
 
@@ -74,6 +75,7 @@ class Application(Base):
     decided_by: Mapped[str | None] = mapped_column(String(254), nullable=True)
     decision_note: Mapped[str] = mapped_column(Text, default="")
     note: Mapped[str] = mapped_column(Text, default="")
+    fairness_folded: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")  # True once this person's counts were added to the fairness totals (see fairness_service.fold)
     created_at: Mapped[datetime] = mapped_column(UTCDateTime, default=utcnow)
     updated_at: Mapped[datetime] = mapped_column(UTCDateTime, default=utcnow)
 
@@ -91,6 +93,17 @@ class Resume(Base):
     injection: Mapped[list] = mapped_column(JSON, default=list)  # each entry: why, text, and where it sits in redacted_text (start, end) once injection_scan is 1
     injection_scan: Mapped[int] = mapped_column(Integer, default=0, server_default="0")  # 1: the lines that talk to the scorer were found when the resume was saved and their places are stored; 0: an older row, read once and then stored
     language: Mapped[str] = mapped_column(String(10), default="en", server_default="en")  # en, other (the scorer reads English only, so nothing is scored) or unknown (too short to tell)
+    notes: Mapped[list] = mapped_column(JSON, default=list, server_default="[]")  # what the reader of the file found: hidden text, which attachment was used and why, a body that was ignored. Each: {kind, detail, private}
+
+
+class ResumeFile(Base):
+    """The resume file as it arrived (a PDF, size capped), kept so a person can look at what a reader could not show (hidden text, a layout). It holds the name and contact
+    details, so it is shown only when identity is not hidden, and it is erased with the person."""
+    __tablename__ = "cf_resume_file"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    application_id: Mapped[int] = mapped_column(ForeignKey("cf_application.id"), unique=True)
+    media_type: Mapped[str] = mapped_column(String(40), default="application/pdf")
+    content: Mapped[bytes] = mapped_column(LargeBinary)
 
 
 class Score(Base):
@@ -179,6 +192,21 @@ class FairnessReport(Base):
     created_at: Mapped[datetime] = mapped_column(UTCDateTime, default=utcnow)
 
 
+class FairnessAggregate(Base):
+    """What a deleted person added to the fairness counts, kept without a name, an address or a day: role, step, group label, month. Without it every deletion would turn a labelled
+    person into nothing and the report would drift toward "too few" as people are deleted (see fairness_service.fold)."""
+    __tablename__ = "cf_fairness_aggregate"
+    __table_args__ = (UniqueConstraint("role_id", "step", "group_label", "month", name="uq_cf_fairness_aggregate"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    role_id: Mapped[int] = mapped_column(ForeignKey("cf_role.id"), index=True)
+    step: Mapped[str] = mapped_column(String(20))
+    group_label: Mapped[str] = mapped_column(String(60))
+    month: Mapped[str] = mapped_column(String(7))
+    entered: Mapped[int] = mapped_column(Integer, default=0)
+    passed: Mapped[int] = mapped_column(Integer, default=0)
+    people: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+
+
 class IntakeLog(Base):
     __tablename__ = "cf_intake_log"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -190,9 +218,11 @@ class IntakeLog(Base):
 
 
 class Suppression(Base):
-    """A person who was erased and must not be added again by a mailbox, an ATS pull or a webhook retry. Holds a salted one way hash and the date, nothing readable."""
+    """A person who was erased and must not be added again by a mailbox, an ATS pull or a webhook retry. Holds a keyed one way hash and the date, nothing readable."""
     __tablename__ = "cf_suppression"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     digest: Mapped[str] = mapped_column(String(64), unique=True, index=True)
     kind: Mapped[str] = mapped_column(String(10))  # email or ref (an outside reference such as a Message-ID or an ATS id)
+    scheme: Mapped[str] = mapped_column(String(8), default="key", server_default="salt")  # key: made with SUPPRESSION_KEY from the environment; salt: made with the salt that sat in the database (older rows)
+    group_id: Mapped[str] = mapped_column(String(32), default="", server_default="")  # the hashes of one erasure share this, so lifting by address also lifts the reference
     created_at: Mapped[datetime] = mapped_column(UTCDateTime, default=utcnow)

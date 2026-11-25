@@ -117,13 +117,24 @@ class _IMAP(socketserver.StreamRequestHandler):
                     with self.store.lock:
                         want = re.search(r'SUBJECT\s+(?:"([^"]*)"|(\S+))', a2, re.I)
                         needle = ((want.group(1) if want.group(1) is not None else want.group(2)) if want else "").lower()
-                        uids = [m["uid"] for m in self.store.inbox if ("UNSEEN" not in a2.upper() or not m["seen"]) and (not needle or needle in _subject(m["raw"]).lower())]
+                        smaller = re.search(r"SMALLER\s+(\d+)", a2, re.I)
+                        larger = re.search(r"LARGER\s+(\d+)", a2, re.I)
+                        uids = [m["uid"] for m in self.store.inbox if ("UNSEEN" not in a2.upper() or not m["seen"]) and (not needle or needle in _subject(m["raw"]).lower())
+                                and (smaller is None or len(m["raw"]) < int(smaller.group(1))) and (larger is None or len(m["raw"]) > int(larger.group(1)))]
                     self._w(("* SEARCH " + " ".join(map(str, uids))).strip().encode() + b"\r\n" + tag.encode() + b" OK done\r\n")
+                elif sub == "FETCH" and "RFC822.SIZE" in a2.upper():
+                    wanted = {int(x) for x in a2.split(" ", 1)[0].split(",") if x.isdigit()}
+                    with self.store.lock:
+                        rows = [(m["uid"], len(m["raw"])) for m in self.store.inbox if m["uid"] in wanted]
+                    self._w("".join(f"* {u} FETCH (UID {u} RFC822.SIZE {n})\r\n" for u, n in rows).encode() + tag.encode() + b" OK done\r\n")
                 elif sub == "FETCH":
                     uid = int(a2.split(" ", 1)[0])
                     with self.store.lock:
                         msg = next((m for m in self.store.inbox if m["uid"] == uid), None)
-                    if msg is None:
+                    if msg is not None and "HEADER" in a2.upper():  # only the header lines, as BODY.PEEK[HEADER.FIELDS (...)] asks
+                        head = msg["raw"].split(b"\r\n\r\n", 1)[0].split(b"\n\n", 1)[0] + b"\r\n\r\n"
+                        self._w(f"* {uid} FETCH (UID {uid} BODY[HEADER.FIELDS (FROM)] {{{len(head)}}}\r\n".encode() + head + b")\r\n" + tag.encode() + b" OK done\r\n")
+                    elif msg is None:
                         self._w(tag.encode() + b" OK done\r\n")
                     else:
                         body = msg["raw"]

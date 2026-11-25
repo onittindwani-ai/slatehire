@@ -8,7 +8,6 @@ sys.path[:0] = [str(ROOT / "apps/api/src"), str(ROOT)]
 
 from fastapi.testclient import TestClient  # noqa: E402
 
-import slatehire.guards  # noqa: E402,F401
 from slatehire.api.app import create_app  # noqa: E402
 from slatehire.config import Settings  # noqa: E402
 from slatehire.context import Ctx  # noqa: E402

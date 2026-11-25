@@ -16,6 +16,17 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 - **If it is wrong you see:** The API refuses to start outside demo mode, or `make check-env` says the placeholder is still in place.
 
 
+### `SUPPRESSION_KEY`
+- **Required:** Yes outside the demo (the API and the worker refuse to start without it as soon as an owner password is set or MODE is live)
+- **What it does:** The key of the one way hashes that stop a deleted person being added again. It is kept only in the environment, never in the database or in a backup of it, so someone who holds a copy of the data cannot use the hashes to test whether a known address was erased. Keep the same value for as long as you keep the data: hashes made under another key match nobody. After a restore, `docker compose exec -T api python -m slatehire.reapply -` (see [operating](11-OPERATING-AND-BACKUPS.md)) needs the same key.
+- **How to get it:**
+1. Run `python3 -c "import secrets; print(secrets.token_urlsafe(48))"` and paste the result as the value (32 or more characters). Use a different one for every install, and keep a copy where you keep your other secrets.
+- **Cost:** Free.
+- **Where to put it:** Local: your `.env` file. Railway: the service, Variables tab (on both the `api` and the `worker` service). Hetzner: the `.env` file next to `docker-compose.yml` on the server.
+- **Check it:** `python3 tools/doctor.py`
+- **If it is wrong you see:** The API refuses to start and names `SUPPRESSION_KEY`. In the demo it may stay empty: the hashes then use a salt kept in the database, which is weaker.
+
+
 ### `DATABASE_URL`
 - **Required:** Yes
 - **What it does:** Where the data lives. `sqlite:///./slatehire.sqlite3` for one machine, `postgresql+psycopg://user:password@host:5432/dbname` for a deploy.
@@ -97,9 +108,9 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 - **If it is wrong you see:** A problem line such as `RETENTION_DAYS is under 30.`
 
 
-### `EXPORT_DIR, UPLOAD_MAX_BYTES, SEED_DIR, MAX_BODY_BYTES`
+### `EXPORT_DIR, UPLOAD_MAX_BYTES, KEEP_ORIGINAL_MAX_BYTES, SEED_DIR, MAX_BODY_BYTES`
 - **Required:** No
-- **What it does:** Where offer files are written, the largest resume upload (`UPLOAD_MAX_BYTES`, 5000000 bytes), where the data folder with the starting rubrics lives (`SEED_DIR`, set automatically when you run from the repository and by the Docker image) and the largest request of any kind the API reads (`MAX_BODY_BYTES`, 26214400 bytes). A request larger than the limit is refused before it is read.
+- **What it does:** Where offer files are written, the largest resume upload (`UPLOAD_MAX_BYTES`, 5000000 bytes), the largest PDF resume that is kept as it arrived so a person can open it (`KEEP_ORIGINAL_MAX_BYTES`, 2000000 bytes, 0 keeps none; the file is erased with the person), where the data folder with the starting rubrics lives (`SEED_DIR`, set automatically when you run from the repository and by the Docker image) and the largest request of any kind the API reads (`MAX_BODY_BYTES`, 26214400 bytes). A request larger than the limit is refused before it is read.
 - **How to get it:**
 1. Make sure the folder exists and the app can write to it. On Railway and Hetzner attach a volume.
 - **Cost:** Free; a volume may cost on your host.
@@ -171,9 +182,9 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 - **If it is wrong you see:** `The service refused the key.`
 - **Status:** Steps VERIFIED (docs.greenhouse.io/harvest.html, 2026-11-23). Harvest v1 and v2 is deprecated and will be removed on 2026-08-31. Never run live.
 
-### `MAILBOX_ADAPTER, IMAP_HOST, IMAP_PORT, IMAP_USER, IMAP_PASSWORD, IMAP_USE_SSL`
+### `MAILBOX_ADAPTER, IMAP_HOST, IMAP_PORT, IMAP_USER, IMAP_PASSWORD, IMAP_USE_SSL, IMAP_MAX_MESSAGE_BYTES, IMAP_MAX_RUN_BYTES`
 - **Required:** Only for an email inbox
-- **What it does:** Reads application emails. Gmail: host `imap.gmail.com`, port 993.
+- **What it does:** Reads application emails. Gmail: host `imap.gmail.com`, port 993. `IMAP_MAX_MESSAGE_BYTES` (10000000) is the largest message that is downloaded: a bigger one is never fetched, is listed under Not added with its sender and is marked read. `IMAP_MAX_RUN_BYTES` (60000000) is the most message bytes one run holds at a time; the rest waits for the next run.
 - **How to get it:**
 1. Turn on 2 step verification on the mailbox account.
 2. Open myaccount.google.com/apppasswords and make an app password for Slatehire.
@@ -255,8 +266,8 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 1. Set `COMPANY_NAME` to your own company name.
 2. Leave `APP_NAME` as it is.
 - **Cost:** Free.
-- **Where to put it:** - **Where to put it:** Local: your `.env` file. Vercel: Project, Settings, Environment Variables (web variables only). Railway: the service, Variables tab. Hetzner: the `.env` file next to `docker-compose.yml` on the server.
-- **Check it:** - **Check it:** `python3 tools/doctor.py` (it prints the variable name, never the value)
+- **Where to put it:** Local: your `.env` file. Vercel: Project, Settings, Environment Variables (web variables only). Railway: the service, Variables tab. Hetzner: the `.env` file next to `docker-compose.yml` on the server.
+- **Check it:** `python3 tools/doctor.py` (it prints the variable name, never the value)
 - **If it is wrong you see:** An offer file would name the wrong company. The doctor names the placeholder.
 
 
@@ -266,8 +277,8 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 - **How to get it:**
 1. Leave `false`.
 - **Cost:** Free.
-- **Where to put it:** - **Where to put it:** Local: your `.env` file. Vercel: Project, Settings, Environment Variables (web variables only). Railway: the service, Variables tab. Hetzner: the `.env` file next to `docker-compose.yml` on the server.
-- **Check it:** - **Check it:** `python3 tools/doctor.py` (it prints the variable name, never the value)
+- **Where to put it:** Local: your `.env` file. Vercel: Project, Settings, Environment Variables (web variables only). Railway: the service, Variables tab. Hetzner: the `.env` file next to `docker-compose.yml` on the server.
+- **Check it:** `python3 tools/doctor.py` (it prints the variable name, never the value)
 - **If it is wrong you see:** With `DEMO_MODE=true` on Postgres and this `false` the API refuses to start and says why.
 
 
@@ -278,8 +289,8 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 1. Keep the defaults.
 2. Set both budgets before you turn a real model on.
 - **Cost:** Only calls to a real model cost anything.
-- **Where to put it:** - **Where to put it:** Local: your `.env` file. Vercel: Project, Settings, Environment Variables (web variables only). Railway: the service, Variables tab. Hetzner: the `.env` file next to `docker-compose.yml` on the server.
-- **Check it:** - **Check it:** `python3 tools/doctor.py` (it prints the variable name, never the value)
+- **Where to put it:** Local: your `.env` file. Vercel: Project, Settings, Environment Variables (web variables only). Railway: the service, Variables tab. Hetzner: the `.env` file next to `docker-compose.yml` on the server.
+- **Check it:** `python3 tools/doctor.py` (it prints the variable name, never the value)
 - **If it is wrong you see:** At the limit the app falls back to the built in rules. Turning `LLM_REDACT` off would put candidate text in logs.
 
 
@@ -294,6 +305,16 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 - **Where to put it:** Vercel: Project, Settings, Environment Variables. Railway or Hetzner: the web service variables.
 - **Check it:** Open the sign in page and sign in.
 - **If it is wrong you see:** `The server is not reachable. Check that the API is running.`
+
+
+### `FORWARDED_ALLOW_IPS` (a setting of the API server, not of the app)
+- **Required:** Yes on every hosted setup (Vercel with Railway, Railway, Hetzner)
+- **What it does:** Which addresses may tell the API who the visitor is. The image trusts only `127.0.0.1`. If the web app reaches the API from an address that is not listed, every visitor looks like one address and the sign in limits are shared by everyone. The compose file sets it for Hetzner. On Railway and when the API sits behind another proxy set it to the address range of whatever sits directly in front of the API.
+- **How to get it:** [Vercel](06-DEPLOY-VERCEL.md), [Railway](07-DEPLOY-RAILWAY.md) and [Hetzner](08-DEPLOY-HETZNER.md) say what to put.
+- **Cost:** Free.
+- **Where to put it:** The environment of the API service (not `.env` of the web app).
+- **Check it:** The settings page of the app shows a warning while the API sees a visitor address it does not trust.
+- **If it is wrong you see:** That warning, and sign in limits that hold up the owner when a stranger fails on purpose at the owner's account from a new browser.
 
 
 ### `POSTGRES_PASSWORD`

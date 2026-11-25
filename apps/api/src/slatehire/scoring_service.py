@@ -12,7 +12,7 @@ from slatehire.attention import LANGUAGE_PREFIX, MISSING_PREFIX, REASON, attenti
 from slatehire.errors import RuleError
 from slatehire.models import Application, Resume, Score, State
 from slatehire.redaction import PLACEHOLDER_RE  # noqa: F401  (kept so a reader sees what the scorer never receives)
-from slatehire.untrusted import INJECTION_SCAN, entries, find_injection
+from slatehire.untrusted import INJECTION_SCAN, blocked_spans, entries, find_injection
 from sendora_core.audit import record_audit
 from sendora_core.events import record_event
 
@@ -37,6 +37,9 @@ def score_application(s: Session, app: Application, actor: str, now, scorer=None
     if res is None or not res.redacted_text:
         raise RuleError("There is no resume text for this application (it may have been deleted).")
     out = scoring.score_resume(rub.criteria, res.redacted_text, scorer)  # the scorer sees the REDACTED text only, never the original
+    for n in res.notes or []:  # what the reader of the file found (hidden text that was left out) goes with the score, so nobody reads the score without it
+        if n.get("kind") in ("hidden_text", "pdf_page_skipped"):
+            out["flags"] = [*out["flags"], {"kind": n["kind"], "detail": n.get("detail", "")}]
     prev = latest_score(s, app.id, rub.id)
     if prev is not None and prev.items == out["items"] and prev.total == out["total"]:
         return prev  # the same text under the same rubric gives the same score, so no second row
@@ -85,7 +88,7 @@ def _blocked(res: Resume) -> list[tuple[int, int]]:
     if (res.injection_scan or 0) < INJECTION_SCAN:
         res.injection = entries(res.redacted_text or "", find_injection(res.redacted_text or ""))
         res.injection_scan = INJECTION_SCAN
-    return [(int(e["start"]), int(e["end"])) for e in res.injection]
+    return blocked_spans(res.injection)
 
 
 def quote_check(s: Session) -> dict:

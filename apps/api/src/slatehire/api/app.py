@@ -8,11 +8,13 @@ import os
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
+from slatehire import guards
 from slatehire.api import routes_admin, routes_auth, routes_demo, routes_public, routes_read, routes_write
 from slatehire.config import Settings
 from slatehire.context import Ctx
 from slatehire.datadir import REPO_DATA, MARKER
 from slatehire.dbsetup import make_private_engine
+from slatehire.loginguard import LoginGuard
 from slatehire.dbupgrade import add_missing_columns
 from sendora_core.app import SESSION_COOKIE, create_base_app
 from sendora_core.auth import read_session_token
@@ -20,6 +22,25 @@ from sendora_core.db import Base, make_session_factory
 from sendora_core.ratelimit import TokenBucket
 
 log = logging.getLogger("slatehire.app")
+
+
+class QueryStringFilter(logging.Filter):
+    """uvicorn's access log line holds the address of each request. The upload form of older callers carried the applicant's name and email in the query string, so the log keeps the path only."""
+
+    def filter(self, record: logging.LogRecord) -> bool:
+        args = record.args
+        if isinstance(args, tuple) and len(args) >= 3 and isinstance(args[2], str) and "?" in args[2]:
+            record.args = (*args[:2], args[2].split("?", 1)[0], *args[3:])
+        return True
+
+
+def _quiet_access_log() -> None:
+    logger = logging.getLogger("uvicorn.access")
+    if not any(isinstance(f, QueryStringFilter) for f in logger.filters):
+        logger.addFilter(QueryStringFilter())
+
+
+CSP_FREE = ("/docs", "/redoc", "/openapi.json")  # the interactive docs page loads its own scripts
 
 PUBLIC = {"/api/auth/login", "/api/auth/logout", "/api/webhooks/application"}
 PUBLIC_PREFIX: tuple[str, ...] = ()
@@ -40,6 +61,7 @@ def _seed_if_empty(ctx: Ctx) -> None:
 
 
 def create_app(settings: Settings | None = None, ctx: Ctx | None = None) -> FastAPI:
+    guards.install()  # the locked rubric and append only rules are switched on in this process, whoever imported what first
     settings = settings or Settings()
     if ctx is None:
         engine = make_private_engine(settings.database_url)
@@ -58,14 +80,11 @@ def create_app(settings: Settings | None = None, ctx: Ctx | None = None) -> Fast
     app = create_base_app(ctx.settings, ctx.factory)
     app.title, app.version = "Slatehire API", "1.0.1"
     app.state.ctx = ctx
+    _quiet_access_log()
     app.state.limiter = TokenBucket(capacity=600, refill_per_sec=20.0)
-    # Sign in attempts per address and email: a burst of LOGIN_BURST (default 5), then one more every 12 seconds.
-    app.state.login_bucket = TokenBucket(capacity=ctx.settings.login_burst, refill_per_sec=1 / 12)
-    # And a wider limit per address alone, so changing the email in every try does not give a fresh set of tries.
-    app.state.login_ip_bucket = TokenBucket(capacity=max(30, ctx.settings.login_burst * 6), refill_per_sec=1 / 3)
-    # And one per account whatever the address, so guesses spread over many addresses still run out. It is generous and refills every 30 seconds,
-    # so the owner is held up for at most a short while by someone hammering the account, never locked out.
-    app.state.login_account_bucket = TokenBucket(capacity=max(20, ctx.settings.login_burst * 4), refill_per_sec=1 / 30)
+    # Sign in limits: per address, per address and account, and per account (failed tries only), with a signed note for a browser that signed in before so that it is never held up by
+    # strangers behind a shared address. See loginguard.py.
+    app.state.login_guard = LoginGuard(ctx.settings.login_burst, watch_one_address=not ctx.settings.demo_shortcuts)
 
     @app.middleware("http")
     async def require_session(request: Request, call_next):
@@ -77,6 +96,13 @@ def create_app(settings: Settings | None = None, ctx: Ctx | None = None) -> Fast
                 return JSONResponse({"error": {"code": "http_401", "message": "Sign in to continue."}}, 401)
             request.state.user = data
         return await call_next(request)
+
+    @app.middleware("http")
+    async def api_headers(request: Request, call_next):
+        response = await call_next(request)
+        if not request.url.path.startswith(CSP_FREE):  # the API answers data, never a page: nothing it sends may load or run anything
+            response.headers.setdefault("content-security-policy", "default-src 'none'; frame-ancestors 'none'; base-uri 'none'")
+        return response
 
     for r in (routes_auth, routes_read, routes_write, routes_admin, routes_public, routes_demo):
         app.include_router(r.router)

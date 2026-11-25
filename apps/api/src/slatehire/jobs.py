@@ -79,6 +79,7 @@ def job_mailbox(s: Session, ctx: Ctx) -> dict:
             set_state(s, "inbox_next", str(i + 1))
         return got
     mb = ctx.adapter(s, "mailbox")
+    s.commit()  # let go of the write lock before the network: the mailbox can take seconds to answer
     try:
         messages = mb.fetch_new(limit=25)
     except AdapterError:
@@ -87,6 +88,11 @@ def job_mailbox(s: Session, ctx: Ctx) -> dict:
     handled: list[str] = []
     for uid, raw in messages:
         got[_handle_message(s, ctx, raw, now)] += 1
+        handled.append(uid)
+    limit = ctx.settings.imap_max_message_bytes
+    for uid, sender, size in getattr(mb, "skipped", []):  # too large to download: said so in the Not added list, then marked read so it is not listed again every five minutes
+        _log_intake(s, sender, "rejected", f"The message is {size / 1_000_000:.1f} MB, over the {limit / 1_000_000:.0f} MB limit (IMAP_MAX_MESSAGE_BYTES), so it was not downloaded. Ask the applicant for a smaller file, or add them by hand.", now)
+        got["rejected"] += 1
         handled.append(uid)
     s.commit()  # the applicants are stored for good BEFORE any message is marked read: a failed save loses nothing
     try:

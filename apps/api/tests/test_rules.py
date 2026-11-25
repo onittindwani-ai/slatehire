@@ -9,7 +9,7 @@ from hypothesis import given, settings, strategies as st
 from sqlalchemy import select
 
 from conftest import make_ctx
-from slatehire import fairness_service, interviews, jobs, offers, onboarding, pipeline, retention, rubric_service, scoring_service
+from slatehire import fairness_service, guards, interviews, jobs, offers, onboarding, pipeline, retention, rubric_service, scoring_service
 from slatehire.errors import RuleError
 from slatehire.untrusted import find_injection
 from slatehire.ingest import Applicant
@@ -19,6 +19,7 @@ from sendora_core.audit import verify_audit_chain
 from sendora_core.models import AuditEntry
 from sendora_core.safety import KillSwitchError
 
+guards.install()  # these tests use the rules directly, without starting the app; the app and the worker install them at start (test_round3_start.py)
 SRC = Path(__file__).resolve().parents[1] / "src" / "slatehire"
 CRIT = [{"id": "a", "name": "Writing", "description": "", "weight": 3, "anchors": {"1": "Has seen it done.", "3": "Has done it alone.", "5": "Has led it and taught it."}, "look_for": ["email", "reply"], "question": ""},
         {"id": "b", "name": "Tools", "description": "", "weight": 2, "anchors": {"1": "Has seen it done.", "3": "Has done it alone.", "5": "Has led it and taught it."}, "look_for": ["ticket", "helpdesk"], "question": ""}]
