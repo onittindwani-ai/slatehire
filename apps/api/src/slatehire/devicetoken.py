@@ -5,7 +5,9 @@ are shared by everyone, and one bad try every 10 seconds at the owner's email ke
 count that browser on its own instead of the shared address.
 
 Safety: it is made only after a password was verified, it names the account (as a hash, never the address), it is signed with a key derived from SESSION_SECRET that is not the
-session key (so it can never be read as a session), it expires, and the web app keeps it in an httpOnly cookie. It proves nothing about the password and never signs anyone in.
+session key (so it can never be read as a session), it expires (after 7 days), it is replaced with a new one by every successful sign in, and the web app keeps it in an httpOnly cookie. It proves nothing about the password and never signs anyone in.
+Residual risk, said plainly: someone who steals the cookie may try one wrong password every 10 seconds (the per browser limit) until the note expires or the owner signs in again, because those tries are not
+counted against the account. Seven days and the rotation are what limit that; the cookie is httpOnly and not readable by the page.
 """
 
 from __future__ import annotations
@@ -17,7 +19,7 @@ import json
 import secrets
 import time
 
-DEVICE_TTL_S = 30 * 24 * 3600
+DEVICE_TTL_S = 7 * 24 * 3600  # seven days, renewed (with a new id) by every successful sign in, so a note that is stolen and not used again soon stops working
 
 
 def _key(secret: str) -> bytes:
@@ -33,7 +35,8 @@ def _account(email: str) -> str:
 
 
 def make(secret: str, email: str, device_id: str | None = None, now: float | None = None) -> str:
-    """A fresh note for this account. Pass the id of the browser's earlier note to keep one id (and one bucket) per browser."""
+    """A fresh note for this account, with a new id unless `device_id` is given. The sign in route never passes it: every successful sign in replaces the note (rotation), so a copy of an older note
+    stops counting as this browser, and the per browser limit starts again only for someone who knew the password."""
     body = _b64(json.dumps({"a": _account(email), "d": device_id or secrets.token_hex(8), "exp": int((now or time.time()) + DEVICE_TTL_S)}, separators=(",", ":")).encode())
     return f"{body}.{_b64(hmac.new(_key(secret), body.encode(), hashlib.sha256).digest())}"
 

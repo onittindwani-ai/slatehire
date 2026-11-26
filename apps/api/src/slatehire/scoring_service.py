@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 
 from sqlalchemy import exists, func, select
+from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import Session
 
 from slatehire import evidence, rubric_service, scoring
@@ -38,7 +39,7 @@ def score_application(s: Session, app: Application, actor: str, now, scorer=None
         raise RuleError("There is no resume text for this application (it may have been deleted).")
     out = scoring.score_resume(rub.criteria, res.redacted_text, scorer)  # the scorer sees the REDACTED text only, never the original
     for n in res.notes or []:  # what the reader of the file found (hidden text that was left out) goes with the score, so nobody reads the score without it
-        if n.get("kind") in ("hidden_text", "pdf_page_skipped"):
+        if n.get("kind") in ("hidden_text", "pdf_page_skipped", "ocr_layer"):
             out["flags"] = [*out["flags"], {"kind": n["kind"], "detail": n.get("detail", "")}]
     prev = latest_score(s, app.id, rub.id)
     if prev is not None and prev.items == out["items"] and prev.total == out["total"]:
@@ -83,11 +84,17 @@ def count_unscored(s: Session) -> int:
 BATCH = 400  # resumes and scores are read this many at a time, so the check holds a small part of the data in memory whatever its size
 
 
-def _blocked(res: Resume) -> list[tuple[int, int]]:
-    """Where the lines that talk to the scorer are in the stored redacted text. Read from the resume when the scan was stored with it; an older row is scanned once and stored."""
+BACKFILL = "quote_backfill"  # session.info key: the scans worked out for resumes stored with an older scan, waiting to be saved by a session that is allowed to write
+
+
+def _blocked(s: Session, res: Resume) -> list[tuple[int, int]]:
+    """Where the lines that talk to the scorer are in the stored redacted text. Read from the resume when the scan was stored with it; an older row is scanned once. The new scan is NOT written here
+    (this runs in a page load, which only reads, and a write would stop with "database is locked" while the worker writes): it is handed to `quote_summary`'s `save`, which writes it in a session
+    that is allowed to write, after the page was sent."""
     if (res.injection_scan or 0) < INJECTION_SCAN:
-        res.injection = entries(res.redacted_text or "", find_injection(res.redacted_text or ""))
-        res.injection_scan = INJECTION_SCAN
+        found = entries(res.redacted_text or "", find_injection(res.redacted_text or ""))
+        s.info.setdefault(BACKFILL, {})[res.id] = found
+        return blocked_spans(found)
     return blocked_spans(res.injection)
 
 
@@ -106,7 +113,7 @@ def quote_check(s: Session) -> dict:
         for sc in scores:
             res = texts.get(sc.application_id)
             text = res.redacted_text if res is not None and res.redacted_text else None
-            blocked = _blocked(res) if text is not None else []
+            blocked = _blocked(s, res) if text is not None else []
             for it in sc.items:
                 if it.get("state") != "scored":
                     continue
@@ -116,8 +123,7 @@ def quote_check(s: Session) -> dict:
                     if not ok:
                         invalid += 1
                         bad.append({"score": sc.id, "criterion": it.get("criterion_id")})
-        s.flush()  # a backfilled scan is saved, then these rows are let go of
-        for obj in [*scores, *texts.values()]:
+        for obj in [*scores, *texts.values()]:  # these rows are let go of, so the check holds a small part of the data in memory
             s.expunge(obj)
     return {"quotes": total, "invalid": invalid, "valid_percent": 100.0 if total == 0 else round(100 * (total - invalid) / total, 2), "bad": bad[:20]}
 
@@ -125,8 +131,10 @@ def quote_check(s: Session) -> dict:
 CACHE_KEY = "quote_check_cache"
 
 
-def quote_summary(s: Session) -> dict:
-    """The quote check for the page that loads on every screen. It is worked out again only when a score or a resume was added or removed since last time."""
+def quote_summary(s: Session, save=None) -> dict:
+    """The quote check for the page that loads on every screen. It is worked out again only when a score or a resume was added or removed since last time.
+    A page load only reads. What the check learned (the kept result, and the scans of resumes stored with an older scan) is handed to `save(mark, result, backfill)` instead of being written
+    here; without `save` it is written into this session, as a writer would."""
     mark = f"{s.scalar(select(func.count()).select_from(Score))}:{s.scalar(select(func.max(Score.id)))}:{s.scalar(select(func.count()).select_from(Resume))}:{s.scalar(select(func.max(Resume.id)))}"
     row = s.get(State, CACHE_KEY)
     if row is not None:
@@ -136,9 +144,36 @@ def quote_summary(s: Session) -> dict:
                 return cached["result"]
         except (ValueError, KeyError):
             pass
+    s.info.pop(BACKFILL, None)
     result = quote_check(s)
-    if row is None:
-        s.add(State(key=CACHE_KEY, value=json.dumps({"mark": mark, "result": result})))
+    backfill = s.info.pop(BACKFILL, {})
+    if save is not None:
+        save(mark, result, backfill)
     else:
-        row.value = json.dumps({"mark": mark, "result": result})
+        store_quote_result(s, mark, result, backfill)
     return result
+
+
+def store_quote_result(s: Session, mark: str, result: dict, backfill: dict) -> None:
+    """Keep the quote check result and the scans of older resumes. Called with a session that may write."""
+    for rid, found in backfill.items():
+        res = s.get(Resume, rid)
+        if res is not None and (res.injection_scan or 0) < INJECTION_SCAN:
+            res.injection, res.injection_scan = found, INJECTION_SCAN
+    value = json.dumps({"mark": mark, "result": result})
+    row = s.get(State, CACHE_KEY)
+    if row is None:
+        s.add(State(key=CACHE_KEY, value=value))
+    else:
+        row.value = value
+
+
+def save_quote_result(write_factory, mark: str, result: dict, backfill: dict) -> None:
+    """The same, in a session of its own, run after the page was sent. When someone else holds the write lock it gives up quietly: the next page load works it out and saves it."""
+    try:
+        with write_factory() as ws:
+            store_quote_result(ws, mark, result, backfill)
+            ws.commit()
+    except OperationalError as exc:
+        if "locked" not in str(exc).lower():
+            raise

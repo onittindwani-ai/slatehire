@@ -96,12 +96,13 @@ def add_applicant(s: Session, a: Applicant, role: Role, actor: str, now, *, code
     s.add(app)
     s.flush()
     inst = settings.redact_institutions if settings is not None else True
-    red = redaction.redact(text, [a.name], [a.school] if a.school else None, institutions=inst)
+    extra = settings.redact_extra_term_list() if settings is not None else ()
+    red = redaction.redact(text, [a.name], [a.school] if a.school else None, institutions=inst, extra_terms=extra)
     inj = find_injection(red.redacted)
     s.add(Resume(application_id=app.id, original_text=text, redacted_text=red.redacted, segments=red.segments, counts=red.counts, redaction_version=red.version, filename=a.filename,
                  injection=entries(red.redacted, inj), injection_scan=INJECTION_SCAN, language=lang, notes=_notes(a)))
     keep = settings.keep_original_max_bytes if settings is not None else 0
-    if a.original and not missing and 0 < len(a.original) <= keep:
+    if a.original and 0 < len(a.original) <= keep:
         s.add(ResumeFile(application_id=app.id, media_type="application/pdf", content=a.original))  # the PDF as it arrived, so a person can see what the reader could not show
     note = ". The resume could not be read, so the applicant is flagged." if missing else ". The resume is not in English, so it is not scored: a person reads it." if lang == "other" else ""
     s.add(IntakeLog(source=a.source or "paste", ref=(a.email or cand.code)[:160], status="added", detail=f"{cand.code} for {role.key}" + note, created_at=now))

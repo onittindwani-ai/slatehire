@@ -81,6 +81,7 @@ class Settings(BaseAppSettings):
     min_scorecards: int = 2
     open_retention_days: int = Field(default=730, ge=0)  # OPEN_RETENTION_DAYS: days after which the personal data of an applicant nobody decided on is deleted (0 means never)
     application_webhook_secret: str = ""
+    redact_extra_terms: str = ""  # REDACT_EXTRA_TERMS: comma separated clubs, societies or other words that are hidden from the scorer and the reviewer as personal details, on top of the built in list (best effort, see docs/14)
     proxy_terms: str = ""  # PROXY_TERMS: comma separated words a rubric may not look for (for example age, school or language proxies); the built in list is always checked too
 
     def identity_problems(self) -> list[str]:
@@ -104,6 +105,9 @@ class Settings(BaseAppSettings):
 
     def suppression_key_ok(self) -> bool:
         return len(self.suppression_key.strip()) >= 32
+
+    def redact_extra_term_list(self) -> tuple[str, ...]:
+        return tuple(t.strip() for t in self.redact_extra_terms.split(",") if t.strip())
 
     def proxy_term_list(self) -> list[str]:
         return [t.strip().lower() for t in self.proxy_terms.split(",") if t.strip()]

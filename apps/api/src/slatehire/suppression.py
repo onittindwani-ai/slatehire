@@ -15,6 +15,7 @@ import hashlib
 import hmac
 import re
 import secrets
+import time
 import unicodedata
 from pathlib import Path
 
@@ -27,6 +28,8 @@ from sendora_core.auth import clean_email
 
 SALT_KEY = "suppression_salt"
 ERASED_LIST = "erased-hashes.txt"  # one line per kept hash, appended in the export folder: kept and restored with the exports, and re applied after a restore (see reapply.py)
+# A line is `digest kind group time`, and a lifted hash adds one more line of the same shape ending in `lift`. The time (nanoseconds, the real clock) says which line is newest for a digest, and the
+# newest line wins, so erasing, lifting and erasing again can be replayed in any order. A line without a time (older lists) is the oldest. A group that is not known is written as `-`.
 _TRIM = " \t\r\n.,;:!?)>]}'\"<([{"
 
 
@@ -98,22 +101,24 @@ def record(s: Session, email: str, source: str, ref: str | None, now) -> int:
             row.group_id = group
     s.flush()
     if fresh and _key_of(s):
-        _append_after_commit(s, [(d, k, group) for d, k in fresh])
+        _append_after_commit(s, [(d, k, group, False) for d, k in fresh])
     return len(forms)
 
 
-def _append_after_commit(s: Session, lines: list[tuple[str, str, str]]) -> None:
-    """Add the new hashes to the erased list in the export folder once the deletion is saved for good (a rolled back deletion must not leave a line that would delete the person later)."""
+def _append_after_commit(s: Session, lines: list[tuple[str, str, str, bool]]) -> None:
+    """Add the lines (hash, kind, group, lifted) to the erased list in the export folder once the change is saved for good (a rolled back deletion must not leave a line that would delete the
+    person later, and a rolled back lift must not leave a line that would let them back). Each line carries the time it was written, so the order of the file does not matter."""
     folder = s.info.get("export_dir")
-    if not folder:
+    if not folder or not lines:
         return
+    at = time.time_ns()
 
     def write(_session) -> None:
         path = Path(folder) / ERASED_LIST
         path.parent.mkdir(parents=True, exist_ok=True)
         fresh = not path.exists()
         with path.open("a", encoding="utf-8") as fh:
-            fh.writelines(f"{d} {kind} {group}\n" for d, kind, group in lines)
+            fh.writelines(f"{d} {kind} {group or '-'} {at + i}{' lift' if lifted else ''}\n" for i, (d, kind, group, lifted) in enumerate(lines))
         if fresh:
             path.chmod(0o600)
 
@@ -139,7 +144,10 @@ def lift(s: Session, email: str, actor: str, source: str = "", reference: str | 
         if groups:
             ids |= set(s.scalars(select(Suppression.id).where(Suppression.group_id.in_(groups))))
         if ids:
+            gone = list(s.scalars(select(Suppression).where(Suppression.id.in_(ids))))
             removed = int(s.execute(delete(Suppression).where(Suppression.id.in_(ids))).rowcount or 0)
+            if _key_of(s):  # the list is written too, so that applying it after a restore does not delete the person who was let back in on purpose
+                _append_after_commit(s, [(r.digest, r.kind, r.group_id or "", True) for r in gone if r.scheme == "key"])
     record_audit(s, actor, "suppression.lifted", None, {"removed": removed})
     return removed
 

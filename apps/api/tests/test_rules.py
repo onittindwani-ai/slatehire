@@ -77,8 +77,9 @@ def test_the_blind_setting_and_redaction_version_are_part_of_the_signature(tmp_p
     other = rubric_service.new_draft  # noqa: F841
     a = rubric_service.lock(s, rub, "o@x.test", ctx.now(s)).fingerprint
     from slatehire import rubrics
+    from slatehire.redaction import VERSION  # the version the redaction has now (it moved to 2 in round 4); the test follows it instead of a fixed number
 
-    assert a == rubrics.fingerprint(CRIT, True, "1") and a != rubrics.fingerprint(CRIT, False, "1") and a != rubrics.fingerprint(CRIT, True, "2")
+    assert a == rubrics.fingerprint(CRIT, True, VERSION) and a != rubrics.fingerprint(CRIT, False, VERSION) and a != rubrics.fingerprint(CRIT, True, VERSION + "x")
     assert rubric_service.verify_signature(rub)
     s.execute(__import__("sqlalchemy").text("update cf_rubric set blind = 0"))  # a change made outside the app
     s.expire_all()

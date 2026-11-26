@@ -19,7 +19,7 @@ export const auditTarget = (t: string | null) => {
   return m ? `${m[1]!.charAt(0).toUpperCase()}${m[1]!.slice(1)} ${m[2]}` : t;
 };
 export const OFFER_STATUS: Record<string, string> = { draft: "draft", pending_approval: "waiting for approval", approved: "approved", handed_off: "file written", rejected: "rejected", withdrawn: "withdrawn" };
-export const INTERVIEW_STATUS: Record<string, string> = { planned: "planned", invited: "invite recorded", done: "done", cancelled: "cancelled" };
+export const INTERVIEW_STATUS: Record<string, string> = { planned: "planned", inviting: "invite being sent", invited: "invite recorded", done: "done", cancelled: "cancelled" };
 export const RECOMMENDATION: Record<string, string> = { strong_yes: "strong yes", yes: "yes", no: "no", strong_no: "strong no" };
 export const ADAPTER_NAME: Record<string, string> = { seed: "Offline demo", package: "File for your signing tool", imap: "IMAP mailbox", ashby: "Ashby", workable: "Workable", greenhouse: "Greenhouse", calcom: "Cal.com", google: "Google Calendar", breezedoc: "Breezedoc" };
 export const plural = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? one : many}`;

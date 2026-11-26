@@ -26,7 +26,7 @@ export async function POST(request: Request) {
   const res = NextResponse.json({ user: data.user, role: data.role });
   const secure = process.env.NODE_ENV === "production" && process.env.INSECURE_COOKIES !== "1";
   res.cookies.set("sx_session", data.token, { httpOnly: true, sameSite: "lax", secure, path: "/", maxAge: 8 * 3600 });
-  if (typeof data.device === "string") res.cookies.set("sx_device", data.device, { httpOnly: true, sameSite: "lax", secure, path: "/", maxAge: 30 * 24 * 3600 }); // kept after sign out on purpose: it only says "this browser signed in before"
+  if (typeof data.device === "string") res.cookies.set("sx_device", data.device, { httpOnly: true, sameSite: "lax", secure, path: "/", maxAge: 7 * 24 * 3600 }); // kept after sign out on purpose: it only says "this browser signed in before"
   return res;
 }
 

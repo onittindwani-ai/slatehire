@@ -177,9 +177,9 @@
   "files": 5
  },
  "tests": {
-  "passed": 461,
+  "passed": 559,
   "skipped": 1,
   "failed": 0,
-  "coverage_percent": 92.5
+  "coverage_percent": 91.7
  }
 }

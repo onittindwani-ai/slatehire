@@ -20,6 +20,6 @@ def attention_of(app: Application) -> str | None:
 
 
 REASON = {
-    RESUME_MISSING: "No readable resume arrived for this applicant, so there is nothing to score. Ask for a text or PDF version and add it.",
+    RESUME_MISSING: "No readable resume arrived for this applicant, so there is nothing to score and they cannot be shortlisted yet. A Word or Pages file is not read here. Ask for a PDF or text version and add the applicant again with it (decline this entry with a reason), or just decline.",
     LANGUAGE: "This resume does not look like English, and the scorer reads English only, so it was not scored. Read it yourself; it can be shortlisted without a score.",
 }

@@ -6,7 +6,7 @@ from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from slatehire import interviews, rubric_service, scoring_service
-from slatehire.attention import LANGUAGE, attention_of
+from slatehire.attention import LANGUAGE, REASON, RESUME_MISSING, attention_of
 from slatehire.errors import RuleError, need_person
 from slatehire.models import TERMINAL, Application, Interview, Offer, Scorecard
 from sendora_core.audit import record_audit
@@ -39,6 +39,8 @@ def move(s: Session, app: Application, to: str, actor: str, note: str, now, sett
     note = (note or "").strip()
     if to in NEED_NOTE and len(note) < 8:
         raise RuleError("Write the reason in your own words (at least a short sentence). A person decides every outcome and the reason is kept.")
+    if to == "shortlisted" and attention_of(app) == RESUME_MISSING:
+        raise RuleError(REASON[RESUME_MISSING])  # said as it is: the applicant has no resume to read, not "score them first"
     if to == "shortlisted" and attention_of(app) != LANGUAGE:  # a resume in another language is read by a person, who may shortlist without a score
         rub = rubric_service.latest(s, app.role_id, locked_only=True)
         if rub is None or scoring_service.latest_score(s, app.id, rub.id) is None:

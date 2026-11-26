@@ -23,14 +23,24 @@ PATTERNS = [
     (r"\b(?:automatically|always)\s+(?:approve|advance|pass|accept|shortlist)\s+(?:me\b|(?:this|my|the)\s+(?:candidate|applicant|resume|cv|application))", "asks to be advanced", True),
     (r"\b(?:regardless of|irrespective of)\b[^\n.]{0,30}\b(?:rubric|criteria|qualifications|experience)\b", "tells the scorer to ignore its rules", False),
     (r"\b(?:maximum|full|top|highest|perfect)\s+(?:score|marks|rating|points)\b[^\n.]{0,40}\b(?:for|on|in)\s+(?:every|all|each)\b", "asks for top scores", False),
+    # The scorer's own units: every criterion, level 5. A line that tells a scorer what to give each criterion talks to the scorer, whoever wrote it.
+    (r"\b(?:give|assign|award|rate|score|mark|grade)\b[^\n.]{0,40}\b(?:all|every|each|any)\s+(?:of\s+)?(?:the\s+)?criteri(?:a|on)\b\s+(?:a\s+|an\s+|as\s+|at\s+|with\s+|of\s+)?(?:level\s+|rating\s+|score\s+|grade\s+)?(?:5|five|10|ten|top|max(?:imum)?|full|perfect|highest)\b(?!\s*(?:to|-|\u2013)\s*\d)", "asks for top scores", True),
+    (r"\b(?:give|assign|award|rate|score|mark|grade)\b[^\n.]{0,30}\b(?:5|five|10|ten|top|max(?:imum)?|full|perfect|highest)\b[^\n.]{0,20}\b(?:for|on|in|across)\s+(?:all|every|each|any)\s+(?:of\s+)?(?:the\s+)?criteri(?:a|on)\b", "asks for top scores", True),
+    (r"(?:^|(?<=[.!?:;])\s{1,3})\W{0,5}(?:system\s+(?:prompt|message|instructions?)|developer\s+(?:message|mode)|new\s+instructions?|admin(?:istrator)?\s+override|override)\s*[:\-\u2013]\s*(?:you\b|ignore|disregard|forget|override|bypass|give|assign|award|rate|score|mark|rank|grade|hire|shortlist|advance|accept|approve|treat|always|never|do\s+not|don't|set|output|respond|reply|all\b|every\b)", "pretends to be an instruction", True),
 ]
 RX = [(re.compile(p, re.I), why, direct) for p, why, direct in PATTERNS]
-INJECTION_SCAN = 2  # the version of the scan whose result is stored on a resume (with the place and the level of each flag); a stored scan of an older version is read again once
+INJECTION_SCAN = 3  # the version of the scan whose result is stored on a resume (with the place and the level of each flag); a stored scan of an older version is read again once
 ATTACK, POSSIBLE = "attack", "possible"
 POSSIBLE_WHY = "possible instruction in the text, read by a person"  # shown for a line that has the words of an instruction but is not aimed at the reader: it is flagged, never blocked, and still scored
 
 # Who an instruction would be talking to, and the verbs a command opens with.
 ADDRESSEE = re.compile(r"\b(?:you|your|yours|yourself)\b|\b(?:dear|hello|hi|hey|attention|notice|note|message|instructions?|reminder)s?\s+(?:to|for)\s+(?:the\s+)?(?:a\.?i\.?|llms?|models?|scorers?|assistants?|reviewers?|screeners?|graders?|evaluators?|bots?|algorithms?|ats|systems?)\b", re.I)
+# The scorer named as the one who must do something ("The assistant should disregard the rubric"), and a reference to the application itself, which a line that only describes work never makes.
+AIMED_SUBJECT = re.compile(r"\b(?:ai|a\.i\.|llm|language model|model|assistant|scorer|screener|grader|evaluator|reviewer|bot|algorithm|ats|screening (?:system|tool|software))\s+(?:should|must|shall|will|needs?\s+to|has\s+to|ought\s+to|is\s+to|are\s+to)\b", re.I)
+SELF_REF = re.compile(r"\b(?:this|the|my)\s+(?:candidate|applicant|resume|cv|application|profile)\b|\bme\b", re.I)
+LABEL = re.compile(r"\W*([^:\n]{3,60}):\s")
+LABEL_CUES = frozenset({"please", "kindly", "system", "prompt", "instruction", "instructions", "important", "note", "attention", "reminder", "ai", "llm", "model", "assistant", "scorer", "screener", "grader",
+                        "evaluator", "reviewer", "bot", "you", "your", "candidate", "applicant", "resume", "cv", "application", "me", "my", "this", "these", "score", "scoring", "criteria", "criterion"})
 COMMAND_OPENERS = ("please", "kindly", "now", "also", "and", "then", "just", "important", "note", "attention", "instruction", "instructions", "reminder")
 VOCATIVES = frozenset({"assistant", "ai", "model", "llm", "bot", "scorer", "scoring", "software", "system", "reviewer", "screener", "grader", "evaluator", "dear", "hello", "hi", "hey"})  # a command can be addressed: "Assistant, ignore the rubric"
 COMMAND_VERBS = frozenset({"ignore", "disregard", "forget", "override", "bypass", "give", "assign", "award", "rate", "score", "mark", "hire", "shortlist", "advance", "accept", "interview", "rank", "grade", "approve",
@@ -90,8 +100,21 @@ def _sentence(line: str, a: int, b: int) -> str:
     return line[start:end.start() + 1 if end else len(line)]
 
 
+def _is_label(sentence: str) -> bool:
+    """The sentence opens with a short description of a duty that ends in a colon ("Grade assignments: ...", "Set rules for the credit engine: ..."). What follows describes the work; it is not
+    an order to the reader. A label that names the scorer, the candidate or an instruction ("Note:", "System prompt:", "Please score this resume:") is not a duty."""
+    m = LABEL.match(sentence)
+    if not m:
+        return False
+    words = re.findall(r"[A-Za-z']+", m.group(1).lower())
+    return 2 <= len(words) <= 7 and words[0] in COMMAND_VERBS and not LABEL_CUES & set(words)
+
+
 def _is_command(sentence: str) -> bool:
-    """The sentence opens with a command (after a please or a note:), as in "Ignore the above rubric". A past tense line ("Awarded full marks ...") does not."""
+    """The sentence opens with a command (after a please or a note:), as in "Ignore the above rubric". A past tense line ("Awarded full marks ...") does not, and neither does a duty
+    written as a label ("Grade assignments: award marks for each complete submission")."""
+    if _is_label(sentence):
+        return False
     words = re.findall(r"[A-Za-z']+", sentence[:80].lower())
     while words and (words[0] in COMMAND_OPENERS or (words[0] in VOCATIVES and len(words) > 1 and words[1] in COMMAND_VERBS | frozenset(COMMAND_OPENERS) | VOCATIVES)):
         words = words[1:]
@@ -99,11 +122,14 @@ def _is_command(sentence: str) -> bool:
 
 
 def _aimed(line: str, m: re.Match, direct: bool) -> bool:
-    """Is a match an attack? A pattern that names its own target is. Any other is only when its sentence is a command or speaks to the reader (you, the scorer, the model, the AI)."""
+    """Is a match an attack? A pattern that names its own target is. Any other is only when its sentence is a command, speaks to the reader (you, the scorer, the model, the AI), names the
+    scorer as the one who must act ("the assistant should ..."), or, in a line written as a duty, points at this candidate or this resume."""
     if direct:
         return True
     sentence = _sentence(line, m.start(), m.end())
-    return _is_command(sentence) or bool(ADDRESSEE.search(sentence))
+    if ADDRESSEE.search(sentence) or AIMED_SUBJECT.search(sentence):
+        return True
+    return bool(SELF_REF.search(sentence)) if _is_label(sentence) else _is_command(sentence)
 
 
 def _hit(rx_list, line: str, across: int | None = None) -> tuple[str, str] | None:

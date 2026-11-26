@@ -10,6 +10,8 @@ import time
 from dataclasses import dataclass, field
 from email import policy
 
+from slatehire import pdfink
+
 MAX_TEXT = 60_000
 MAX_ROWS = 2000
 MAX_FILE_BYTES = 5_000_000
@@ -19,11 +21,13 @@ MAX_PDF_SECONDS = 6.0
 # flagged, so a person can ask for another file instead of the person silently never existing.
 MISSING_RESUME = "[No readable resume was received. Ask the applicant for a text or PDF version.]"
 LANGUAGE_NOTE = "Not scored: language. The resume does not look like English, and the scorer reads English words only, so it would show no evidence for everything. A person reads this resume and decides; it can be shortlisted without a score."
-RESUME_MISSING_NOTE = "Resume missing: no readable resume arrived (an image only PDF, a damaged file or an empty email). Ask the applicant to send a text or PDF version. Nothing was scored."
+RESUME_MISSING_NOTE = "Resume missing: no readable resume arrived (an image only PDF, a damaged file, a Word or Pages file, which are not read here, or an empty email). Nothing was scored, and this applicant cannot be shortlisted until a readable resume is added: ask for a PDF or a plain text version and add the applicant again with it (decline this entry with a reason), or just decline. If a PDF came with the application, its original file is kept for a person to open."
 
 
 class IngestError(ValueError):
-    pass
+    def __init__(self, message: str = "", original: bytes = b"") -> None:
+        super().__init__(message)
+        self.original = original  # a PDF that could not be read is still kept for a person to open
 
 
 @dataclass
@@ -108,9 +112,8 @@ def _decode_text(data: bytes) -> str:
 
 
 MAX_PAGE_CONTENT_BYTES = 1_000_000  # a page whose drawing instructions are larger than this is not read: a crafted page can take seconds to parse
-MIN_VISIBLE_POINTS = 2.0  # text drawn smaller than this (in points) cannot be read by a person
 PRIVATE_NOTE_CHARS = 400
-KINDS = {"invisible": "invisible (drawn with no ink)", "white": "white", "tiny": "too small to read", "off_page": "outside the page"}
+KINDS = {"invisible": "invisible (drawn with no ink)", "white": "white, or too pale to read on what is behind it", "tiny": "too small to read", "off_page": "outside the page or clipped away", "layer_off": "in a layer that is switched off", "slow": "on a page that took too long to follow safely"}
 
 
 def note(kind: str, detail: str, private: str = "") -> dict:
@@ -127,6 +130,7 @@ class ResumeRead:
     hidden_kinds: list[str] = field(default_factory=list)
     skipped_pages: int = 0
     original: bytes = b""
+    ocr_chars: int = 0  # characters read from the invisible text layer of a scanned page
 
     def notes(self) -> list[dict]:
         out: list[dict] = []
@@ -134,22 +138,28 @@ class ResumeRead:
             chars = sum(len(h) for h in self.hidden)
             kinds = ", ".join(KINDS[k] for k in dict.fromkeys(self.hidden_kinds))
             out.append(note("hidden_text", f"Hidden text found in the PDF: {chars} characters that are {kinds}. A person reading the page would not see them, so they were left out of scoring. Open the original file to look.", " | ".join(self.hidden)[:PRIVATE_NOTE_CHARS]))
+        if self.ocr_chars:
+            out.append(note("ocr_layer", f"Text layer of a scan, read by a person: {self.ocr_chars} characters came from the invisible text that a scanner lays over the picture of a page. A person cannot see these words on the page, and the scanner can misread them, so open the original file and compare the picture with the text."))
         if self.skipped_pages:
             out.append(note("pdf_page_skipped", f"{self.skipped_pages} page(s) of the PDF were not read because their drawing instructions are too large to read safely. Open the original file."))
         return out
 
 
 def read_resume(data: bytes, filename: str) -> ResumeRead:
-    """The text of a resume file (and, for a PDF, any hidden text found and left out). Raises IngestError for a file that is not a readable resume."""
+    """The text of a resume file (and, for a PDF, any hidden text found and left out). Raises IngestError for a file that is not a readable resume; for a PDF the error carries the file."""
     name = filename.lower()
     if len(data) > MAX_FILE_BYTES:
         raise IngestError("The file is larger than 5 MB.")
     hidden: list[str] = []
     kinds: list[str] = []
-    skipped = 0
+    skipped = ocr = 0
     keep = b""
-    if data[:5] == b"%PDF-" or name.endswith(".pdf"):
-        text, hidden, kinds, skipped = _pdf_read(data)
+    is_pdf = data[:5] == b"%PDF-" or name.endswith(".pdf")
+    if is_pdf:
+        try:
+            text, hidden, kinds, skipped, ocr = _pdf_read_full(data)
+        except IngestError as exc:
+            raise IngestError(str(exc), data) from exc
         keep = data
     elif name.endswith(WORD_PROCESSOR_EXTENSIONS):
         raise IngestError(NOT_READ_WORD)
@@ -159,8 +169,8 @@ def read_resume(data: bytes, filename: str) -> ResumeRead:
         text = _decode_text(data)
     text = _CONTROL_OUT.sub("", text.replace("\r\n", "\n").replace("\r", "\n")).strip()
     if len(text) < 40:
-        raise IngestError("The file has too little text to read. Scanned images are not read.")
-    return ResumeRead(text[:MAX_TEXT], hidden, kinds, skipped, keep)
+        raise IngestError("The file has too little text to read. Scanned images are not read.", keep)
+    return ResumeRead(text[:MAX_TEXT], hidden, kinds, skipped, keep, ocr)
 
 
 def text_from_bytes(data: bytes, filename: str) -> str:
@@ -168,55 +178,6 @@ def text_from_bytes(data: bytes, filename: str) -> str:
 
 
 _CONTROL_OUT = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")
-
-
-def _is_white(values: list[float]) -> bool:
-    if len(values) == 1:
-        return values[0] >= 0.97
-    if len(values) == 3:
-        return all(v >= 0.97 for v in values)
-    if len(values) == 4:
-        return all(v <= 0.03 for v in values)
-    return False
-
-
-class _Ink:
-    """What a PDF page says about how the next text is drawn, followed with the operators pypdf reports: the text render mode, the fill colour, and whether anything dark was filled
-    on the page (white text on a dark box is a design, not a trick). The first two are part of the graphics state, so q and Q save and restore them."""
-
-    def __init__(self) -> None:
-        self.mode, self.white, self.stack, self.dark_fill = 0, False, [], False
-
-    def operand(self, op: bytes, args: list, *_rest) -> None:
-        o = op.decode("latin-1", "replace")
-        try:
-            nums = [float(a) for a in args]
-        except (TypeError, ValueError):
-            nums = []
-        if o == "q":
-            self.stack.append((self.mode, self.white))
-        elif o == "Q" and self.stack:
-            self.mode, self.white = self.stack.pop()
-        elif o == "Tr" and nums:
-            self.mode = int(nums[0])
-        elif o in {"g", "rg", "k", "sc", "scn"} and nums:
-            self.white = _is_white(nums)
-        elif o in {"f", "F", "f*", "B", "B*", "b", "b*", "Do", "sh"} and not self.white:
-            self.dark_fill = True
-
-    def why_hidden(self, tm, cm, size, box) -> str | None:
-        if self.mode in (3, 7):
-            return "invisible"
-        e, f = tm[4], tm[5]
-        x, y = e * cm[0] + f * cm[2] + cm[4], e * cm[1] + f * cm[3] + cm[5]
-        scale = abs(((tm[0] * tm[3] - tm[1] * tm[2]) * (cm[0] * cm[3] - cm[1] * cm[2])) ** 0.5) or 1.0
-        if size * scale < MIN_VISIBLE_POINTS:
-            return "tiny"
-        if box and not (box[0] - 5 <= x <= box[2] + 5 and box[1] - 5 <= y <= box[3] + 5):
-            return "off_page"
-        if self.white and not self.dark_fill:
-            return "white"
-        return None
 
 
 def _page_bytes(page) -> int:
@@ -237,61 +198,33 @@ def _page_bytes(page) -> int:
         return 0
 
 
-def _page_read(page) -> tuple[str, list[str], list[str]]:
-    """(the page's text with hidden pieces removed, the hidden pieces, why each is hidden)."""
-    ink = _Ink()
-    hidden: list[str] = []
-    why: list[str] = []
-    box = None
-    try:
-        mb = page.mediabox
-        box = (float(mb.left), float(mb.bottom), float(mb.right), float(mb.top))
-    except Exception:  # noqa: BLE001
-        box = None
-    seen: list[tuple[str, bool]] = []
-
-    def on_text(text, cm, tm, _font, size):
-        if not text or not text.strip():
-            seen.append((text or "", False))
-            return
-        reason = ink.why_hidden(tm, cm, float(size or 0), box)
-        seen.append((text, reason is not None))
-        if reason:
-            hidden.append(text)
-            why.append(reason)
-
-    plain = page.extract_text(visitor_operand_before=ink.operand, visitor_text=on_text) or ""
-    if not hidden:
-        return plain, [], []
-    cursor, out = 0, plain
-    for piece in hidden:  # remove each hidden piece where it stands in the page text, in the order the page draws them
-        at = out.find(piece, cursor)
-        if at < 0:
-            return "".join(s for s, h in seen if not h), hidden, why  # not found as it was drawn: rebuild the text from the visible pieces only
-        out = out[:at] + out[at + len(piece):]
-        cursor = at
-    return out, hidden, why
-
-
-def _pdf_read(data: bytes) -> tuple[str, list[str], list[str], int]:
+def _pdf_read_full(data: bytes) -> tuple[str, list[str], list[str], int, int]:
+    """(the text, the hidden pieces left out, why each is hidden, pages skipped, characters of a scan's text layer). What counts as hidden is decided in pdfink.py."""
     from pypdf import PdfReader
 
     try:
         reader = PdfReader(io.BytesIO(data))
-        started, pages, hidden, why, skipped = time.monotonic(), [], [], [], 0
+        root = reader.trailer["/Root"]
+        started, pages, hidden, why, skipped, ocr = time.monotonic(), [], [], [], 0, 0
         for page in reader.pages[:MAX_PDF_PAGES]:
             if time.monotonic() - started > MAX_PDF_SECONDS:  # a page that is slow to read stops the rest: the pages read so far are the resume
                 break
             if _page_bytes(page) > MAX_PAGE_CONTENT_BYTES:
                 skipped += 1
                 continue
-            text, h, w = _page_read(page)
-            pages.append(text)
-            hidden += h
-            why += w
-        return "\n".join(pages), hidden, why, skipped
+            got = pdfink.read_page(page, root)
+            pages.append(got.text)
+            hidden += got.hidden
+            why += got.why
+            ocr += got.ocr_chars
+        return "\n".join(pages), hidden, why, skipped, ocr
     except Exception as exc:  # noqa: BLE001 - a bad file is a clean error, never a crash
         raise IngestError("The PDF could not be read.") from exc
+
+
+def _pdf_read(data: bytes) -> tuple[str, list[str], list[str], int]:
+    text, hidden, why, skipped, _ocr = _pdf_read_full(data)
+    return text, hidden, why, skipped
 
 
 def from_csv(data: bytes, resumes: dict[str, bytes] | None = None) -> list[Applicant]:
@@ -373,11 +306,11 @@ def _rank(fn: str) -> int:
     return 0 if NAME_FIRST.search(base) else 2 if NAME_LAST.search(base) else 1
 
 
-def _resume_from_attachments(msg) -> tuple[ResumeRead | None, str, str, list[dict]]:
-    """(what was read, the file name, why nothing was readable, notes). Only files that can be a resume are tried (at most six). Every readable one is read, and the one used is the one
+def _resume_from_attachments(msg) -> tuple[ResumeRead | None, str, str, list[dict], bytes]:
+    """(what was read, the file name, why nothing was readable, notes, the first PDF that could not be read). Only files that can be a resume are tried (at most six). Every readable one is read, and the one used is the one
     whose name says resume, cv or curriculum, then the largest text: a cover letter or a signature that comes first is never the resume just for being first. When more than one file
     was readable the choice is written down, with the reason, so a person can see which file was scored. Nothing that is not text is ever decoded as text."""
-    unreadable = ""
+    unreadable, lost = "", b""
     readable: list[tuple[str, ResumeRead]] = []
     for fn, data in _attachments(msg):
         if not (is_resume_name(fn) or fn.lower().endswith(WORD_PROCESSOR_EXTENSIONS) or data[:5] == b"%PDF-"):
@@ -388,8 +321,9 @@ def _resume_from_attachments(msg) -> tuple[ResumeRead | None, str, str, list[dic
             readable.append((fn, read_resume(data, fn)))
         except IngestError as exc:
             unreadable = unreadable or str(exc)
+            lost = lost or exc.original  # an image only PDF is not read, but a person can open it
     if not readable:
-        return None, "", unreadable, []
+        return None, "", unreadable, [], lost
     ranked = sorted(readable, key=lambda x: (_rank(x[0]), -len(x[1].text)))
     fn, got = ranked[0]
     notes: list[dict] = []
@@ -397,7 +331,7 @@ def _resume_from_attachments(msg) -> tuple[ResumeRead | None, str, str, list[dic
         why = "its name says it is the resume" if _rank(fn) == 0 else "its name does not say it is something else, and it has the most text" if _rank(fn) == 1 else "every file name looked like something else, so the one with the most text was used"
         others = [n for n, _r in ranked[1:]]
         notes.append(note("attachment_choice", f"{len(readable)} readable files came with this email. One was scored because {why}. The other {len(others)} were not read as the resume. Check that the right file was used.", f"Scored: {fn}. Not scored: {', '.join(others)}."))
-    return got, fn, unreadable, notes
+    return got, fn, unreadable, notes, lost
 
 
 def from_email(raw: bytes, role_titles: dict[str, str] | None = None, *, keep_unreadable: bool = False) -> Applicant:
@@ -409,7 +343,7 @@ def from_email(raw: bytes, role_titles: dict[str, str] | None = None, *, keep_un
         raise IngestError("The message has no sender.")
     role_key, ambiguous = match_role(str(msg.get("Subject", "")), role_titles)
     extra = {"role_ambiguous": ambiguous} if ambiguous else {}
-    got, fname, unreadable, notes = _resume_from_attachments(msg)
+    got, fname, unreadable, notes, lost = _resume_from_attachments(msg)
     ref = str(msg.get("Message-ID", "")) or None
     who = name or addr.split("@")[0]
     body = ""
@@ -423,5 +357,5 @@ def from_email(raw: bytes, role_titles: dict[str, str] | None = None, *, keep_un
         body = body or _body_text(msg)
         if unreadable and len(body) >= 40:  # a file that cannot be read was attached AND the email has text: that text is not scored as the resume, but it is kept for a person to read
             notes = [*notes, note("body_not_used", f"The attached file could not be read and the email has {len(body)} characters of text. The email text was not scored as the resume, because a cover note is not a resume. Read it, and ask the applicant for a PDF or text version.", body[:2000])]
-        return Applicant(who, addr, "", role_key, MISSING_RESUME, fname, "email", external_ref=ref, extra={**extra, "resume_missing": unreadable or "no resume", "notes": notes})
+        return Applicant(who, addr, "", role_key, MISSING_RESUME, fname, "email", external_ref=ref, extra={**extra, "resume_missing": unreadable or "no resume", "notes": notes}, original=lost)
     return Applicant(who, addr, "", role_key, got.text[:MAX_TEXT], fname, "email", external_ref=ref, extra={**extra, "notes": [*got.notes(), *notes]}, original=got.original)

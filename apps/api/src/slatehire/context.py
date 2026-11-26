@@ -31,7 +31,7 @@ class Ctx:
         if not self.adapters:
             self.adapters = build_adapters(self.settings, self.registry)
         # Every session carries the key of the erasure hashes and the export folder, so suppression and erasure never need the settings passed through every call.
-        self.factory.configure(info={"suppression_key": self.settings.suppression_key, "export_dir": self.settings.export_dir})
+        self.factory.configure(info={"suppression_key": self.settings.suppression_key, "export_dir": self.settings.export_dir, "fairness_floor": self.settings.fairness_min_group})
         self.write_factory = self.write_factory or dbsetup.write_factory(self.factory)
         if self.write_factory is not self.factory:
             self.write_factory.configure(info=dict(self.factory.kw["info"]))

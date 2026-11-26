@@ -396,7 +396,7 @@ class FairnessIn(BaseModel):
 @router.post("/fairness/run", summary="Run the fairness indicator and save the report (owner). The smallest group can be raised, never lowered below FAIRNESS_MIN_GROUP.")
 def fairness_run(b: FairnessIn, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(owner)):
     st = ctx.settings
-    r = rule(fairness_service.run, s, u["user"], b.role, b.min_group or st.fairness_min_group, b.threshold or st.fairness_threshold, st.fairness_min_group)
+    r = rule(fairness_service.run, s, u["user"], b.role, b.min_group or st.fairness_min_group, b.threshold or st.fairness_threshold, st.fairness_min_group, ctx.now(s))
     return {"id": r.id, "min_group": r.min_group}
 
 

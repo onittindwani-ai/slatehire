@@ -14,7 +14,7 @@ import re
 import unicodedata
 from dataclasses import dataclass, field
 
-VERSION = "1"
+VERSION = "2"  # 2: two digit years, clubs and societies that name a group, family status, parental leave and native language lines (round 4)
 PLACEHOLDERS = {"name": "[NAME]", "email": "[EMAIL]", "phone": "[PHONE]", "address": "[ADDRESS]", "link": "[LINK]", "photo": "[PHOTO]", "dob_age": "[BIRTH-OR-AGE]", "grad_year": "[YEAR]",
                 "pronoun": "[PRONOUN]", "title": "[TITLE]", "institution": "[SCHOOL]", "personal": "[PERSONAL]"}
 CATEGORY_LABELS = {"name": "Name", "email": "Email address", "phone": "Phone number", "address": "Street address", "link": "Profile or web link", "photo": "Photo reference", "dob_age": "Birth date or age",
@@ -40,6 +40,33 @@ TITLE_WORDS = {"senior", "junior", "lead", "chief", "head", "principal", "staff"
                "sales", "marketing", "finance", "data", "software", "project", "product", "account", "human", "resources", "logistics", "warehouse", "quality", "research", "technical", "general", "inc", "ltd", "llc", "plc", "corp", "corporation",
                "company", "group", "systems", "solutions", "labs", "technologies", "partners", "associates", "holdings", "bank", "hospital", "clinic", "store", "stores"}
 FUNCTION_WORDS = {"the", "and", "for", "with", "from", "that", "this", "these", "those", "are", "was", "were", "has", "had", "have", "not", "but", "its", "our", "his", "her", "their", "you", "your", "all", "any", "can", "who", "how", "why", "when", "where", "which", "into", "than", "then", "also", "per", "via", "off", "out", "one", "two", "she", "him", "them", "they", "will", "would", "could", "should"}
+# What a person writes about the groups they belong to and the family they have says things the rubric must not use. The patterns below are bounded and best effort: they cover the common
+# wordings, not every club on earth. The owner adds the rest in REDACT_EXTRA_TERMS, and every reviewer is reminded (docs/14) that the redaction is a help and not a promise.
+AFFINITY_GROUP = (r"(?:Black|African[ \-]American|Hispanic|Latino|Latina|Latinx|Latine|Asian|Asian[ \-]American|Pacific[ \-]Islander|Native[ \-]American|Indigenous|First[ \-]Nations|Women|Womens|Women's|"
+                  r"Female|LGBTQ\+?|LGBTQIA\+?|LGBT|Lesbian|Gay|Queer|Trans|Transgender|Muslim|Islamic|Jewish|Hindu|Sikh|Buddhist|Catholic|Christian|Evangelical|Mormon|Veterans?|Disabled|Deaf|Neurodivergent|Pride)")
+AFFINITY_NOUN = r"(?:Network|Association|Council|Alliance|Society|Union|Caucus|Club|Organization|Organisation|Coalition|Collective|Fellowship|Chamber|League|Group|Forum|Chapter|Committee|Professionals|Engineers|Leaders|Students|Scholars|Employees)"
+AFFINITY_CAP = r"[A-Z][\w&'’\-]{1,25}"
+AFFINITY = (rf"\b{AFFINITY_GROUP}(?:[ \t]+{AFFINITY_CAP}){{0,3}}[ \t]+{AFFINITY_NOUN}\b(?:[ \t]+(?:of|for|in)[ \t]+{AFFINITY_CAP}){{0,2}}"
+            rf"|\b(?:National[ \t]+)?Society[ \t]+of[ \t]+(?:Women|Black|Hispanic|Asian|Latino|Latina|Native|Pacific|Indigenous|LGBTQ)\b(?:[ \t]+{AFFINITY_CAP}){{0,3}}")
+GREEK = r"(?:Alpha|Beta|Gamma|Delta|Epsilon|Zeta|Eta|Theta|Iota|Kappa|Lambda|Mu|Nu|Xi|Omicron|Pi|Rho|Sigma|Tau|Upsilon|Phi|Chi|Psi|Omega)"
+FRATERNITY = rf"\b{GREEK}(?:[ \t]+{GREEK}){{1,3}}\b(?:[ \t]+(?:Fraternity|Sorority|Chapter))?"
+NAMED_GROUPS = (r"\b(?:NAACP|NSBE|SHPE|AAUW|Hillel|Newman Center|Knights of Columbus|Black Girls Code|Girls Who Code|Women Who Code|Lesbians Who Tech|Out in Tech|Grace Hopper Celebration|Techqueria|"
+                r"Latinas in Tech|Black Women in Tech)\b")
+NUMBER_WORD = r"(?:an?|one|two|three|four|five|six|seven|eight|nine|ten|\d{1,2})"
+FAMILY = [
+    r"(?im)^[ \t>*|\-•]*((?:newly |happily )?(?:married|single|divorced|widow(?:ed|er)?|separated|engaged)\b[^\n]{0,80})$",
+    r"(?i)\b(?:married|divorced|widowed|separated|engaged)[ \t]+(?:with|to|and)[ \t]+[^\n.;]{0,40}?\b(?:child|children|kids?|sons?|daughters?|husband|wife|spouse|partner)\w*",
+    r"(?i)\b(?:single|working|stay[ \-]at[ \-]home|proud|new|expectant|young)[ \t]+(?:mother|mom|mum|father|dad|parent)s?\b",
+    rf"(?i)\b(?:mother|father|mom|mum|dad|parent|grandmother|grandfather)[ \t]+of[ \t]+{NUMBER_WORD}\b(?:[ \t]+(?:children|kids|boys|girls|sons|daughters|toddlers|twins|infants|babies))?",
+    r"(?i)\b(?:maternity|paternity|parental|adoption|family|childcare|child[ \-]care|baby)[ \t]+(?:leave|break)\b|\bon[ \t]+(?:maternity|paternity|parental)\b|\bcareer[ \t]+break[ \t]+(?:for|to)[ \t]+(?:raise|care|have)\b",
+    r"(?i)\bpregnan(?:t|cy)\b|\bexpecting[ \t]+(?:a|my|our)[ \t]+(?:baby|child|first|second)\b",
+]
+NATIVE_LANGUAGE = [
+    r"\bNative[ \t]+[A-Z][a-z]+(?:[ \-][A-Z][a-z]+)?[ \t]+speaker\b",
+    r"(?i:\b(?:mother[ \-]tongue|native language|first language|home language))[ \t]*[:\-]?[ \t]*(?:is[ \t]+)?[A-Z][a-z]+\b",
+    r"(?<![A-Za-z])[A-Z][a-z]{2,15}[ \t]*(\([ \t]*(?i:native)(?:[ \t]+speaker)?[ \t]*\))",
+]
+MAX_EXTRA_TERMS = 200
 ZERO_WIDTH = {"​", "‌", "‍", "⁠", "﻿", "­"}
 
 
@@ -179,6 +206,28 @@ def _reference_names(clean: str) -> list[Span]:
     return out
 
 
+def _group_spans(clean: str, extra_terms: tuple[str, ...]) -> list[Span]:
+    """Clubs and societies that name a group, fraternities and sororities, family status, parental leave, native language, and the owner's own list. All are category "personal"."""
+    out: list[Span] = []
+    for rx in (AFFINITY, FRATERNITY, NAMED_GROUPS):
+        out += _find(rx, clean, "personal", flags=0)
+    for rx in FAMILY:
+        out += [Span(m.start(1) if m.re.groups else m.start(), m.end(1) if m.re.groups else m.end(), "personal") for m in re.finditer(rx, clean)]
+    for rx in NATIVE_LANGUAGE:
+        out += [Span(m.start(1) if m.re.groups else m.start(), m.end(1) if m.re.groups else m.end(), "personal") for m in re.finditer(rx, clean)]
+    for term in extra_terms[:MAX_EXTRA_TERMS]:
+        t = _clean(term.strip())[0]
+        if 2 <= len(t) <= 80:
+            out += [Span(m.start(), m.end(), "personal") for m in re.finditer(rf"(?<![A-Za-z]){re.escape(t)}(?![A-Za-z])", clean, re.I)]
+    return out
+
+
+def _short_years(clean: str) -> list[Span]:
+    """Two digit graduation years: Class of '08, Class of 08, and a school line ending in '08."""
+    out = _find(r"(?i)\bclass[ \t]+of[ \t]*['’]?[ \t]*(\d{2})\b(?!\d)", clean, "grad_year", flags=0, group=1)
+    return out
+
+
 def _despace(line: str) -> str:
     parts = re.split(r"\s{3,}", line.strip())
     out = []
@@ -233,7 +282,7 @@ def _name_rx(token: str, *, ordinary: bool = False) -> re.Pattern:
     return re.compile(rf"(?<![A-Za-z]){shape(token)}(?![A-Za-z])", re.I)
 
 
-def detect(text: str, known_names: list[str] | None = None, known_schools: list[str] | None = None) -> list[Span]:
+def detect(text: str, known_names: list[str] | None = None, known_schools: list[str] | None = None, extra_terms: tuple[str, ...] = ()) -> list[Span]:
     clean, idx = _clean(text)
     spans: list[Span] = []
     emails = [m.group(0) for m in re.finditer(EMAIL, clean, re.I)]
@@ -263,8 +312,10 @@ def detect(text: str, known_names: list[str] | None = None, known_schools: list[
     pos = 0
     for n, line in enumerate(clean.split("\n")):
         if in_edu[n] or re.search(EDU_WORDS, line, re.I):
-            spans += [Span(pos + m.start(), pos + m.end(), "grad_year") for m in re.finditer(r"\b(?:19|20)\d{2}\b", line)]
+            spans += [Span(pos + m.start(), pos + m.end(), "grad_year") for m in re.finditer(r"\b(?:19|20)\d{2}\b|(?<![\w'’])['’]\d{2}\b", line)]
         pos += len(line) + 1
+    spans += _short_years(clean)
+    spans += _group_spans(clean, extra_terms)
     # schools
     spans += _find(SCHOOL, clean, "institution", flags=0)
     spans += _find(FOREIGN_SCHOOL, clean, "institution", flags=0)
@@ -350,8 +401,8 @@ def _merge(spans: list[Span], text: str) -> list[Span]:
     return out
 
 
-def redact(text: str, known_names: list[str] | None = None, known_schools: list[str] | None = None, *, institutions: bool = True) -> Redaction:
-    spans = detect(text, known_names, known_schools)
+def redact(text: str, known_names: list[str] | None = None, known_schools: list[str] | None = None, *, institutions: bool = True, extra_terms: tuple[str, ...] = ()) -> Redaction:
+    spans = detect(text, known_names, known_schools, extra_terms)
     if not institutions:
         spans = [s for s in spans if s.cat != "institution"]
     spans = _merge(_select(spans, len(text)), text)

@@ -6,7 +6,7 @@
    addresses. An attempt from an address that already signed in successfully as that account in the last 24 hours is never held up by it, so
    someone who only knows the owner's email cannot keep the owner out by failing on purpose from somewhere else.
 
-4. A browser that already signed in as the account carries a signed note (devicetoken.py). Its tries are counted on their own, per browser, and are not held up by the shared
+4. A browser that already signed in as the account carries a signed note (devicetoken.py, valid for 7 days and replaced by every successful sign in). Its tries are counted on their own, per browser, and are not held up by the shared
    limits above. This is what keeps the owner able to sign in when every visitor reaches the API as one address (a proxy whose forwarded address is not trusted:
    set FORWARDED_ALLOW_IPS), which would otherwise let one bad try every 10 seconds from anyone shut the owner out.
 

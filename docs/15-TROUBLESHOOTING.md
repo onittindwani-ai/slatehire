@@ -20,6 +20,8 @@ Run `python3 tools/doctor.py` first. It tests each connection and prints a plain
 | The settings page says every visitor looks like one address | The API does not trust the visitor address the web app passes on | Set `FORWARDED_ALLOW_IPS` on the API ([Vercel](06-DEPLOY-VERCEL.md), [Railway](07-DEPLOY-RAILWAY.md), [Hetzner](08-DEPLOY-HETZNER.md)) |
 | An ATS pull says it needs a job id | The role has no ATS job id | Write it on the Roles page ("Your ATS") |
 | A resume shows "Hidden text found" | The PDF holds text a reader cannot see; it was left out of the score | Open the original file (identity shown) and read it |
+| A resume shows "Text layer of a scan, read by a person" | The PDF is a scan, and its words come from the invisible text a scanner lays over the picture; they were scored | Open the original file (identity shown) and compare the picture with the text |
+| An applicant shows "Resume missing" and cannot be shortlisted | No readable resume arrived: a Word or Pages file, a picture only PDF or a damaged file | Ask for a PDF or text version and add the person again with it (decline the first entry with a reason); a PDF that came with the application is kept to open |
 | The API stops and names `SUPPRESSION_KEY` | The key of the erasure hashes is not set | Set it ([variables](04-ENVIRONMENT-VARIABLES.md)) |
 | Export file missing | The export folder is not writable | Fix `EXPORT_DIR` or attach a volume |
 | Upload refused | File is over `UPLOAD_MAX_BYTES` or not a supported type | Split or convert it |

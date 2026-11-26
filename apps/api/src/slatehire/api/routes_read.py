@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import date, datetime, timedelta, timezone
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query
 from fastapi.responses import Response
 from sqlalchemy import func, or_, select
 from sqlalchemy.orm import Session
@@ -14,6 +14,7 @@ from slatehire.attention import attention_of
 from slatehire.context import Ctx
 from slatehire.models import Application, Candidate, FairnessReport, IntakeLog, Interview, OnboardingTask, Offer, Resume, ResumeFile, Role, Rubric, Score
 from slatehire.onboarding import progress
+from slatehire.untrusted import INJECTION_SCAN, entries, find_injection
 from sendora_core.audit import record_audit
 from sendora_core.auth import WRITE_ROLES
 from sendora_core.models import Approval, AuditEntry
@@ -47,13 +48,27 @@ def stale_jobs(s: Session) -> list[str]:
     return late
 
 
+def _injection_view(res: Resume | None) -> list[dict]:
+    """The flagged lines of a resume as the page shows them. A resume stored with an older scan is read again in memory for the page (nothing is written by a page load)."""
+    if res is None:
+        return []
+    if (res.injection_scan or 0) >= INJECTION_SCAN:
+        return res.injection
+    return entries(res.redacted_text or "", find_injection(res.redacted_text or ""))
+
+
+def _quote_summary(s: Session, ctx: Ctx, background: BackgroundTasks) -> dict:
+    """The kept quote check. A page load only reads: when the result has to be saved, that is done in a session of its own after the page was sent, so a busy worker can never turn a page load into an error."""
+    return scoring_service.quote_summary(s, save=lambda mark, result, backfill: background.add_task(scoring_service.save_quote_result, ctx.write_factory, mark, result, backfill))
+
+
 @router.get("/overview", summary="Numbers for the top of the page")
-def overview(s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx)):
+def overview(background: BackgroundTasks, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx)):
     """Loaded with every page, so it never walks every resume: counts are counts, the quote check is kept until a score or a resume changes, and the waiting list is one query per role."""
     roles, rubs = _role_ctx(s)
     funnel = pipeline.funnel(s)
     pend = s.scalar(select(func.count()).select_from(Approval).where(Approval.status == "pending")) or 0
-    q = scoring_service.quote_summary(s)
+    q = _quote_summary(s, ctx, background)
     today = ctx.today(s)
     overdue = s.scalar(select(func.count()).select_from(OnboardingTask).where(OnboardingTask.done.is_(False), OnboardingTask.due_on < today.isoformat())) or 0
     return {"funnel": funnel, "roles": len(roles), "roles_unlocked": sum(1 for r in rubs.values() if r is None), "pending_approvals": pend, "unscored": scoring_service.count_unscored(s), "evidence": {"quotes": q["quotes"], "invalid": q["invalid"], "valid_percent": q["valid_percent"]},
@@ -216,10 +231,10 @@ def workspace(app_id: int, reveal: bool = False, s: Session = Depends(db, scope=
         "rubric": None if shown is None else {"id": shown.id, "version": shown.version, "fingerprint": shown.fingerprint, "signature_ok": rubric_service.verify_signature(shown), "blind": shown.blind, "criteria": shown.criteria},
         "current_version": None if rub is None else rub.version,
         "score": None if sc is None else {"id": sc.id, "total": sc.total, "covered": sc.covered, "items": sc.items, "flags": sc.flags, "scorer": sc.scorer, "at": iso(sc.created_at)},
-        "resume": {"pieces": pieces(res, sc.items if sc else [], reveal=not hide), "counts": res.counts if res else {}, "injection": res.injection if res else [], "filename": ("" if res is None else "resume file" if hide and res.filename else res.filename),  # a file name often carries the person's name
+        "resume": {"pieces": pieces(res, sc.items if sc else [], reveal=not hide), "counts": res.counts if res else {}, "injection": _injection_view(res), "filename": ("" if res is None else "resume file" if hide and res.filename else res.filename),  # a file name often carries the person's name
                    "notes": [] if res is None else [{"kind": n.get("kind"), "detail": n.get("detail"), **({} if hide else {"private": n.get("private", "")})} for n in (res.notes or [])],  # what the reader of the file found; the file names and the hidden text itself only when identity is shown
                    "has_original_file": bool(s.scalar(select(func.count()).select_from(ResumeFile).where(ResumeFile.application_id == app.id)))},
-        "probe_areas": interviews.probe_areas(s, app), "interviews": [{"id": i.id, "kind": i.kind, "starts_at": iso(i.starts_at), "minutes": i.minutes, "status": i.status, "interviewers": i.interviewers, "calendar_detail": i.calendar_detail} for i in ivs],
+        "probe_areas": interviews.probe_areas(s, app), "interviews": [{"id": i.id, "kind": i.kind, "starts_at": iso(i.starts_at), "minutes": i.minutes, "status": i.status, "interviewers": i.interviewers, "calendar_detail": "" if i.status == interviews.SENDING else i.calendar_detail} for i in ivs],
         "offer": None if offer is None else {"id": offer.id, "status": offer.status, "title": offer.title, "start_date": offer.start_date, "handoff_ref": offer.handoff_ref},
         "onboarding": {"tasks": [{"id": t.id, "phase": t.phase, "title": t.title, "owner": t.owner, "due_on": t.due_on, "done": t.done} for t in tasks], "progress": progress(tasks, ctx.today(s))} if tasks else None,
     }
@@ -297,5 +312,5 @@ def fairness_latest(role: str = "all", s: Session = Depends(db, scope="function"
 
 
 @router.get("/evals", summary="Quote check over every stored score, kept until a score or a resume is added or removed")
-def evals(s: Session = Depends(db, scope="function")):
-    return {"quote_check": scoring_service.quote_summary(s)}
+def evals(background: BackgroundTasks, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx)):
+    return {"quote_check": _quote_summary(s, ctx, background)}

@@ -82,7 +82,7 @@ def login(body: Login, request: Request, ctx: Ctx = Depends(get_ctx)):
         raise HTTPException(401, "Email or password is wrong.")
     guard.succeeded(host, email)
     token = make_session_token(ctx.settings.session_secret, email, acc[1])
-    note = devicetoken.make(ctx.settings.session_secret, email, device)  # made only now, after the password was verified
+    note = devicetoken.make(ctx.settings.session_secret, email)  # made only now, after the password was verified, and always a new one: the older note is replaced, not renewed
     return {"token": token, "user": email, "role": acc[1], "device": note}
 
 
