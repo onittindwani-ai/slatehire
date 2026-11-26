@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Score Slatehire on an independent test set (written by agents who never saw the code).
+"""Score Slatehire on an independent test set (written by separate AI test authors who never saw the code).
 
 A set folder holds `rubrics.json`, `scoring_key.json`, `resumes/*.txt`, `leak/*.txt`, `leak_key.json` and `fairness_cases.json` (data/eval/independent/set_a, set_b).
 Nothing goes through the database: redaction, the scorer, the quote check and the fairness arithmetic are pure code, and this tool calls them the way the service does
@@ -416,7 +416,7 @@ def main(argv: list[str]) -> int:
     if a.out and Path(a.out).exists():
         print("refusing: that file already exists (the first run is kept untouched)")
         return 1
-    res = {"note": "Independent set, written by agents who never saw the code. Rules stand in, not a language model.", **run(folder)}
+    res = {"note": "Independent set, written by separate AI test authors who never saw the code. Rules stand in, not a language model.", **run(folder)}
     if a.out:
         Path(a.out).write_text(json.dumps(res, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
         print("saved", a.out)

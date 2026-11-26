@@ -15,6 +15,6 @@ Every outside fact has a file in [facts](facts/) with the source address, the da
 | Libraries | [libraries](facts/libraries.md) | 2026-11-23 | From lock files |
 | Four fifths rule | [four-fifths-rule](facts/four-fifths-rule.md) | 2026-11-23 | VERIFIED |
 
-The model path is not an outside fact but is UNVERIFIED live in the same way: the request to the Anthropic Messages API (path, headers, structured output) follows the vendor docs as the hub base read them on 2026-11-23 and was run only against a local fake server. The vendor contract excerpts used by the adapter tests are under `mock/contracts/` (Cal.com, Google Calendar, Ashby, Greenhouse; Workable's public pages could not be read), with the URL and date of each.
+The model path is not an outside fact but is UNVERIFIED live in the same way: the request to the Anthropic Messages API (path, headers, structured output) follows the vendor docs as the hub base read them on 2026-11-23 and was run only against a local mock server. The vendor contract excerpts used by the adapter tests are under `mock/contracts/` (Cal.com, Google Calendar, Ashby, Greenhouse; Workable's public pages could not be read), with the URL and date of each.
 
 Tool scoring evidence is in [tools and alternatives](TOOLS-AND-ALTERNATIVES.md). Re check a fact before you rely on it: vendor pages change.

@@ -92,7 +92,7 @@ def test_evidence_validity_is_exactly_one_hundred_percent_on_the_seed_world(ro):
     assert q["quotes"] > 100 and q["invalid"] == 0 and q["valid_percent"] == 100.0
 
 
-def test_a_made_up_quote_is_rejected_and_the_score_with_it():
+def test_a_quote_not_in_the_resume_is_rejected_and_the_score_with_it():
     text = "Led the support process for a team of 15 and cut errors by 18 percent."
     item = {"criterion_id": "x", "state": "scored", "value": 5, "quotes": ["Led a team of 400 and cut errors by 90 percent."], "rationale": ""}
     out = evidence.verify_item(item, text)

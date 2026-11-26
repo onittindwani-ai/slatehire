@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/guards.py
+# hypothesis_version: 6.170.17
+
+['before_delete', 'before_update', 'blind', 'criteria', 'fingerprint', 'locked', 'redaction_version', 'role_id', 'version']

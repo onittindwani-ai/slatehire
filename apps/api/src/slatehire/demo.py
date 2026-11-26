@@ -1,4 +1,4 @@
-"""Demo mode: reset to the seed data and move the clock. Fictional people, offline stand ins, nothing real is touched."""
+"""Demo mode: reset to the seed data and move the clock. Sample people, offline stand ins, nothing real is touched."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from sendora_core.db import Base
 
 
 def reset(session: Session, ctx) -> dict:
-    """Erase every table and load the fictional seed. Only while demo shortcuts are on (DEMO_MODE and no owner password): with a real owner
+    """Erase every table and load the sample seed. Only while demo shortcuts are on (DEMO_MODE and no owner password): with a real owner
     password this is refused here too, whatever route or tool called it, so a real database is never emptied by the demo button."""
     if not ctx.settings.demo_shortcuts:
         raise PermissionError("The demo reset is only available in demo mode with no owner password set.")

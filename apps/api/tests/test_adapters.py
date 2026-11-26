@@ -12,7 +12,7 @@ from slatehire.adapters.mailbox import ImapMailbox
 from slatehire.config import Settings
 from slatehire.ingest import from_email
 from slatehire.registry import build_adapters, build_registry
-from mock.mail_servers import FakeMailServers
+from mock.mail_servers import StubMailServers
 from mock.vendor_mocks import AshbyMock, CalComMock, GoogleCalendarMock, GreenhouseMock, WorkableMock
 from sendora_core.adapters import AdapterError
 from sendora_core.safety import DraftModeError, KillSwitchError
@@ -43,7 +43,7 @@ def test_workable_and_greenhouse_follow_their_paging_and_skip_disqualified():
     assert len(got) == 2 and all(a.resume_text for a in got)
     g = GreenhouseMock()
     rows = Greenhouse(st(greenhouse_token=g.token), tc(g)).list_applicants(job_id="77")
-    assert [a.name for a in rows] == ["Fictional Hire1", "Fictional Hire2", "Fictional Hire3"]
+    assert [a.name for a in rows] == ["Sample Hire1", "Sample Hire2", "Sample Hire3"]
 
 
 def test_the_ats_adapters_are_read_only():
@@ -79,9 +79,9 @@ def test_seed_calendar_and_package_handoff_stay_inside(tmp_path):
         BreezedocHandoff(st())
 
 
-def test_imap_reads_unseen_application_emails_from_the_local_fake_server():
-    with FakeMailServers() as servers:
-        raw = (b"From: Fictional Applicant <fa@mail.example.test>\r\nSubject: Application for Customer Support Specialist\r\nMessage-ID: <m1@x>\r\n\r\n" + b"I wrote replies to customer emails every day and trained 3 colleagues at my last job.\r\n")
+def test_imap_reads_unseen_application_emails_from_the_local_mock_server():
+    with StubMailServers() as servers:
+        raw = (b"From: Sample Applicant <fa@mail.example.test>\r\nSubject: Application for Customer Support Specialist\r\nMessage-ID: <m1@x>\r\n\r\n" + b"I wrote replies to customer emails every day and trained 3 colleagues at my last job.\r\n")
         servers.store.deliver(raw)
         mb = ImapMailbox(st(imap_host="127.0.0.1", imap_port=servers.imap_port, imap_user="demo", imap_password="demo-password", imap_use_ssl=False))
         ok, _ = mb.healthcheck()

@@ -99,7 +99,7 @@ def test_white_outline_text_is_hidden_text_and_a_black_outline_is_not():
 
 
 def test_text_outside_the_crop_box_is_hidden_text():
-    inside = line("Customer Support Specialist, Fictional Co, 2020 to 2026", 280) + line("I wrote replies to about 40 customer emails a day and cut errors by 12 percent.", 260)
+    inside = line("Customer Support Specialist, Sample Co, 2020 to 2026", 280) + line("I wrote replies to about 40 customer emails a day and cut errors by 12 percent.", 260)
     got = read(inside + f"BT /F1 11 Tf 72 640 Td ({HIDDEN}) Tj ET\n", cropbox=(0, 0, 300, 300))
     assert_left_out(got, "off_page")
 
@@ -135,7 +135,7 @@ def test_text_clipped_away_is_hidden_text():
 
 
 def test_hidden_text_that_repeats_a_visible_line_is_removed_where_it_stands_not_where_the_same_words_first_appear():
-    first = "Customer Support Specialist, Fictional Co, 2020 to 2026"
+    first = "Customer Support Specialist, Sample Co, 2020 to 2026"
     body = line(first, 700) + line("I wrote replies to about 40 customer emails a day and cut errors by 12 percent.", 680) + white(first, 660)
     got = read(body)
     assert got.hidden == [first]
@@ -162,7 +162,7 @@ def test_a_resume_with_white_text_and_a_dark_rectangle_scores_nothing_for_the_hi
 
 # ---- a scan that has a text layer ----
 
-SCAN_TEXT = "Customer Support Specialist, Fictional Co, 2020 to 2026. I wrote replies to about 40 customer emails a day and cut errors by 12 percent."
+SCAN_TEXT = "Customer Support Specialist, Sample Co, 2020 to 2026. I wrote replies to about 40 customer emails a day and cut errors by 12 percent."
 SCAN_PAGE = "q 612 0 0 792 0 0 cm /Im1 Do Q\n" + f"BT 3 Tr /F1 11 Tf 72 700 Td ({SCAN_TEXT}) Tj ET\n"
 
 
@@ -177,7 +177,7 @@ def test_a_searchable_scan_is_read_and_says_where_its_words_came_from():
 def test_a_pdf_with_a_typed_page_and_a_scanned_page_reads_both_without_an_accusation():
     typed = build_pdf(VISIBLE, extra_pages=[SCAN_PAGE], images={"Im1": 255})
     got = ingest.read_resume(typed, "mixed.pdf")
-    assert got.hidden == [] and "Customer Support Specialist, Fictional Co, 2020 to 2026\nI wrote" in got.text and "cut errors by 12 percent." in got.text
+    assert got.hidden == [] and "Customer Support Specialist, Sample Co, 2020 to 2026\nI wrote" in got.text and "cut errors by 12 percent." in got.text
     assert [n["kind"] for n in got.notes()] == ["ocr_layer"]
 
 

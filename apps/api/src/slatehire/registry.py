@@ -25,7 +25,7 @@ def build_registry(settings) -> AdapterRegistry:
     add("calendar", "calcom", "B", CalCom, "POST /bookings with cal-api-version 2026-02-25, from the Cal.com docs on 2026-11-23. Local imitation only.")
     add("calendar", "google", "B", GoogleCalendar, "events.insert from the Google Calendar docs on 2026-11-23. Local imitation only.")
     add("mailbox", "seed", "A", SeedMailbox, "Offline demo.")
-    add("mailbox", "imap", "A", ImapMailbox, "Plain IMAP, tested against the local fake mail server in mock/.")
+    add("mailbox", "imap", "A", ImapMailbox, "Plain IMAP, tested against the local mock mail server in mock/.")
     add("handoff", "seed", "A", SeedHandoff, "Offline demo.")
     add("handoff", "package", "A", PackageHandoff, "The default. Writes the approved offer to a file for your signing tool. Never sends.")
     add("handoff", "breezedoc", "C", BreezedocHandoff, "No live call built: the API could not be confirmed. Recipe in prompts/04-recipes.md.")

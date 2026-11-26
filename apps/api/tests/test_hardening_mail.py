@@ -15,7 +15,7 @@ from slatehire.adapters import mailbox as mailbox_mod
 from slatehire.adapters.mailbox import ImapMailbox
 from slatehire.ingest import MISSING_RESUME
 from slatehire.models import Application, Candidate, IntakeLog, Role
-from mock.mail_servers import FakeMailServers
+from mock.mail_servers import StubMailServers
 from sendora_core.adapters import AdapterError
 
 GOOD = "Wrote replies to customer emails every day and trained three colleagues on the help desk tools at my last job.\n"
@@ -67,7 +67,7 @@ def log_rows(ctx) -> list[IntakeLog]:
 # ---- the read mark ----
 
 def test_reading_a_message_does_not_mark_it_read(tmp_path):
-    with FakeMailServers() as srv:
+    with StubMailServers() as srv:
         srv.store.deliver(mail("Ann <ann@mail.example.test>", "Application for Customer Support Specialist"))
         mb = ImapMailbox(real_ctx(tmp_path, mailbox_adapter="imap", imap_host=srv.host, imap_port=srv.imap_port, imap_user="demo", imap_password="demo-password", imap_use_ssl=False).settings)
         got = mb.fetch_new()
@@ -77,11 +77,11 @@ def test_reading_a_message_does_not_mark_it_read(tmp_path):
         assert srv.store.inbox[0]["seen"] is True and mb.fetch_new() == []
 
 
-def test_the_fake_server_marks_a_message_read_when_it_is_fetched_the_old_way(tmp_path):
-    """The proof that the test above can fail: RFC 3501 says fetching RFC822 sets the seen flag, and the fake server now does the same."""
+def test_the_mock_server_marks_a_message_read_when_it_is_fetched_the_old_way(tmp_path):
+    """The proof that the test above can fail: RFC 3501 says fetching RFC822 sets the seen flag, and the mock server now does the same."""
     import imaplib
 
-    with FakeMailServers() as srv:
+    with StubMailServers() as srv:
         srv.store.deliver(mail("Ann <ann@mail.example.test>", "Application for Customer Support Specialist"))
         m = imaplib.IMAP4(srv.host, srv.imap_port)
         m.login("demo", "demo-password")
@@ -92,7 +92,7 @@ def test_the_fake_server_marks_a_message_read_when_it_is_fetched_the_old_way(tmp
 
 
 def test_one_broken_email_loses_no_other_application_and_everything_is_marked_read_only_after_it_is_stored(tmp_path):
-    with FakeMailServers() as srv:
+    with StubMailServers() as srv:
         ctx = installed(tmp_path, srv)
         long_id = "<" + "x" * 300 + "@mail.example.test>"
         srv.store.deliver(mail("Ann <ann@mail.example.test>", "Application for Customer Support Specialist", message_id="<a1@x>"))
@@ -121,7 +121,7 @@ def test_one_broken_email_loses_no_other_application_and_everything_is_marked_re
 
 
 def test_a_message_that_fails_inside_is_rolled_back_alone_and_written_to_the_list(tmp_path, monkeypatch):
-    with FakeMailServers() as srv:
+    with StubMailServers() as srv:
         ctx = installed(tmp_path, srv)
         for who in ("ann", "bad", "cy"):
             srv.store.deliver(mail(f"{who.title()} <{who}@mail.example.test>", "Application for Customer Support Specialist", message_id=f"<{who}@x>"))
@@ -145,7 +145,7 @@ def test_a_message_that_fails_inside_is_rolled_back_alone_and_written_to_the_lis
 
 
 def test_nothing_is_marked_read_when_the_save_fails(tmp_path, monkeypatch):
-    with FakeMailServers() as srv:
+    with StubMailServers() as srv:
         ctx = installed(tmp_path, srv)
         srv.store.deliver(mail("Ann <ann@mail.example.test>", "Application for Customer Support Specialist"))
         with ctx.factory() as s:
@@ -156,7 +156,7 @@ def test_nothing_is_marked_read_when_the_save_fails(tmp_path, monkeypatch):
 
 
 def test_a_message_that_is_not_added_says_why_on_the_list(tmp_path):
-    with FakeMailServers() as srv:
+    with StubMailServers() as srv:
         ctx = installed(tmp_path, srv)
         srv.store.deliver(mail("Dee <dee@mail.example.test>", "Application"))  # no role in the subject
         srv.store.deliver(mail("Eve <eve@mail.example.test>", "Application for Astronaut"))  # a role that does not exist
@@ -169,7 +169,7 @@ def test_a_message_that_is_not_added_says_why_on_the_list(tmp_path):
 
 
 def test_a_resume_nobody_can_read_still_brings_the_applicant_in_flagged_and_unscored(tmp_path):
-    with FakeMailServers() as srv:
+    with StubMailServers() as srv:
         ctx = installed(tmp_path, srv)
         m = EmailMessage()
         m["From"], m["Subject"] = "Gus <gus@mail.example.test>", "Application for Customer Support Specialist"
@@ -195,7 +195,7 @@ def test_a_person_can_read_the_not_added_list_through_the_api(tmp_path):
     from hardening_helpers import sign_in
     from slatehire.api.app import create_app
 
-    with FakeMailServers() as srv:
+    with StubMailServers() as srv:
         ctx = installed(tmp_path, srv)
         srv.store.deliver(mail("Dee <dee@mail.example.test>", "Application"))
         run(ctx)
@@ -246,11 +246,11 @@ def test_the_mailbox_connection_refuses_a_certificate_nobody_vouches_for(tmp_pat
 def test_the_mailbox_connection_is_given_the_default_checking_context(tmp_path, monkeypatch):
     seen = {}
 
-    def fake(host, port, ssl_context=None, timeout=None, **kw):
+    def stub_imap(host, port, ssl_context=None, timeout=None, **kw):
         seen["ctx"] = ssl_context
         raise OSError("stop here")
 
-    monkeypatch.setattr(mailbox_mod.imaplib, "IMAP4_SSL", fake)
+    monkeypatch.setattr(mailbox_mod.imaplib, "IMAP4_SSL", stub_imap)
     s = real_ctx(tmp_path, mailbox_adapter="imap", imap_host="imap.provider.example.test", imap_user="u", imap_password="p").settings
     with pytest.raises(AdapterError):
         ImapMailbox(s).fetch_new()

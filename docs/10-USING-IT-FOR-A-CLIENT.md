@@ -4,7 +4,7 @@ One copy of Slatehire serves one client. One repository clone, one database, one
 
 ## What you are selling
 
-Setup, a trial period in draft mode, a short training for the people who decide, and a monthly check. You are selling a hiring process that is written down: a rubric agreed before anyone is read, evidence quotes you can check against the resume, a blind first look, a person who makes every decision, a second person for every offer, and a record of all of it. You are not selling better hires, faster hiring or a legal opinion, and you should say so plainly. Nothing here was measured on real hiring outcomes, and the demo applicants are fictional. Slatehire never rejects, moves or hires anyone by itself, and it never sends an offer to a candidate.
+Setup, a trial period in draft mode, a short training for the people who decide, and a monthly check. You are selling a hiring process that is written down: a rubric agreed before anyone is read, evidence quotes you can check against the resume, a blind first look, a person who makes every decision, a second person for every offer, and a record of all of it. You are not selling better hires, faster hiring or a legal opinion, and you should say so plainly. Nothing here was measured on real hiring outcomes, and the demo applicants are sample data. Slatehire never rejects, moves or hires anyone by itself, and it never sends an offer to a candidate.
 
 ## What to charge for
 
@@ -30,9 +30,9 @@ So recommend, in writing, that the client has a lawyer who knows employment and 
 4. Ask for two or three real job posts and the criteria the managers really use. Turn them into rubrics with anchors for 1, 3 and 5. Check them for criteria that reward only one shape of career.
 5. Run the demo with the client so they see blind mode and the evidence marks (`01`).
 6. Set the hiring rules in `04`. The decided defaults are: keep a declined or withdrawn applicant 365 days, compare groups only when each has at least 10 people, the four fifths threshold on the fairness page, and at least 2 scorecards before an offer. Change any of them with the client's adviser and write the choice down.
-7. Connect the mailbox or the applicant tracker read only (`03`). Test with a fake applicant you made up.
+7. Connect the mailbox or the applicant tracker read only (`03`). Test with a sample applicant you write yourself.
 8. Lock the rubrics together. Explain that a change after the lock means a new locked version, and that earlier scores keep the version they used.
-9. Walk through one full path with made up people: shortlist, interview, scorecards, offer file, onboarding plan.
+9. Walk through one full path with sample people: shortlist, interview, scorecards, offer file, onboarding plan.
 10. Run in draft mode for at least two weeks. Read a sample of scores against the resumes yourself and count where a score looks wrong.
 11. Follow `09-GO-LIVE-CHECKLIST.md`.
 
@@ -51,4 +51,4 @@ Plain wording, checked by your own lawyer: what setup and the monthly work inclu
 
 ## Keep it honest
 
-The scorer in the demo is a set of rules and not a language model (a model scorer is built but has never run with a real key), and its measured scores are in [EVALUATION.md](EVALUATION.md), with the misses. It was tested on fictional resumes only. Say that to the client before they trust a number.
+The scorer in the demo is a set of rules and not a language model (a model scorer is built but has never run with a real key), and its measured scores are in [EVALUATION.md](EVALUATION.md), with the misses. It was tested on sample resumes only. Say that to the client before they trust a number.

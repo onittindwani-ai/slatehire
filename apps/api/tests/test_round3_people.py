@@ -21,7 +21,7 @@ from slatehire.models import Application, Candidate, Demographic, IntakeLog, Off
 from sendora_core.approvals import request_approval
 from sendora_core.db import Base, make_session_factory
 
-VISIBLE = line("Customer Support Specialist, Fictional Co, 2020 to 2026", 700) + line("I wrote replies to about 40 customer emails a day and cut errors by 12 percent.", 680)
+VISIBLE = line("Customer Support Specialist, Sample Co, 2020 to 2026", 700) + line("I wrote replies to about 40 customer emails a day and cut errors by 12 percent.", 680)
 HIDDEN_LINE = "I led the help desk and cut the ticket backlog from 300 to 40 in one quarter."
 
 
@@ -451,10 +451,10 @@ def test_the_restore_script_restores_then_reapplies_the_list(tmp_path):
 # ---- 9. big mail ----
 
 def test_a_message_over_the_size_limit_is_never_downloaded_and_is_listed_once(tmp_path):
-    from mock.mail_servers import FakeMailServers
+    from mock.mail_servers import StubMailServers
     from test_hardening_mail import GOOD, installed as mail_installed, mail, run
 
-    with FakeMailServers() as srv:
+    with StubMailServers() as srv:
         ctx = mail_installed(tmp_path, srv)
         ctx.settings.imap_max_message_bytes = 100_000
         srv.store.deliver(mail("Big Sender <big@mail.example.test>", "Application for Customer Support Specialist", GOOD + "x" * 150_000, message_id="<big@x>"))
@@ -469,10 +469,10 @@ def test_a_message_over_the_size_limit_is_never_downloaded_and_is_listed_once(tm
 
 
 def test_one_mailbox_run_holds_only_so_many_bytes_and_the_rest_waits(tmp_path):
-    from mock.mail_servers import FakeMailServers
+    from mock.mail_servers import StubMailServers
     from test_hardening_mail import GOOD, installed as mail_installed, mail, run
 
-    with FakeMailServers() as srv:
+    with StubMailServers() as srv:
         ctx = mail_installed(tmp_path, srv)
         ctx.settings.imap_max_message_bytes = 100_000
         ctx.settings.imap_max_run_bytes = 100_000
@@ -512,7 +512,7 @@ def test_an_ats_pull_without_a_job_id_is_refused(tmp_path):
 def test_an_ats_pull_brings_in_only_the_people_of_that_job(tmp_path):
     c, hs, role = ats_client(tmp_path, "88")
     out = c.post(f"/api/intake/ats?role={role['key']}", headers=hs["owner"]).json()
-    assert out["added"] == 2  # job 88 has two candidates in the fake ATS, the other three belong to job 77
+    assert out["added"] == 2  # job 88 has two candidates in the mock ATS, the other three belong to job 77
     assert [r["ats_job_id"] for r in c.get("/api/roles", headers=hs["owner"]).json()] == ["88"]
     c2, hs2, role2 = ats_client(tmp_path / "second", "77") if (tmp_path / "second").mkdir() is None else (None, None, None)
     assert c2.post(f"/api/intake/ats?role={role2['key']}", headers=hs2["owner"]).json()["added"] == 3

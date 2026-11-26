@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/mock/anthropic_mock.py
+# hypothesis_version: 6.170.17
+
+[150, 200, '127.0.0.1', 'application/json', 'assistant', 'body', 'claude-haiku-5-5', 'content', 'content-length', 'content-type', 'end_turn', 'headers', 'id', 'input_tokens', 'message', 'model', 'msg_stub', 'output_tokens', 'path', 'req_stub123', 'request-id', 'role', 'stop_reason', 'text', 'type', 'usage', '{}']

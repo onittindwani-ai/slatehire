@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/fairness.py
+# hypothesis_version: 6.170.17
+
+[1e-09, 1.0, 100, 'disclaimer', 'entered', 'fewer_than', 'flagged', 'groups', 'hired', 'interviewed', 'min_group', 'no_comparison', 'no_group_big_enough', 'nobody_selected', 'not_computable', 'notes', 'offered', 'ok', 'p_value', 'rate', 'rate_pct', 'ratio', 'ratio_dec', 'reference', 'selected', 'shortlisted', 'stages', 'status', 'threshold', 'too_few', 'undisclosed']

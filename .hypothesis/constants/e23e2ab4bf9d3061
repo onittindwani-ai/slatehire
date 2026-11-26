@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/packages/core-py/src/sendora_core/redaction.py
+# hypothesis_version: 6.170.17
+
+['Bearer [secret]', '[email]', '[id-number]', '[phone]', '[secret]']

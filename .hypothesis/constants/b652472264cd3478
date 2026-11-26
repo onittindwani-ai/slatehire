@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/scoring.py
+# hypothesis_version: 6.170.17
+
+[0.1, 100, 160, 240, ' -*|•\t', ' |', '(?<=[.;!?])\\s+', 'covered', 'criteria', 'criterion_id', 'detail', 'evidence_rejected', 'flags', 'id', 'items', 'keyword_list', 'kind', 'listed_only', 'look_for', 'model', 'model_level_differs', 'model_note', 'name', 'not_found', 'notes', 'possible_instruction', 'problem', 'quotes', 'rationale', 'rejected', 'scored', 'scorer', 'state', 'text', 'total', 'value', 'via', 'weight']

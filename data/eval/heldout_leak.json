@@ -1,5 +1,5 @@
 {
- "note": "40 fictional resumes with planted identity details in unusual formats. mode norm: leak when a core string is found in the normalised redacted text; mode token: leak when the word is found as a whole word.",
+ "note": "40 sample resumes with planted identity details in unusual formats. mode norm: leak when a core string is found in the normalised redacted text; mode token: leak when the word is found as a whole word.",
  "resumes": [
   {
    "id": "L01",

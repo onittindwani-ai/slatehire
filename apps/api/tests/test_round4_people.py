@@ -131,7 +131,7 @@ def test_a_lift_of_an_old_salted_hash_writes_no_line_because_the_list_holds_only
 
 # ---- restore.sh ----
 
-def fake_docker(tmp_path, live: str) -> tuple[Path, Path]:
+def stub_docker(tmp_path, live: str) -> tuple[Path, Path]:
     """A `docker` that logs every call in order, answers the read of the live list with `live`, and keeps what is written back and what is handed to the reapply command."""
     bin_dir = tmp_path / "bin"
     bin_dir.mkdir(exist_ok=True)
@@ -159,7 +159,7 @@ def run_restore(tmp_path, bin_dir: Path, *args: str):
 def test_a_restore_reads_the_live_list_before_stopping_and_puts_the_merged_list_back_after_the_exports(tmp_path):
     new = "b" * 64 + " email g2 20"
     old = "a" * 64 + " email g1 10"
-    bin_dir, log = fake_docker(tmp_path, new + "\n")
+    bin_dir, log = stub_docker(tmp_path, new + "\n")
     out = tmp_path / "backups"
     out.mkdir()
     dump, tar = out / "slatehire-1.dump", out / "exports-1.tar"
@@ -180,7 +180,7 @@ def test_a_restore_reads_the_live_list_before_stopping_and_puts_the_merged_list_
 
 
 def test_a_restore_with_no_readable_live_list_says_so_and_still_uses_the_list_next_to_the_dump(tmp_path):
-    bin_dir, log = fake_docker(tmp_path, "")
+    bin_dir, log = stub_docker(tmp_path, "")
     out = tmp_path / "backups"
     out.mkdir()
     dump = out / "slatehire-1.dump"

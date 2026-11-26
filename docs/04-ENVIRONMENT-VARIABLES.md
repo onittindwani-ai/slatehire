@@ -42,9 +42,9 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 
 ### `MODE and DEMO_MODE`
 - **Required:** Yes
-- **What it does:** `MODE=draft` sends nothing (no calendar invites). `live` allows a confirmed invite. `DEMO_MODE=true` loads fictional data, offline adapters and the public demo sign ins (the demo password, the data reset button and the clock buttons). The moment `OWNER_PASSWORD_HASH` is set every one of those shortcuts is off, even if this stays `true`. The default in `.env.example` is `false`.
+- **What it does:** `MODE=draft` sends nothing (no calendar invites). `live` allows a confirmed invite. `DEMO_MODE=true` loads sample data, offline adapters and the public demo sign ins (the demo password, the data reset button and the clock buttons). The moment `OWNER_PASSWORD_HASH` is set every one of those shortcuts is off, even if this stays `true`. The default in `.env.example` is `false`.
 - **How to get it:**
-1. Set `DEMO_MODE=true` (and leave `OWNER_PASSWORD_HASH` empty) only for the demo with fictional people.
+1. Set `DEMO_MODE=true` (and leave `OWNER_PASSWORD_HASH` empty) only for the demo with sample people.
 2. For a real install set `DEMO_MODE=false` first, then work through the go live checklist before `MODE=live`.
 - **Cost:** Free.
 - **Where to put it:** Local: your `.env` file. Vercel: Project, Settings, Environment Variables (web variables only). Railway: the service, Variables tab. Hetzner: the `.env` file next to `docker-compose.yml` on the server.
@@ -193,7 +193,7 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 - **Where to put it:** Local: your `.env` file. Vercel: Project, Settings, Environment Variables (web variables only). Railway: the service, Variables tab. Hetzner: the `.env` file next to `docker-compose.yml` on the server.
 - **Check it:** `python3 tools/doctor.py` (it prints the variable name, never the value) with `--live`
 - **If it is wrong you see:** `Could not sign in to the mailbox. Check the host, port, user and password.`
-- **Status:** Gmail steps from a Gmail help page read on 2026-11-22 for another project. Run only against a local fake mail server here.
+- **Status:** Gmail steps from a Gmail help page read on 2026-11-22 for another project. Run only against a local mock mail server here.
 
 ## Interview invites and offers
 
@@ -248,10 +248,10 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 
 ### `ANTHROPIC_API_KEY, LLM_BACKEND, LLM_MODE, SCORER, LLM_HARD_MODEL, LLM_BULK_MODEL, LLM_MODEL, ANTHROPIC_BASE_URL, ANTHROPIC_VERSION`
 - **Required:** No
-- **What it does:** Not needed for the demo or for scoring by the built in rules. `LLM_BACKEND` is `offline` (default, the built in rules stand in, no account), `fixture` (recorded answers from `LLM_FIXTURES_DIR`) or `anthropic` (a real model, needs the key, UNVERIFIED live: it has only been run against a local fake server). `SCORER` is `rules` (default) or `model`: with `SCORER=model` and a model backend, each criterion is scored by the model one at a time, from the redacted resume only, and the code checks every quote against the redacted text and adds up the total. A model never moves, rejects or messages anyone. Turning it on is a choice to make with your lawyer's advice, see doc 14.
+- **What it does:** Not needed for the demo or for scoring by the built in rules. `LLM_BACKEND` is `offline` (default, the built in rules stand in, no account), `fixture` (recorded answers from `LLM_FIXTURES_DIR`) or `anthropic` (a real model, needs the key, UNVERIFIED live: it has only been run against a local mock server). `SCORER` is `rules` (default) or `model`: with `SCORER=model` and a model backend, each criterion is scored by the model one at a time, from the redacted resume only, and the code checks every quote against the redacted text and adds up the total. A model never moves, rejects or messages anyone. Turning it on is a choice to make with your lawyer's advice, see doc 14.
 - **How to get it:**
 1. Leave both empty for the demo.
-2. To try the model path with no account, set `LLM_BACKEND=fixture`, `LLM_FIXTURES_DIR=data/llm_fixtures` and `SCORER=model` (recorded answers for the first 8 demo applications, made from a local fake server, not from a real model).
+2. To try the model path with no account, set `LLM_BACKEND=fixture`, `LLM_FIXTURES_DIR=data/llm_fixtures` and `SCORER=model` (recorded answers for the first 8 demo applications, made from a local mock server, not from a real model).
 3. For a real model: in the Anthropic Console, API keys, create a key, and set `ANTHROPIC_API_KEY`, `LLM_BACKEND=anthropic` and `SCORER=model`. Set `LLM_CALL_BUDGET` and `LLM_BUDGET_USD` first so a mistake cannot run up a bill.
 - **Cost:** Free when empty. A real model costs per call, one call per criterion per resume (a role with 5 criteria and 100 resumes is 500 calls).
 - **Where to put it:** Local: your `.env` file. Vercel: Project, Settings, Environment Variables (web variables only). Railway: the service, Variables tab. Hetzner: the `.env` file next to `docker-compose.yml` on the server.
@@ -273,7 +273,7 @@ Every variable Slatehire reads, in plain words. Copy `.env.example` to `.env` an
 
 ### `ALLOW_DEMO_SERVER`
 - **Required:** No (keep `false`)
-- **What it does:** Lets a throw away demo run on a server database. Leave it `false`: a demo on a real database would load fictional people into it, with public demo passwords.
+- **What it does:** Lets a throw away demo run on a server database. Leave it `false`: a demo on a real database would load sample people into it, with public demo passwords.
 - **How to get it:**
 1. Leave `false`.
 - **Cost:** Free.

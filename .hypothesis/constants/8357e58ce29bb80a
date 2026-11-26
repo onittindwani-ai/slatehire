@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/packages/core-py/src/sendora_core/app.py
+# hypothesis_version: 6.170.17
+
+[b'application/json', b'content-length', b'content-type', 2.0, 120, 401, 403, 409, 413, 429, 503, '/api/events/stream', '/docs', '/health', '/openapi.json', '/ready', 'Depends', 'GET', 'HEAD', 'OPTIONS', 'SELECT 1', 'SESSION_COOKIE', 'Sign in to continue.', 'body', 'cache-control', 'code', 'create_base_app', 'error', 'get_db', 'headers', 'http', 'http.request', 'http.response.body', 'http.response.start', 'local', 'message', 'no', 'no-cache', 'not_ready', 'ok', 'rate_limited', 'ready', 'require_read', 'require_role', 'require_write', 'retry-after', 'role', 'sendora.ready', 'status', 'sx_session', 'text/event-stream', 'type', 'x-accel-buffering', 'x-request-id', 'x-session']

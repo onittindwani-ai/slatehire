@@ -1,4 +1,4 @@
-"""Held out pools. Written BEFORE any redaction or scoring code exists. Everything is fictional.
+"""Held out pools. Written BEFORE any redaction or scoring code exists. Everything is sample data.
 
 The scoring statements are written in everyday synonyms and loose phrasing. The level of each statement (1 to 5) is the label,
 assigned by the author when writing it: 1 exposure only, 2 routine help, 3 solid independent work, 4 strong with a result, 5 led it and taught it.

@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/packages/core-py/src/sendora_core/jobs.py
+# hypothesis_version: 6.170.17
+
+[30.0, 1000, 1800, 2000, 'done', 'failed', 'queued', 'running']

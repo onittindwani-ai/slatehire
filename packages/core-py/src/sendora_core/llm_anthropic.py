@@ -1,7 +1,7 @@
 """The Anthropic Messages API as a backend for the shared model wrapper, over plain HTTP (httpx, no vendor SDK).
 
 LIVE USE IS UNVERIFIED. The request and response shapes below follow the vendor docs read on 2026-11-23
-(see docs/FACTS-AND-SOURCES.md of the hub). This code has been run only against a local fake server that
+(see docs/FACTS-AND-SOURCES.md of the hub). This code has been run only against a local mock server that
 checks the request shape. It has never been run against the real API with a real key.
 
 What it sends: POST {base_url}/v1/messages with headers x-api-key, anthropic-version and content-type,

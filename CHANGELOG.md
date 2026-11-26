@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2 (2026-11-27)
+
+- Documentation and demo label updates.
+
 ## 1.0.1 (2026-11-25)
 
 - Hardening after a security review. Mail is read without marking it read and marked read only after the application is stored, one message that cannot be stored is skipped on its own and the rest of the batch goes on, and nothing the applicant wrote is put in a log or a job error. Every application that is not added has a line with the reason, shown on the Candidates page, and a person whose resume cannot be read still comes in, marked "Resume missing" and not scored.

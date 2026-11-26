@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/interviews.py
+# hypothesis_version: 6.170.17
+
+[100, 240, 300, 600, ':', '@', 'already', 'anchors', 'application', 'calendar', 'can_submit', 'cancelled', 'comments', 'complete', 'criteria', 'criterion_id', 'detail', 'disagree', 'disagreements', 'done', 'hidden', 'id', 'interview.cancelled', 'interview.invited', 'interview.planned', 'interviewer', 'interviewers', 'interviewing', 'invited', 'inviting', 'max', 'mean', 'min', 'my_scorecard', 'n', 'name', 'no', 'overall', 'planned', 'probes', 'question', 'ratings', 'reason', 'recommendation', 'recommendations', 'ref', 'scorecard.sent', 'scorecards', 'scored', 'sent', 'shortlisted', 'spread', 'state', 'strong_no', 'strong_yes', 'submitted', 'submitted_by', 'summary', 'value', 'weight', 'why', 'yes']

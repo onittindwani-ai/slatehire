@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/tools/check_docs.py
+# hypothesis_version: 6.170.17
+
+[8210, 8211, 8212, 8213, '*.md', '--fix', '.', '.git', 'CHANGELOG.md', 'PROBLEM ', '[a-z]+:', '__main__', '`(0\\d|1[0-5])`', 'counts.json', 'data', 'deploy', 'docs', 'mailto', 'prompts', 'templates', 'utf-8']

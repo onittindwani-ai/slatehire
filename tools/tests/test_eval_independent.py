@@ -1,4 +1,4 @@
-"""The independent evaluation tool, tried on a tiny made up set (NOT an independent set) so the loader and the scoring of the scorer are tested."""
+"""The independent evaluation tool, tried on a tiny hand written set (NOT an independent set) so the loader and the scoring of the scorer are tested."""
 
 import json
 import sys

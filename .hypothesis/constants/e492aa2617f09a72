@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/models.py
+# hypothesis_version: 6.170.17
+
+[120, 160, 200, 254, 300, '0', '1', 'Hiring manager', '[]', 'all', 'application/pdf', 'applied', 'cf_application', 'cf_application.id', 'cf_candidate', 'cf_candidate.id', 'cf_demographic', 'cf_fairness_report', 'cf_intake_log', 'cf_interview', 'cf_interview.id', 'cf_offer', 'cf_onboarding_task', 'cf_resume', 'cf_resume_file', 'cf_role', 'cf_role.id', 'cf_rubric', 'cf_rubric.id', 'cf_score', 'cf_scorecard', 'cf_state', 'cf_suppression', 'declined', 'draft', 'en', 'group_label', 'hired', 'interview_id', 'interviewed', 'interviewer', 'interviewing', 'key', 'month', 'offer', 'offered', 'open', 'planned', 'role_id', 'salt', 'shortlisted', 'step', 'structured', 'template', 'withdrawn']

@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/tools/scan_secrets.py
+# hypothesis_version: 6.170.17
+
+['.ico', '.jpg', '.pdf', '.png', '.woff', '.woff2', 'AKIA[0-9A-Z]{16}', 'AWS access key', 'Anthropic key', 'Argon2 hash', 'GitHub token', 'Notion token', 'OpenAI style key', 'Private key block', 'Slack token', '\\$argon2[a-z]*\\$', '__main__', 'change-me', 'demo-secret', 'dev-only', 'e2e-only', 'example', 'git', 'ignore', 'ls-files', 'not-for-real', 'nothing found', 'ntn_[A-Za-z0-9]{20,}', 'packages/', 'pnpm-lock.yaml', 'scan_secrets.py', 'secret scan:', 'sk-[A-Za-z0-9]{32,}', 'stub', 'test-only']

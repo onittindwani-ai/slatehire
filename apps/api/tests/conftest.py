@@ -20,7 +20,7 @@ DATA = str(ROOT / "data")
 
 @pytest.fixture(autouse=True)
 def _no_key_from_the_shell(monkeypatch):
-    """The developer's shell may hold a real ANTHROPIC_API_KEY. No test may use it: a test that needs a key sets one explicitly and points it at a local fake server."""
+    """The developer's shell may hold a real ANTHROPIC_API_KEY. No test may use it: a test that needs a key sets one explicitly and points it at a local mock server."""
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     monkeypatch.delenv("ANTHROPIC_BASE_URL", raising=False)
 HOOK = "hook-secret-for-tests"

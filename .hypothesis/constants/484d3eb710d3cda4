@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/tools/eval_redaction.py
+# hypothesis_version: 6.170.17
+
+['--save', 'NFKC', 'NFKD', '[^a-z0-9]', '[^a-z0-9]+', '__main__', 'apps/api/src', 'category', 'cores', 'data', 'eval', 'first', 'heldout_leak.json', 'id', 'keep', 'known_name', 'last', 'leak_first_run.json', 'leak_rate', 'leaked', 'missed', 'mode', 'must_keep_lost', 'must_keep_phrases', 'name_known', 'note', 'over_redaction_rate', 'per_category', 'planted', 'resume', 'resumes', 'saved', 'text', 'token', 'unknown_name']

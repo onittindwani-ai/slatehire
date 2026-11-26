@@ -1,6 +1,6 @@
 # Slatehire
 
-Slatehire reads resumes with identity hidden, scores each one against a rubric a person locked, shows the exact resume sentences behind every score, and then steps aside: a person decides every outcome. It also plans interviews, collects scorecards, drafts offers for a second person to approve, and starts onboarding plans. It runs on fictional data in a few minutes with no accounts.
+Slatehire reads resumes with identity hidden, scores each one against a rubric a person locked, shows the exact resume sentences behind every score, and then steps aside: a person decides every outcome. It also plans interviews, collects scorecards, drafts offers for a second person to approve, and starts onboarding plans. It runs on sample data in a few minutes with no accounts.
 
 ![Candidate workspace](docs/screenshots/state-2-detail-evidence-marked-desktop.png)
 
@@ -17,7 +17,7 @@ Slatehire reads resumes with identity hidden, scores each one against a rubric a
 | ![Pipeline](docs/screenshots/page-pipeline-desktop.png) | ![Roles](docs/screenshots/page-roles-desktop.png) |
 
 ## Try it
-Follow [docs/01-QUICK-DEMO.md](docs/01-QUICK-DEMO.md). Everything in the demo is fictional.
+Follow [docs/01-QUICK-DEMO.md](docs/01-QUICK-DEMO.md). Everything in the demo is sample data and nothing leaves your computer.
 
 ## Use it for real
 Start at [docs/00-START-HERE.md](docs/00-START-HERE.md). Guides run from 00 to 15: business basics, connecting tools, variables, running locally, deploying (Vercel, Railway, Hetzner), go live, [using it for a client](docs/10-USING-IT-FOR-A-CLIENT.md), operating, updating, security, limits and troubleshooting. Reference: [architecture](docs/ARCHITECTURE.md), [capabilities](docs/CAPABILITIES.md), [tools and alternatives](docs/TOOLS-AND-ALTERNATIVES.md), [evaluation](docs/EVALUATION.md), [glossary](docs/GLOSSARY.md), [facts and sources](docs/FACTS-AND-SOURCES.md). Prompts for Claude Code and Codex are in [prompts](prompts/).

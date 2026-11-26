@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/packages/core-py/src/sendora_core/llm.py
+# hypothesis_version: 6.170.17
+
+[0.5, 500, 'AnthropicBackend', 'CallBudget', 'FixtureLLM', 'LLM', 'LLMAPIError', 'LLMBackend', 'LLMBudgetError', 'LLMError', 'LLMResponse', 'RecordingBackend', 'T', 'build_llm', 'fixture_key', 'hard', 'is_live', 'no JSON object found', 'reset_budgets', 'schema', 'sendora_core.llm', 'supports_json_schema', 'unreachable', '{', '}']

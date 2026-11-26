@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/evidence.py
+# hypothesis_version: 6.170.17
+
+[400, 'not_found', 'problem', 'quotes', 'reason', 'rejected', 'rejected_quotes', 'scored', 'start', 'state', 'text', 'the quote is blank', 'the quote is empty', 'value']

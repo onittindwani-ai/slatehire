@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/rubric_service.py
+# hypothesis_version: 6.170.17
+
+['## How to apply', '## How we decide', '-', '[^a-z0-9]+', 'blind', 'criteria', 'fingerprint', 'key', 'role', 'role.created', 'rubric.drafted', 'rubric.edited', 'rubric.locked', 'version']

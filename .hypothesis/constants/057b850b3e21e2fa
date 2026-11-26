@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/dbsetup.py
+# hypothesis_version: 6.170.17
+
+['BEGIN', 'BEGIN IMMEDIATE', 'IMMEDIATE', 'begin', 'bind', 'connect', 'sqlite', 'sqlite_begin']

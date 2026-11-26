@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/packages/core-py/src/sendora_core/approvals.py
+# hypothesis_version: 6.170.17
+
+[500, 'action', 'approval.requested', 'approved', 'approver', 'high', 'low', 'medium', 'note', 'owner', 'pending', 'rejected', 'risk', 'system']

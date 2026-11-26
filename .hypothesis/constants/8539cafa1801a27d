@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/tools/check_env.py
+# hypothesis_version: 6.170.17
+
+['#', '# ', '\'"', '--env', '--example', '--strict', '.', '.env', '.env.example', 'Core', 'DATABASE_URL', 'DEMO_MODE', 'PROBLEM', 'SESSION_SECRET', '__main__', 'all or none', 'copy to', 'fill in together', 'make the hash', 'store_true', 'true', 'which adapter']

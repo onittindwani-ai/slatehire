@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/context.py
+# hypothesis_version: 6.170.17
+
+['1', 'export_dir', 'fairness_floor', 'force_draft', 'info', 'kill_switch', 'mode', 'model', 's', 'suppression_key']

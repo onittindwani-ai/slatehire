@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/retention.py
+# hypothesis_version: 6.170.17
+
+[120, 160, '(?!\\d)', '(?!\\w)', '(?<!\\d)\\+?', '(?<!\\w)', '(deleted)', '.', '/', '[\\s().\\-/x]{0,3}', '[\\s,.\\-]+', '\\', '\\D', 'also_removed', 'applications', 'applied', 'candidate.deleted', 'code', 'files', 'hired', 'intake_lines', 'interviewing', 'note', 'offer', 'offers', 'quotes', 'rationale', 'rejected_quotes', 'resumes', 'retention-job', 'scores', 'shortlisted', 'suppressed', 'tasks', 'utf-8', 'why']

@@ -24,9 +24,9 @@ PATTERNS = {
 }
 SKIP_SUFFIX = {".png", ".jpg", ".pdf", ".ico", ".woff", ".woff2"}
 SKIP_NAMES = {"pnpm-lock.yaml", "scan_secrets.py"}
-# Test fixtures use obviously fake values. The marker must be inside the matched value itself: a real key on a line that merely
+# Test fixtures use obviously test-only values. The marker must be inside the matched value itself: a real key on a line that merely
 # mentions the word "example" is still reported.
-ALLOW = ("example", "not-for-real", "e2e-only", "dev-only", "fake", "demo-secret", "test-only", "change-me")
+ALLOW = ("example", "not-for-real", "e2e-only", "dev-only", "stub", "demo-secret", "test-only", "change-me")
 
 
 def tracked() -> list[Path]:
@@ -35,7 +35,7 @@ def tracked() -> list[Path]:
 
 
 def scan_line(line: str) -> list[str]:
-    """The kinds of secret found in one line. A match whose own text carries a fake marker is allowed."""
+    """The kinds of secret found in one line. A match whose own text carries a stub marker is allowed."""
     found = []
     for kind, rx in PATTERNS.items():
         for m in rx.finditer(line):

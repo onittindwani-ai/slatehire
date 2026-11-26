@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Write the four fictional application emails the demo receives one by one when you press Run now.
+"""Write the four sample application emails the demo receives one by one when you press Run now.
 
   python3 tools/make_inbox.py
-Everything is invented. The files go to data/seed/inbox/.
+Everything is generated sample data. The files go to data/seed/inbox/.
 """
 from __future__ import annotations
 

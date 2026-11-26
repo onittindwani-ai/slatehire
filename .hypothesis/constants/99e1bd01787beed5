@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/registry.py
+# hypothesis_version: 6.170.17
+
+['127.0.0.1', 'A', 'ASHBY_API_KEY', 'B', 'C', 'CALCOM_API_KEY', 'CALCOM_EVENT_TYPE_ID', 'GOOGLE_ACCESS_TOKEN', 'GREENHOUSE_TOKEN', 'IMAP_HOST', 'IMAP_PASSWORD', 'IMAP_USER', 'Offline demo.', 'WORKABLE_SUBDOMAIN', 'WORKABLE_TOKEN', 'ashby', 'ats', 'breezedoc', 'calcom', 'calendar', 'google', 'greenhouse', 'handoff', 'imap', 'localhost', 'mailbox', 'package', 'seed', 'workable']

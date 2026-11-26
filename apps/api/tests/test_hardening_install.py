@@ -25,7 +25,7 @@ def test_a_fresh_non_demo_install_does_its_core_job_from_an_empty_database(tmp_p
     c = real_client(tmp_path, mode="live")
     app = c.app
     with app.state.ctx.factory() as s:
-        assert s.scalar(select(func.count(Role.id))) == 0  # nothing fictional was loaded
+        assert s.scalar(select(func.count(Role.id))) == 0  # no sample data was loaded
     hs = three_people(c)
     role = start_role(c, hs["owner"])
     flow = get_to_offer(c, hs, role["key"])
@@ -201,8 +201,8 @@ def test_the_version_is_the_same_in_every_place(tmp_path):
     web = json.loads((ROOT / "apps/web/package.json").read_text())["version"]
     root = json.loads((ROOT / "package.json").read_text())["version"]
     app_version = create_app(real_settings(tmp_path)).version
-    assert api == web == root == app_version == "1.0.1"
-    assert re.search(rf"^## {re.escape(api)} \(2026-11-25\)", (ROOT / "CHANGELOG.md").read_text(), re.M)
+    assert api == web == root == app_version == "1.0.2"
+    assert re.search(rf"^## {re.escape(api)} \(2026-11-27\)", (ROOT / "CHANGELOG.md").read_text(), re.M)
 
 
 def test_the_docker_files_say_what_the_docs_say():

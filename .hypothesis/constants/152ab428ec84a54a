@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/api/deps.py
+# hypothesis_version: 6.170.17
+
+[400, 401, 403, 404, '/original', '1', 'GET', 'HEAD', 'Not found.', 'OPTIONS', 'Sign in to continue.', 'locked', 'owner', 'reveal', 'role', 'true', 'user']

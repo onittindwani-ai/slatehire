@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/api/routes_auth.py
+# hypothesis_version: 6.170.17
+
+[254, 401, 429, 1024, ',', '/api/auth', '/login', '/logout', '/me', 'Who is signed in', 'approver', 'auth', 'demo-password-1', 'demo_mode', 'device', 'email', 'ok', 'owner', 'password_hash', 'role', 'sx_device', 'token', 'user', 'viewer', 'viewer@example.test', 'x', 'x-device', 'x-forwarded-for']

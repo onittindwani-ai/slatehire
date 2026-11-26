@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/world.py
+# hypothesis_version: 6.170.17
+
+['Demo company', 'Interview planned.', 'answer_key.json', 'applicants', 'applicants.csv', 'approved', 'approver', 'code', 'criteria', 'criterion_id', 'csv', 'declined', 'demographics.json', 'email', 'groups', 'hired', 'intake', 'interviewing', 'interviews', 'levels', 'name', 'no', 'offers', 'ops', 'owner@example.test', 'phone', 'resume_file', 'resumes', 'role', 'roles', 'rubrics.json', 'school', 'scorecards', 'scorer', 'seed', 'shortlisted', 'source', 'structured', 'support', 'title', 'undisclosed', 'utf-8', 'yes']

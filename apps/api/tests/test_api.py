@@ -162,7 +162,7 @@ def test_a_new_applicant_is_scored_by_the_job_and_stays_applied(client):
 
 
 def test_signed_webhook_adds_an_applicant_and_a_bad_signature_is_refused(client):
-    body = json.dumps({"name": "Hooked Person", "email": "hp@mail.example.test", "role": "analyst", "resume_text": "Data Analyst, Fictional Co\n* Wrote SQL queries and joins on the warehouse database every week.\n* Built dashboards.\n"}).encode()
+    body = json.dumps({"name": "Hooked Person", "email": "hp@mail.example.test", "role": "analyst", "resume_text": "Data Analyst, Sample Co\n* Wrote SQL queries and joins on the warehouse database every week.\n* Built dashboards.\n"}).encode()
     good = hmac.new(HOOK.encode(), body, hashlib.sha256).hexdigest()
     assert client.post("/api/webhooks/application", content=body, headers={"x-signature": "0" * 64}).status_code == 401
     assert client.post("/api/webhooks/application", content=body).status_code == 401

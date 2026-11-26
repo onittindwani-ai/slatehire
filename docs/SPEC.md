@@ -31,7 +31,7 @@ Draft mode sends nothing. A kill switch (owner) stops invites and file hand offs
 
 ## Adapters
 
-ATS: seed (A), Ashby, Workable, Greenhouse (B, read only). Calendar: seed (A), Cal.com, Google Calendar (B). Mailbox: seed (A), IMAP (A, tested on a fake server). Hand off: package file (A), Breezedoc (C: no live call built).
+ATS: seed (A), Ashby, Workable, Greenhouse (B, read only). Calendar: seed (A), Cal.com, Google Calendar (B). Mailbox: seed (A), IMAP (A, tested on a local mock server). Hand off: package file (A), Breezedoc (C: no live call built).
 
 ## Pages
 

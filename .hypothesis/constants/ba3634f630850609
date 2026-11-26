@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/adapters/calendar.py
+# hypothesis_version: 6.170.17
+
+[200, 401, 403, '%Y-%m-%dT%H:%M:%SZ', '/bookings', '/me', '2026-02-25', '@', 'Authorization', 'Booked in Cal.com.', 'Connected.', 'UTC', 'all', 'attendee', 'attendees', 'cal-api-version', 'calcom', 'data', 'dateTime', 'description', 'detail', 'email', 'end', 'eventTypeId', 'google', 'google.create_event', 'guests', 'id', 'lengthInMinutes', 'metadata', 'name', 'purpose', 'ref', 'seed', 'sendUpdates', 'start', 'summary', 'timeZone', 'uid']

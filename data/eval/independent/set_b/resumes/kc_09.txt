@@ -3,7 +3,7 @@ WANT: Restaurant Kitchen Manager
 
 TAGS: food cost
 >> Cobalt Ridge Ltd [Restaurant Kitchen Manager] 3 years
-   Developed 17 new menu dishes that together made up 12 percent of weekly sales and wrote the recipe cards.
+   Developed 17 new menu dishes that together accounted for 12 percent of weekly sales and wrote the recipe cards.
 >> Bluepine Services [Assistant Restaurant Kitchen Manager] 2 years
    Passed 17 health inspections in a row with no major findings and cut wasted stock by 12 percent through labelling and rotation.
 SCHOOL: Nordhavn University of Applied Sciences (2019), Culinary Arts

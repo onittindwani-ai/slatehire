@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/rubrics.py
+# hypothesis_version: 6.170.17
+
+['*', '1', '3', '5', 'accent', 'anchors', 'blind', 'citizenship', 'criteria', 'cultural fit', 'culture fit', 'digital native', 'elite university', 'energetic', 'female', 'gender', 'id', 'ivy league', 'look_for', 'maiden name', 'male', 'marital', 'married', 'mother tongue', 'name', 'nationality', 'native speaker', 'over 50', 'pregnan*', 'prestigious', 'race', 'recent grad', 'recent graduate', 'redaction', 'religion', 'top school', 'top university', 'under 30', 'weight', 'years of age', 'young', 'youthful']

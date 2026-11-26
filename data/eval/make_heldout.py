@@ -4,7 +4,7 @@
   python3 data/eval/make_heldout.py
 
 Writes: rubric_defs.json, swap_identities.json, heldout_leak.json (40 resumes with planted identity details), heldout_scoring.json (60 labelled resumes).
-Everything is fictional. Names, schools, towns and employers are invented. Phone numbers use fictional ranges.
+Everything is sample data. Names, schools, towns and employers are generated. Phone numbers use reserved sample ranges.
 """
 from __future__ import annotations
 
@@ -131,7 +131,7 @@ def main() -> None:
     defs = {"roles": {k: {"title": v["title"], "criteria": [{"id": c, "name": CRITERIA[c][0], "topic": CRITERIA[c][1], "question": CRITERIA[c][2]} for c in v["criteria"]]} for k, v in ROLES.items()}}
     (OUT / "rubric_defs.json").write_text(json.dumps(defs, indent=1) + "\n")
     ids = [identity(random.Random(1000 + i), i) for i in range(60)]
-    (OUT / "swap_identities.json").write_text(json.dumps({"note": "Fictional identities for the identity swap property test.", "identities": ids}, indent=1) + "\n")
+    (OUT / "swap_identities.json").write_text(json.dumps({"note": "Sample identities for the identity swap property test.", "identities": ids}, indent=1) + "\n")
     # leak set
     leak = []
     for n in range(40):
@@ -143,7 +143,7 @@ def main() -> None:
         text, keep = compose(items, bullets, rng, n % 3, ROLES[role]["title"])
         keep += [b[:40] for b in bullets]
         leak.append({"id": f"L{n + 1:02d}", "known_name": {"first": ident["first"], "last": ident["last"]}, "text": text, "planted": items, "keep": keep})
-    (OUT / "heldout_leak.json").write_text(json.dumps({"note": "40 fictional resumes with planted identity details in unusual formats. mode norm: leak when a core string is found in the normalised redacted text; mode token: leak when the word is found as a whole word.", "resumes": leak}, indent=1, ensure_ascii=False) + "\n")
+    (OUT / "heldout_leak.json").write_text(json.dumps({"note": "40 sample resumes with planted identity details in unusual formats. mode norm: leak when a core string is found in the normalised redacted text; mode token: leak when the word is found as a whole word.", "resumes": leak}, indent=1, ensure_ascii=False) + "\n")
     # scoring set: 60 resumes, 20 per role, labels by construction
     weights = [0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5]
     rows = []
@@ -162,7 +162,7 @@ def main() -> None:
         text = "\n".join([*head, "", "SUMMARY", "Steady and reliable worker.", "", "EXPERIENCE", f"{ROLES[role]['title']}, {e1}, 2019 to 2026", *[f"- {b}" for b in bl[:h + 1]], f"- {rng.choice(FILLER)}", "", f"Assistant, {e2}, 2012 to 2019", *[f"- {b}" for b in bl[h + 1:]], f"- {rng.choice(FILLER)}",
                           "", "EDUCATION", f"B.A., {ident['school']}, {ident['grad_year']}"])
         rows.append({"id": f"S{n + 1:02d}", "role": role, "known_name": {"first": ident["first"], "last": ident["last"]}, "text": text, "labels": labels, "label_note": "level 0 means the criterion is not shown; 1 to 5 as written by the author"})
-    (OUT / "heldout_scoring.json").write_text(json.dumps({"note": "60 labelled fictional resumes. Labels are the level of the statement the author wrote into the resume, by construction. Same author as the rules: not independent.", "resumes": rows}, indent=1) + "\n")
+    (OUT / "heldout_scoring.json").write_text(json.dumps({"note": "60 labelled sample resumes. Labels are the level of the statement the author wrote into the resume, by construction. Same author as the rules: not independent.", "resumes": rows}, indent=1) + "\n")
     print("wrote", len(leak), "leak resumes with", sum(len(r["planted"]) for r in leak), "planted items;", len(rows), "scoring resumes")
 
 

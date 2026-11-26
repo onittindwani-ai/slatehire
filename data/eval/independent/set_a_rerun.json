@@ -1,5 +1,5 @@
 {
- "note": "Independent set, written by agents who never saw the code. Rules stand in, not a language model.",
+ "note": "Independent set, written by separate AI test authors who never saw the code. Rules stand in, not a language model.",
  "set": "set_a",
  "scoring": {
   "resumes": 60,

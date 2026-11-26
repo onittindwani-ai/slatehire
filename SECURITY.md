@@ -22,7 +22,7 @@ Please do not post security problems in a public issue. Use the Security tab of 
 - The database refuses edits to a locked rubric, a sent scorecard and the audit log, and a test edits one outside the app and sees the chain break.
 - Group labels are read by one module only, and a test checks that.
 - Secret scan of tracked files (`python tools/scan_secrets.py`): nothing found.
-- Dependency audit on 2026-11-23: `pip-audit` over the 45 installed third party Python packages and `pnpm audit` over all JavaScript packages both reported no known vulnerabilities. This covers only known, published problems on that date and was not repeated for 1.0.1.
+- Dependency audit on 2026-11-23: `pip-audit` over the 45 installed third party Python packages and `pnpm audit` over all JavaScript packages both reported no known vulnerabilities. This covers only known, published problems on that date and was not repeated for 1.0.1 or 1.0.2.
 
 ## What was not checked
 - No outside penetration test, and no test against real vendor accounts. Treat this as a careful self review, not an audit.

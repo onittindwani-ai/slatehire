@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Generate the fictional demo data: rubrics, 90 resumes (text, markdown and PDF) in several layouts with planted differences,
-an applicant CSV, voluntary demographic labels, and the answer key. Everything is invented. Deterministic: same seed, same files.
+"""Generate the sample demo data: rubrics, 90 resumes (text, markdown and PDF) in several layouts with planted differences,
+an applicant CSV, voluntary demographic labels, and the answer key. Everything is generated sample data. Deterministic: same seed, same files.
 
   python3 tools/make_seed.py
 """
@@ -111,7 +111,7 @@ def main() -> None:
         f.unlink()
     rb = rubrics()
     (SEED / "rubrics.json").write_text(json.dumps(rb, indent=1) + "\n")
-    key: dict = {"resumes": {}, "twins": [], "gap_pairs": [], "injection_pairs": [], "stuffing": [], "non_traditional": [], "note": "Everything is fictional. levels: 0 not shown, 1 to 5 by construction."}
+    key: dict = {"resumes": {}, "twins": [], "gap_pairs": [], "injection_pairs": [], "stuffing": [], "non_traditional": [], "note": "Everything is sample data. levels: 0 not shown, 1 to 5 by construction."}
     rows, n = [], 0
     for rk, role in rb.items():
         crit = [c["id"] for c in role["criteria"]]
@@ -176,7 +176,7 @@ def main() -> None:
         for c in codes[i:i + k]:
             demo[c] = g
         i += k
-    (SEED / "demographics.json").write_text(json.dumps({"note": "Voluntary, fictional, abstract group labels. Stored apart from everything else.", "groups": demo}, indent=1) + "\n")
+    (SEED / "demographics.json").write_text(json.dumps({"note": "Voluntary, sample, abstract group labels. Stored apart from everything else.", "groups": demo}, indent=1) + "\n")
     with (SEED / "applicants.csv").open("w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0]))
         w.writeheader(); w.writerows(rows)

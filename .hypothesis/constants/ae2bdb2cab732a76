@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/worker.py
+# hypothesis_version: 6.170.17
+
+['.env', 'ENV_FILE', '__main__', 'now', 'ran %d job(s)', 'slatehire.worker', 'sqlite', 'worker loop error', 'worker stopped']

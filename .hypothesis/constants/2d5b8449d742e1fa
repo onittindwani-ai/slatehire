@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/devicetoken.py
+# hypothesis_version: 6.170.17
+
+[b'=', b'slatehire-device-v1|', 400, 3600, ',', '.', ':', '=', 'a', 'd', 'exp']

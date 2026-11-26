@@ -7,14 +7,14 @@ from email.message import EmailMessage
 from sqlalchemy import select
 
 from slatehire.models import Application, Candidate, IntakeLog, Resume
-from mock.mail_servers import FakeMailServers
+from mock.mail_servers import StubMailServers
 from test_hardening_mail import installed, log_rows, mail, run
 
 PNG = b"\x89PNG\r\n\x1a\n" + bytes(range(256)) * 12
 
 
 def test_other_peoples_mail_in_a_shared_inbox_is_never_read_stored_or_marked_read(tmp_path):
-    with FakeMailServers() as srv:
+    with StubMailServers() as srv:
         ctx = installed(tmp_path, srv)
         srv.store.deliver(mail("Colleague <colleague@rivera.example.test>", "Lunch on Friday?"))
         srv.store.deliver(mail("Bank <bank@mail.example.test>", "Your statement is ready"))
@@ -29,7 +29,7 @@ def test_other_peoples_mail_in_a_shared_inbox_is_never_read_stored_or_marked_rea
 def test_the_subject_search_is_done_by_the_server_not_after_the_fetch(tmp_path):
     from slatehire.adapters.mailbox import ImapMailbox
 
-    with FakeMailServers() as srv:
+    with StubMailServers() as srv:
         ctx = installed(tmp_path, srv)
         srv.store.deliver(mail("Colleague <colleague@rivera.example.test>", "Private note"))
         srv.store.deliver(mail("Ann <ann@mail.example.test>", "application for customer support specialist"))  # the case of the subject does not matter
@@ -38,7 +38,7 @@ def test_the_subject_search_is_done_by_the_server_not_after_the_fetch(tmp_path):
 
 
 def test_an_application_mail_with_a_picture_first_is_added_with_the_real_resume(tmp_path):
-    with FakeMailServers() as srv:
+    with StubMailServers() as srv:
         ctx = installed(tmp_path, srv)
         m = EmailMessage()
         m["From"], m["Subject"] = "Pat Quinn <pat@mail.example.test>", "Application for Customer Support Specialist"
@@ -56,7 +56,7 @@ def test_an_application_mail_with_a_picture_first_is_added_with_the_real_resume(
 def test_a_subject_that_fits_two_roles_goes_to_the_list_and_nobody_is_added(tmp_path):
     from slatehire import rubric_service
 
-    with FakeMailServers() as srv:
+    with StubMailServers() as srv:
         ctx = installed(tmp_path, srv)
         with ctx.factory() as s:
             rubric_service.create_role(s, "sam@rivera.example.test", "Customer Support Lead", "Support", "Leads support.", key="lead")
@@ -71,7 +71,7 @@ def test_a_subject_that_fits_two_roles_goes_to_the_list_and_nobody_is_added(tmp_
 
 
 def test_an_application_mail_that_is_not_added_is_on_the_list_and_not_fetched_again(tmp_path):
-    with FakeMailServers() as srv:
+    with StubMailServers() as srv:
         ctx = installed(tmp_path, srv)
         srv.store.deliver(mail("Eve <eve@mail.example.test>", "Application for Astronaut"))
         assert run(ctx)["rejected"] == 1

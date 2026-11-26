@@ -48,7 +48,7 @@ export default function Login() {
           {error ? <p role="alert" className="sx-field__error" style={{ margin: 0 }}>{error}</p> : null}
           <Button type="submit" variant="primary" disabled={!email || !password} disabledReason="Enter your email and password" onClick={submit}>Sign in</Button>
         </form>
-        {demoHint ? <p className="cf-mini" style={{ margin: 0 }}>Demo: owner@example.test with the password demo-password-1. Fictional data only.</p> : null}
+        {demoHint ? <p className="cf-mini" style={{ margin: 0 }}>Demo sign in: owner@example.test with the password demo-password-1. Demo data only.</p> : null}
       </Card>
     </main>
   );

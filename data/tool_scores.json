@@ -531,7 +531,7 @@
    "reference": "imap",
    "recommendation": {
     "beginner": "Start with the demo inbox, then CSV. Connect a mailbox only when you are ready.",
-    "implementer": "Plain IMAP works with Gmail (app password), Outlook and most hosts, and was tested against a local fake server. It only reads.",
+    "implementer": "Plain IMAP works with Gmail (app password), Outlook and most hosts, and was tested against a local mock server. It only reads.",
     "cost_sensitive": "IMAP is free with the mailbox you already have.",
     "open_source_when": "Not a paid versus open source choice: IMAP is an open standard. A mailbox shared by many people may fit a form tool and the signed webhook better."
    },
@@ -540,7 +540,7 @@
      "id": "imap",
      "name": "IMAP mailbox",
      "kind": "open standard",
-     "supported_in_slatehire": "Built and tested against a local fake mail server",
+     "supported_in_slatehire": "Built and tested against a local mock mail server",
      "run": "run against a local stand in only",
      "sources": [
       {
@@ -661,7 +661,7 @@
    "reference": "claude",
    "recommendation": {
     "beginner": "Use the offline rules scorer. It is plain, repeatable and every quote is checked by code.",
-    "implementer": "A language model can replace the proposal step and the quote check still applies. That path is built behind the shared model wrapper and tested against a local fake server and recorded fixtures; it was never run with a real key (UNVERIFIED live).",
+    "implementer": "A language model can replace the proposal step and the quote check still applies. That path is built behind the shared model wrapper and tested against a local mock server and recorded fixtures; it was never run with a real key (UNVERIFIED live).",
     "cost_sensitive": "The offline scorer costs nothing. A model is billed per use on the vendor price page.",
     "open_source_when": "The rules scorer is the right call when a hiring decision must be explainable word for word. It is the wrong call when resumes are long, messy or in many languages."
    },
@@ -701,7 +701,7 @@
       },
       "integration": {
        "score": 60,
-       "evidence": "Built behind the shared model wrapper, one criterion per call, every quote and the total checked by code. Run only against a local fake server."
+       "evidence": "Built behind the shared model wrapper, one criterion per call, every quote and the total checked by code. Run only against a local mock server."
       }
      }
     },
@@ -975,7 +975,7 @@
   },
   {
    "name": "Anthropic API as a live scorer",
-   "why": "Scored above as a language model option. The live path is built and only run against a local fake server (UNVERIFIED live)."
+   "why": "Scored above as a language model option. The live path is built and only run against a local mock server (UNVERIFIED live)."
   }
  ]
 }

@@ -1,4 +1,4 @@
-"""A local fake of the Anthropic Messages endpoint, standard library only. It records every request so a test can assert the
+"""A local mock of the Anthropic Messages endpoint, standard library only. It records every request so a test can assert the
 request shape, and it answers from a script or from a function.
 
 It is NOT the real API and proves nothing about how a real model reads a reply. Live use stays UNVERIFIED.
@@ -13,11 +13,11 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 
 def ok(text: str, model: str = "claude-haiku-5-5", stop: str = "end_turn", tin: int = 150, tout: int = 40) -> dict:
-    return {"id": "msg_fake", "type": "message", "role": "assistant", "model": model, "stop_reason": stop,
+    return {"id": "msg_stub", "type": "message", "role": "assistant", "model": model, "stop_reason": stop,
             "content": [{"type": "text", "text": text}], "usage": {"input_tokens": tin, "output_tokens": tout}}
 
 
-class FakeAnthropic:
+class MockAnthropic:
     """`script` answers in order (status, headers, body). `responder(request_body) -> text` answers every call when the script is empty."""
 
     def __init__(self, responder: Callable[[dict], str] | None = None):
@@ -40,7 +40,7 @@ class FakeAnthropic:
                 data = (payload if isinstance(payload, str) else json.dumps(payload)).encode()
                 self.send_response(status)
                 self.send_header("content-type", "application/json")
-                self.send_header("request-id", "req_fake123")
+                self.send_header("request-id", "req_stub123")
                 for k, v in headers.items():
                     self.send_header(k, v)
                 self.send_header("content-length", str(len(data)))

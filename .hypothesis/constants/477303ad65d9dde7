@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/pipeline.py
+# hypothesis_version: 6.170.17
+
+['Applied', 'Declined', 'Hired', 'Interviewing', 'Offer', 'Shortlisted', 'Withdrawn', 'application', 'application.moved', 'applied', 'approved', 'at', 'by', 'declined', 'draft', 'from', 'handed_off', 'hired', 'interviewing', 'note', 'note_chars', 'offer', 'offer.withdrawn', 'pending', 'pending_approval', 'rejected', 'shortlisted', 'stage', 'to', 'why', 'withdrawn']

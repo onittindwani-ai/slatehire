@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/dburl.py
+# hypothesis_version: 6.170.17
+
+['.env', 'ENV_FILE', 'database_url']

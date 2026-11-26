@@ -47,7 +47,7 @@ class StressIn(BaseModel):
     n: int = Field(ge=1, le=20000)
 
 
-@router.post("/stress-candidates", summary="Add many fictional applications, to check that long tables stay fast")
+@router.post("/stress-candidates", summary="Add many sample applications, to check that long tables stay fast")
 def stress(b: StressIn, s: Session = Depends(db, scope="function"), ctx: Ctx = Depends(get_ctx), u: dict = Depends(owner)):
     from sqlalchemy import select
 
@@ -56,7 +56,7 @@ def stress(b: StressIn, s: Session = Depends(db, scope="function"), ctx: Ctx = D
     role = s.scalars(select(Role).order_by(Role.id)).first()
     base = s.scalar(select(__import__("sqlalchemy").func.max(Candidate.id))) or 0
     now = ctx.now(s)
-    s.bulk_insert_mappings(Candidate, [{"id": base + i + 1, "code": f"L{base + i + 1:05d}", "full_name": f"Fictional Person {i}", "email": "", "phone": "", "school": "", "source": "load test", "created_at": now} for i in range(b.n)])
+    s.bulk_insert_mappings(Candidate, [{"id": base + i + 1, "code": f"L{base + i + 1:05d}", "full_name": f"Sample Person {i}", "email": "", "phone": "", "school": "", "source": "load test", "created_at": now} for i in range(b.n)])
     s.bulk_insert_mappings(Application, [{"candidate_id": base + i + 1, "role_id": role.id, "stage": "applied", "history": [], "decision_note": "", "note": "", "created_at": now, "updated_at": now} for i in range(b.n)])
     record_event(s, "demo.stress", None, None, {"n": b.n})
     return {"added": b.n}

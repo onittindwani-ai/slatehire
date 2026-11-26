@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/jobs.py
+# hypothesis_version: 6.170.17
+
+[160, 300, 3600, '*.eml', ', ', '0', 'added', 'cycle.ran', 'deleted', 'done', 'duplicate', 'error', 'failed', 'inbox', 'inbox_next', 'mailbox', 'new', 'onboarding', 'onboarding.overdue', 'overdue', 'rejected', 'retention', 'role_ambiguous', 'score', 'scored', 'scorer', 'seed', 'skipped', 'slatehire.jobs', 'tasks', 'unknown sender']

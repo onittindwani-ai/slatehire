@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/packages/core-py/src/sendora_core/models.py
+# hypothesis_version: 6.170.17
+
+[120, 200, 500, 'core_approvals', 'core_audit', 'core_costs', 'core_events', 'core_jobs', 'core_metrics', 'created_at', 'medium', 'name', 'pending', 'queued', 'system']

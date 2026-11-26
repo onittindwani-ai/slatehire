@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/loginguard.py
+# hypothesis_version: 6.170.17
+
+[256, 2000, 2048, 3600, 10000, 'one_address', 'slatehire.loginguard', 'untrusted']

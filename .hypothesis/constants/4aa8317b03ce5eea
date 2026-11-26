@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/packages/core-py/src/sendora_core/auth.py
+# hypothesis_version: 6.170.17
+
+[b'=', 254, 3600, '.', '=', 'approver', 'exp', 'owner', 'r', 'role', 'u', 'user', 'viewer']

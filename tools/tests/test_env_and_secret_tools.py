@@ -44,7 +44,7 @@ def test_a_real_key_on_a_line_that_says_example_is_still_reported():
     assert scan_secrets.scan_line(f"# example of a real key: {key}") == ["Anthropic key"]
 
 
-def test_a_fake_marker_inside_the_value_is_allowed():
+def test_a_stub_marker_inside_the_value_is_allowed():
     assert scan_secrets.scan_line('secret = "test-only-' + "a1B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6" + '"') == []
 
 

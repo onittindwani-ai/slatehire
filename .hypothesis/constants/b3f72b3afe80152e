@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/adapters/ats.py
+# hypothesis_version: 6.170.17
+
+[100, 120, 200, 401, 403, 429, '/application.list', '/candidate.list', '/candidates', '/file.info', '/spi/v3', '/v1/candidates', '?', 'Ashby said no: ', 'Authorization', 'Basic ', 'Connected.', 'GET', 'POST', 'ashby', 'attachments', 'candidate', 'candidates', 'cursor', 'disqualified', 'doNotContact', 'email', 'email_addresses', 'errors', 'fileHandle', 'fileName', 'filename', 'greenhouse', 'handle', 'id', 'jobId', 'job_id', 'limit', 'moreDataAvailable', 'name', 'next', 'nextCursor', 'notes', 'paging', 'per_page', 'phone', 'phone_numbers', 'primaryEmailAddress', 'primaryPhoneNumber', 'results', 'resume', 'resume.pdf', 'resumeFileHandle', 'resume_metadata', 'resume_url', 'seed', 'shortcode', 'success', 'type', 'unknown', 'url', 'value', 'workable']

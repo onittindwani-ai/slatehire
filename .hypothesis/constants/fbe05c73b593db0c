@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/config.py
+# hypothesis_version: 6.170.17
+
+[120, 200, 365, 730, 993, 1000, 100000, 1000000, 2000000, 5000000, 10000000, 60000000, ',', './exports', '4/5', 'ASHBY_API_KEY', 'CALCOM_API_KEY', 'Example Company', 'GOOGLE_ACCESS_TOKEN', 'GREENHOUSE_TOKEN', 'IMAP_PASSWORD', 'SUPPRESSION_KEY', 'WORKABLE_TOKEN', '[]', 'ashby', 'ats', 'calcom', 'calendar', 'google', 'greenhouse', 'imap', 'localhost', 'mailbox', 'model', 'offline', 'owner@example.test', 'package', 'primary', 'rules', 'seed', 'slatehire', 'workable']

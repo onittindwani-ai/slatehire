@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/dbupgrade.py
+# hypothesis_version: 6.170.17
+
+['ats_job_id', 'cf_application', 'cf_resume', 'cf_role', 'cf_suppression', 'fairness_folded', 'group_id', 'injection_scan', 'language', 'name', 'notes', 'scheme', 'sqlite']

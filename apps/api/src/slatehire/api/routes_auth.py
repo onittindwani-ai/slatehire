@@ -42,7 +42,7 @@ def _members(raw: str) -> list[tuple[str, str, str]]:
 
 
 def _accounts(ctx: Ctx) -> dict[str, tuple[str | None, str]]:
-    """Who may sign in. The made up approver, interviewer and viewer accounts exist only while demo shortcuts are on, never next to a real owner password.
+    """Who may sign in. The demo approver, interviewer and viewer accounts exist only while demo shortcuts are on, never next to a real owner password.
     An account with no password hash can sign in only with the public demo password, so it exists only in that case."""
     s = ctx.settings
     out: dict[str, tuple[str | None, str]] = {clean_email(s.owner_email): (s.owner_password_hash, "owner")}

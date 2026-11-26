@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/adapters/handoff.py
+# hypothesis_version: 6.170.17
+
+['-', '[^a-z0-9]+', 'breezedoc', 'detail', 'offer', 'package', 'ref', 'seed', 'utf-8']

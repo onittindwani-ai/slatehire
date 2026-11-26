@@ -2,7 +2,7 @@
  "openapi": "3.1.0",
  "info": {
   "title": "Slatehire API",
-  "version": "1.0.1"
+  "version": "1.0.2"
  },
  "paths": {
   "/health": {
@@ -2236,7 +2236,7 @@
     "tags": [
      "demo"
     ],
-    "summary": "Add many fictional applications, to check that long tables stay fast",
+    "summary": "Add many sample applications, to check that long tables stay fast",
     "operationId": "stress_api_demo_stress_candidates_post",
     "requestBody": {
      "content": {

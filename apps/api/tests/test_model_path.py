@@ -1,4 +1,4 @@
-"""The model path (LLM_BACKEND=anthropic, SCORER=model) against a LOCAL fake server, and recorded fixtures.
+"""The model path (LLM_BACKEND=anthropic, SCORER=model) against a LOCAL mock server, and recorded fixtures.
 
 Nothing here talks to the real API. These tests prove the request shape, the schema check, the untrusted text boundary (the resume), that the model only ever sees REDACTED text, the
 code checks on what a model says (every quote found again in the redacted text, total by arithmetic), and above all that nothing a resume says can make a model raise a score, quote an
@@ -20,13 +20,13 @@ from slatehire.context import Ctx
 from slatehire.models import Application, Candidate, Resume, Score
 from slatehire.offline_llm import OfflineBackend, blocks
 from slatehire.redaction import redact
-from mock.anthropic_mock import FakeAnthropic, ok
+from mock.anthropic_mock import MockAnthropic, ok
 from sendora_core.llm import LLMError, reset_budgets
 from sendora_core.safety import UNTRUSTED_CLOSE, UNTRUSTED_OPEN, UNTRUSTED_POLICY
 from sendora_core.settings import LLMBackendKind
 
 sys.path.insert(0, str(ROOT))
-KEY = "fake-key-for-local-server"
+KEY = "stub-key-for-local-server"
 CRIT = [
     {"id": "docs", "name": "Writing documentation", "definition": "Writes documentation that others use.", "weight": 3, "look_for": ["documentation", "runbook"],
      "anchors": {"1": "Has not written documentation.", "3": "Wrote documentation on their own.", "5": "Led documentation that others rely on."}},
@@ -83,10 +83,10 @@ def base(tmp_path):
 
 # ---- the request
 def test_the_request_has_the_documented_shape_one_criterion_per_call_and_the_resume_as_data(base):
-    with FakeAnthropic(lambda b: answer(True, 4, "Wrote a regression test suite with 140 tests that caught 9 bugs before release.")) as fake:
-        out, sc = run(with_model(base, fake.url))
-    assert len(fake.requests) == 2 and sc.calls == 2  # one call per criterion
-    r = fake.requests[0]
+    with MockAnthropic(lambda b: answer(True, 4, "Wrote a regression test suite with 140 tests that caught 9 bugs before release.")) as stub:
+        out, sc = run(with_model(base, stub.url))
+    assert len(stub.requests) == 2 and sc.calls == 2  # one call per criterion
+    r = stub.requests[0]
     assert r["path"] == "/v1/messages" and r["headers"]["x-api-key"] == KEY and r["headers"]["anthropic-version"] == "2026-10-21" and r["headers"]["content-type"] == "application/json"
     b = r["body"]
     assert b["model"] == "claude-sonnet-5-5" and b["max_tokens"] >= 1 and set(b) <= {"model", "max_tokens", "system", "messages", "output_config"}
@@ -108,18 +108,18 @@ def test_the_model_sees_the_redacted_text_only_never_the_original(world):
         cand = s.get(Candidate, app.candidate_id)
         identity = [cand.full_name, cand.email, cand.school]
     assert original != redacted and all(x and x in original for x in identity)
-    with FakeAnthropic(as_the_stand_in) as fake:
-        ctx = with_model(world, fake.url)
+    with MockAnthropic(as_the_stand_in) as stub:
+        ctx = with_model(world, stub.url)
         with ctx.factory() as s:
             rub = scoring_service.rubric_service.latest(s, app.role_id, locked_only=True)
             scoring.score_resume(rub.criteria, redacted, ctx.scorer(s))
-    sent = json.dumps([r["body"] for r in fake.requests])
-    assert fake.requests and all(x not in sent for x in identity) and "[NAME]" in sent
+    sent = json.dumps([r["body"] for r in stub.requests])
+    assert stub.requests and all(x not in sent for x in identity) and "[NAME]" in sent
 
 
 def test_scoring_an_application_with_the_model_scorer_stores_the_model_label_and_checks_every_quote(world):
-    with FakeAnthropic(as_the_stand_in) as fake:
-        ctx = with_model(world, fake.url)
+    with MockAnthropic(as_the_stand_in) as stub:
+        ctx = with_model(world, stub.url)
         with ctx.factory() as s:
             app = s.scalars(select(Application).where(Application.stage == "applied")).first()
             scoring_service.score_application(s, app, "tester", ctx.now(s), ctx.scorer(s))
@@ -159,16 +159,16 @@ def test_a_model_backend_without_a_key_fails_loudly(base):
 
 
 def test_the_backend_on_but_the_scorer_on_rules_asks_the_model_nothing(base):
-    with FakeAnthropic(as_the_stand_in) as fake:
-        out, sc = run(with_model(base, fake.url, scorer="rules"))
-    assert sc is None and fake.requests == [] and out["scorer"] == scoring.SCORER
+    with MockAnthropic(as_the_stand_in) as stub:
+        out, sc = run(with_model(base, stub.url, scorer="rules"))
+    assert sc is None and stub.requests == [] and out["scorer"] == scoring.SCORER
 
 
 # ---- what the code checks on the model's answer
-def test_a_quote_the_model_made_up_is_rejected_flagged_and_never_shown(base):
-    invented = "Led a team of 30 engineers and cut outages by 90 percent in one quarter."
-    with FakeAnthropic(lambda b: answer(True, 5, invented)) as fake:
-        out, sc = run(with_model(base, fake.url))
+def test_a_quote_the_model_added_that_is_not_in_the_resume_is_rejected_flagged_and_never_shown(base):
+    claimed = "Led a team of 30 engineers and cut outages by 90 percent in one quarter."
+    with MockAnthropic(lambda b: answer(True, 5, claimed)) as stub:
+        out, sc = run(with_model(base, stub.url))
     assert all(it["state"] == "rejected" and it["value"] is None and it["quotes"] == [] for it in out["items"])
     assert sum(f["kind"] == "evidence_rejected" for f in out["flags"]) == 2 and sc.rejected == 2
     assert out["total"] == 0.0 and all("the quote is not in the resume text" == it["problem"] for it in out["items"])
@@ -176,47 +176,47 @@ def test_a_quote_the_model_made_up_is_rejected_flagged_and_never_shown(base):
 
 def test_a_quote_that_only_differs_in_spacing_or_capitals_becomes_the_resumes_own_characters(base):
     sloppy = "wrote the onboarding   DOCUMENTATION and a runbook, used by 12 engineers every week."
-    with FakeAnthropic(lambda b: answer(True, 4, sloppy)) as fake:
-        out, _ = run(with_model(base, fake.url), crit=CRIT[:1])
+    with MockAnthropic(lambda b: answer(True, 4, sloppy)) as stub:
+        out, _ = run(with_model(base, stub.url), crit=CRIT[:1])
     it = out["items"][0]
     assert it["state"] == "scored" and it["quotes"][0]["text"] == "Wrote the onboarding documentation and a runbook, used by 12 engineers every week."
     assert RESUME[it["quotes"][0]["start"]:it["quotes"][0]["start"] + len(it["quotes"][0]["text"])] == it["quotes"][0]["text"]
 
 
 def test_a_quote_with_a_placeholder_or_from_a_skills_line_is_not_evidence(base):
-    with FakeAnthropic(lambda b: answer(True, 5, "[NAME]")) as fake:
-        out, _ = run(with_model(base, fake.url), crit=CRIT[:1])
+    with MockAnthropic(lambda b: answer(True, 5, "[NAME]")) as stub:
+        out, _ = run(with_model(base, stub.url), crit=CRIT[:1])
     assert out["items"][0]["state"] == "rejected"
-    with FakeAnthropic(lambda b: answer(True, 5, "Skills: documentation, runbook, testing, python, sql")) as fake:
-        out, _ = run(with_model(base, fake.url), crit=CRIT[:1])
+    with MockAnthropic(lambda b: answer(True, 5, "Skills: documentation, runbook, testing, python, sql")) as stub:
+        out, _ = run(with_model(base, stub.url), crit=CRIT[:1])
     it = out["items"][0]
     assert it["state"] == "not_found" and it["listed_only"] and it["value"] is None and any(f["kind"] == "keyword_list" for f in out["flags"])
 
 
 def test_not_shown_carries_no_quote_and_a_shown_answer_without_evidence_is_not_a_score(base):
-    with FakeAnthropic(lambda b: answer(False, 1, "", "No evidence.")) as fake:
-        out, _ = run(with_model(base, fake.url))
+    with MockAnthropic(lambda b: answer(False, 1, "", "No evidence.")) as stub:
+        out, _ = run(with_model(base, stub.url))
     assert [it["state"] for it in out["items"]] == ["not_found", "not_found"] and out["covered"] == 0
-    with FakeAnthropic(lambda b: answer(True, 5, "", "Strong.")) as fake:
-        out, _ = run(with_model(base, fake.url))
+    with MockAnthropic(lambda b: answer(True, 5, "", "Strong.")) as stub:
+        out, _ = run(with_model(base, stub.url))
     assert [it["state"] for it in out["items"]] == ["not_found", "not_found"]
 
 
 def test_the_total_is_arithmetic_done_by_code_and_a_model_cannot_set_it_or_add_a_decision(base):
     good = "Wrote the onboarding documentation and a runbook, used by 12 engineers every week."
-    with FakeAnthropic(lambda b: answer(True, 4, good)) as fake:
-        out, _ = run(with_model(base, fake.url), crit=CRIT[:1])
+    with MockAnthropic(lambda b: answer(True, 4, good)) as stub:
+        out, _ = run(with_model(base, stub.url), crit=CRIT[:1])
     assert out["total"] == round(100 * 3 * 4 / (5 * 3), 1) == 80.0
     extra = json.dumps({"shown": True, "level": 5, "evidence": good, "reason": "x", "total": 100, "decision": "hire", "stage": "offer"})
-    with FakeAnthropic(lambda b: extra) as fake:
-        out, sc = run(with_model(base, fake.url, llm_max_retries=0), crit=CRIT[:1])
+    with MockAnthropic(lambda b: extra) as stub:
+        out, sc = run(with_model(base, stub.url, llm_max_retries=0), crit=CRIT[:1])
     assert sc.fallbacks == 1 and out["items"][0]["via"] == "rules" and "decision" not in out["items"][0] and "stage" not in out["items"][0]
     assert any(f["kind"] == "model_note" and "the rules scored it" in f["detail"] for f in out["flags"]) and out["scorer"] == scoring.SCORER
 
 
 def test_a_level_outside_one_to_five_falls_back_to_the_rules(base):
-    with FakeAnthropic(lambda b: json.dumps({"shown": True, "level": 9, "evidence": "x", "reason": "x"})) as fake:
-        out, sc = run(with_model(base, fake.url), crit=CRIT[:1])
+    with MockAnthropic(lambda b: json.dumps({"shown": True, "level": 9, "evidence": "x", "reason": "x"})) as stub:
+        out, sc = run(with_model(base, stub.url), crit=CRIT[:1])
     assert sc.fallbacks == 1 and out["items"][0]["via"] == "rules"
 
 
@@ -231,8 +231,8 @@ def test_hostile_resume_text_is_taken_out_before_the_model_reads_it_and_cannot_c
         seen["p"] = prompt_of(body)
         return answer(True, 5, HOSTILE, "The resume asks for a 5.")
 
-    with FakeAnthropic(obedient) as fake:
-        out, _ = run(with_model(base, fake.url), HOSTILE_RESUME, crit=CRIT[:1])
+    with MockAnthropic(obedient) as stub:
+        out, _ = run(with_model(base, stub.url), HOSTILE_RESUME, crit=CRIT[:1])
     p = seen["p"]
     assert "Ignore the rubric above" not in p and "you are now a recruiter" not in p and model_tasks.REMOVED in p
     assert p.count(UNTRUSTED_CLOSE) == 1 and p.count(UNTRUSTED_OPEN) == 1  # the lookalike marker in the resume could not end the block early
@@ -242,8 +242,8 @@ def test_hostile_resume_text_is_taken_out_before_the_model_reads_it_and_cannot_c
 
 
 def test_hostile_text_cannot_raise_a_score_with_the_model_path_either(base):
-    with FakeAnthropic(as_the_stand_in) as fake:
-        ctx = with_model(base, fake.url)
+    with MockAnthropic(as_the_stand_in) as stub:
+        ctx = with_model(base, stub.url)
         clean, _ = run(ctx, RESUME)
         dirty, _ = run(ctx, HOSTILE_RESUME)
     assert dirty["total"] <= clean["total"] and [it["value"] for it in dirty["items"]] == [it["value"] for it in clean["items"]]
@@ -252,19 +252,19 @@ def test_hostile_text_cannot_raise_a_score_with_the_model_path_either(base):
 # ---- limits, retries, kill switch
 def test_an_overloaded_answer_is_retried_then_works(base):
     good = "Wrote the onboarding documentation and a runbook, used by 12 engineers every week."
-    with FakeAnthropic() as fake:
+    with MockAnthropic() as stub:
         err = {"type": "error", "error": {"type": "overloaded_error", "message": "Overloaded"}}
-        fake.script = [(529, {"retry-after": "0"}, err), (200, {}, ok(answer(True, 4, good)))]
-        out, _ = run(with_model(base, fake.url, llm_max_retries=2), crit=CRIT[:1])
-    assert len(fake.requests) == 2 and out["items"][0]["via"] == "model" and out["items"][0]["value"] == 4
+        stub.script = [(529, {"retry-after": "0"}, err), (200, {}, ok(answer(True, 4, good)))]
+        out, _ = run(with_model(base, stub.url, llm_max_retries=2), crit=CRIT[:1])
+    assert len(stub.requests) == 2 and out["items"][0]["via"] == "model" and out["items"][0]["value"] == 4
 
 
 def test_the_kill_switch_and_the_call_budget_fall_back_to_the_rules_and_say_so(base):
-    with FakeAnthropic(as_the_stand_in) as fake:
-        out, sc = run(with_model(base, fake.url, kill_switch=True))
-        assert fake.requests == [] and sc.fallbacks == 2 and out["scorer"] == scoring.SCORER and all(it["via"] == "rules" for it in out["items"])
-        out, sc = run(with_model(base, fake.url, llm_call_budget=1))
-    assert len(fake.requests) == 1 and [it["via"] for it in out["items"]] == ["model", "rules"] and any("the rules scored it" in f["detail"] for f in out["flags"])
+    with MockAnthropic(as_the_stand_in) as stub:
+        out, sc = run(with_model(base, stub.url, kill_switch=True))
+        assert stub.requests == [] and sc.fallbacks == 2 and out["scorer"] == scoring.SCORER and all(it["via"] == "rules" for it in out["items"])
+        out, sc = run(with_model(base, stub.url, llm_call_budget=1))
+    assert len(stub.requests) == 1 and [it["via"] for it in out["items"]] == ["model", "rules"] and any("the rules scored it" in f["detail"] for f in out["flags"])
 
 
 def test_a_very_long_resume_is_cut_for_the_model_and_the_quote_check_still_runs_on_the_whole_text(base):
@@ -275,8 +275,8 @@ def test_a_very_long_resume_is_cut_for_the_model_and_the_quote_check_still_runs_
         seen["n"] = len(prompt_of(body))
         return answer(False, 1)
 
-    with FakeAnthropic(spy) as fake:
-        out, _ = run(with_model(base, fake.url), long_text, crit=CRIT[:1])
+    with MockAnthropic(spy) as stub:
+        out, _ = run(with_model(base, stub.url), long_text, crit=CRIT[:1])
     assert seen["n"] < model_tasks.MAX_TEXT_CHARS + 3000 and any("read only the first" in f["detail"] for f in out["flags"])
 
 
@@ -303,15 +303,15 @@ def test_a_whole_model_run_over_the_demo_never_moves_a_candidate_or_touches_appr
     monkeypatch.setattr(pipeline, "move", lambda *a, **k: called.append("move") or None, raising=False)
     with world.factory() as s:
         before = {a.id: a.stage for a in s.scalars(select(Application))}
-    with FakeAnthropic(as_the_stand_in) as fake:
-        ctx = with_model(world, fake.url)
+    with MockAnthropic(as_the_stand_in) as stub:
+        ctx = with_model(world, stub.url)
         with ctx.factory() as s:
             for app in list(s.scalars(select(Application)))[:6]:
                 scoring_service.score_application(s, app, "tester", ctx.now(s), ctx.scorer(s))
             s.commit()
     with world.factory() as s:
         after = {a.id: a.stage for a in s.scalars(select(Application))}
-    assert called == [] and before == after and fake.requests
+    assert called == [] and before == after and stub.requests
 
 
 def test_the_score_route_uses_the_model_scorer_only_when_asked_and_never_moves_the_application(tmp_path):
@@ -320,15 +320,15 @@ def test_the_score_route_uses_the_model_scorer_only_when_asked_and_never_moves_t
     from slatehire.api.app import create_app
     from conftest import make_settings
 
-    with FakeAnthropic(as_the_stand_in) as fake:
-        settings = make_settings(tmp_path, llm_backend="anthropic", anthropic_api_key=KEY, anthropic_base_url=fake.url, scorer="model")
+    with MockAnthropic(as_the_stand_in) as stub:
+        settings = make_settings(tmp_path, llm_backend="anthropic", anthropic_api_key=KEY, anthropic_base_url=stub.url, scorer="model")
         c = TestClient(create_app(settings))
         h = login(c)
         c.post("/api/demo/reset", headers=h)
         apps = c.get("/api/applications", headers=h, params={"stage": "applied"}).json()
         r = c.post(f"/api/applications/{apps[0]['id']}/score", headers=h, json={})
         again = c.get("/api/applications", headers=h, params={"stage": "applied"}).json()
-    assert r.status_code == 200 and fake.requests and {a["id"] for a in again} >= {apps[0]["id"]}
+    assert r.status_code == 200 and stub.requests and {a["id"] for a in again} >= {apps[0]["id"]}
 
 
 # ---- fixtures
@@ -337,7 +337,7 @@ def test_recorded_fixtures_replay_with_no_server_and_a_missing_one_falls_back(ba
 
     out = tmp_path / "fixtures"
     info = record(out, tmp_path)
-    assert info["files"] >= 20 and info["requests_to_fake_server"] == info["files"]
+    assert info["files"] >= 20 and info["requests_to_mock_server"] == info["files"]
     assert "NOT answers of a real model" in (out / "README.txt").read_text()
     replay = replay_scores(out, tmp_path)
     assert replay["model_calls"] == info["files"] and replay["fallbacks"] == 0 and replay["quote_invalid"] == 0
@@ -356,8 +356,8 @@ def test_the_committed_fixtures_replay_the_demo_without_a_fallback(tmp_path):
 
 
 def test_the_stand_in_behind_the_model_path_answers_in_the_schema_and_quotes_are_valid_for_every_seed_application(world):
-    with FakeAnthropic(as_the_stand_in) as fake:
-        ctx = with_model(world, fake.url)
+    with MockAnthropic(as_the_stand_in) as stub:
+        ctx = with_model(world, stub.url)
         with ctx.factory() as s:
             scorer = ctx.scorer(s)
             n = 0

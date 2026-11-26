@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/scoring_service.py
+# hypothesis_version: 6.170.17
+
+[100.0, 100, 400, 'application', 'applied', 'bad', 'covered', 'criterion', 'criterion_id', 'detail', 'flags', 'hidden_text', 'invalid', 'items', 'kind', 'locked', 'mark', 'ocr_layer', 'pdf_page_skipped', 'quote_backfill', 'quote_check_cache', 'quotes', 'result', 'rubric', 'score', 'score.created', 'scored', 'scorer', 'start', 'state', 'text', 'total', 'valid_percent', 'version']

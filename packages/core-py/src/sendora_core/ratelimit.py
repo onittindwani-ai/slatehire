@@ -13,7 +13,7 @@ class RateLimitExceeded(RuntimeError):
 
 
 class TokenBucket:
-    """Keeps at most `max_keys` buckets, so a client that invents a new key on every request cannot grow the memory without limit.
+    """Keeps at most `max_keys` buckets, so a client that sends a new key on every request cannot grow the memory without limit.
     When the table is full, buckets that have refilled completely are dropped first (they are the same as a new one), then the oldest."""
 
     def __init__(self, capacity: int, refill_per_sec: float, clock: Callable[[], float] = time.monotonic, max_keys: int = 10_000):

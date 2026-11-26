@@ -273,7 +273,7 @@ test.describe("Round 5", () => {
   });
 
   test("a waiting applicant says it is waiting for the next run, not that a rubric is missing", async ({ page }) => {
-    const r = await json(await call(page, "/applicants", { name: "Jo Fictional", role: "support", resume_text: "Customer support for five years. I answered customer emails with calm written replies and handled helpdesk tickets every week. More text here." }));
+    const r = await json(await call(page, "/applicants", { name: "Jo Sample", role: "support", resume_text: "Customer support for five years. I answered customer emails with calm written replies and handled helpdesk tickets every week. More text here." }));
     await page.goto(`/candidates/${r.application_id}`);
     await expect(page.getByText(/Waiting for the next run/)).toBeVisible();
     await expect(page.getByText(/needs a locked rubric/)).toHaveCount(0);

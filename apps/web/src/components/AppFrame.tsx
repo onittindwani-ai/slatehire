@@ -88,7 +88,7 @@ export function AppFrame({ children }: { children: ReactNode }) {
       {s?.kill_switch ? (
         <div className="cf-banner cf-banner--danger" role="status"><strong>Kill switch is on.</strong> <span className="cf-hide-sm cf-grow">No calendar invite is sent and no offer file is written. Reading, scoring, deciding and approving still work.</span><span className="cf-grow cf-show-sm" /> <Button size="sm" variant="ghost" disabled={!owner} disabledReason="Only the owner can turn it off" onClick={async () => { await toggleKill.mutateAsync(false); }}>Turn it off</Button></div>
       ) : s && demo ? (
-        <div className="cf-banner cf-banner--info" role="status"><strong>Demo mode.</strong> <span className="cf-grow cf-hide-sm">Fictional applicants. An offline rules scorer reads the resumes, not a language model. {demoDate ? `Demo date: ${demoDate}.` : ""}</span><span className="cf-grow cf-show-sm" />
+        <div className="cf-banner cf-banner--info" role="status"><strong>Demo mode.</strong> <span className="cf-grow cf-hide-sm">Sample applicants. An offline rules scorer reads the resumes, not a language model. {demoDate ? `Demo date: ${demoDate}.` : ""}</span><span className="cf-grow cf-show-sm" />
           <Button size="sm" variant="primary" disabled={!canWrite} disabledReason="Viewers cannot run jobs" onClick={async () => { await run.mutateAsync(); }}>Run now</Button>
           <Button size="sm" disabled={!canWrite} disabledReason="Viewers cannot move the clock" onClick={async () => { await advance.mutateAsync(24); }}>+1 day</Button></div>
       ) : s?.effective_mode === "draft" ? (
@@ -120,7 +120,7 @@ export function AppFrame({ children }: { children: ReactNode }) {
       </AppShell>
       <CommandPalette items={items} open={palette} onOpenChange={setPalette} placeholder="Go to a page or run an action" />
       <ConfirmDialog open={confirmKill} onOpenChange={setConfirmKill} title="Pause all sending?" description="The kill switch stops calendar invites and offer files at once. Reading, scoring, deciding and approving keep working. You can turn it off again from the banner or the top bar." confirmLabel="Pause all" destructive onConfirm={() => void toggleKill.mutateAsync(true)} />
-      <ConfirmDialog open={confirmReset} onOpenChange={setConfirmReset} title="Reset the demo?" description="This puts the fictional seed data back and clears everything you did in the demo." confirmLabel="Reset" destructive onConfirm={() => void reset.mutateAsync()} />
+      <ConfirmDialog open={confirmReset} onOpenChange={setConfirmReset} title="Reset the demo?" description="This puts the sample seed data back and clears everything you did in the demo." confirmLabel="Reset" destructive onConfirm={() => void reset.mutateAsync()} />
     </>
   );
 }

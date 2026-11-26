@@ -185,7 +185,7 @@ def test_a_model_answer_is_checked_against_what_the_rubric_looks_for_and_against
 
 # ---- M11: the address that was checked is the address that is used ----
 
-def fake_dns(monkeypatch, answers: list[str]):
+def stub_dns(monkeypatch, answers: list[str]):
     calls = []
 
     def getaddrinfo(host, port, *a, **k):
@@ -198,7 +198,7 @@ def fake_dns(monkeypatch, answers: list[str]):
 
 
 def test_the_fetch_goes_to_the_checked_address_and_the_name_is_looked_up_once(monkeypatch):
-    calls = fake_dns(monkeypatch, ["93.184.216.34", "169.254.169.254"])  # a name that answers a public address first and the metadata address after
+    calls = stub_dns(monkeypatch, ["93.184.216.34", "169.254.169.254"])  # a name that answers a public address first and the metadata address after
     seen = {}
 
     def handler(request: httpx.Request) -> httpx.Response:
@@ -212,14 +212,14 @@ def test_the_fetch_goes_to_the_checked_address_and_the_name_is_looked_up_once(mo
 
 
 def test_a_redirect_hop_is_checked_again_and_refused_when_it_points_inside(monkeypatch):
-    fake_dns(monkeypatch, ["93.184.216.34", "10.0.0.7"])
+    stub_dns(monkeypatch, ["93.184.216.34", "10.0.0.7"])
     client = httpx.Client(transport=httpx.MockTransport(lambda r: httpx.Response(302, headers={"location": "https://inside.example.test/x"})))
     with pytest.raises(AdapterError, match="private"):
         fetch.safe_fetch("https://resumes.example.test/cv", client=client)
 
 
 def test_a_server_that_trickles_is_cut_off_by_the_overall_deadline(monkeypatch):
-    fake_dns(monkeypatch, ["93.184.216.34"])
+    stub_dns(monkeypatch, ["93.184.216.34"])
     from types import SimpleNamespace
 
     clock = iter(range(0, 1000, 40))

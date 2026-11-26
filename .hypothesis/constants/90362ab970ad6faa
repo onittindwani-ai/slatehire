@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/packages/core-py/src/sendora_core/settings.py
+# hypothesis_version: 6.170.17
+
+[120.0, 1024, 4096, 26214400, '\n- ', '.env', '127.0.0.1', '2026-10-21', '::1', 'anthropic', 'claude-haiku-5-5', 'claude-sonnet-5-5', 'database_url', 'default', 'dev-only', 'draft', 'fixture', 'hard', 'http', 'https', 'ignore', 'live', 'localhost', 'off', 'offline', 'owner_password_hash', 'postgresql', 'sendora-system', 'sqlite']

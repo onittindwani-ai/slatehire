@@ -1,7 +1,7 @@
 """Record the model answers for the first seed applications into data/llm_fixtures/, so the demo can replay them with LLM_BACKEND=fixture SCORER=model and no account.
 
 IMPORTANT: these are NOT answers of a real model. The recording goes through the real anthropic code path (request building, schema, response parsing, the checks by code)
-against a local fake server that answers with the offline stand in. So the fixtures prove the replay path and the request shape, not model quality. Replace them with a
+against a local mock server that answers with the offline stand in. So the fixtures prove the replay path and the request shape, not model quality. Replace them with a
 recording from a real key (LLM_RECORD=true, LLM_BACKEND=anthropic, SCORER=model) when you have one. Never commit recordings made from real applicants: the fixture holds the
 redacted resume text the model read.
 
@@ -22,7 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path[:0] = [str(ROOT / "apps" / "api" / "src"), str(ROOT)]
 
-from mock.anthropic_mock import FakeAnthropic  # noqa: E402
+from mock.anthropic_mock import MockAnthropic  # noqa: E402
 from slatehire import demo, evidence, rubric_service, scoring  # noqa: E402
 from slatehire.config import Settings  # noqa: E402
 from slatehire.context import Ctx  # noqa: E402
@@ -74,18 +74,18 @@ def record(out: Path = OUT, work: Path | None = None) -> dict:
         shutil.rmtree(out)
     if work is not None:
         Path(work).mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(dir=work) as tmp, FakeAnthropic(stand_in) as fake:
+    with tempfile.TemporaryDirectory(dir=work) as tmp, MockAnthropic(stand_in) as stub:
         base = _world(tmp)
         with base.factory() as s:
             demo.reset(s, base)
-        ctx = _world(tmp, llm_backend="anthropic", anthropic_api_key="fake-key-for-local-server", anthropic_base_url=fake.url, llm_record=True, llm_fixtures_dir=str(out))
+        ctx = _world(tmp, llm_backend="anthropic", anthropic_api_key="stub-key-for-local-server", anthropic_base_url=stub.url, llm_record=True, llm_fixtures_dir=str(out))
         info = _score_first(ctx)
     files = len(list(out.glob("*.json")))
     (out / "README.txt").write_text(
-        "Recorded from a LOCAL FAKE server that answers with the offline stand in. These are NOT answers of a real model.\n"
+        "Recorded from a LOCAL MOCK server that answers with the offline stand in. These are NOT answers of a real model.\n"
         "They prove the replay path and the request shape only. Replay with LLM_BACKEND=fixture LLM_FIXTURES_DIR=data/llm_fixtures SCORER=model.\n"
         "Recorded: one call per criterion for the first 8 applications of the demo world. Regenerate: python tools/record_llm_fixtures.py\n", encoding="utf-8")
-    return {**info, "files": files, "requests_to_fake_server": len(fake.requests)}
+    return {**info, "files": files, "requests_to_mock_server": len(stub.requests)}
 
 
 def replay_scores(fixtures: Path, work: Path | None = None) -> dict:

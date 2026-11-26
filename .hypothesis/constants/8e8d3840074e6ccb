@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/adapters/mailbox.py
+# hypothesis_version: 6.170.17
+
+[b',', b'RFC822\\.SIZE (\\d+)', b'UID (\\d+)', '(BODY.PEEK[])', '(RFC822.SIZE)', '(\\Seen)', '+FLAGS', 'Application', 'Connected.', 'FETCH', 'INBOX', 'LARGER', 'SEARCH', 'SMALLER', 'STORE', 'SUBJECT', 'UNSEEN', 'imap', 'seed']

@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/tools/eval_scoring.py
+# hypothesis_version: 6.170.17
+
+[0.5, '--save', '__main__', 'all', 'apps/api/src', 'correctly_absent', 'criteria', 'criteria_checked', 'data', 'eval', 'first', 'found_correctly', 'found_wrongly', 'id', 'items', 'known_name', 'labels', 'last', 'level_exact', 'level_within_one', 'levels_compared', 'mean_score_by_label', 'missed', 'note', 'precision', 'quotes', 'recall', 'rejected', 'rejected_scores', 'resumes', 'role', 'saved', 'state', 'text', 'value', 'weight']

@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/adapters/fetch.py
+# hypothesis_version: 6.170.17
+
+[30.0, 200, 301, 302, 303, 307, 308, 443, 5000000, 'GET', 'Host', 'Too many redirects.', 'https', 'location', 'sni_hostname']

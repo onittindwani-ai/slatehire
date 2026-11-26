@@ -1,6 +1,6 @@
 # Evaluation
 
-Honest numbers. The same author wrote the rules and the checks, so this is not an independent test, and all people are made up.
+Honest numbers. The same author wrote the rules and the checks, so this is not an independent test, and all people are sample data.
 
 ## Data
 <!--n:seed.applicants-->90<!--/n--> seed applicants, <!--n:seed.twin_pairs-->15<!--/n--> identity swap pairs, <!--n:seed.gap_pairs-->9<!--/n--> gap pairs, <!--n:seed.injection_pairs-->6<!--/n--> resumes with instructions to the scorer, <!--n:seed.stuffing-->6<!--/n--> keyword stuffing resumes and <!--n:seed.non_traditional-->6<!--/n--> non traditional paths. Held out sets (made before tuning): <!--n:seed.heldout_leak_resumes-->40<!--/n--> resumes for redaction leaks, <!--n:seed.heldout_scoring_resumes-->60<!--/n--> for scoring and <!--n:seed.heldout_fairness_cases-->11<!--/n--> fairness cases.
@@ -20,7 +20,7 @@ First run: <!--n:eval.leak_first_run.planted-->600<!--/n--> planted identity det
 
 The exact level match is the weak number: the scorer often picks a neighbouring level. Use scores to read, not to rank people.
 
-## Independent held out sets (written by people who never saw the code)
+## Independent held out sets (written by separate AI test authors who never saw the code)
 Two sets, A and B, each with 60 resumes scored by a key (3 roles, 5 criteria each, levels 1 to 5 with the evidence sentence), 32 messy resumes with planted identity details, and 8 hand computed fairness cases. They were written from the product spec only, by separate agents, and live outside the repo build in `data/eval/independent/`. The tool is `tools/eval_independent.py`; every reading of the key is written at the top of the tool before it was run. The first runs are saved untouched and are the numbers to quote. Plain readings and weaknesses follow the table.
 
 | Measure | Old self written set (first run) | Set A first run | Set B first run | Set A after changes (not held out) | Set B after changes (not held out) |
@@ -48,7 +48,7 @@ Plain readings and weaknesses:
 - Disclosure: before the set A run only key names and types were read. After it, counts, the shape of leaked items and the lines of leaked reference names were read, so the set A redaction and scoring changes were made after seeing set A formats. Set B was run after those changes and not read before its run. The set B changes (street and school patterns) were made without reading set B items, from general knowledge, after its first run. The scoring thresholds were not changed after the set B run.
 
 ## The model path (UNVERIFIED live)
-`SCORER=model` with `LLM_BACKEND=fixture` or `anthropic` scores one criterion per call from the redacted resume only, in an untrusted data block, and the code finds the evidence quote again, rejects an invented quote, counts a keyword line as no evidence and adds the total up. It has <!--n:model.tests-->24<!--/n--> tests against a local fake server (request shape, hostile resume text, a model that invents a quote, a model that adds a decision field, kill switch, call budget, no network when the backend is unset even if a key is in the environment) and <!--n:model.fixtures-->40<!--/n--> recorded fixtures made from that fake server, not from a real model. How a real model scores real resumes is unknown: run `tools/eval_independent.py` with a real key on your own fictional set before you trust it.
+`SCORER=model` with `LLM_BACKEND=fixture` or `anthropic` scores one criterion per call from the redacted resume only, in an untrusted data block, and the code finds the evidence quote again, rejects a quote that is not in the resume, counts a keyword line as no evidence and adds the total up. It has <!--n:model.tests-->24<!--/n--> tests against a local mock server (request shape, hostile resume text, a model that answers with a quote that is not in the resume, a model that adds a decision field, kill switch, call budget, no network when the backend is unset even if a key is in the environment) and <!--n:model.fixtures-->40<!--/n--> recorded fixtures made from that mock server, not from a real model. How a real model scores real resumes is unknown: run `tools/eval_independent.py` with a real key on your own sample set before you trust it.
 
 ## Vendor contract tests
 <!--n:model.contract_tests-->7<!--/n--> test functions (11 runs, one is repeated for each vendor's facts file) in `mock/tests/test_contracts.py` check the Cal.com, Google Calendar, Ashby and Greenhouse adapters against page text excerpts saved in `mock/contracts/` (URL and date in each header). No machine readable spec was fetched for any vendor; Workable's public pages could not be read at all. Found while reading: Greenhouse's page says attachments moved to the application level in 2020 and that Harvest v1 and v2 end on 2026-08-31, so the candidate attachment reading and the whole adapter need a check against Harvest v3 before use.

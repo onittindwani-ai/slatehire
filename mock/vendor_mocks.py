@@ -1,4 +1,4 @@
-"""Fake Ashby, Workable, Greenhouse, Cal.com and Google Calendar servers, written from the vendors' public docs read on 2026-11-23. Nothing here is the real service, and the shapes are only as good as that reading."""
+"""Mock Ashby, Workable, Greenhouse, Cal.com and Google Calendar servers, written from the vendors' public docs read on 2026-11-23. Nothing here is the real service, and the shapes are only as good as that reading."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ import base64
 from fastapi import FastAPI, Header, Request, Response
 from fastapi.responses import JSONResponse
 
-RESUME = b"Customer Support Specialist, Fictional Co, 2020 to 2026\n* Wrote replies to customer emails every day and trained 3 colleagues, cutting errors by 12 percent.\n* Ran the helpdesk ticket queue.\n"
+RESUME = b"Customer Support Specialist, Sample Co, 2020 to 2026\n* Wrote replies to customer emails every day and trained 3 colleagues, cutting errors by 12 percent.\n* Ran the helpdesk ticket queue.\n"
 
 
 def _files(app: FastAPI) -> None:
@@ -21,7 +21,7 @@ class AshbyMock:
         self.key, self.app = key, FastAPI()
         _files(self.app)
         self.jobs = {"job-1": {"cand-1", "cand-2", "cand-3", "cand-4"}, "job-2": {"cand-5"}}  # which candidates applied to which job
-        self.people = [{"id": f"cand-{i}", "name": f"Fictional Person {i}", "primaryEmailAddress": {"value": f"p{i}@mail.example.test"}, "primaryPhoneNumber": {"value": "(555) 010-0101"},
+        self.people = [{"id": f"cand-{i}", "name": f"Sample Person {i}", "primaryEmailAddress": {"value": f"p{i}@mail.example.test"}, "primaryPhoneNumber": {"value": "(555) 010-0101"},
                         "resumeFileHandle": {"handle": f"h{i}"}, "doNotContact": i == 3} for i in range(1, 6)]
 
         def authed(a: str | None) -> bool:
@@ -56,7 +56,7 @@ class WorkableMock:
     def __init__(self, token="wk-mock-token"):
         self.token, self.app = token, FastAPI()
         _files(self.app)
-        self.people = [{"id": f"w{i}", "name": f"Fictional Worker {i}", "email": f"w{i}@mail.example.test", "phone": "", "disqualified": i == 2, "resume_metadata": {"filename": "resume.txt"}, "shortcode": "SUP" if i <= 3 else "OPS"} for i in range(1, 6)]
+        self.people = [{"id": f"w{i}", "name": f"Sample Worker {i}", "email": f"w{i}@mail.example.test", "phone": "", "disqualified": i == 2, "resume_metadata": {"filename": "resume.txt"}, "shortcode": "SUP" if i <= 3 else "OPS"} for i in range(1, 6)]
 
         @self.app.get("/spi/v3/candidates")
         def lst(request: Request, authorization: str | None = Header(default=None)):
@@ -80,7 +80,7 @@ class GreenhouseMock:
     def __init__(self, token="gh-mock-token"):
         self.token, self.app = token, FastAPI()
         _files(self.app)
-        self.people = [{"id": i, "first_name": "Fictional", "last_name": f"Hire{i}", "email_addresses": [{"value": f"g{i}@mail.example.test"}], "phone_numbers": [], "attachments": [{"type": "resume", "filename": "resume.txt", "url": "http://127.0.0.1/files/resume.txt"}], "jobs": [{"id": 77 if i <= 3 else 88}]} for i in range(1, 6)]
+        self.people = [{"id": i, "first_name": "Sample", "last_name": f"Hire{i}", "email_addresses": [{"value": f"g{i}@mail.example.test"}], "phone_numbers": [], "attachments": [{"type": "resume", "filename": "resume.txt", "url": "http://127.0.0.1/files/resume.txt"}], "jobs": [{"id": 77 if i <= 3 else 88}]} for i in range(1, 6)]
 
         @self.app.get("/v1/candidates")
         def lst(request: Request, response: Response, authorization: str | None = Header(default=None)):

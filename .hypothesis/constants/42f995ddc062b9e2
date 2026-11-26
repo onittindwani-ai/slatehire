@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/api/routes_demo.py
+# hypothesis_version: 6.170.17
+
+[503, 20000, '/advance', '/api/demo', '/reset', '/state', '/stress-candidates', '/tick', 'The demo clock', 'added', 'applied', 'candidate_id', 'code', 'created_at', 'decision_note', 'demo', 'demo.stress', 'email', 'full_name', 'function', 'history', 'id', 'load test', 'n', 'note', 'now', 'phone', 'role_id', 'school', 'source', 'sqlalchemy', 'stage', 'updated_at']

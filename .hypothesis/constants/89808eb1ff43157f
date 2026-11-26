@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/offline_llm.py
+# hypothesis_version: 6.170.17
+
+[300, '\\[task:(\\w+)\\]', 'evidence', 'id', 'level', 'look_for', 'offline-rules', 'quotes', 'rationale', 'reason', 'resume', 'score_criterion', 'scored', 'shown', 'state', 'value', '{}']

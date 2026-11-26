@@ -131,9 +131,9 @@ def test_a_webhook_retry_of_a_deleted_person_without_an_address_is_not_added_aga
 
 def test_a_mailbox_message_of_a_deleted_person_is_not_added_again(tmp_path):
     from test_hardening_mail import GOOD, installed as mail_installed, mail, run
-    from mock.mail_servers import FakeMailServers
+    from mock.mail_servers import StubMailServers
 
-    with FakeMailServers() as srv:
+    with StubMailServers() as srv:
         ctx = mail_installed(tmp_path, srv)
         srv.store.deliver(mail("Ann <Ann@Mail.Example.Test>", "Application for Customer Support Specialist", GOOD, message_id="<a1@x>"))
         assert run(ctx)["added"] == 1

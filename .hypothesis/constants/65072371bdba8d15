@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/packages/core-py/src/sendora_core/sse.py
+# hypothesis_version: 6.170.17
+
+[1.0, ': heartbeat\n\n', 'entity_id', 'entity_type', 'id', 'payload']

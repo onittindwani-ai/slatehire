@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/packages/core-py/src/sendora_core/llm_fixtures.py
+# hypothesis_version: 6.170.17
+
+[160, '[ \\t]+', 'input_tokens', 'is_live', 'model', 'output_tokens', 'prompt_preview', 'supports_json_schema', 'text']

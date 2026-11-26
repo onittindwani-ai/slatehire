@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/model_tasks.py
+# hypothesis_version: 6.170.17
+
+[300, 400, 600, 40000, ',', ':', '\\s+', 'anchors', 'criterion_id', 'definition', 'description', 'forbid', 'hard', 'id', 'listed_only', 'look_for', 'model', 'name', 'not_found', 'quotes', 'rationale', 'read only the first', 'resume', 'rules', 'score_criterion', 'scored', 'state', 'value', 'via']

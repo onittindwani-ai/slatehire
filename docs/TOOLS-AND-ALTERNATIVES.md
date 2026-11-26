@@ -188,7 +188,7 @@ What Slatehire has for each: Breezedoc: Not built: the API could not be confirme
 | Gmail (through IMAP) | paid | 70 | 60 | 85 | 80 | 40 | 60 | **68.2** | 100 percent of IMAP mailbox |
 | Signed webhook | built in | 60 | 70 | 90 | 100 | 100 | 100 | **80.0** | 86 percent of IMAP mailbox |
 
-What Slatehire has for each: IMAP mailbox: Built and tested against a local fake mail server (run against a local stand in only); Gmail (through IMAP): Works through the IMAP adapter, not run live (not run against Gmail); Signed webhook: Built and tested (run and tested).
+What Slatehire has for each: IMAP mailbox: Built and tested against a local mock mail server (run against a local stand in only); Gmail (through IMAP): Works through the IMAP adapter, not run live (not run against Gmail); Signed webhook: Built and tested (run and tested).
 
 **Evidence, IMAP mailbox**
 
@@ -223,7 +223,7 @@ What Slatehire has for each: IMAP mailbox: Built and tested against a local fake
 **Recommendation by user type**
 
 - **Beginner:** Start with the demo inbox, then CSV. Connect a mailbox only when you are ready.
-- **Implementer running it for clients:** Plain IMAP works with Gmail (app password), Outlook and most hosts, and was tested against a local fake server. It only reads.
+- **Implementer running it for clients:** Plain IMAP works with Gmail (app password), Outlook and most hosts, and was tested against a local mock server. It only reads.
 - **Cost sensitive owner:** IMAP is free with the mailbox you already have.
 - **When open source is the right call:** Not a paid versus open source choice: IMAP is an open standard. A mailbox shared by many people may fit a form tool and the signed webhook better.
 
@@ -243,7 +243,7 @@ What Slatehire has for each: A language model (Anthropic API): Built behind the 
 - Reliability and upkeep (70): Answers can differ run to run, so consistency is a test, not a given.
 - Cost (55): Billed per use. See the vendor price page.
 - Data control (40): Resume text would be sent to the vendor, which needs a privacy decision.
-- Integration depth (60): Built behind the shared model wrapper, one criterion per call, every quote and the total checked by code. Run only against a local fake server.
+- Integration depth (60): Built behind the shared model wrapper, one criterion per call, every quote and the total checked by code. Run only against a local mock server.
 - Sources: https://docs.anthropic.com (checked 2026-11-23)
 
 **Evidence, Offline rules scorer**
@@ -259,7 +259,7 @@ What Slatehire has for each: A language model (Anthropic API): Built behind the 
 **Recommendation by user type**
 
 - **Beginner:** Use the offline rules scorer. It is plain, repeatable and every quote is checked by code.
-- **Implementer running it for clients:** A language model can replace the proposal step and the quote check still applies. That path is built behind the shared model wrapper and tested against a local fake server and recorded fixtures; it was never run with a real key (UNVERIFIED live).
+- **Implementer running it for clients:** A language model can replace the proposal step and the quote check still applies. That path is built behind the shared model wrapper and tested against a local mock server and recorded fixtures; it was never run with a real key (UNVERIFIED live).
 - **Cost sensitive owner:** The offline scorer costs nothing. A model is billed per use on the vendor price page.
 - **When open source is the right call:** The rules scorer is the right call when a hiring decision must be explainable word for word. It is the wrong call when resumes are long, messy or in many languages.
 
@@ -349,6 +349,6 @@ What Slatehire has for each: Railway: Dockerfiles and a config file, never deplo
 ### Named but not scored
 
 - Cloudflare Tunnel and Cloudflare DNS: Named in the deploy guides for webhook testing and a custom domain. Infrastructure, not a choice Slatehire depends on.
-- Anthropic API as a live scorer: Scored above as a language model option. The live path is built and only run against a local fake server (UNVERIFIED live).
+- Anthropic API as a live scorer: Scored above as a language model option. The live path is built and only run against a local mock server (UNVERIFIED live).
 
 <!-- SCORES:END -->

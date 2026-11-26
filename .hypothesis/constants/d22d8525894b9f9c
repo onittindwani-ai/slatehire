@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/tools/record_llm_fixtures.py
+# hypothesis_version: 6.170.17
+
+['*.json', 'README.txt', '__main__', 'anthropic', 'anthropic_api_key', 'api', 'apps', 'calls', 'content', 'data', 'fallbacks', 'files', 'fixture', 'items', 'llm_fixtures', 'max_tokens', 'messages', 'model', 'model_calls', 'quote_invalid', 'quotes', 'src', 'system', 'text', 'utf-8']

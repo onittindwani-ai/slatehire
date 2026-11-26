@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/suppression.py
+# hypothesis_version: 6.170.17
+
+[384, ' \t\r\n.,;:!?)>]}\'"<([{', '+', '.', '/', '@', 'NFKC', 'a', 'after_commit', 'email', 'erased-hashes.txt', 'export_dir', 'key', 'ref', 'removed', 'replace', 'salt', 'suppression.lifted', 'suppression_key', 'suppression_salt', 'utf-8']

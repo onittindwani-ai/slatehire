@@ -1,4 +1,4 @@
-"""Load the fictional demo company. 90 applicants for three roles, a locked rubric each, voluntary labels, and a pipeline already moved by people:
+"""Load the sample demo company. 90 applicants for three roles, a locked rubric each, voluntary labels, and a pipeline already moved by people:
 shortlists, declines with reasons, interviews with scorecards, one offer waiting for approval and one hire with an onboarding plan.
 
 Every decision below is made by calling the same functions the API uses, as a named person, so the demo obeys the same rules as a real install.
@@ -33,7 +33,7 @@ def load_world(s: Session, ctx) -> dict:
     rb, key = _read(seed, "rubrics.json"), _read(seed, "answer_key.json")["resumes"]
     roles: dict[str, Role] = {}
     for rk, r in rb.items():
-        role = rubric_service.create_role(s, OWNER, r["title"], "Demo company", f"A fictional {r['title'].lower()} role for the demo.", key=rk)
+        role = rubric_service.create_role(s, OWNER, r["title"], "Demo company", f"A sample {r['title'].lower()} role for the demo.", key=rk)
         rub = rubric_service.new_draft(s, role, OWNER, r["criteria"], True)
         rubric_service.lock(s, rub, OWNER, now)
         role.job_post = rubric_service.job_post_draft(role, r["criteria"])
@@ -86,9 +86,9 @@ def _stage_pipeline(s: Session, ctx, roles, apps, key, now) -> dict:
                 counts["scorecards"] += 2
     # one offer waiting for a second person, one hire with an onboarding plan
     sup, ops = cards["support"][0], cards["ops"][1]
-    o1 = offers.create(s, sup, OWNER, "Customer Support Specialist", (ctx.today(s) + timedelta(days=40)).isoformat(), "Full time, base pay as agreed in the interview, review after 6 months. [Demo terms, fictional.]", ctx.today(s), st.min_scorecards, st.company_name)
+    o1 = offers.create(s, sup, OWNER, "Customer Support Specialist", (ctx.today(s) + timedelta(days=40)).isoformat(), "Full time, base pay as agreed in the interview, review after 6 months. [Demo terms, sample data.]", ctx.today(s), st.min_scorecards, st.company_name)
     offers.ask_approval(s, o1, OWNER)
-    o2 = offers.create(s, ops, OWNER, "Operations Coordinator", (ctx.today(s) + timedelta(days=30)).isoformat(), "Full time, base pay as agreed in the interview, review after 6 months. [Demo terms, fictional.]", ctx.today(s), st.min_scorecards, st.company_name)
+    o2 = offers.create(s, ops, OWNER, "Operations Coordinator", (ctx.today(s) + timedelta(days=30)).isoformat(), "Full time, base pay as agreed in the interview, review after 6 months. [Demo terms, sample data.]", ctx.today(s), st.min_scorecards, st.company_name)
     offers.ask_approval(s, o2, OWNER)
     decide(s, o2.approval_id, True, APPROVER, "approver", "Terms match the interview notes.")
     o2.status = "approved"

@@ -1,6 +1,6 @@
 # Capabilities
 
-Screenshots are from the demo data (fictional people), taken by the browser tests at 1440x900 and 390x844.
+Screenshots are from the demo data (sample people), taken by the browser tests at 1440x900 and 390x844.
 
 ## Pipeline
 ![Pipeline](screenshots/page-pipeline-desktop.png)

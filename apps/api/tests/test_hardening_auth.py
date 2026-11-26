@@ -127,7 +127,7 @@ def test_a_live_start_is_refused_while_the_company_or_the_owner_is_a_placeholder
         create_app(real_settings(tmp_path, mode="live", company_name="Example Company"))
     with pytest.raises(ConfigError, match="OWNER_EMAIL"):
         create_app(real_settings(tmp_path, mode="live", owner_email="owner@example.test"))
-    assert create_app(real_settings(tmp_path, mode="live")).version == "1.0.1"  # real names: it starts
+    assert create_app(real_settings(tmp_path, mode="live")).version == "1.0.2"  # real names: it starts
     assert create_app(real_settings(tmp_path, mode="draft", company_name="Example Company")).version  # draft may start, and problems() lists it
     assert any("COMPANY_NAME" in p for p in real_settings(tmp_path, company_name="Example Company").problems())
 

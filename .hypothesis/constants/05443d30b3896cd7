@@ -1,0 +1,4 @@
+# file: /Users/onit/Sendora AI Systems/slatehire/apps/api/src/slatehire/offers.py
+# hypothesis_version: 6.170.17
+
+[120, 200, 'application', 'approved', 'at', 'by', 'declined', 'draft', 'handed_off', 'handoff', 'high', 'interviewing', 'note', 'offer', 'offer.approve', 'offer.drafted', 'offer.handed_off', 'offer_id', 'pending_approval', 'ref', 'rejected', 'stage', 'withdrawn']
