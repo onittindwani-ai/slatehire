@@ -1,9 +1,16 @@
 # One command start: docker compose up -d --build
 # Needs a .env file (copy .env.example). Postgres data lives in a named volume.
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
 services:
   db:
     image: postgres:17
     restart: unless-stopped
+    logging: *logging
     environment:
       POSTGRES_USER: slatehire
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
@@ -21,9 +28,12 @@ services:
       context: .
       dockerfile: apps/api/Dockerfile
     restart: unless-stopped
+    logging: *logging
     env_file: .env
     environment:
       DATABASE_URL: postgresql+psycopg://slatehire:${POSTGRES_PASSWORD}@db:5432/slatehire
+      SEED_DIR: /app/data  # set here so an empty SEED_DIR in .env cannot hide the data folder inside the image
+      FORWARDED_ALLOW_IPS: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"  # the web container, on the private compose network, passes on the visitor address
       EXPORT_DIR: /data/exports
     volumes:
       - exports:/data/exports
@@ -38,26 +48,33 @@ services:
       context: .
       dockerfile: apps/api/Dockerfile
     restart: unless-stopped
+    logging: *logging
+    healthcheck:
+      disable: true  # the image checks the API port, which a worker does not open
     env_file: .env
     environment:
       DATABASE_URL: postgresql+psycopg://slatehire:${POSTGRES_PASSWORD}@db:5432/slatehire
+      SEED_DIR: /app/data  # set here so an empty SEED_DIR in .env cannot hide the data folder inside the image
       EXPORT_DIR: /data/exports
     command: ["python", "-m", "slatehire.worker"]
     volumes:
       - exports:/data/exports
     depends_on:
-      - api
+      api:
+        condition: service_healthy
 
   web:
     build:
       context: .
       dockerfile: apps/web/Dockerfile
     restart: unless-stopped
-    env_file: .env
+    logging: *logging
     environment:
       API_BASE_URL: http://api:8000
+      INSECURE_COOKIES: ${INSECURE_COOKIES:-}  # the web container gets only what it needs, not the whole .env (no database password, no session secret)
     depends_on:
-      - api
+      api:
+        condition: service_healthy
     ports:
       - "127.0.0.1:3000:3000"
 

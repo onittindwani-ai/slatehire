@@ -20,6 +20,7 @@ class AshbyMock:
     def __init__(self, key="ashby-mock-key"):
         self.key, self.app = key, FastAPI()
         _files(self.app)
+        self.jobs = {"job-1": {"cand-1", "cand-2", "cand-3", "cand-4"}, "job-2": {"cand-5"}}  # which candidates applied to which job
         self.people = [{"id": f"cand-{i}", "name": f"Fictional Person {i}", "primaryEmailAddress": {"value": f"p{i}@mail.example.test"}, "primaryPhoneNumber": {"value": "(555) 010-0101"},
                         "resumeFileHandle": {"handle": f"h{i}"}, "doNotContact": i == 3} for i in range(1, 6)]
 
@@ -36,6 +37,14 @@ class AshbyMock:
             more = start + 2 < len(self.people)
             return {"success": True, "results": page, "moreDataAvailable": more, "nextCursor": str(start + 2) if more else None}
 
+        @self.app.post("/application.list")
+        async def apps(request: Request, authorization: str | None = Header(default=None)):
+            if not authed(authorization):
+                return JSONResponse({"success": False, "errors": ["unauthorized"]}, 401)
+            body = await request.json()
+            ids = sorted(self.jobs.get(body.get("jobId"), set()))
+            return {"success": True, "results": [{"id": f"app-{i}", "candidate": {"id": i}} for i in ids], "moreDataAvailable": False, "nextCursor": None}
+
         @self.app.post("/file.info")
         async def info(request: Request, authorization: str | None = Header(default=None)):
             if not authed(authorization):
@@ -47,15 +56,17 @@ class WorkableMock:
     def __init__(self, token="wk-mock-token"):
         self.token, self.app = token, FastAPI()
         _files(self.app)
-        self.people = [{"id": f"w{i}", "name": f"Fictional Worker {i}", "email": f"w{i}@mail.example.test", "phone": "", "disqualified": i == 2, "resume_metadata": {"filename": "resume.txt"}} for i in range(1, 5)]
+        self.people = [{"id": f"w{i}", "name": f"Fictional Worker {i}", "email": f"w{i}@mail.example.test", "phone": "", "disqualified": i == 2, "resume_metadata": {"filename": "resume.txt"}, "shortcode": "SUP" if i <= 3 else "OPS"} for i in range(1, 6)]
 
         @self.app.get("/spi/v3/candidates")
         def lst(request: Request, authorization: str | None = Header(default=None)):
             if authorization != f"Bearer {self.token}":
                 return JSONResponse({"error": "unauthorized"}, 401)
             start = int(request.query_params.get("since_id", "0"))
-            page = self.people[start:start + 2]
-            nxt = f"http://testserver/spi/v3/candidates?since_id={start + 2}" if start + 2 < len(self.people) else None
+            code = request.query_params.get("shortcode") or request.query_params.get("job")
+            pool = [p for p in self.people if not code or p["shortcode"] == code]
+            page = pool[start:start + 2]
+            nxt = f"http://testserver/spi/v3/candidates?since_id={start + 2}&shortcode={code}" if code and start + 2 < len(pool) else f"http://testserver/spi/v3/candidates?since_id={start + 2}" if start + 2 < len(pool) else None
             return {"candidates": page, "paging": {"next": nxt} if nxt else {}}
 
         @self.app.get("/spi/v3/candidates/{cid}")
@@ -69,7 +80,7 @@ class GreenhouseMock:
     def __init__(self, token="gh-mock-token"):
         self.token, self.app = token, FastAPI()
         _files(self.app)
-        self.people = [{"id": i, "first_name": "Fictional", "last_name": f"Hire{i}", "email_addresses": [{"value": f"g{i}@mail.example.test"}], "phone_numbers": [], "attachments": [{"type": "resume", "filename": "resume.txt", "url": "http://127.0.0.1/files/resume.txt"}]} for i in range(1, 4)]
+        self.people = [{"id": i, "first_name": "Fictional", "last_name": f"Hire{i}", "email_addresses": [{"value": f"g{i}@mail.example.test"}], "phone_numbers": [], "attachments": [{"type": "resume", "filename": "resume.txt", "url": "http://127.0.0.1/files/resume.txt"}], "jobs": [{"id": 77 if i <= 3 else 88}]} for i in range(1, 6)]
 
         @self.app.get("/v1/candidates")
         def lst(request: Request, response: Response, authorization: str | None = Header(default=None)):
@@ -77,9 +88,11 @@ class GreenhouseMock:
                 return JSONResponse({"message": "unauthorized"}, 401)
             page = int(request.query_params.get("page", "1"))
             per = 2
-            if page * per < len(self.people):
-                response.headers["Link"] = f'<http://testserver/v1/candidates?page={page + 1}&per_page={per}>; rel="next"'
-            return self.people[(page - 1) * per:page * per]
+            job = request.query_params.get("job_id")
+            pool = [p for p in self.people if not job or any(str(j["id"]) == job for j in p["jobs"])]
+            if page * per < len(pool):
+                response.headers["Link"] = f'<http://testserver/v1/candidates?page={page + 1}&per_page={per}' + (f"&job_id={job}" if job else "") + '>; rel="next"'
+            return pool[(page - 1) * per:page * per]
 
 
 class CalComMock:

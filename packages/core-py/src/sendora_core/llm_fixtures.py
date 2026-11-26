@@ -4,14 +4,28 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from pathlib import Path
 
 from sendora_core.llm_types import LLMBackend, LLMError, LLMResponse
 from sendora_core.redaction import redact_text
 
 
+_SPACES = re.compile(r"[ \t]+")
+
+
+def _loose(text: str) -> str:
+    """Runs of spaces and tabs count as one space and trailing spaces are ignored.
+
+    Text laid out in columns (a PDF page read by position) can shift by one space between operating systems
+    when a position sits on a rounding boundary. The key must not depend on that, or a recording made on one
+    machine would miss on another (it did: the same test passed on macOS and failed on the Linux CI runner).
+    """
+    return "\n".join(_SPACES.sub(" ", line).rstrip() for line in text.replace("\r\n", "\n").split("\n"))
+
+
 def fixture_key(model_kind: str, system: str, prompt: str) -> str:
-    return hashlib.sha256(f"{model_kind}\n{system}\n{prompt}".encode()).hexdigest()[:16]
+    return hashlib.sha256(f"{model_kind}\n{_loose(system)}\n{_loose(prompt)}".encode()).hexdigest()[:16]
 
 
 class FixtureLLM:

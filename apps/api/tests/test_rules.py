@@ -9,7 +9,7 @@ from hypothesis import given, settings, strategies as st
 from sqlalchemy import select
 
 from conftest import make_ctx
-from slatehire import fairness_service, interviews, jobs, offers, onboarding, pipeline, retention, rubric_service, scoring_service
+from slatehire import fairness_service, guards, interviews, jobs, offers, onboarding, pipeline, retention, rubric_service, scoring_service
 from slatehire.errors import RuleError
 from slatehire.untrusted import find_injection
 from slatehire.ingest import Applicant
@@ -19,6 +19,7 @@ from sendora_core.audit import verify_audit_chain
 from sendora_core.models import AuditEntry
 from sendora_core.safety import KillSwitchError
 
+guards.install()  # these tests use the rules directly, without starting the app; the app and the worker install them at start (test_round3_start.py)
 SRC = Path(__file__).resolve().parents[1] / "src" / "slatehire"
 CRIT = [{"id": "a", "name": "Writing", "description": "", "weight": 3, "anchors": {"1": "Has seen it done.", "3": "Has done it alone.", "5": "Has led it and taught it."}, "look_for": ["email", "reply"], "question": ""},
         {"id": "b", "name": "Tools", "description": "", "weight": 2, "anchors": {"1": "Has seen it done.", "3": "Has done it alone.", "5": "Has led it and taught it."}, "look_for": ["ticket", "helpdesk"], "question": ""}]
@@ -76,8 +77,9 @@ def test_the_blind_setting_and_redaction_version_are_part_of_the_signature(tmp_p
     other = rubric_service.new_draft  # noqa: F841
     a = rubric_service.lock(s, rub, "o@x.test", ctx.now(s)).fingerprint
     from slatehire import rubrics
+    from slatehire.redaction import VERSION  # the version the redaction has now (it moved to 2 in round 4); the test follows it instead of a fixed number
 
-    assert a == rubrics.fingerprint(CRIT, True, "1") and a != rubrics.fingerprint(CRIT, False, "1") and a != rubrics.fingerprint(CRIT, True, "2")
+    assert a == rubrics.fingerprint(CRIT, True, VERSION) and a != rubrics.fingerprint(CRIT, False, VERSION) and a != rubrics.fingerprint(CRIT, True, VERSION + "x")
     assert rubric_service.verify_signature(rub)
     s.execute(__import__("sqlalchemy").text("update cf_rubric set blind = 0"))  # a change made outside the app
     s.expire_all()
@@ -273,8 +275,10 @@ def test_fairness_report_counts_labels_and_never_guesses(world):
         p = rep.payload
         assert p["disclaimer"].startswith("This is an indicator") and p["min_group"] == 10
         first = p["stages"]["shortlisted"]["groups"]
-        assert sum(g["entered"] for g in first.values()) == 90
         assert first["undisclosed"]["status"] == "undisclosed"
+        assert all(g["entered"] is None and g["selected"] is None and g["fewer_than"] == 10 for g in first.values() if g["status"] == "too_few")  # a small group shows no counts at all
+        wide = fairness_service.run(s, "o@x.test", "all", 2).payload["stages"]["shortlisted"]["groups"]  # the counts add up to everyone when no group is too small to show
+        assert sum(g["entered"] for g in wide.values()) == 90
         small = fairness_service.run(s, "o@x.test", "all", 200).payload
         assert all(g["status"] in ("too_few", "undisclosed") for g in small["stages"]["shortlisted"]["groups"].values())
         with pytest.raises(RuleError):

@@ -22,7 +22,8 @@ class CostTracker:
         self.prices = prices or DEFAULT_PRICES
 
     def cost_usd(self, model: str, input_tokens: int, output_tokens: int) -> float:
-        pin, pout = self.prices.get(model, (0.0, 0.0))
+        # A model that is not in the price table is priced at the highest known price, so a spend budget still trips (it never counts as free).
+        pin, pout = self.prices.get(model) or (max(p[0] for p in self.prices.values()), max(p[1] for p in self.prices.values()))
         return round((input_tokens * pin + output_tokens * pout) / 1_000_000, 6)
 
     def record(self, model: str, purpose: str, input_tokens: int, output_tokens: int) -> CostEntry:

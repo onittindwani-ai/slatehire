@@ -11,17 +11,31 @@ import httpx
 
 from slatehire.adapters.base import safe_base_url
 from slatehire.adapters.fetch import safe_fetch
-from slatehire.ingest import Applicant, IngestError, text_from_bytes
+from slatehire.ingest import Applicant, IngestError, ResumeRead, read_resume
 from sendora_core.adapters import AdapterError
 
 
-def _resume(settings, url: str | None, name: str, headers: dict | None = None, client=None) -> str:
+def _resume(settings, url: str | None, name: str, headers: dict | None = None, client=None) -> ResumeRead:
     if not url:
-        return ""
+        return ResumeRead("")
     try:
-        return text_from_bytes(safe_fetch(url, allow_http_local=settings.allow_http_local_targets, headers=headers, client=client), name)
+        return read_resume(safe_fetch(url, allow_http_local=settings.allow_http_local_targets, headers=headers, client=client), name)
     except (AdapterError, IngestError):
-        return ""  # the applicant is still added; the resume can be pasted or uploaded
+        return ResumeRead("")  # the applicant is still added; the resume can be pasted or uploaded
+
+
+def _person(name: str, email: str, phone: str, got: ResumeRead, source: str, ref: str | None) -> Applicant:
+    return Applicant(name, email, phone, "", got.text, "", source, external_ref=ref, extra={"notes": got.notes()}, original=got.original)
+
+
+NEED_JOB = "An ATS pull needs the ATS job id of the role (set it on the role). Without it every candidate in your ATS, for every job, would be put into this role and scored."
+
+
+def need_job(job_id: str) -> str:
+    job = (job_id or "").strip()
+    if not job:
+        raise AdapterError(NEED_JOB)
+    return job
 
 
 def _get(client: httpx.Client, method: str, path: str, **kw) -> httpx.Response:
@@ -43,7 +57,7 @@ class SeedATS:
     def __init__(self, settings):
         self.s = settings
 
-    def list_applicants(self, limit: int = 200) -> list[Applicant]:
+    def list_applicants(self, limit: int = 200, job_id: str = "") -> list[Applicant]:
         return []
 
     def healthcheck(self):
@@ -62,22 +76,39 @@ class Ashby:
         self.client = client or httpx.Client(base_url=safe_base_url(settings.ashby_base_url, allow_http_local=settings.allow_http_local_targets), timeout=30)
         self.auth = (settings.ashby_api_key, "")
 
-    def list_applicants(self, limit: int = 200) -> list[Applicant]:
+    def _candidates_of_job(self, job: str, limit: int) -> set[str]:
+        """The ids of the candidates who applied to one job (application.list with jobId; UNVERIFIED against the real service)."""
+        ids: set[str] = set()
+        cursor = None
+        while len(ids) < limit:
+            body = {"jobId": job, "limit": 100} | ({"cursor": cursor} if cursor else {})
+            data = _get(self.client, "POST", "/application.list", json=body, auth=self.auth).json()
+            if not data.get("success", True):
+                raise AdapterError("Ashby said no: " + str((data.get("errors") or ["unknown"])[0])[:120])
+            ids |= {str((a.get("candidate") or {}).get("id")) for a in data.get("results", []) if (a.get("candidate") or {}).get("id")}
+            cursor = data.get("nextCursor")
+            if not data.get("moreDataAvailable") or not cursor:
+                break
+        return ids
+
+    def list_applicants(self, limit: int = 200, job_id: str = "") -> list[Applicant]:
+        job = need_job(job_id)
+        wanted = self._candidates_of_job(job, limit)
         out, cursor = [], None
-        while len(out) < limit:
-            body = {"limit": min(100, limit - len(out))} | ({"cursor": cursor} if cursor else {})
+        while len(out) < limit and wanted:
+            body = {"limit": 100} | ({"cursor": cursor} if cursor else {})
             data = _get(self.client, "POST", "/candidate.list", json=body, auth=self.auth).json()
             if not data.get("success", True):
                 raise AdapterError("Ashby said no: " + str((data.get("errors") or ["unknown"])[0])[:120])
             for c in data.get("results", []):
-                if c.get("doNotContact"):
+                if c.get("doNotContact") or str(c.get("id")) not in wanted:
                     continue
                 handle = (c.get("resumeFileHandle") or {}).get("handle")
-                text = ""
+                got = ResumeRead("")
                 if handle:
                     info = _get(self.client, "POST", "/file.info", json={"fileHandle": handle}, auth=self.auth).json().get("results", {})
-                    text = _resume(self.s, info.get("url"), info.get("fileName", "resume.pdf"), client=self.client)
-                out.append(Applicant(c.get("name", ""), (c.get("primaryEmailAddress") or {}).get("value", ""), (c.get("primaryPhoneNumber") or {}).get("value", ""), "", text, "", "ashby", external_ref=c.get("id")))
+                    got = _resume(self.s, info.get("url"), info.get("fileName", "resume.pdf"), client=self.client)
+                out.append(_person(c.get("name", ""), (c.get("primaryEmailAddress") or {}).get("value", ""), (c.get("primaryPhoneNumber") or {}).get("value", ""), got, "ashby", c.get("id")))
             cursor = data.get("nextCursor")
             if not data.get("moreDataAvailable") or not cursor:
                 break
@@ -104,19 +135,20 @@ class Workable:
         self.client = client or httpx.Client(base_url=safe_base_url(base, allow_http_local=settings.allow_http_local_targets), timeout=30)
         self.h = {"Authorization": f"Bearer {settings.workable_token}"}
 
-    def list_applicants(self, limit: int = 200) -> list[Applicant]:
+    def list_applicants(self, limit: int = 200, job_id: str = "") -> list[Applicant]:
+        job = need_job(job_id)  # the job's shortcode in Workable
         out, path = [], "/candidates"
-        params: dict | None = {"limit": min(100, limit)}
+        params: dict | None = {"limit": min(100, limit), "shortcode": job}
         while path and len(out) < limit:
             data = _get(self.client, "GET", path, params=params, headers=self.h).json()
             for c in data.get("candidates", []):
                 if c.get("disqualified"):
                     continue
-                text = ""
+                got = ResumeRead("")
                 if (c.get("resume_metadata") or {}).get("filename"):
                     det = _get(self.client, "GET", f"/candidates/{c['id']}", headers=self.h).json().get("candidate", {})
-                    text = _resume(self.s, det.get("resume_url"), c["resume_metadata"]["filename"], client=self.client)
-                out.append(Applicant(c.get("name", ""), c.get("email", ""), c.get("phone", ""), "", text, "", "workable", external_ref=str(c.get("id"))))
+                    got = _resume(self.s, det.get("resume_url"), c["resume_metadata"]["filename"], client=self.client)
+                out.append(_person(c.get("name", ""), c.get("email", ""), c.get("phone", ""), got, "workable", str(c.get("id"))))
             nxt = (data.get("paging") or {}).get("next")
             path, params = (httpx.URL(nxt).raw_path.decode() if nxt else None), None
             if path and path.startswith("/spi/v3"):
@@ -143,16 +175,17 @@ class Greenhouse:
         self.client = client or httpx.Client(base_url=safe_base_url(settings.greenhouse_base_url, allow_http_local=settings.allow_http_local_targets), timeout=30)
         self.h = {"Authorization": "Basic " + base64.b64encode(f"{settings.greenhouse_token}:".encode()).decode()}
 
-    def list_applicants(self, limit: int = 200) -> list[Applicant]:
-        out, url, params = [], "/v1/candidates", {"per_page": min(100, limit)}
+    def list_applicants(self, limit: int = 200, job_id: str = "") -> list[Applicant]:
+        job = need_job(job_id)
+        out, url, params = [], "/v1/candidates", {"per_page": min(100, limit), "job_id": job}
         while url and len(out) < limit:
             r = _get(self.client, "GET", url, params=params, headers=self.h)
             for c in r.json():
                 att = next((a for a in c.get("attachments", []) if a.get("type") == "resume"), None)
-                text = _resume(self.s, att.get("url"), att.get("filename", "resume.pdf"), client=self.client) if att else ""
+                got = _resume(self.s, att.get("url"), att.get("filename", "resume.pdf"), client=self.client) if att else ResumeRead("")
                 email = next((e.get("value", "") for e in c.get("email_addresses", [])), "")
                 phone = next((p.get("value", "") for p in c.get("phone_numbers", [])), "")
-                out.append(Applicant(f"{c.get('first_name', '')} {c.get('last_name', '')}".strip(), email, phone, "", text, "", "greenhouse", external_ref=str(c.get("id"))))
+                out.append(_person(f"{c.get('first_name', '')} {c.get('last_name', '')}".strip(), email, phone, got, "greenhouse", str(c.get("id"))))
             nxt = r.links.get("next", {}).get("url")
             url, params = (httpx.URL(nxt).raw_path.decode() + ("?" + httpx.URL(nxt).query.decode() if httpx.URL(nxt).query else "") if nxt else None), None
         return out

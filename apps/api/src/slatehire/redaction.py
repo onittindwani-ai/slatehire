@@ -14,7 +14,7 @@ import re
 import unicodedata
 from dataclasses import dataclass, field
 
-VERSION = "1"
+VERSION = "2"  # 2: two digit years, clubs and societies that name a group, family status, parental leave and native language lines (round 4)
 PLACEHOLDERS = {"name": "[NAME]", "email": "[EMAIL]", "phone": "[PHONE]", "address": "[ADDRESS]", "link": "[LINK]", "photo": "[PHOTO]", "dob_age": "[BIRTH-OR-AGE]", "grad_year": "[YEAR]",
                 "pronoun": "[PRONOUN]", "title": "[TITLE]", "institution": "[SCHOOL]", "personal": "[PERSONAL]"}
 CATEGORY_LABELS = {"name": "Name", "email": "Email address", "phone": "Phone number", "address": "Street address", "link": "Profile or web link", "photo": "Photo reference", "dob_age": "Birth date or age",
@@ -28,7 +28,45 @@ NEUTRAL = {"salesman": "salesperson", "saleswoman": "salesperson", "foreman": "s
 
 HEADINGS = {"resume", "curriculum", "vitae", "cv", "summary", "profile", "experience", "education", "skills", "contact", "page", "confidential", "references", "objective", "employment"}
 COMMON_WORDS = {"will", "mark", "grant", "rose", "may", "bill", "art", "dean", "hope", "faith", "joy", "gray", "grey", "king", "young", "bell", "cook", "baker", "mason", "major", "chase", "frank", "miles", "reed", "case", "page"}
+# Surnames and first names that are also everyday words. Such a token of the applicant's own name is removed where it is written as a name (Capitalised or
+# in capitals), never where it is a plain lower case word: "Grant Cook" is redacted, "wrote grant proposals" is kept (a person called Grant must not
+# lose every sentence about grants, and so a lower score).
+ORDINARY_WORDS = COMMON_WORDS | {"porter", "driver", "banks", "bank", "fisher", "hunter", "archer", "carter", "butler", "cooper", "potter", "smith", "turner", "walker", "sage", "price", "long", "bishop", "church", "field", "fields",
+                                 "ford", "hall", "lane", "park", "rice", "stone", "wood", "woods", "wright", "wise", "brown", "green", "white", "black", "gold", "hill", "lake", "marsh", "rich", "sharp", "swift", "winter", "summer",
+                                 "rivers", "chambers", "cash", "carpenter", "gardner", "miller", "taylor", "weaver", "parker", "mayor", "judge", "knight", "steward", "marshall", "sailor", "shepherd", "thatcher", "tanner", "fox", "wolf", "lamb"}
+# Words that make a first line a job title or a company, not a person: "Senior Data Analyst", "Acme Systems Ltd". Such a line is never taken for the applicant's name.
+TITLE_WORDS = {"senior", "junior", "lead", "chief", "head", "principal", "staff", "associate", "assistant", "specialist", "analyst", "coordinator", "engineer", "developer", "designer", "consultant", "officer", "administrator", "representative",
+               "technician", "supervisor", "manager", "director", "executive", "operator", "agent", "advisor", "adviser", "architect", "accountant", "nurse", "teacher", "clerk", "operations", "customer", "support", "service", "services",
+               "sales", "marketing", "finance", "data", "software", "project", "product", "account", "human", "resources", "logistics", "warehouse", "quality", "research", "technical", "general", "inc", "ltd", "llc", "plc", "corp", "corporation",
+               "company", "group", "systems", "solutions", "labs", "technologies", "partners", "associates", "holdings", "bank", "hospital", "clinic", "store", "stores"}
 FUNCTION_WORDS = {"the", "and", "for", "with", "from", "that", "this", "these", "those", "are", "was", "were", "has", "had", "have", "not", "but", "its", "our", "his", "her", "their", "you", "your", "all", "any", "can", "who", "how", "why", "when", "where", "which", "into", "than", "then", "also", "per", "via", "off", "out", "one", "two", "she", "him", "them", "they", "will", "would", "could", "should"}
+# What a person writes about the groups they belong to and the family they have says things the rubric must not use. The patterns below are bounded and best effort: they cover the common
+# wordings, not every club on earth. The owner adds the rest in REDACT_EXTRA_TERMS, and every reviewer is reminded (docs/14) that the redaction is a help and not a promise.
+AFFINITY_GROUP = (r"(?:Black|African[ \-]American|Hispanic|Latino|Latina|Latinx|Latine|Asian|Asian[ \-]American|Pacific[ \-]Islander|Native[ \-]American|Indigenous|First[ \-]Nations|Women|Womens|Women's|"
+                  r"Female|LGBTQ\+?|LGBTQIA\+?|LGBT|Lesbian|Gay|Queer|Trans|Transgender|Muslim|Islamic|Jewish|Hindu|Sikh|Buddhist|Catholic|Christian|Evangelical|Mormon|Veterans?|Disabled|Deaf|Neurodivergent|Pride)")
+AFFINITY_NOUN = r"(?:Network|Association|Council|Alliance|Society|Union|Caucus|Club|Organization|Organisation|Coalition|Collective|Fellowship|Chamber|League|Group|Forum|Chapter|Committee|Professionals|Engineers|Leaders|Students|Scholars|Employees)"
+AFFINITY_CAP = r"[A-Z][\w&'’\-]{1,25}"
+AFFINITY = (rf"\b{AFFINITY_GROUP}(?:[ \t]+{AFFINITY_CAP}){{0,3}}[ \t]+{AFFINITY_NOUN}\b(?:[ \t]+(?:of|for|in)[ \t]+{AFFINITY_CAP}){{0,2}}"
+            rf"|\b(?:National[ \t]+)?Society[ \t]+of[ \t]+(?:Women|Black|Hispanic|Asian|Latino|Latina|Native|Pacific|Indigenous|LGBTQ)\b(?:[ \t]+{AFFINITY_CAP}){{0,3}}")
+GREEK = r"(?:Alpha|Beta|Gamma|Delta|Epsilon|Zeta|Eta|Theta|Iota|Kappa|Lambda|Mu|Nu|Xi|Omicron|Pi|Rho|Sigma|Tau|Upsilon|Phi|Chi|Psi|Omega)"
+FRATERNITY = rf"\b{GREEK}(?:[ \t]+{GREEK}){{1,3}}\b(?:[ \t]+(?:Fraternity|Sorority|Chapter))?"
+NAMED_GROUPS = (r"\b(?:NAACP|NSBE|SHPE|AAUW|Hillel|Newman Center|Knights of Columbus|Black Girls Code|Girls Who Code|Women Who Code|Lesbians Who Tech|Out in Tech|Grace Hopper Celebration|Techqueria|"
+                r"Latinas in Tech|Black Women in Tech)\b")
+NUMBER_WORD = r"(?:an?|one|two|three|four|five|six|seven|eight|nine|ten|\d{1,2})"
+FAMILY = [
+    r"(?im)^[ \t>*|\-•]*((?:newly |happily )?(?:married|single|divorced|widow(?:ed|er)?|separated|engaged)\b[^\n]{0,80})$",
+    r"(?i)\b(?:married|divorced|widowed|separated|engaged)[ \t]+(?:with|to|and)[ \t]+[^\n.;]{0,40}?\b(?:child|children|kids?|sons?|daughters?|husband|wife|spouse|partner)\w*",
+    r"(?i)\b(?:single|working|stay[ \-]at[ \-]home|proud|new|expectant|young)[ \t]+(?:mother|mom|mum|father|dad|parent)s?\b",
+    rf"(?i)\b(?:mother|father|mom|mum|dad|parent|grandmother|grandfather)[ \t]+of[ \t]+{NUMBER_WORD}\b(?:[ \t]+(?:children|kids|boys|girls|sons|daughters|toddlers|twins|infants|babies))?",
+    r"(?i)\b(?:maternity|paternity|parental|adoption|family|childcare|child[ \-]care|baby)[ \t]+(?:leave|break)\b|\bon[ \t]+(?:maternity|paternity|parental)\b|\bcareer[ \t]+break[ \t]+(?:for|to)[ \t]+(?:raise|care|have)\b",
+    r"(?i)\bpregnan(?:t|cy)\b|\bexpecting[ \t]+(?:a|my|our)[ \t]+(?:baby|child|first|second)\b",
+]
+NATIVE_LANGUAGE = [
+    r"\bNative[ \t]+[A-Z][a-z]+(?:[ \-][A-Z][a-z]+)?[ \t]+speaker\b",
+    r"(?i:\b(?:mother[ \-]tongue|native language|first language|home language))[ \t]*[:\-]?[ \t]*(?:is[ \t]+)?[A-Z][a-z]+\b",
+    r"(?<![A-Za-z])[A-Z][a-z]{2,15}[ \t]*(\([ \t]*(?i:native)(?:[ \t]+speaker)?[ \t]*\))",
+]
+MAX_EXTRA_TERMS = 200
 ZERO_WIDTH = {"​", "‌", "‍", "⁠", "﻿", "­"}
 
 
@@ -64,14 +102,34 @@ def _clean(text: str) -> tuple[str, list[int]]:
         idx.append(i)
     return "".join(out), idx
 
+PHOTO_FILE = re.compile(r"\b[\w\-]{1,100}\.(?:jpe?g|png|gif|webp|heic)\b", re.I)
+
+
+def _photo_file_lines(clean: str) -> list[Span]:
+    """A line that names a photo file (name.jpg) is a photo reference as a whole. Found from the file name outward, never by scanning the line for it."""
+    out: list[Span] = []
+    done = -1
+    for m in PHOTO_FILE.finditer(clean):
+        if m.start() < done:
+            continue
+        start = clean.rfind("\n", 0, m.start()) + 1
+        end = clean.find("\n", m.end())
+        done = len(clean) if end < 0 else end
+        out.append(Span(start, done, "photo"))
+    return out
+
 
 def _find(rx: str, text: str, cat: str, flags: int = re.I, group: int = 0) -> list[Span]:
     return [Span(m.start(group), m.end(group), cat) for m in re.finditer(rx, text, flags)]
 
 
-EMAIL = (r"(?:mailto:)?[\w+\-]+(?:(?:\.|\s+\.\s+)[\w+\-]+)*\s*(?:@|\[at\]|\(at\)|\{at\})\s*[\w\-]+(?:\s*(?:\.|\[dot\]|\(dot\)|\sdot\s)\s*[\w\-]+)+"
-         r"|[\w.+\-]+\sat\s[\w\-]+(?:(?:\s*(?:\[dot\]|\(dot\)|\sdot\s)\s*|\.)[\w\-]+)+(?<!\.)")  # the plain word "at" counts only with a spelled out dot or a dot with no space ("name at host dot example"), never "worked at Mercy. Led"
-LINK = r"(?:https?://|www\.)[^\s)>\]\"']+|\b(?:linkedin|github|gitlab|instagram|facebook|twitter|x|behance|dribbble|medium)\.(?:com|net|io)/[^\s)>\]\"']+|\b(?:[\w\-]+\.)+(?:com|org|net|io|dev|test|me|co|app|ai|info|site)\b(?:/[^\s)>\]\"']*)?|(?<![\w@.])@[A-Za-z][\w.]{2,30}\b|(?<![\w/])\(?in/[\w\-]{3,}\)?"
+# Every repeat in the address patterns has an upper bound and a match can only start where a word starts, so the work grows in step with the length of
+# the text (a 60,000 character line of "a." used to take minutes). Limits come from the mail standards: a local part is at most 64 characters, a label 63.
+# The tail of a link runs to the next space and is read once, because a match never starts inside an earlier one.
+EMAIL = (r"(?<![\w+\-])(?:mailto:)?[\w+\-]{1,64}(?:(?:\.|\s{1,3}\.\s{1,3})[\w+\-]{1,64}){0,8}\s{0,3}(?:@|\[at\]|\(at\)|\{at\})\s{0,3}[\w\-]{1,63}(?:\s{0,3}(?:\.|\[dot\]|\(dot\)|\sdot\s)\s{0,3}[\w\-]{1,63}){1,10}"
+         r"|(?<![\w.+\-])[\w.+\-]{1,64}\sat\s[\w\-]{1,63}(?:(?:\s{0,3}(?:\[dot\]|\(dot\)|\sdot\s)\s{0,3}|\.)[\w\-]{1,63}){1,10}(?<!\.)")  # the plain word "at" counts only with a spelled out dot or a dot with no space ("name at host dot example"), never "worked at Mercy. Led"
+LINK = (r"(?:https?://|www\.)[^\s)>\]\"']+|\b(?:linkedin|github|gitlab|instagram|facebook|twitter|x|behance|dribbble|medium)\.(?:com|net|io)/[^\s)>\]\"']+"
+        r"|(?<![\w\-])(?:[\w\-]{1,63}\.){1,10}(?:com|org|net|io|dev|test|me|co|app|ai|info|site)\b(?:/[^\s)>\]\"']*)?|(?<![\w@.])@[A-Za-z][\w.]{2,30}\b|(?<![\w/])\(?in/[\w\-]{3,}\)?")
 DIGIT_WORDS = r"(?:zero|one|two|three|four|five|six|seven|eight|nine|oh)"
 STREET_WORDS = r"(?:Street|St|Road|Rd|Lane|Ln|Avenue|Ave|Drive|Dr|Court|Ct|Way|Rise|Wharf|Row|Close|Terrace|Place|Pl|Boulevard|Blvd|Crescent|Square|Walk)"
 EDU_WORDS = r"\b(?:b\.?a\.?|b\.?sc\.?|b\.?s\.?|m\.?a\.?|m\.?sc\.?|mba|ph\.?d|bachelor|master|diploma|degree|graduat\w*|class of|alumn\w*|studied|university|college|polytechnic|academy|institute|school of)\b"
@@ -82,7 +140,7 @@ NOT_NAME_WORDS = {"available", "upon", "on", "furnished", "provided", "request",
 SECTION_NAMES = {"education": True, "training": True, "qualifications": True, "academic background": True, "experience": False, "work experience": False, "employment": False, "summary": False, "profile": False,
                  "skills": False, "projects": False, "certifications": False, "languages": False, "interests": False, "references": False, "professional experience": False}
 SCHOOL_KW = r"(?:University|College|Institute|Polytechnic|Academy|Univ\.?)"
-CAP = r"[A-Z][\w'’&\-]*"
+CAP = r"[A-Z][\w'’&\-]{0,40}"  # a capitalised word; the bound keeps a long run of capitals and dashes from being re read from every position
 CAPS = rf"{CAP}(?:[ \t]+{CAP}){{0,3}}"
 PARTICLES = r"(?:of|at|for|de|del|della|delle|degli|dei|di|du|des|der|van|von|do|da|das|dos|y|la|le|los|las|el|am|im)"
 SCHOOL = rf"(?:{CAP}\s+){{0,4}}{SCHOOL_KW}(?:\s+(?:of|at|for)\s+(?:the\s+)?{CAPS}(?:\s+(?:of|at|for)\s+{CAPS})?)?"
@@ -148,6 +206,28 @@ def _reference_names(clean: str) -> list[Span]:
     return out
 
 
+def _group_spans(clean: str, extra_terms: tuple[str, ...]) -> list[Span]:
+    """Clubs and societies that name a group, fraternities and sororities, family status, parental leave, native language, and the owner's own list. All are category "personal"."""
+    out: list[Span] = []
+    for rx in (AFFINITY, FRATERNITY, NAMED_GROUPS):
+        out += _find(rx, clean, "personal", flags=0)
+    for rx in FAMILY:
+        out += [Span(m.start(1) if m.re.groups else m.start(), m.end(1) if m.re.groups else m.end(), "personal") for m in re.finditer(rx, clean)]
+    for rx in NATIVE_LANGUAGE:
+        out += [Span(m.start(1) if m.re.groups else m.start(), m.end(1) if m.re.groups else m.end(), "personal") for m in re.finditer(rx, clean)]
+    for term in extra_terms[:MAX_EXTRA_TERMS]:
+        t = _clean(term.strip())[0]
+        if 2 <= len(t) <= 80:
+            out += [Span(m.start(), m.end(), "personal") for m in re.finditer(rf"(?<![A-Za-z]){re.escape(t)}(?![A-Za-z])", clean, re.I)]
+    return out
+
+
+def _short_years(clean: str) -> list[Span]:
+    """Two digit graduation years: Class of '08, Class of 08, and a school line ending in '08."""
+    out = _find(r"(?i)\bclass[ \t]+of[ \t]*['’]?[ \t]*(\d{2})\b(?!\d)", clean, "grad_year", flags=0, group=1)
+    return out
+
+
 def _despace(line: str) -> str:
     parts = re.split(r"\s{3,}", line.strip())
     out = []
@@ -159,7 +239,7 @@ def _despace(line: str) -> str:
 
 def _looks_like_name(s: str) -> bool:
     words = [w for w in re.split(r"[\s,]+", s.strip()) if w]
-    if not 2 <= len(words) <= 4 or any(w.lower().strip(".") in HEADINGS for w in words):
+    if not 2 <= len(words) <= 4 or any(w.lower().strip(".") in HEADINGS or w.lower().strip(".") in TITLE_WORDS for w in words):
         return False
     return all(re.fullmatch(r"[A-Z][A-Za-z'’\-]+|[A-Z]\.|[A-Z]{2,}[A-Za-z'’\-]*", w) for w in words) and not re.search(r"\d|@", s)
 
@@ -172,7 +252,7 @@ def _discover_names(clean: str, emails: list[str]) -> set[str]:
         cand = re.sub(r"^(?:resume|cv|curriculum vitae)\s*[:\-]\s*", "", cand, flags=re.I)
         if _looks_like_name(cand):
             found.update(re.split(r"[\s,]+", cand))
-    for m in re.finditer(r"(?im)^\W*(?:full name|name|candidate|applicant)\s*[:\-]\s*(.+)$", clean):
+    for m in re.finditer(r"(?im)^[^\w\n]*(?:full name|name|candidate|applicant)[ \t]*[:\-][ \t]*(.+)$", clean):
         found.update(re.split(r"[\s,]+", m.group(1).strip()))
     for m in re.finditer(r"(?im)^.*page\s*\d+\s*(?:of|/)\s*\d+.*$", clean):
         for seg in re.split(r"[|·•]", m.group(0)):
@@ -180,7 +260,7 @@ def _discover_names(clean: str, emails: list[str]) -> set[str]:
                 found.update(seg.split())
     for m in re.finditer(r"(?i)(?:resume|cv|curriculum vitae)[_\s\-]+([A-Z][a-z]+)[_\s\-]+([A-Z][a-z]+)", clean):
         found.update(m.groups())
-    for m in re.finditer(r"(?im)(?:^|\n)\s*(?:sincerely|regards|best regards|kind regards|yours truly|thank you|thanks)\s*,?\s*\n?\s*([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\s*$", clean):
+    for m in re.finditer(r"(?im)^[ \t]*(?:sincerely|regards|best regards|kind regards|yours truly|thank you|thanks)\s{0,20},?\s{0,20}([A-Z][a-z]+(?:\s{1,3}[A-Z][a-z]+)?)\s{0,20}$", clean):
         found.update(m.group(1).split())
     for m in re.finditer(r"(?:prepared|written|submitted) by ([A-Z][a-z]+(?:\s+[A-Z][\w\-']+)?)", clean):
         found.update(m.group(1).split())
@@ -192,14 +272,17 @@ def _discover_names(clean: str, emails: list[str]) -> set[str]:
     return {t.strip(".,'’") for t in found if len(t.strip(".,'’")) >= 2}
 
 
-def _name_rx(token: str) -> re.Pattern:
-    t = re.escape(token)
-    if len(token) >= 5:
-        t = r"\s?".join(re.escape(c) for c in token)
-    return re.compile(rf"(?<![A-Za-z]){t}(?![A-Za-z])", re.I)
+def _name_rx(token: str, *, ordinary: bool = False) -> re.Pattern:
+    """The token as a whole word. A token that is also an everyday word matches only as a name: Capitalised or in capitals, case sensitive."""
+    def shape(t: str) -> str:
+        return r"\s?".join(re.escape(c) for c in t) if len(t) >= 5 else re.escape(t)
+
+    if ordinary:
+        return re.compile(rf"(?<![A-Za-z])(?:{shape(token.capitalize())}|{shape(token.upper())})(?![A-Za-z])")
+    return re.compile(rf"(?<![A-Za-z]){shape(token)}(?![A-Za-z])", re.I)
 
 
-def detect(text: str, known_names: list[str] | None = None, known_schools: list[str] | None = None) -> list[Span]:
+def detect(text: str, known_names: list[str] | None = None, known_schools: list[str] | None = None, extra_terms: tuple[str, ...] = ()) -> list[Span]:
     clean, idx = _clean(text)
     spans: list[Span] = []
     emails = [m.group(0) for m in re.finditer(EMAIL, clean, re.I)]
@@ -207,8 +290,8 @@ def detect(text: str, known_names: list[str] | None = None, known_schools: list[
     spans += _find(LINK, clean, "link")
     spans += _find(r"!\[[^\]]*\]\([^)]*\)|<img[^>]*>|\[image[^\]]*\]", clean, "photo")
     spans += _find(r"(?im)^[ \t>*|\-]*((?:photo|photograph|headshot|portrait|picture)\b[^\n]*)$", clean, "photo", group=1)
-    spans += _find(r"[^\n]*\b[\w\-]+\.(?:jpe?g|png|gif|webp|heic)\b[^\n]*", clean, "photo")
-    spans += _find(r"[\[(][^\])\n]*\b(?:photos?|photograph\w*|pictures?|headshots?|portraits?|selfie|passport[ \-]photo|image)\b[^\])\n]*[\])]", clean, "photo")
+    spans += _photo_file_lines(clean)
+    spans += _find(r"[\[(][^\])\n]{0,120}\b(?:photos?|photograph\w*|pictures?|headshots?|portraits?|selfie|passport[ \-]photo|image)\b[^\])\n]{0,120}[\])]", clean, "photo")
     for m in re.finditer(r"(?<![\w.])(?:tel:)?\+?\(?\d[\d \t().\-]{6,}\d(?!\w)", clean, re.I):
         n = len(re.sub(r"\D", "", m.group(0)))
         if 10 <= n <= 15:
@@ -229,8 +312,10 @@ def detect(text: str, known_names: list[str] | None = None, known_schools: list[
     pos = 0
     for n, line in enumerate(clean.split("\n")):
         if in_edu[n] or re.search(EDU_WORDS, line, re.I):
-            spans += [Span(pos + m.start(), pos + m.end(), "grad_year") for m in re.finditer(r"\b(?:19|20)\d{2}\b", line)]
+            spans += [Span(pos + m.start(), pos + m.end(), "grad_year") for m in re.finditer(r"\b(?:19|20)\d{2}\b|(?<![\w'’])['’]\d{2}\b", line)]
         pos += len(line) + 1
+    spans += _short_years(clean)
+    spans += _group_spans(clean, extra_terms)
     # schools
     spans += _find(SCHOOL, clean, "institution", flags=0)
     spans += _find(FOREIGN_SCHOOL, clean, "institution", flags=0)
@@ -244,7 +329,7 @@ def detect(text: str, known_names: list[str] | None = None, known_schools: list[
         toks.update(t for t in re.split(r"[\s\-]+", _clean(n)[0]) if len(t) >= 2)
     heur = {t for t in _discover_names(clean, emails_clean) for t in re.split(r"[\s\-]+", t) if len(t) >= 3 and t.lower() not in COMMON_WORDS and t.lower() not in HEADINGS and t.lower() not in FUNCTION_WORDS}
     for t in sorted(toks | heur, key=len, reverse=True):
-        spans += [Span(m.start(), m.end(), "name") for m in _name_rx(t).finditer(clean)]
+        spans += [Span(m.start(), m.end(), "name") for m in _name_rx(t, ordinary=t.lower() in ORDINARY_WORDS).finditer(clean)]
     spans += _reference_names(clean)
     # pronouns, titles
     spans += _find(r"(?im)\bpronouns?\s*:[^\n]*", clean, "pronoun")
@@ -316,8 +401,8 @@ def _merge(spans: list[Span], text: str) -> list[Span]:
     return out
 
 
-def redact(text: str, known_names: list[str] | None = None, known_schools: list[str] | None = None, *, institutions: bool = True) -> Redaction:
-    spans = detect(text, known_names, known_schools)
+def redact(text: str, known_names: list[str] | None = None, known_schools: list[str] | None = None, *, institutions: bool = True, extra_terms: tuple[str, ...] = ()) -> Redaction:
+    spans = detect(text, known_names, known_schools, extra_terms)
     if not institutions:
         spans = [s for s in spans if s.cat != "institution"]
     spans = _merge(_select(spans, len(text)), text)

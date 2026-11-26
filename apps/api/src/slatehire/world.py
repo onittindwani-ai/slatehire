@@ -86,9 +86,9 @@ def _stage_pipeline(s: Session, ctx, roles, apps, key, now) -> dict:
                 counts["scorecards"] += 2
     # one offer waiting for a second person, one hire with an onboarding plan
     sup, ops = cards["support"][0], cards["ops"][1]
-    o1 = offers.create(s, sup, OWNER, "Customer Support Specialist", (ctx.today(s) + timedelta(days=40)).isoformat(), "Full time, base pay as agreed in the interview, review after 6 months. [Demo terms, fictional.]", ctx.today(s), st.min_scorecards)
+    o1 = offers.create(s, sup, OWNER, "Customer Support Specialist", (ctx.today(s) + timedelta(days=40)).isoformat(), "Full time, base pay as agreed in the interview, review after 6 months. [Demo terms, fictional.]", ctx.today(s), st.min_scorecards, st.company_name)
     offers.ask_approval(s, o1, OWNER)
-    o2 = offers.create(s, ops, OWNER, "Operations Coordinator", (ctx.today(s) + timedelta(days=30)).isoformat(), "Full time, base pay as agreed in the interview, review after 6 months. [Demo terms, fictional.]", ctx.today(s), st.min_scorecards)
+    o2 = offers.create(s, ops, OWNER, "Operations Coordinator", (ctx.today(s) + timedelta(days=30)).isoformat(), "Full time, base pay as agreed in the interview, review after 6 months. [Demo terms, fictional.]", ctx.today(s), st.min_scorecards, st.company_name)
     offers.ask_approval(s, o2, OWNER)
     decide(s, o2.approval_id, True, APPROVER, "approver", "Terms match the interview notes.")
     o2.status = "approved"

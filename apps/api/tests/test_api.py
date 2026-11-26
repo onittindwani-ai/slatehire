@@ -129,7 +129,8 @@ def test_the_demo_invite_stays_inside_the_app(client):
     iv = client.post(f"/api/applications/{a['id']}/interviews", headers=h, json={"interviewers": ["owner@example.test"], "starts_at": "2026-12-08T10:00:00Z"}).json()["id"]
     out = client.post(f"/api/interviews/{iv}/invite", headers=h, json={"confirm": True}).json()
     assert out["sent"] is True and "Nothing is sent" in out["reason"]
-    assert client.post(f"/api/interviews/{iv}/invite", headers=h, json={}).json()["sent"] is True  # the offline adapter has nothing to confirm
+    again = client.post(f"/api/interviews/{iv}/invite", headers=h, json={}).json()  # a second call is not a second invite (round 2 audit: it used to book a duplicate)
+    assert again["sent"] is False and again["already"] is True
     assert client.get(f"/api/interviews/{iv}", headers=h).json()["status"] == "invited"
 
 
@@ -221,5 +222,5 @@ def test_onboarding_tasks_can_be_ticked_and_added(client):
 
 
 def test_demo_routes_do_not_exist_outside_demo_mode(tmp_path):
-    c = TestClient(create_app(make_settings(tmp_path, demo_mode=False, owner_password_hash="x")))
+    c = TestClient(create_app(make_settings(tmp_path, demo_mode=False, session_secret="test-only-Rt7Kq2Vw9Xm4Zc8Lb3Nf6Hy1Js5Dp0Ga2Ue7Tq4Wi9", suppression_key="test-only-Sk4Pq8Zw2Vn6Xc1Jb9Rm3Th7Yd5Ga0Le", owner_password_hash="x")))
     assert c.post("/api/auth/login", json={"email": "owner@example.test", "password": "demo-password-1"}).status_code == 401

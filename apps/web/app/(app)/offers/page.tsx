@@ -12,11 +12,12 @@ const TONE: Record<string, "neutral" | "success" | "warning" | "danger"> = { dra
 
 export default function OffersPage() {
   const qc = useQueryClient();
-  const { canWrite } = useRole();
-  const q = useQuery({ queryKey: ["offers"], queryFn: () => get<OfferRow[]>("/offers") });
+  const { canWrite, known } = useRole();
+  const q = useQuery({ queryKey: ["offers"], queryFn: () => get<OfferRow[]>("/offers"), enabled: canWrite });
   const done = (m: string) => { notify.success(m); qc.invalidateQueries(); };
   const ask = useMutation({ mutationFn: (id: number) => post(`/offers/${id}/request-approval`), onSuccess: () => done("Sent for approval. A second person has to decide it."), onError: (e: Error) => notify.error("Not sent", e.message) });
   const hand = useMutation({ mutationFn: (id: number) => post<{ detail: string }>(`/offers/${id}/hand-off`), onSuccess: (r) => { notify.success(`Offer file written. ${r.detail}`); qc.invalidateQueries(); }, onError: (e: Error) => notify.error("Not written", e.message) });
+  if (known && !canWrite) return <div className="cf-page"><PageHead title="Offers" /><EmptyState title="Offers are for the owner and the approver" body="They hold pay terms and names. Ask the owner if you need to see one." /></div>;
   if (q.isError) return <div className="cf-page"><PageHead title="Offers" /><LoadError error={q.error} onRetry={() => q.refetch()} what="offers" /></div>;
   if (!q.data) return <div className="cf-page"><PageHead title="Offers" /><ListSkeleton /></div>;
   return (

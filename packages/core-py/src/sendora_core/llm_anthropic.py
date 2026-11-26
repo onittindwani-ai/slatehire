@@ -78,6 +78,8 @@ class AnthropicBackend:
                  timeout: float = 120.0, thinking: str = "default", transport: httpx.BaseTransport | None = None):
         if not api_key:
             raise LLMError("ANTHROPIC_API_KEY is empty.")
+        if not base_url.startswith(("https://", "http://127.0.0.1", "http://localhost")):
+            raise LLMError("The model address must start with https:// (plain http is only for 127.0.0.1 or localhost), or the key would travel unencrypted.")
         self._key, self.version, self.thinking = api_key, version, thinking
         self.url = base_url.rstrip("/") + "/v1/messages"
         self._client = httpx.Client(timeout=timeout, transport=transport)

@@ -8,7 +8,7 @@ from typing import Any
 
 from sqlalchemy.orm import Session, sessionmaker
 
-from slatehire import clock, model_tasks
+from slatehire import clock, dbsetup, model_tasks
 from slatehire.config import Settings
 from slatehire.models import State
 from slatehire.offline_llm import OfflineBackend
@@ -24,11 +24,17 @@ class Ctx:
     factory: sessionmaker[Session]
     adapters: dict[str, Any] = field(default_factory=dict)
     registry: Any = None
+    write_factory: Any = None  # sessions for requests and jobs that can write (BEGIN IMMEDIATE on SQLite, see dbsetup.py); the plain `factory` is for reading
 
     def __post_init__(self) -> None:
         self.registry = self.registry or build_registry(self.settings)
         if not self.adapters:
             self.adapters = build_adapters(self.settings, self.registry)
+        # Every session carries the key of the erasure hashes and the export folder, so suppression and erasure never need the settings passed through every call.
+        self.factory.configure(info={"suppression_key": self.settings.suppression_key, "export_dir": self.settings.export_dir, "fairness_floor": self.settings.fairness_min_group})
+        self.write_factory = self.write_factory or dbsetup.write_factory(self.factory)
+        if self.write_factory is not self.factory:
+            self.write_factory.configure(info=dict(self.factory.kw["info"]))
 
     def effective(self, session: Session) -> Settings:
         """The kill switch can be turned on in the app and the mode pulled back to draft. Neither can go the other way."""
@@ -36,7 +42,7 @@ class Ctx:
         upd: dict[str, Any] = {}
         if kill and kill.value == "1":
             upd["kill_switch"] = True
-        if force and force.value == "1":
+        if (force and force.value == "1") or (self.settings.demo_mode and self.settings.mode is Mode.LIVE):  # a demo never writes to the outside world, whatever MODE says
             upd["mode"] = Mode.DRAFT
         return self.settings.model_copy(update=upd) if upd else self.settings
 
@@ -65,10 +71,10 @@ class Ctx:
         return None
 
     def now(self, session: Session):
-        return clock.now(session, self.settings.demo_mode)
+        return clock.now(session, self.settings.demo_shortcuts)
 
     def today(self, session: Session) -> date:
-        return clock.today(session, self.settings.demo_mode)
+        return clock.today(session, self.settings.demo_shortcuts)
 
 
 def set_state(session: Session, key: str, value: str) -> None:

@@ -1,1 +1,1 @@
-"""Slatehire: a writing engine that learns one person's voice, with a person approving everything."""
+"""Slatehire: structured hiring with a blind first read, rubrics locked before anyone is scored, and a person deciding every outcome."""

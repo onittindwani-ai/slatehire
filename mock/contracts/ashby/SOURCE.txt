@@ -3,3 +3,4 @@ Page: https://developers.ashbyhq.com/reference/candidatelist
 candidate_list.json holds what the page states: POST /candidate.list, basic auth, permission candidatesRead, request parameters syncToken and createdAfter, success response keys success, results, moreDataAvailable, syncToken and one example candidate.
 NOT read: the CandidateListRequest schema, so the request fields cursor and limit that the adapter sends, and the response field nextCursor it follows, are UNVERIFIED (the page says the endpoint paginates).
 Never run against the real service.
+The job filter (round 3) is NOT read from the page: the adapter asks POST /application.list with jobId and keeps only the candidates named there. That call, and the candidate id inside each result, are UNVERIFIED. Greenhouse job_id and Workable shortcode are likewise UNVERIFIED.

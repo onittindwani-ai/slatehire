@@ -1,8 +1,36 @@
 # Replace the two names with your own DNS names. Caddy gets HTTPS certificates by itself.
 app.example.com {
+	encode zstd gzip
+	request_body {
+		max_size 25MB
+	}
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+	}
 	reverse_proxy 127.0.0.1:3000
 }
 
+# The API host answers only the two paths an applicant form or an uptime check needs. Every other address gets a plain 404, so the sign in and the
+# rest of the API are reached through the app host only (its web server passes them on privately).
 api.example.com {
-	reverse_proxy 127.0.0.1:8000
+	encode zstd gzip
+	request_body {
+		max_size 25MB
+	}
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+	}
+	@public path /api/webhooks/application /health
+	handle @public {
+		reverse_proxy 127.0.0.1:8000
+	}
+	handle {
+		respond "Not found" 404
+	}
 }

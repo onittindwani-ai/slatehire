@@ -35,7 +35,7 @@ export function AppFrame({ children }: { children: ReactNode }) {
   const path = usePathname();
   const qc = useQueryClient();
   const me = useMe();
-  const { canWrite, owner } = useRole();
+  const { canWrite, owner, known } = useRole();
   const settings = useSettings();
   const overview = useQuery({ queryKey: ["overview"], queryFn: () => get<Overview>("/overview") });
   const { setChoice } = useTheme();
@@ -45,7 +45,9 @@ export function AppFrame({ children }: { children: ReactNode }) {
   useLiveRefresh();
   useBlockStrayFileDrops();
   const killOn = !!settings.data?.kill_switch;
-  const active = NAV.find((n) => (n.id === "/" ? path === "/" : path.startsWith(n.id)))?.id ?? (path.startsWith("/candidates") ? "/candidates" : "/");
+  // Pay terms are for the owner and the approver, and the audit log is for the owner: the screens a sign in cannot read are not offered (all of them show until the role is known, so nothing jumps).
+  const nav = useMemo(() => NAV.filter((n) => !known || ((n.id !== "/offers" || canWrite) && (n.id !== "/audit" || owner))), [known, canWrite, owner]);
+  const active = nav.find((n) => (n.id === "/" ? path === "/" : path.startsWith(n.id)))?.id ?? (path.startsWith("/candidates") ? "/candidates" : "/");
   const refresh = () => qc.invalidateQueries({ predicate: (q) => q.queryKey[0] !== "me" });
   const demo = me.data?.demo_mode ?? false;
   const run = useMutation({ mutationFn: () => post<Parameters<typeof ranSummary>[0]>("/demo/tick"), onSuccess: (r) => { notify.success(ranSummary(r)); refresh(); }, onError: (e: Error) => notify.error("The run failed", e.message) });
@@ -62,15 +64,15 @@ export function AppFrame({ children }: { children: ReactNode }) {
       const t = e.target as HTMLElement | null;
       if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.closest("[role=dialog], [role=alertdialog]"))) return;
       if (e.key.toLowerCase() === "g") { armed = Date.now(); return; }
-      if (armed && Date.now() - armed < 1500 && /^[1-9]$/.test(e.key)) { armed = 0; const target = NAV[Number(e.key) - 1]; if (target) router.push(target.id); return; }
+      if (armed && Date.now() - armed < 1500 && /^[1-9]$/.test(e.key)) { armed = 0; const target = nav[Number(e.key) - 1]; if (target) router.push(target.id); return; }
       armed = 0;
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [router]);
+  }, [router, nav]);
 
   const items: PaletteItem[] = useMemo(() => [
-    ...NAV.map((n, i) => ({ id: `go-${n.id}`, label: `Go to ${n.label}`, group: "Pages", shortcut: i < 9 ? ["G", String(i + 1)] : undefined, onSelect: () => router.push(n.id) })),
+    ...nav.map((n, i) => ({ id: `go-${n.id}`, label: `Go to ${n.label}`, group: "Pages", shortcut: i < 9 ? ["G", String(i + 1)] : undefined, onSelect: () => router.push(n.id) })),
     { id: "signout", label: "Sign out", group: "Account", onSelect: signOut },
     ...(owner ? [killOn ? { id: "kill", label: "Turn the kill switch off", group: "Account", onSelect: () => toggleKill.mutate(false) } : { id: "kill", label: "Pause all (kill switch)", group: "Account", onSelect: () => setConfirmKill(true) }] : []),
     { id: "dark", label: "Switch to dark theme", group: "Actions", onSelect: () => setChoice("dark") },
@@ -78,7 +80,7 @@ export function AppFrame({ children }: { children: ReactNode }) {
     ...(demo && canWrite ? [{ id: "run", label: "Run the jobs now", group: "Demo", onSelect: () => void run.mutateAsync() }, { id: "adv", label: "Move the demo clock forward one day", group: "Demo", onSelect: () => void advance.mutateAsync(24) }] : []),
     ...(demo && owner ? [{ id: "reset", label: "Reset the demo data", group: "Demo", onSelect: () => setConfirmReset(true) }] : []),
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  ], [router, setChoice, demo, run, advance, owner, canWrite, killOn, toggleKill]);
+  ], [router, nav, setChoice, demo, run, advance, owner, canWrite, killOn, toggleKill]);
   const s = settings.data, o = overview.data;
   const demoDate = o?.today ? new Date(`${o.today}T12:00:00`).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }) : "";
   return (
@@ -101,11 +103,11 @@ export function AppFrame({ children }: { children: ReactNode }) {
       {me.data?.role === "viewer" ? <div className="cf-banner" role="status"><strong>Read only.</strong> <span className="cf-hide-sm">You can look at everything, and change nothing. Identities stay hidden where a role reads blind.</span></div> : null}
       <AppShell
         productName="Slatehire"
-        nav={NAV.map((n) => ({ ...n, count: n.id === "/approvals" ? o?.pending_approvals || undefined : undefined }))}
+        nav={nav.map((n) => ({ ...n, count: n.id === "/approvals" ? o?.pending_approvals || undefined : undefined }))}
         activeId={active}
         onNavigate={(id) => router.push(id)}
         onOpenPalette={() => setPalette(true)}
-        breadcrumbs={["Slatehire", NAV.find((n) => n.id === active)?.label ?? ""]}
+        breadcrumbs={["Slatehire", nav.find((n) => n.id === active)?.label ?? ""]}
         topRight={
           <>
             {owner ? <Button size="sm" variant="ghost" feedback={false} className="cf-iconify" aria-label={killOn ? "Turn it off (kill switch)" : "Pause all"} onClick={() => (killOn ? toggleKill.mutate(false) : setConfirmKill(true))}><Pause size={14} aria-hidden /><span className="cf-hide-sm">{killOn ? "Turn it off" : "Pause all"}</span></Button> : null}

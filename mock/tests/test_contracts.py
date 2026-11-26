@@ -79,11 +79,15 @@ def test_ashby_candidate_list_request_and_parsing_follow_the_page_where_it_was_r
     seen = []
 
     def handler(req):
-        seen.append((req.method, req.url.path, req.headers.get("authorization"), json.loads(req.content)))
+        body = json.loads(req.content)
         ex = doc["example_candidate"]
+        if req.url.path == "/application.list":  # the job filter: who applied to this job (UNVERIFIED, see mock/contracts/ashby/SOURCE.txt)
+            assert body["jobId"] == "job-9"
+            return httpx.Response(200, json={"success": True, "results": [{"id": "a1", "candidate": {"id": ex["id"]}}], "moreDataAvailable": False})
+        seen.append((req.method, req.url.path, req.headers.get("authorization"), body))
         return httpx.Response(200, json={"success": True, "results": [ex], "moreDataAvailable": False, "syncToken": "s"})
 
-    got = Ashby(live(), client(handler, "https://api.ashbyhq.com")).list_applicants()
+    got = Ashby(live(), client(handler, "https://api.ashbyhq.com")).list_applicants(job_id="job-9")
     method, path, auth, body = seen[0]
     assert method == doc["method"] and path == doc["path"] and auth == "Basic " + base64.b64encode(b"ak:").decode()
     assert set(body) <= set(doc["request_documented"]) | set(doc["request_not_confirmed"])  # cursor and limit are sent but NOT confirmed by the page we read
@@ -101,7 +105,7 @@ def test_greenhouse_uses_basic_auth_with_a_blank_password_and_follows_the_link_h
                                   headers={"Link": '<https://harvest.greenhouse.io/v1/candidates?page=abc&per_page=100>; rel="next"'})
         return httpx.Response(200, json=[])
 
-    got = Greenhouse(live(), client(handler, "https://harvest.greenhouse.io")).list_applicants()
+    got = Greenhouse(live(), client(handler, "https://harvest.greenhouse.io")).list_applicants(job_id="7")
     assert doc["auth"].startswith("basic") and seen[0][1] == "Basic " + base64.b64encode(b"gt:").decode() and len(seen) == 2 and got[0].name == "A B"
 
 

@@ -571,7 +571,7 @@
       },
       "integration": {
        "score": 80,
-       "evidence": "Marks a message read only after it was added."
+       "evidence": "Reads only mail whose subject has the word Application, and marks a message read only after it was dealt with."
       }
      }
     },
@@ -922,7 +922,7 @@
       },
       "integration": {
        "score": 70,
-       "evidence": "Set API_BASE_URL and SESSION_SECRET."
+       "evidence": "Set API_BASE_URL (the web app reads no secret)."
       }
      }
     },

@@ -8,7 +8,9 @@ import { api } from "@/lib/api";
 function afterSignIn(): string {
   try {
     const next = new URLSearchParams(window.location.search).get("next") ?? "";
-    return /^\/(?![/\\])/.test(next) ? next : "/";
+    // Resolve it against this site: a value that lands on another origin (for example a slash, a tab, then a host name) is dropped.
+    const url = new URL(next, window.location.origin);
+    return next.startsWith("/") && url.origin === window.location.origin ? url.pathname + url.search + url.hash : "/";
   } catch {
     return "/";
   }

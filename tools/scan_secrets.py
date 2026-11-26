@@ -24,7 +24,8 @@ PATTERNS = {
 }
 SKIP_SUFFIX = {".png", ".jpg", ".pdf", ".ico", ".woff", ".woff2"}
 SKIP_NAMES = {"pnpm-lock.yaml", "scan_secrets.py"}
-# Test fixtures use obviously fake values; a line carrying one of these markers is allowed.
+# Test fixtures use obviously fake values. The marker must be inside the matched value itself: a real key on a line that merely
+# mentions the word "example" is still reported.
 ALLOW = ("example", "not-for-real", "e2e-only", "dev-only", "fake", "demo-secret", "test-only", "change-me")
 
 
@@ -33,9 +34,21 @@ def tracked() -> list[Path]:
     return [ROOT / f for f in out]
 
 
+def scan_line(line: str) -> list[str]:
+    """The kinds of secret found in one line. A match whose own text carries a fake marker is allowed."""
+    found = []
+    for kind, rx in PATTERNS.items():
+        for m in rx.finditer(line):
+            if not any(a in m.group(0).lower() for a in ALLOW):
+                found.append(kind)
+                break
+    return found
+
+
 def main() -> int:
     hits = 0
     for f in tracked():
+        # packages/ is the shared base copied from the hub, with its own test fixtures; it is scanned in the hub, not here.
         if f.suffix in SKIP_SUFFIX or f.name in SKIP_NAMES or "packages/" in f.as_posix() or not f.is_file():
             continue
         try:
@@ -43,12 +56,9 @@ def main() -> int:
         except OSError:
             continue
         for i, line in enumerate(lines, 1):
-            if any(a in line.lower() for a in ALLOW):
-                continue
-            for kind, rx in PATTERNS.items():
-                if rx.search(line):
-                    print(f"{f.relative_to(ROOT)}:{i}: looks like {kind}")
-                    hits += 1
+            for kind in scan_line(line):
+                print(f"{f.relative_to(ROOT)}:{i}: looks like {kind}")
+                hits += 1
     print("secret scan:", "nothing found" if not hits else f"{hits} possible secret(s)")
     return 1 if hits else 0
 

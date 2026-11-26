@@ -102,3 +102,10 @@ def test_eval_runner():
     assert r.failures[0]["id"] == "c" and "error" in r.failures[0]["got"]
     assert "2/3" in r.summary()
     assert run_eval("empty", [], predict).pass_rate == 0.0
+
+def test_fixture_key_ignores_column_spacing_and_line_endings_but_not_words():
+    base = fixture_key("m", "sys", "Total   19.00\nDue 2026-11-30")
+    assert fixture_key("m", "sys", "Total 19.00  \r\nDue\t2026-11-30") == base
+    assert fixture_key("m", "sys", "Total 19.00\nDue 2026-11-31") != base
+    assert fixture_key("m", "sys", "Total 19.0 0\nDue 2026-11-30") != base
+    assert fixture_key("n", "sys", "Total 19.00\nDue 2026-11-30") != base

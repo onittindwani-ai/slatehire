@@ -21,8 +21,24 @@ def enqueue(session: Session, kind: str, payload: dict | None = None, delay_s: f
     return job
 
 
+LEASE_S = 1800  # a job that has been running longer than this without finishing is taken as lost (its worker died)
+
+
+def reclaim_lost(session: Session, lease_s: float = LEASE_S) -> int:
+    """A worker that is killed in the middle of a job leaves the job 'running' for ever. After the lease the job goes back to the queue,
+    or is marked failed when it has used all its attempts. `run_at` is set when a job is claimed, so it is the start time of the run."""
+    cutoff = utcnow() - timedelta(seconds=lease_s)
+    lost = update(Job).where(Job.status == "running", Job.run_at <= cutoff).execution_options(synchronize_session=False)
+    failed = session.execute(
+        lost.where(Job.attempts >= Job.max_attempts).values(status="failed", finished_at=utcnow(), last_error="The worker stopped before the job finished.")
+    ).rowcount
+    requeued = session.execute(lost.where(Job.attempts < Job.max_attempts).values(status="queued", last_error="The worker stopped before the job finished. Tried again.")).rowcount
+    return (failed or 0) + (requeued or 0)
+
+
 def claim_next(session: Session) -> Job | None:
     """Atomically move one due job from queued to running. The conditional update makes double claims impossible."""
+    reclaim_lost(session)
     now = utcnow()
     candidate = session.scalars(
         select(Job).where(Job.status == "queued", Job.run_at <= now).order_by(Job.run_at, Job.id).limit(1)
@@ -30,7 +46,7 @@ def claim_next(session: Session) -> Job | None:
     if candidate is None:
         return None
     res = session.execute(
-        update(Job).where(Job.id == candidate.id, Job.status == "queued").values(status="running", attempts=Job.attempts + 1)
+        update(Job).where(Job.id == candidate.id, Job.status == "queued").values(status="running", attempts=Job.attempts + 1, run_at=now)
     )
     session.flush()
     if res.rowcount != 1:
@@ -59,6 +75,8 @@ class Worker:
                 job.result = handler(s, payload) or {}
                 job.status, job.finished_at = "done", utcnow()
             except Exception as exc:
+                s.rollback()  # a failed statement leaves the transaction unusable until it is rolled back
+                job = s.get(Job, job_id)
                 job.last_error = f"{type(exc).__name__}: {exc}"[:2000]
                 if job.attempts >= job.max_attempts:
                     job.status, job.finished_at = "failed", utcnow()

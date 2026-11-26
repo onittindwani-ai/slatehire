@@ -12,7 +12,7 @@ from dataclasses import dataclass
 
 from slatehire import evidence, language
 from slatehire.redaction import PLACEHOLDER_RE
-from slatehire.untrusted import find_injection
+from slatehire.untrusted import ATTACK, find_injection
 
 SCORER = "offline rules v2 (not a language model)"
 SPLIT = re.compile(r"(?<=[.;!?])\s+")
@@ -102,18 +102,34 @@ def propose(criterion: dict, sents: list[Sentence]) -> dict:
     return {"criterion_id": criterion["id"], "state": "scored", "value": value, "quotes": quotes, "rationale": why, "listed_only": False}
 
 
+def _check_model_item(c: dict, it: dict, sents: list[Sentence], flags: list[dict]) -> dict:
+    """What the code checks about a model's answer, beyond that the quote exists. The quote must itself mention something the rubric looks for (so a resume cannot
+    make the model cite any harmless sentence beside a top level), and a level two or more away from what the plain rules read is flagged for a person."""
+    terms = c.get("look_for", [])
+    if terms and not any(language.hits(q["text"], terms) for q in it["quotes"]):
+        flags.append({"kind": "evidence_rejected", "detail": f"{c['name']}: the quote does not mention anything the rubric looks for", "criterion_id": c["id"]})
+        return {**it, "state": "rejected", "value": None, "problem": "the quote does not mention anything the rubric looks for"}
+    rules = propose(c, sents)
+    rules_level = rules["value"] if rules["state"] == "scored" else 0
+    if abs(int(it["value"]) - int(rules_level)) >= 2:
+        flags.append({"kind": "model_level_differs", "detail": f"{c['name']}: the model gave {it['value']}, the plain rules read {rules_level or 'nothing'}. Look at the quote before you rely on it.", "criterion_id": c["id"]})
+    return it
+
+
 def score_resume(criteria: list[dict], redacted: str, scorer=None) -> dict:
     """Score a redacted resume against a locked rubric. Returns items (already verified), the weighted total and flags.
 
     `scorer` is None for the rules above, or a model scorer (`model_tasks.ModelScorer`) with the same call shape. Either way every quote is checked here against the redacted text, and
     the total is arithmetic done here: nothing a scorer says can skip the check or set the total."""
     inj = find_injection(redacted)
-    blocked = [(f.start, f.end) for f in inj]
+    blocked = [(f.start, f.end) for f in inj if f.level == ATTACK]  # only a line aimed at the reader is left out; one that merely has the words of an instruction is scored and flagged
     sents = sentences(redacted, blocked)
-    items, flags = [], [{"kind": "instruction_in_resume", "detail": f.why, "text": redacted[f.start:f.end][:160]} for f in inj]
+    items, flags = [], [{"kind": "instruction_in_resume" if f.level == ATTACK else "possible_instruction", "detail": f.why, "text": redacted[f.start:f.end][:160]} for f in inj]
     for c in criteria:
         raw = scorer(c, redacted, sents, blocked) if scorer is not None else propose(c, sents)
         it = evidence.verify_item(raw, redacted, blocked)
+        if raw.get("via") == "model" and it["state"] == "scored":
+            it = _check_model_item(c, it, sents, flags)
         if it.get("listed_only"):
             flags.append({"kind": "keyword_list", "detail": f"{c['name']}: only a run of keywords, counted as not shown", "criterion_id": c["id"]})
         if it["state"] == "rejected":

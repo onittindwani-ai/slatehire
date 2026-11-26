@@ -29,15 +29,19 @@ LINE = re.compile(r"^([A-Z][A-Z0-9_]*)=(.*)$")
 def parse_example(text: str) -> list[tuple[str, str, str]]:
     """Return (group, name, default) for each variable in the example file."""
     group, out = "Core", []
+    after_blank = True  # a comment names a group only when it follows a blank line; a note on the line above one variable does not
     for raw in text.splitlines():
         line = raw.strip()
         if not line:
+            after_blank = True
             continue
         if line.startswith("#"):
             comment = line.lstrip("# ").strip()
-            if comment and not comment.lower().startswith(("copy to", "make the hash", "which adapter")):
+            if after_blank and comment and not comment.lower().startswith(("copy to", "make the hash", "which adapter")):
                 group = comment.split(".")[0][:60]
+            after_blank = False
             continue
+        after_blank = False
         m = LINE.match(line)
         if m:
             out.append((group, m.group(1), m.group(2).strip().strip("'\"")))
@@ -73,8 +77,8 @@ def check(example_text: str, env_text: str | None, shell: dict[str, str] | None 
     for g, n, d in spec:
         groups.setdefault(g, []).append((n, d))
     for g, members in groups.items():
-        if g == "Core":
-            continue
+        if g == "Core" or not any(m in g.lower() for m in ("all or none", "fill in together")):
+            continue  # only a group the example marks "all or none" or "fill in together" must be filled in completely
         no_default = [n for n, d in members if not d]
         started = [n for n, d in members if values.get(n, "") and values.get(n, "") != d]
         if started and no_default:

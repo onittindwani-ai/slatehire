@@ -21,3 +21,9 @@ next-env.d.ts
 .demo/
 uploads/
 demo.sqlite3-*
+.env.*
+!.env.example
+*.pem
+*.key
+exports/
+**/exports/

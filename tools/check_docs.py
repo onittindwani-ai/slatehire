@@ -22,6 +22,7 @@ DASHES = {chr(c) for c in (0x2014, 0x2013, 0x2012, 0x2015)}
 FILES = [*ROOT.glob("*.md"), *(ROOT / "docs").rglob("*.md"), *(ROOT / "prompts").glob("*.md"), *(ROOT / "templates").rglob("*.md"), *(ROOT / "deploy").rglob("*.md")]
 PRIVATE = re.compile(r"(drive\.google\.com|docs\.google\.com|notion\.so|notion\.site|/Users/|/home/[a-z]+/|C:\\\\Users)")
 LEFTOVER = re.compile(r"\b(ledgerlight|rainmaker|closeline|lighthouse|cortex|voiceprint)\b", re.I)
+DOC_NUMBER = re.compile(r"`(0\d|1[0-5])`")  # a guide is referred to as `07` or `11`
 GITHUB = re.compile(r"https://github\.com/[\w.-]+/[\w.-]+[^\s)>\]\"']*")
 MARK = re.compile(r"<!--n:([\w.]+)-->(.*?)<!--/n-->")
 LINK = re.compile(r"\]\(([^)#\s]+)(?:#[^)]*)?\)")
@@ -67,6 +68,9 @@ def main(argv: list[str]) -> int:
         new = MARK.sub(repl, text)
         if fix and new != text:
             f.write_text(new, encoding="utf-8")
+        for m in DOC_NUMBER.finditer(text):
+            if not list((ROOT / "docs").glob(f"{m.group(1)}-*.md")):
+                bad.append(f"{rel}: refers to guide `{m.group(1)}`, which does not exist")
         for m in LINK.finditer(text):
             target = m.group(1)
             if re.match(r"[a-z]+:", target) or target.startswith("mailto"):

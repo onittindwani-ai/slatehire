@@ -12,7 +12,7 @@ Blind by default. The resume shows the sentences behind each score, marked.
 
 ## A resume that talks to the scorer
 ![Warning](screenshots/state-3-warning-instruction-in-resume-desktop.png)
-Such lines are flagged and never used as evidence.
+Lines aimed at the reader are flagged and never used as evidence. A line that only has the words of an instruction is flagged for a person and still scored. Text hidden in a PDF is left out of the score and flagged.
 
 ## Roles and rubrics
 ![Roles](screenshots/page-roles-desktop.png)

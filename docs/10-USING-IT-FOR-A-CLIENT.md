@@ -25,7 +25,7 @@ So recommend, in writing, that the client has a lawyer who knows employment and 
 ## Onboarding checklist
 
 1. Run `02-BUSINESS-BASICS-CHECK.md` with the client: who employs, what notice applicants get, where they recruit, how long records are kept.
-2. Make a fresh copy for this client with `DEMO_MODE=false`, their company name, their own owner login (`tools/hash_password.py`) and their own `SESSION_SECRET`.
+2. Make a fresh copy for this client with `DEMO_MODE=false`, their `COMPANY_NAME` (it is written into every offer file and job post, and a live start is refused while it is the example), their own owner login (`tools/hash_password.py`), a second person for offers (`APPROVER_EMAIL`) their own `SESSION_SECRET` and their own `SUPPRESSION_KEY`. The database starts empty: add their roles, then their rubrics.
 3. Agree who decides. The owner moves people and may show identity after the shortlist. A second person approves every offer (the approver login). A read only login (`VIEWER_EMAIL`) suits a manager who only looks. Interviewers sign in as approvers so they can send scorecards. Write down who has which login.
 4. Ask for two or three real job posts and the criteria the managers really use. Turn them into rubrics with anchors for 1, 3 and 5. Check them for criteria that reward only one shape of career.
 5. Run the demo with the client so they see blind mode and the evidence marks (`01`).

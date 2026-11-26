@@ -71,9 +71,9 @@ export default function PipelinePage() {
               <div className="cf-cand" onPointerDown={(e) => { down.current = [e.clientX, e.clientY]; }} onClick={(e) => { if (Math.hypot(e.clientX - down.current[0], e.clientY - down.current[1]) < 5) setOpen(c); }}>
                 <strong className="cf-cand__name">{c.name}</strong>
                 <span className="cf-mini">{c.role_title}</span>
-                <span className="cf-cand__foot">{c.total != null ? <span className="sx-num cf-cand__score"><CountUp value={c.total} format={(n) => n.toFixed(0)} /></span> : <Badge>Not scored</Badge>}{c.flags ? <Badge tone="warning">{c.flags} flag{c.flags > 1 ? "s" : ""}</Badge> : null}{c.hidden ? <Badge tone="accent">Blind</Badge> : null}</span>
+                <span className="cf-cand__foot">{c.total != null ? <span className="sx-num cf-cand__score"><CountUp value={c.total} format={(n) => n.toFixed(0)} /></span> : c.attention ? <Badge tone="warning">Needs a person</Badge> : <Badge>Not scored</Badge>}{c.flags ? <Badge tone="warning">{c.flags} flag{c.flags > 1 ? "s" : ""}</Badge> : null}{c.hidden ? <Badge tone="accent">Blind</Badge> : null}</span>
               </div>)} />
-          {hidden.length ? <p className="cf-mini">Each column shows the 40 highest scores. The Candidates page lists everyone.</p> : null}
+          {hidden.length ? <p className="cf-mini">Each column shows the 40 highest scores, and always everyone who needs a person first. The Candidates page lists everyone.</p> : null}
         </>)}
       <AddApplicants key={String(adding)} open={adding} onOpenChange={setAdding} roles={roles.data ?? []} />
       <Sheet open={open !== null} onOpenChange={(o) => !o && setOpen(null)} title={open?.name ?? ""} description={open ? `${open.role_title}. ${STAGE_LABEL[open.stage]}.` : ""}

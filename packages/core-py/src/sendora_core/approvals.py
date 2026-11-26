@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from sqlalchemy import select
+from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 
 from sendora_core.audit import record_audit
@@ -49,8 +49,18 @@ def decide(session: Session, approval_id: int, approve: bool, decided_by: str, r
             f"Approval {approval_id} was requested by {a.requested_by}, so someone else must decide it. "
             "Ask another owner or approver."
         )
-    a.status = "approved" if approve else "rejected"
-    a.decided_by, a.decision_note, a.decided_at = decided_by, note, utcnow()
+    new_status = "approved" if approve else "rejected"
+    # One conditional update decides it: when two people (or one double click) decide at the same moment, exactly one update changes a row.
+    res = session.execute(
+        update(Approval)
+        .where(Approval.id == approval_id, Approval.status == "pending")
+        .values(status=new_status, decided_by=decided_by, decision_note=note, decided_at=utcnow())
+        .execution_options(synchronize_session=False)
+    )
+    if res.rowcount != 1:
+        session.refresh(a)
+        raise ApprovalError(f"Approval {approval_id} was already {a.status}.")
+    session.refresh(a)
     record_audit(session, decided_by, f"approval.{a.status}", f"approval:{a.id}", {"note": note})
     return a
 

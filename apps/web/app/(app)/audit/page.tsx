@@ -1,9 +1,10 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { Badge, Button, Card, DataTable, Sheet, TableSkeleton, notify, type Column } from "@sendora/ui-kit";
+import { Badge, Button, Card, DataTable, EmptyState, Sheet, TableSkeleton, notify, type Column } from "@sendora/ui-kit";
 import { LoadError, PageHead } from "@/components/Parts";
 import { get } from "@/lib/api";
+import { useRole } from "@/lib/hooks";
 import { auditAction, auditTarget } from "@/lib/labels";
 import type { AuditRow } from "@/lib/types";
 
@@ -12,8 +13,9 @@ const when = (iso: string) => new Date(iso).toLocaleString("en-US", { month: "sh
 const plain = (v: unknown): string => (v === true ? "yes" : v === false ? "no" : Array.isArray(v) ? v.map(plain).join(", ") : v === null || v === undefined ? "" : typeof v === "object" ? JSON.stringify(v) : String(v));
 
 export default function AuditPage() {
-  const q = useQuery({ queryKey: ["audit"], queryFn: () => get<AuditRow[]>("/audit?limit=500") });
-  const v = useQuery({ queryKey: ["audit-verify"], queryFn: () => get<{ ok: boolean; first_bad_id: number | null; entries: number }>("/audit/verify") });
+  const { owner, known } = useRole();
+  const q = useQuery({ queryKey: ["audit"], queryFn: () => get<AuditRow[]>("/audit?limit=500"), enabled: owner });
+  const v = useQuery({ queryKey: ["audit-verify"], queryFn: () => get<{ ok: boolean; first_bad_id: number | null; entries: number }>("/audit/verify"), enabled: owner });
   const [open, setOpen] = useState<AuditRow | null>(null);
   const columns: Column<AuditRow>[] = [
     { key: "at", header: "When", width: "190px", render: (r) => when(r.at), sortValue: (r) => r.at },
@@ -26,6 +28,7 @@ export default function AuditPage() {
     if (r.data) (r.data.ok ? notify.success : notify.error)(r.data.ok ? `Chain intact: ${r.data.entries} entries checked.` : `Chain broken at entry ${r.data.first_bad_id}.`);
     else notify.error("Could not check the chain", "Try again in a moment.");
   };
+  if (known && !owner) return <div className="cf-page"><PageHead title="Audit log" /><EmptyState title="The audit log is for the owner" body="It shows who did what, including who has sent a scorecard. Ask the owner if you need something from it." /></div>;
   return (
     <div className="cf-page cf-act-88">
       <PageHead title="Audit log" sub="Every change, who made it and when. Each line is chained to the one before, so an edit after the fact shows. Open a line to read it in full." actions={<Button onClick={check}>Check the chain</Button>} />

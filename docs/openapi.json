@@ -2,7 +2,7 @@
  "openapi": "3.1.0",
  "info": {
   "title": "Slatehire API",
-  "version": "1.0.0"
+  "version": "1.0.1"
  },
  "paths": {
   "/health": {
@@ -174,6 +174,7 @@
      "read"
     ],
     "summary": "Numbers for the top of the page",
+    "description": "Loaded with every page, so it never walks every resume: counts are counts, the quote check is kept until a score or a resume changes, and the waiting list is one query per role.",
     "operationId": "overview_api_overview_get",
     "responses": {
      "200": {
@@ -181,6 +182,66 @@
       "content": {
        "application/json": {
         "schema": {}
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/intake/log": {
+   "get": {
+    "tags": [
+     "read"
+    ],
+    "summary": "Every application that came in by email, an ATS or a form and was not added, with the reason (owner and approver). Nobody leaves the funnel without a line here. A person whose identity is still hidden is shown by their neutral code.",
+    "operationId": "intake_log_api_intake_log_get",
+    "parameters": [
+     {
+      "name": "status",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "pattern": "^(added|duplicate|rejected)$"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Status"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 500,
+       "minimum": 1,
+       "default": 100,
+       "title": "Limit"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
        }
       }
      }
@@ -288,7 +349,7 @@
     "tags": [
      "read"
     ],
-    "summary": "Cards for the board: the top of each stage, with the real count",
+    "summary": "Cards for the board: the top of each stage, with the real count. People who need a person first (a resume nobody could read, one not in English) come first and are never cut off by the limit.",
     "operationId": "board_api_pipeline_get",
     "parameters": [
      {
@@ -467,6 +528,46 @@
     }
    }
   },
+  "/api/applications/{app_id}/original": {
+   "get": {
+    "tags": [
+     "read"
+    ],
+    "summary": "The resume file as it arrived (a PDF), so a person can look at what a reader could not show. Not while identity is hidden: the file holds the name and contact details.",
+    "operationId": "original_file_api_applications__app_id__original_get",
+    "parameters": [
+     {
+      "name": "app_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "App Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/api/interviews": {
    "get": {
     "tags": [
@@ -531,7 +632,7 @@
     "tags": [
      "read"
     ],
-    "summary": "Offers",
+    "summary": "Offers (owner and approver: they hold pay terms and names)",
     "operationId": "offer_list_api_offers_get",
     "responses": {
      "200": {
@@ -569,7 +670,7 @@
     "tags": [
      "read"
     ],
-    "summary": "The latest fairness report, if one was run",
+    "summary": "The latest fairness report, if one was run, and the latest one that flagged a group",
     "operationId": "fairness_latest_api_fairness_get",
     "parameters": [
      {
@@ -610,7 +711,7 @@
     "tags": [
      "read"
     ],
-    "summary": "Quote check, computed now over every stored score",
+    "summary": "Quote check over every stored score, kept until a score or a resume is added or removed",
     "operationId": "evals_api_evals_get",
     "responses": {
      "200": {
@@ -938,7 +1039,7 @@
     "tags": [
      "write"
     ],
-    "summary": "Upload one resume file (text, markdown or PDF) for a role",
+    "summary": "Upload one resume file (text, markdown or PDF) for a role. The name and email go in the x-applicant-name and x-applicant-email headers (URL encoded), so they never sit in an address that a server logs.",
     "operationId": "add_file_api_applicants_file_post",
     "parameters": [
      {
@@ -953,9 +1054,16 @@
      {
       "name": "name",
       "in": "query",
-      "required": true,
+      "required": false,
       "schema": {
-       "type": "string",
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
        "title": "Name"
       }
      },
@@ -964,8 +1072,14 @@
       "in": "query",
       "required": false,
       "schema": {
-       "type": "string",
-       "default": "",
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
        "title": "Email"
       }
      }
@@ -1165,7 +1279,7 @@
     "tags": [
      "write"
     ],
-    "summary": "Delete a candidate's personal data now (owner)",
+    "summary": "Delete a person's personal data now (owner): this application and every other application with the same address. The answer says exactly what was removed.",
     "operationId": "delete_candidate_api_candidates__app_id__delete",
     "parameters": [
      {
@@ -1178,6 +1292,64 @@
       }
      }
     ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/suppression": {
+   "get": {
+    "tags": [
+     "write"
+    ],
+    "summary": "How many deleted people are kept as one way hashes so they are not added again (owner). Nothing readable is stored.",
+    "operationId": "suppression_info_api_suppression_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/suppression/lift": {
+   "post": {
+    "tags": [
+     "write"
+    ],
+    "summary": "Let one address apply again, because the person applied again on purpose (owner)",
+    "operationId": "suppression_lift_api_suppression_lift_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/LiftIn"
+       }
+      }
+     },
+     "required": true
+    },
     "responses": {
      "200": {
       "description": "Successful Response",
@@ -1625,7 +1797,7 @@
     "tags": [
      "write"
     ],
-    "summary": "Run the fairness indicator and save the report",
+    "summary": "Run the fairness indicator and save the report (owner). The smallest group can be raised, never lowered below FAIRNESS_MIN_GROUP.",
     "operationId": "fairness_run_api_fairness_run_post",
     "requestBody": {
      "content": {
@@ -1703,7 +1875,7 @@
     "tags": [
      "admin"
     ],
-    "summary": "Pending and recent approvals",
+    "summary": "Pending and recent approvals. The terms of an offer are shown to the owner and the approver only.",
     "operationId": "approvals_api_approvals_get",
     "responses": {
      "200": {
@@ -1772,7 +1944,7 @@
     "tags": [
      "admin"
     ],
-    "summary": "Audit log, newest first",
+    "summary": "Audit log, newest first (owner only: it names who did what to whom, and who sent a scorecard before the others may look)",
     "operationId": "audit_api_audit_get",
     "parameters": [
      {
@@ -1815,7 +1987,7 @@
     "tags": [
      "admin"
     ],
-    "summary": "Check the audit chain has not been edited",
+    "summary": "Check the audit chain has not been edited (owner only)",
     "operationId": "audit_verify_api_audit_verify_get",
     "responses": {
      "200": {
@@ -2145,13 +2317,16 @@
        "type": "string"
       },
       "type": "object",
+      "maxProperties": 5,
       "title": "Anchors"
      },
      "look_for": {
       "items": {
-       "type": "string"
+       "type": "string",
+       "maxLength": 80
       },
       "type": "array",
+      "maxItems": 40,
       "title": "Look For",
       "default": []
      },
@@ -2198,16 +2373,29 @@
       "default": "all"
      },
      "min_group": {
-      "type": "integer",
-      "maximum": 200.0,
-      "minimum": 2.0,
-      "title": "Min Group",
-      "default": 10
+      "anyOf": [
+       {
+        "type": "integer",
+        "maximum": 200.0,
+        "minimum": 2.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Min Group"
      },
      "threshold": {
-      "type": "string",
-      "title": "Threshold",
-      "default": "4/5"
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 20
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Threshold"
      }
     },
     "type": "object",
@@ -2294,14 +2482,40 @@
     ],
     "title": "LabelsIn"
    },
+   "LiftIn": {
+    "properties": {
+     "email": {
+      "type": "string",
+      "maxLength": 254,
+      "title": "Email",
+      "default": ""
+     },
+     "reference": {
+      "type": "string",
+      "maxLength": 120,
+      "title": "Reference",
+      "default": ""
+     },
+     "source": {
+      "type": "string",
+      "maxLength": 80,
+      "title": "Source",
+      "default": ""
+     }
+    },
+    "type": "object",
+    "title": "LiftIn"
+   },
    "Login": {
     "properties": {
      "email": {
       "type": "string",
+      "maxLength": 254,
       "title": "Email"
      },
      "password": {
       "type": "string",
+      "maxLength": 1024,
       "title": "Password"
      }
     },
@@ -2445,6 +2659,19 @@
        }
       ],
       "title": "Status"
+     },
+     "ats_job_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 120,
+        "pattern": "^[\\w.:\\-]*$"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Ats Job Id"
      }
     },
     "type": "object",

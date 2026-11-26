@@ -5,7 +5,8 @@ from __future__ import annotations
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
-from slatehire import rubric_service, scoring_service
+from slatehire import interviews, rubric_service, scoring_service
+from slatehire.attention import LANGUAGE, REASON, RESUME_MISSING, attention_of
 from slatehire.errors import RuleError, need_person
 from slatehire.models import TERMINAL, Application, Interview, Offer, Scorecard
 from sendora_core.audit import record_audit
@@ -38,7 +39,9 @@ def move(s: Session, app: Application, to: str, actor: str, note: str, now, sett
     note = (note or "").strip()
     if to in NEED_NOTE and len(note) < 8:
         raise RuleError("Write the reason in your own words (at least a short sentence). A person decides every outcome and the reason is kept.")
-    if to == "shortlisted":
+    if to == "shortlisted" and attention_of(app) == RESUME_MISSING:
+        raise RuleError(REASON[RESUME_MISSING])  # said as it is: the applicant has no resume to read, not "score them first"
+    if to == "shortlisted" and attention_of(app) != LANGUAGE:  # a resume in another language is read by a person, who may shortlist without a score
         rub = rubric_service.latest(s, app.role_id, locked_only=True)
         if rub is None or scoring_service.latest_score(s, app.id, rub.id) is None:
             raise RuleError("Score this applicant under the locked rubric before shortlisting.")
@@ -55,10 +58,11 @@ def move(s: Session, app: Application, to: str, actor: str, note: str, now, sett
     app.stage, app.updated_at = to, now
     if to in NEED_NOTE:
         _close_offer(s, app, actor, now)
+        interviews.cancel_open(s, app, actor)
     if to in TERMINAL or to == "shortlisted":
         app.decided_by, app.decision_note = actor, note
     s.flush()
-    record_audit(s, actor, f"application.{to}", f"application:{app.id}", {"from": app.history[-2]["stage"], "note": note[:200]})
+    record_audit(s, actor, f"application.{to}", f"application:{app.id}", {"from": app.history[-2]["stage"], "note_chars": len(note)})  # the words stay on the application, where a delete removes them; the append only log holds no free text
     record_event(s, "application.moved", "application", app.id, {"to": to})
     return app
 
